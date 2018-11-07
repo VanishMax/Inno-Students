@@ -6,3 +6,4 @@ server/config/config.js
 public/*
 !public/manifest.json
 !public/robots.txt
+assets/pics/*
