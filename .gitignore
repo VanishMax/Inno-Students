@@ -3,6 +3,6 @@ node_modules
 .DS_Store
 package-lock.json
 server/config/config.js
-public
+public/*
 !public/manifest.json
 !public/robots.txt
