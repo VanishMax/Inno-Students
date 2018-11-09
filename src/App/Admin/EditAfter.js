@@ -81,12 +81,12 @@ class EditAfter extends React.Component {
             ) }
           </List>
           :
-          <Typography variant="subheading" color="primary">
+          <Typography variant="subtitle1" color="primary">
             At the moment there are no unpublished news
           </Typography>
         }
 
-        <Typography variant="headline">List of Published news</Typography>
+        <Typography variant="h5">List of Published news</Typography>
         { (readyNewsLoaded && readyNews != null) ?
           <List>
             <Divider/>

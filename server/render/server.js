@@ -31,12 +31,15 @@ export default function render(req, res, initialState) {
   const sheetsManager = new Map()
   // Create a theme instance.
  const theme = createMuiTheme({
-    palette: {
-      primary: purple,
-      secondary: {
-        main: '#f44336',
-      },
-    },
+   palette: {
+     primary: purple,
+     secondary: {
+       main: '#f44336',
+     },
+   },
+   typography: {
+     useNextVariants: true,
+   }
   })
   const generateClassName = createGenerateClassName()
 

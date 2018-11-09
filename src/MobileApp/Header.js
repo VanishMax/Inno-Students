@@ -15,7 +15,7 @@ export default function Header(props) {
         <IconButton color="inherit" aria-label="Menu" style={{marginLeft: -12, marginRight: 20}}>
           <MenuIcon />
         </IconButton>
-        <Typography variant="title" color="inherit">
+        <Typography variant="h6" color="inherit">
           Mobile News
         </Typography>
       </Toolbar>

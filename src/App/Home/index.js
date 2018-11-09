@@ -3,6 +3,7 @@ import Header from '../Header'
 import { Helmet } from 'react-helmet'
 import config from '#/home' //See /babelrc file to understand what is #
 import NeewCard from '../News/Preview'
+import {connect} from 'react-redux'
 
 const neew = {
   ru: {
@@ -12,7 +13,7 @@ const neew = {
     title: "Engly"
   }
 }
-export default class Home extends React.Component {
+class Home extends React.Component {
   constructor(props){
     super(props)
     this.state = {
@@ -20,7 +21,7 @@ export default class Home extends React.Component {
     }
   }
   render(){
-    const {lang} = this.props
+    const {lang, news} = this.props
     return (
       <div>
         <Helmet>
@@ -29,9 +30,17 @@ export default class Home extends React.Component {
         </Helmet>
         <Header lang={lang} title={config.header[lang]}/>
         <div style={{marginTop: 90}}>
-          <NeewCard neew={neew} lang={lang}/>
+          {news.map( (neew) =>
+            <NeewCard key={neew._id} neew={neew} lang={lang}/>
+          )}
         </div>
       </div>
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  news: state.news,
+  state: state
+})
+export default connect(mapStateToProps, null)(Home)

@@ -104,7 +104,7 @@ class Menu extends React.Component{
               <Fade in={true}>
                 <ButtonBase style={styles.button} onClick={this.createToggle}>
                   <Paper elevation={3} align="center" style={styles.paper}>
-                    <Typography variant="display2">
+                    <Typography variant="h3">
                       Create
                     </Typography>
                   </Paper>
@@ -117,10 +117,10 @@ class Menu extends React.Component{
             {create ?
               <Fade in={create}>
                 <Paper elevation={3} align="center" style={styles.paper}>
-                  <Typography variant="title">
+                  <Typography variant="h6">
                     Please, type the title of the news.
                   </Typography>
-                  <Typography variant="subheading">
+                  <Typography variant="subtitle1">
                     You will be able to change it later.
                   </Typography>
                   <form noValidate autoComplete="off">
@@ -152,7 +152,7 @@ class Menu extends React.Component{
               <Fade in={true}>
                 <ButtonBase style={styles.button} onClick={this.editToggle}>
                   <Paper elevation={3} align="center" style={styles.paper}>
-                    <Typography variant="display2">
+                    <Typography variant="h3">
                       Edit
                     </Typography>
                   </Paper>

@@ -178,7 +178,7 @@ export default class Main extends React.Component{
     return(
       <div align="center">
         <Paper elevation={3} style={styles.paperMain}>
-          <Typography variant="headline">
+          <Typography variant="h5">
             Main
           </Typography>
 
@@ -187,7 +187,7 @@ export default class Main extends React.Component{
               The news is published. All the changes will be immediately published.
             </Typography>
           :
-            <Typography variant="subheading">
+            <Typography variant="subtitle1">
               All the data is automatically saved
             </Typography>}
 

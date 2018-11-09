@@ -119,7 +119,7 @@ export default class Content extends React.Component{
         </Helmet>
 
         <Paper elevation={3} style={styles.paperMain}>
-          <Typography variant="headline">
+          <Typography variant="h5">
             Content
           </Typography>
           <Typography variant="body1">
@@ -136,7 +136,7 @@ export default class Content extends React.Component{
         </Paper>
 
         <Paper elevation={3} style={styles.paper}>
-          <Typography variant="headline">
+          <Typography variant="h5">
             Контент на русском
           </Typography>
 

@@ -1,17 +1,10 @@
 import React from 'react'
+import axios from "axios"
+
 import Paper from '@material-ui/core/Paper/Paper'
 import Typography from '@material-ui/core/Typography/Typography'
 import Divider from '@material-ui/core/Divider'
 import Button from "@material-ui/core/Button/Button"
-import Card from '@material-ui/core/Card'
-import CardHeader from '@material-ui/core/CardHeader'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import CardMedia from '@material-ui/core/CardMedia'
-import Collapse from '@material-ui/core/Collapse'
-import IconButton from '@material-ui/core/IconButton'
-import FavoriteIcon from '@material-ui/icons/Favorite'
-import ShareIcon from '@material-ui/icons/Share'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle"
@@ -19,7 +12,8 @@ import DialogContent from "@material-ui/core/DialogContent/DialogContent"
 import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText"
 import DialogActions from "@material-ui/core/DialogActions/DialogActions"
 import Dialog from "@material-ui/core/Dialog/Dialog"
-import axios from "axios"
+
+import NeewCard from '&/App/News/Preview'
 
 const styles = {
   paper: {
@@ -57,14 +51,14 @@ export default class Preview extends React.Component{
     super(props)
     this.state = {
       neew: null,
-      expanded: false,
       toDelete: false,
       publishDialog: false,
       published: false,
       time: '',
+      langEn: true
     }
-    this.handleExpandClick = this.handleExpandClick.bind(this)
     this.deleteNewsDialog = this.deleteNewsDialog.bind(this)
+    this.changeLang = this.changeLang.bind(this)
     this.deleteForever = this.deleteForever.bind(this)
     this.publish = this.publish.bind(this)
     this.publishDialog = this.publishDialog.bind(this)
@@ -84,6 +78,9 @@ export default class Preview extends React.Component{
       .catch((error)=>{
         console.log(error)
       })
+  }
+  changeLang(){
+    this.setState({ langEn: !this.state.langEn})
   }
   handleExpandClick(){
     this.setState({ expanded: !this.state.expanded })
@@ -109,7 +106,7 @@ export default class Preview extends React.Component{
     this.setState({ publishDialog: !this.state.publishDialog })
   }
   render(){
-    const {neew, toDelete, expanded, publishDialog, published, time} = this.state
+    const {neew, toDelete, expanded, publishDialog, published, time, langEn} = this.state
     let timePrint = null
     if(time != '' && time != ', '){ timePrint = time}
     return(
@@ -123,52 +120,19 @@ export default class Preview extends React.Component{
         </Button>
 
         <Paper elevation={3} style={styles.paper}>
-            <Typography variant="headline">
+            <Typography variant="h5">
               Preview
             </Typography>
-            <Typography variant="subheading">
+            <Typography variant="subtitle1">
               How your news will look like:
             </Typography>
+            <Button variant="contained" color="primary" onClick={this.changeLang}>
+              {langEn ? `Change Lang` : `Изменить язык`}
+            </Button>
           <Divider/>
 
           {neew !== null &&
-            <Card style={styles.card} align="left">
-              <CardHeader title={neew.en.title}
-                          subheader={timePrint || "September 14, 2018"}/>
-              <CardMedia
-                component="img" alt={neew.en.title} title={neew.en.title}
-                width="420" image={'/assets/pics/' + (neew.previewImage || 'Test-Picture.png')}
-              />
-              <CardContent>
-                <Typography component="p">
-                  {neew.en.lead}
-                </Typography>
-              </CardContent>
-              <CardActions disableActionSpacing>
-                <IconButton aria-label="Add to favorites">
-                  <FavoriteIcon />
-                </IconButton>
-                <IconButton aria-label="Share">
-                  <ShareIcon />
-                </IconButton>
-                {(neew.en.content != null && neew.en.content.length < 600) ?
-                  <IconButton onClick={this.handleExpandClick} aria-expanded={this.state.expanded}
-                              aria-label="Show more" style={styles.expandIcon}>
-                    {this.state.expanded ?
-                      <div style={styles.expand}><ExpandMoreIcon/></div>
-                      : <div style={styles.expand0}><ExpandMoreIcon/></div>
-                    }
-                  </IconButton>
-                  : <React.Fragment/>
-                }
-              </CardActions>
-              {(neew.en.content != null && neew.en.content.length < 600) ?
-                <Collapse in={expanded} timeout="auto" unmountOnExit>
-                  <CardContent dangerouslySetInnerHTML={{__html: neew.en.content}}/>
-                </Collapse>
-                : <React.Fragment/>
-              }
-            </Card>
+            <NeewCard lang={langEn ? 'en' : 'ru'} neew={neew} style={styles.card}/>
           }
         </Paper>
 

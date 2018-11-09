@@ -24,7 +24,8 @@ const styles = {
     margin: 'auto',
     textAlign: 'justify',
     backgroundColor: '#223',
-    color: '#AAA'
+    color: '#AAA',
+    overflowX: "auto"
   }
 }
 
@@ -115,7 +116,7 @@ export default class Meta extends React.Component{
     return(
       <div align="center">
         <Paper elevation={3} style={styles.paperMain}>
-          <Typography variant="headline">
+          <Typography variant="h5">
             Meta
           </Typography>
 
@@ -137,7 +138,7 @@ export default class Meta extends React.Component{
           <br/>
         </Paper>
         <Paper elevation={3} style={styles.paper}>
-          <Typography variant="headline">
+          <Typography variant="h5">
             Meta По-русски
           </Typography>
 
@@ -151,7 +152,7 @@ export default class Meta extends React.Component{
         </Paper>
 
         <Paper elevation={3} style={styles.paper}>
-          <Typography variant="title">How your {`<Head>`} will look like:</Typography>
+          <Typography variant="h6">How your {`<Head>`} will look like:</Typography>
           {neew !== null &&
           <pre style={styles.pre}>
               {
