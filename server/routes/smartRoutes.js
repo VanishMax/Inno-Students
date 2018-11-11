@@ -140,10 +140,12 @@ export default function (app){
           oldPath = files.file.path,
           fileExt = files.file.name.split('.').pop(),
           fileName = url + '.' + fileExt,
-          newPath = path.join(__dirname, '../', 'assets/pics/', fileName)
+          newPath = path.join(__dirname, '../../', 'assets/pics/', fileName)
 
       fs.readFile(oldPath, (err, data) => {
+        if(err) console.log(err)
         fs.writeFile(newPath, data, (err) => {
+          if(err) console.log(err)
           fs.unlink(oldPath, (err) => {
             if (err) console.log(err)
           })
