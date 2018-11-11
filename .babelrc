@@ -21,7 +21,7 @@
         "rootPathSuffix": ""
       }, {
         "rootPathPrefix": "#",
-        "rootPathSuffix": "config/"
+        "rootPathSuffix": "langs/"
       }, {
         "rootPathPrefix": "&",
         "rootPathSuffix": "src/"

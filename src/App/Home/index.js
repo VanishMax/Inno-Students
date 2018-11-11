@@ -1,9 +1,12 @@
 import React from 'react'
-import Header from '../Header'
 import { Helmet } from 'react-helmet'
+import {connect} from 'react-redux'
+
+import Grid from '@material-ui/core/Grid'
+
+import Header from '../Header'
 import config from '#/home' //See /babelrc file to understand what is #
 import NeewCard from '../News/Preview'
-import {connect} from 'react-redux'
 
 const neew = {
   ru: {
