@@ -6,7 +6,7 @@ export default function Loading(props) {
     console.log(props.error)
     return <div>Error! <button onClick={ props.retry }>Retry</button></div>
   } else if (props.pastDelay) {
-    return <CircularProgress color="primary"/>
+    return <CircularProgress color="primary" style={{margin: '50px 0 0 50px'}}/>
   } else {
     return null
   }

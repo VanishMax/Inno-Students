@@ -2,29 +2,23 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import {connect} from 'react-redux'
 
-import Grid from '@material-ui/core/Grid'
-
 import Header from '../Header'
 import config from '#/home' //See /babelrc file to understand what is #
-import NeewCard from '../News/Preview'
+import Loadable from 'react-loadable'
+import Loading from '&/Loading'
 
-const neew = {
-  ru: {
-    title: "Рузкий"
-  },
-  en:{
-    title: "Engly"
-  }
-}
-class Home extends React.Component {
+const NewsGrid = Loadable({
+  loader: () => import(/* webpackChunkName: "NewsGrid" */ './NewsGrid'),
+  loading: Loading,
+  delay: 500,
+})
+
+export default class Home extends React.Component {
   constructor(props){
     super(props)
-    this.state = {
-
-    }
   }
   render(){
-    const {lang, news} = this.props
+    const {lang} = this.props
     return (
       <div>
         <Helmet>
@@ -32,18 +26,8 @@ class Home extends React.Component {
           <meta name="description" content="VaMax app" />
         </Helmet>
         <Header lang={lang} title={config.header[lang]}/>
-        <div style={{marginTop: 90}}>
-          {news.map( (neew) =>
-            <NeewCard key={neew._id} neew={neew} lang={lang}/>
-          )}
-        </div>
+        <NewsGrid lang={lang}/>
       </div>
     )
   }
 }
-
-const mapStateToProps = (state) => ({
-  news: state.news,
-  state: state
-})
-export default connect(mapStateToProps, null)(Home)
