@@ -48,7 +48,7 @@ class Preview extends React.Component{
     if(time != '' && time != ', '){ timePrint = time}
 
     return(
-      <Card style={style} align="left">
+      <Card style={style} align="left" elevation={4}>
         <CardHeader title={news.title}
                     subheader={timePrint || "September 14, 2018"}/>
         <CardMedia
