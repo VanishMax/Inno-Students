@@ -1,13 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import CardHeader from "@material-ui/core/CardHeader/CardHeader"
-import CardMedia from "@material-ui/core/CardMedia/CardMedia"
-import CardContent from "@material-ui/core/CardContent/CardContent"
-import Typography from "@material-ui/core/Typography/Typography"
-import CardActions from "@material-ui/core/CardActions/CardActions"
-import IconButton from "@material-ui/core/IconButton/IconButton"
-import Collapse from "@material-ui/core/Collapse/Collapse"
-import Card from "@material-ui/core/Card/Card"
+import { withRouter } from 'react-router-dom'
+import CardHeader from '@material-ui/core/CardHeader/CardHeader'
+import CardActionArea from '@material-ui/core/CardActionArea'
+import CardMedia from '@material-ui/core/CardMedia/CardMedia'
+import CardContent from '@material-ui/core/CardContent/CardContent'
+import Typography from '@material-ui/core/Typography/Typography'
+import CardActions from '@material-ui/core/CardActions/CardActions'
+import IconButton from '@material-ui/core/IconButton/IconButton'
+import Collapse from '@material-ui/core/Collapse/Collapse'
+import Card from '@material-ui/core/Card/Card'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import ShareIcon from '@material-ui/icons/Share'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
@@ -49,17 +51,19 @@ class Preview extends React.Component{
 
     return(
       <Card style={style} align="left" elevation={4}>
-        <CardHeader title={news.title}
-                    subheader={timePrint || "September 14, 2018"}/>
-        <CardMedia
-          component="img" alt={news.title || 'Simple Title'} title={news.title}
-          width="420" image={'/assets/pics/' + (neew.previewImage || 'Test-Picture.png')}
-        />
-        <CardContent>
-          <Typography component="p">
-            {news.lead || 'Some lead sentence just to make water'}
-          </Typography>
-        </CardContent>
+        <CardActionArea onClick={ () => this.props.history.push('/news/' + neew.url)}>
+          <CardHeader title={news.title}
+                      subheader={timePrint || "September 14, 2018"}/>
+          <CardMedia
+            component="img" alt={news.title || 'Simple Title'} title={news.title}
+            width="420" image={'/assets/pics/' + (neew.previewImage || 'Test-Picture.png')}
+          />
+          <CardContent>
+            <Typography component="p">
+              {news.lead || 'Some lead sentence just to make water'}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
         <CardActions disableActionSpacing>
           <IconButton aria-label="Add to favorites">
             <FavoriteIcon />
@@ -95,4 +99,4 @@ Preview.propTypes = {
   style: PropTypes.object
 }
 
-export default Preview
+export default withRouter(Preview)
