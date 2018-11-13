@@ -26,6 +26,9 @@ const styles = {
   expand0:{
     transform: 'rotate(0deg)',
     transition: 'transform 200'
+  },
+  starred: {
+    border: '2px soild gold'
   }
 }
 
@@ -42,7 +45,7 @@ class Preview extends React.Component{
   }
   render(){
     const {expanded} = this.state
-    const {neew, style, lang} = this.props
+    const {neew, lang, starred} = this.props
     const news = neew[lang]
 
     const time = (neew.publishDate || '') + ', ' + (neew.publishTime || '')
@@ -50,10 +53,10 @@ class Preview extends React.Component{
     if(time != '' && time != ', '){ timePrint = time}
 
     return(
-      <Card style={style} align="left" elevation={4}>
+      <Card style={starred ? styles.starred : {}} align="left" elevation={4}>
         <CardActionArea onClick={ () => this.props.history.push('/news/' + neew.url)}>
           <CardHeader title={news.title}
-                      subheader={timePrint || "September 14, 2018"}/>
+                      subheader={<em>{timePrint || "September 14, 2018"}</em>}/>
           <CardMedia
             component="img" alt={news.title || 'Simple Title'} title={news.title}
             width="420" image={'/assets/pics/' + (neew.previewImage || 'Test-Picture.png')}
@@ -96,7 +99,7 @@ class Preview extends React.Component{
 Preview.propTypes = {
   neew: PropTypes.object.isRequired,
   lang: PropTypes.string.isRequired,
-  style: PropTypes.object
+  starred: PropTypes.bool,
 }
 
 export default withRouter(Preview)

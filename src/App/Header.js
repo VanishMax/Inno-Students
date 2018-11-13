@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import SvgIcon from '@material-ui/core/SvgIcon'
+import HomeIcon from '@material-ui/icons/Home'
 import { Link } from 'react-router-dom'
 
 import LangMenu from './LangMenu'
@@ -22,9 +22,7 @@ export default class Header extends React.Component {
         <AppBar position="static">
           <Toolbar>
             <Link to="/">
-              <SvgIcon aria-label="Menu" style={{marginLeft: -12, marginRight: 20, fontSize: 40, color: "#FFF"}}>
-                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-              </SvgIcon>
+              <HomeIcon style={{marginLeft: -12, marginRight: 20, fontSize: 40, color: "#FFF"}}/>
             </Link>
             <Typography variant="h6" color="inherit" style={styles.grow}>
               {this.props.title}
