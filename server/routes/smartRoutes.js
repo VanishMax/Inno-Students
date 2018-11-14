@@ -38,7 +38,7 @@ export default function (app){
               if (err) {
                 console.log(err)
               }
-              res.send({news: {edit: true, neew: neew}})
+              res.json({news: {edit: true, neew: neew}})
             })
           }
         )
@@ -58,12 +58,12 @@ export default function (app){
   })
 
   app.post('/admins/getNewsToEdit', (req, res) => {
-    News.find({published: false}, {'en.title': 1, url: 1}).sort({ _id: -1}).toArray((err, news) => {
+    News.find({published: false}, {'en.title': 1, url: 1, _id: 1}).sort({ _id: -1}).toArray((err, news) => {
       news.length == 0 ? res.json({news: null}) : res.json({news: news})
     })
   })
   app.post('/admins/getPublishedNews', (req, res) => {
-    News.find({published: true}, {'en.title': 1, url: 1}).sort({ _id: -1}).toArray((err, news) => {
+    News.find({published: true}, {'en.title': 1, url: 1, _id: 1}).sort({ _id: -1}).toArray((err, news) => {
       news.length == 0 ? res.json({news: null}) : res.json({news: news})
     })
   })

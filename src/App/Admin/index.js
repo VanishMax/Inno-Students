@@ -5,8 +5,6 @@ import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
-// import Menu from './Menu'
-// import Edit from './Edit'
 import config from '#/admin'
 import Loadable from "react-loadable"
 import Loading from '&/Loading'

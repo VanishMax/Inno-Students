@@ -15,6 +15,12 @@ let initialState = {
 }
 
 export default function (app){
+  app.get('/news/:neew', (req, res) => {
+    News.findOne({_id: parseInt(req.params.neew)}, (err, neew) => {
+      initialState.neew = neew
+      render(app, req, res, initialState)
+    })
+  })
   app.get('/', (req, res) => {
     News.find({published: true}).sort({ _id: -1}).toArray((err, news) => {
       initialState.news = news

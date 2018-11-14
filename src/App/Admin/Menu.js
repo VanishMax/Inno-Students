@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography'
 import ButtonBase from '@material-ui/core/ButtonBase'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
-import Divider from '@material-ui/core/Divider'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import Input from '@material-ui/core/Input'
@@ -86,7 +85,7 @@ class Menu extends React.Component{
     }
   }
   render(){
-    const {create, edit, title, select, error, newsToEditLoaded, newsToEdit, created} = this.state
+    const {create, edit, title, select, error, created} = this.state
 
     return(
       <React.Fragment>

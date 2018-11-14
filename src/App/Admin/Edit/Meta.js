@@ -3,7 +3,6 @@ import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper/Paper'
 import axios from 'axios'
 import TextField from '@material-ui/core/TextField/TextField'
-import Divider from "@material-ui/core/Divider/Divider";
 
 const styles = {
   paperMain: {
@@ -109,8 +108,8 @@ export default class Meta extends React.Component{
     axios.post('/admins/edit/keywordsRu', {id: this.state.id, keywordsRu: this.state.keywordsRu})
   }
   render(){
-    const {title, authorName, authorNameRu, keywordsRu, authorLink,
-          keywords, description, neew, time, published} = this.state
+    const {authorName, authorNameRu, keywordsRu, authorLink,
+          keywords, neew, time, published} = this.state
     let timePrint = null
     if(time != '' && time != ', ') timePrint = time
     return(

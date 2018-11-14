@@ -41,11 +41,13 @@ class NewsGrid extends React.Component {
     const {lang, news} = this.props
     let grid0 = []
     let grid1 = []
-    for(let i = 0; i < news.length; i++){
-      if(i % 2 == 1){
-        grid1.push(<Grid key={news[i]['_id']} item style={styles.item}><NeewCard neew={news[i]} lang={lang}/></Grid>)
-      }else{
-        grid0.push(<Grid key={news[i]['_id']} item style={styles.item}><NeewCard neew={news[i]} lang={lang} starred={true}/></Grid>)
+    if(news){
+      for(let i = 0; i < news.length; i++){
+        if(i % 2 == 1){
+          grid1.push(<Grid key={news[i]['_id']} item style={styles.item}><NeewCard neew={news[i]} lang={lang}/></Grid>)
+        }else{
+          grid0.push(<Grid key={news[i]['_id']} item style={styles.item}><NeewCard neew={news[i]} lang={lang} starred={true}/></Grid>)
+        }
       }
     }
     return (

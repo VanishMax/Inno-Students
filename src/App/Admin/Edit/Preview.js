@@ -5,8 +5,6 @@ import Paper from '@material-ui/core/Paper/Paper'
 import Typography from '@material-ui/core/Typography/Typography'
 import Divider from '@material-ui/core/Divider'
 import Button from "@material-ui/core/Button/Button"
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
 import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle"
 import DialogContent from "@material-ui/core/DialogContent/DialogContent"
 import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText"
@@ -106,9 +104,7 @@ export default class Preview extends React.Component{
     this.setState({ publishDialog: !this.state.publishDialog })
   }
   render(){
-    const {neew, toDelete, expanded, publishDialog, published, time, langEn} = this.state
-    let timePrint = null
-    if(time != '' && time != ', '){ timePrint = time}
+    const {neew, toDelete, publishDialog, published, time, langEn} = this.state
     return(
       <div align="center">
         {published && <Typography variant="h5">The news is published</Typography>}
@@ -158,7 +154,7 @@ export default class Preview extends React.Component{
           <DialogContent>
             <DialogContentText>
               The news {neew !== null && `"${neew.en.title}"`} will be published. It will send
-              the notification to all the subscribers. You will not be able to unbublish it,
+              the notification to all the subscribers. You will not be able to unpublish it,
               but you will still be able to edit it, and all changes will be published in time.
             </DialogContentText>
           </DialogContent>

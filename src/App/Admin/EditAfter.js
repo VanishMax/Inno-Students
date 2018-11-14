@@ -52,7 +52,6 @@ class EditAfter extends React.Component {
   render(){
     const {styles, editToggle} = this.props
     const {newsToEditLoaded, newsToEdit, redir, readyNewsLoaded, readyNews} = this.state
-
     if(redir !== ''){
       return(
         <Redirect to={"/admins/edit/" + redir}/>
@@ -60,16 +59,16 @@ class EditAfter extends React.Component {
     }
     return(
       <Paper elevation={3} align="center" style={styles.paper}>
-        <Button variant="raised" onClick={editToggle}>
+        <Button variant="contained" onClick={editToggle}>
           Go back
         </Button>
-        <Typography variant="headline">List of unpublished news</Typography>
+        <Typography variant="h5">List of unpublished news</Typography>
         { (newsToEditLoaded && newsToEdit != null) ?
           <List>
             <Divider/>
             {newsToEdit.map( (neew) =>
-              <React.Fragment>
-                <ListItem key={neew.id} button onClick={(e) => this.setRedir(neew.url, e)}>
+              <div key={neew._id}>
+                <ListItem button onClick={(e) => this.setRedir(neew.url, e)}>
                   {neew.category == "News" && <Receipt/>}
                   {neew.category == "Funny" && <Mood/>}
                   {neew.category == "Sport" && <DirectionsRun/>}
@@ -77,7 +76,7 @@ class EditAfter extends React.Component {
                   <ListItemText primary={neew.en.title}/>
                 </ListItem>
                 <Divider/>
-              </React.Fragment>
+              </div>
             ) }
           </List>
           :
@@ -91,8 +90,8 @@ class EditAfter extends React.Component {
           <List>
             <Divider/>
             {readyNews.map( (neew) =>
-              <React.Fragment>
-                <ListItem key={neew.id} button onClick={(e) => this.setRedir(neew.url, e)}>
+              <div key={neew._id}>
+                <ListItem button onClick={(e) => this.setRedir(neew.url, e)}>
                   {neew.category == "News" && <Receipt/>}
                   {neew.category == "Funny" && <Mood/>}
                   {neew.category == "Sport" && <DirectionsRun/>}
@@ -100,7 +99,7 @@ class EditAfter extends React.Component {
                   <ListItemText primary={neew.en.title}/>
                 </ListItem>
                 <Divider/>
-              </React.Fragment>
+              </div>
             ) }
           </List>
           :
