@@ -2,7 +2,7 @@ node_modules
 .idea
 .DS_Store
 package-lock.json
-server/config/config.js
+server/config/hidden.js
 public/*
 !public/manifest.json
 !public/robots.txt
