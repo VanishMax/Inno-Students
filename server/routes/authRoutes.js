@@ -2,7 +2,6 @@ import passport from 'passport'
 export default function (app){
 
   //Send request to Google with Passport google-strategy
-  // See services/passport.js
   app.get(
     '/auth/google',
     passport.authenticate('google', {

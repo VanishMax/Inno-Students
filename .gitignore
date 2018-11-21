@@ -7,3 +7,4 @@ public/*
 !public/manifest.json
 !public/robots.txt
 assets/pics/*
+!assets/pics/Test-Picture.png
