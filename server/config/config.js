@@ -1,9 +1,7 @@
-import cfg from './hidden'
-
 const obj = {
-  googleClientID: process.env.googleClientId || cfg.googleClientID || '',
-  googleClientSecret: process.env.googleClientSecret || cfg.googleClientSecret || '',
-  mongoURI: process.env.mongoURI || cfg.mongoURI || '',
-  cookieKey: process.env.cookieKey || cfg.cookieKey || ''
+  googleClientID: process.env.googleClientID || '',
+  googleClientSecret: process.env.googleClientSecret || '',
+  mongoURI: process.env.mongoURI || '',
+  cookieKey: process.env.cookieKey || ''
 }
 export default obj
