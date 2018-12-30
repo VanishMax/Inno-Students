@@ -5,33 +5,27 @@ import { Route } from 'react-router'
 
 import config from '#/admin'
 
-import Loadable from "react-loadable"
+import LoadableHOC from '&/HOCs/LoadableHOC'
 
-const AsyncMenu = Loadable({
+const AsyncMenu = LoadableHOC({
   loader: () => import(/* webpackChunkName: "AdminMenu" */ './Menu'),
-  loading: () => null
 })
-// const AsyncEdit = Loadable({
+// const AsyncEdit = LoadableHOC({
 //   loader: () => import(/* webpackChunkName: "AdminEdit" */ './Edit'),
-//   loading: () => null
 // })
 
-class Admin extends React.Component {
-  render(){
-    return (
+export default function (props) {
+  return (
+    <React.Fragment>
+      <Helmet>
+        <title>{config.header[props.lang]}</title>
+        <meta name="description" content="VaMax app" />
+      </Helmet>
+      <Header/>
       <React.Fragment>
-        <Helmet>
-          <title>{config.header[this.props.lang]}</title>
-          <meta name="description" content="VaMax app" />
-        </Helmet>
-        <Header/>
-        <React.Fragment>
-          <Route path="/admins/edit" render={(props) => <AsyncEdit lang={this.props.lang}/>}/>
-          <Route path="/admins" render={(props) => <AsyncMenu lang={this.props.lang}/>}/>
-        </React.Fragment>
+        <Route path="/admins/edit" render={() => <AsyncEdit lang={props.lang}/>}/>
+        <Route path="/admins" render={() => <AsyncMenu lang={props.lang}/>}/>
       </React.Fragment>
-    )
-  }
+    </React.Fragment>
+  )
 }
-
-export default Admin

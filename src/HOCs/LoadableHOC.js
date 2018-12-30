@@ -1,5 +1,13 @@
 import React from 'react'
+import Loadable from 'react-loadable'
 import CircularProgress from '@material-ui/core/CircularProgress'
+
+export default function LoadableHOC(opts) {
+  return Loadable(Object.assign({
+    loading: Loading,
+    delay: 200
+  }, opts))
+}
 
 const styles = {
   div: {
@@ -13,7 +21,7 @@ const styles = {
   }
 }
 
-export default function Loading(props) {
+function Loading(props) {
   if (props.error) {
     return <div style={styles.div} onClick={ () => window.location.reload(true) } align="center">
       <h3>

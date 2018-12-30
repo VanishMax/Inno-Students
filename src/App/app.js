@@ -1,26 +1,12 @@
 import React from 'react'
 import { Switch, Route } from 'react-router'
 
-import isAdminHOC from '&/isAdminHOC'
+import isAdminHOC from '&/HOCs/isAdminHOC'
 
-import Loadable from 'react-loadable'
-import Loading from '~/src/Loading'
-const AsyncHome = Loadable({
-  loader: () => import(/* webpackChunkName: "Home" */ './Home'),
-  loading: Loading,
-  delay: 300,
-})
-const AsyncAbout = Loadable({
-  loader: () => import(/* webpackChunkName: "About" */ './About'),
-  loading: Loading,
-  delay: 300,
-})
-const AsyncAdmin = Loadable({
-  loader: () => import(/* webpackChunkName: "About" */ './Admin'),
-  loading: Loading,
-  delay: 300,
-})
-
+import LoadableHOC from '&/HOCs/LoadableHOC'
+const AsyncHome = LoadableHOC({ loader: () => import(/* webpackChunkName: "Home" */ './Home') })
+const AsyncAbout = LoadableHOC({ loader: () => import(/* webpackChunkName: "About" */ './About') })
+const AsyncAdmin = LoadableHOC({ loader: () => import(/* webpackChunkName: "About" */ './Admin') })
 
 
 export default function App() {
@@ -29,7 +15,7 @@ export default function App() {
     <Switch>
       <Route exact path="/" component={ AsyncHome }/>
       <Route exact path="/about" component={ AsyncAbout }/>
-      <Route exact path="/admins" component={ (props) => <Admin lang="ru"/> }/>
+      <Route exact path="/admins" component={ () => <Admin lang="ru"/> }/>
     </Switch>
   )
 }
