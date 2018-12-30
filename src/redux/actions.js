@@ -1,10 +1,13 @@
-export const CHANGE_LANG = 'CHANGE_LANG'
-export const CREATE_NEWS = 'CREATE_NEWS'
+export const INCREASE = 'INCREASE'
+export const DECREASE = 'DECREASE'
 
-export function changeLang(lang){
-  return {type: CHANGE_LANG, lang: lang}
+export function increase() {
+  return {
+    type: INCREASE
+  }
 }
-
-export function createNews(title, category){
-  return {type: CREATE_NEWS, title: title, category: category}
+export function decrease() {
+  return {
+    type: DECREASE
+  }
 }

@@ -1,21 +1,20 @@
-import passport from 'passport'
-import strat from 'passport-google-oauth'
-const GoogleStrategy = strat.OAuth2Strategy
+import strat from 'passport-google-oauth20'
 import config from './config'
 import db from './connection'
+const GoogleStrategy = strat.Strategy
 
-export default function oauth(passport) {
-  let User
-  let Counters
-  db.getInstance((p_db) => {
-    User = p_db.collection('auth')
-    Counters = p_db.collection('counters')
-  })
+let User
+let Counters
+db.getInstance((p_db) => {
+  User = p_db.collection('auth')
+  Counters = p_db.collection('counters')
+})
+
+export default function auth(passport) {
 
   passport.serializeUser((user, done) => {
     done(null, {id: user._id, isAdmin: user.isAdmin, name: user.name})
   })
-
   passport.deserializeUser((user, done) => {
     done(null, user)
   })

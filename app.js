@@ -1,19 +1,22 @@
 import express from 'express'
 import http from 'http'
 import path from 'path'
-import bodyParser from 'body-parser'
 import cookieSession from 'cookie-session'
 import passport from 'passport'
 import Loadable from 'react-loadable'
 
 import config from '^/config/config'
-import goauth from '^/config/googleOauth'
+import goauth from '^/config/googleAuth'
 import db from '^/config/connection'
+
+import authRoutes from '^/routes/authRoutes'
+import stateRoutes from '^/routes/stateRoutes'
+import smartRoutes from '^/routes/smartRoutes'
 
 var app = express()
 db.initPool()
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -38,9 +41,6 @@ Loadable.preloadAll().then(() => server.listen(PORT, '0.0.0.0', function () {
   console.log("The app is running in PORT " + PORT)
 }))
 
-import authRoutes from '^/routes/authRoutes'
-import smartRoutes from '^/routes/smartRoutes'
-import stateRoutes from '^/routes/stateRoutes'
 authRoutes(app)
 smartRoutes(app)
 stateRoutes(app)

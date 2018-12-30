@@ -1,4 +1,5 @@
 import passport from 'passport'
+
 export default function (app){
 
   //Send request to Google with Passport google-strategy
@@ -32,6 +33,6 @@ export default function (app){
         }
       }
     }
-    res.send({isAdmin: isAdmin})
+    res.json({isAdmin: isAdmin})
   })
 }

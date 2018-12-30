@@ -128,9 +128,9 @@ class Menu extends React.Component{
                     />
                     <br/><br/>
                     <Select autoWidth={false} style={{width: '60%'}} name="Category"
-                      value={select}
-                      onChange={this.changeSelects}
-                      input={<Input name="Category"/>}
+                            value={select}
+                            onChange={this.changeSelects}
+                            input={<Input name="Category"/>}
                     >
                       <MenuItem value="News"><Receipt/>News</MenuItem>
                       <MenuItem value="Funny"><Mood/>Funny</MenuItem>

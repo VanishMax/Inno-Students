@@ -53,7 +53,7 @@ export default function (app){
     let date = moment().format('DD-MM-YYYY')
     News.findOneAndUpdate({ _id: parseInt(req.body.id) },
       { $set: { published: true, publishTime: time, publishDate: date }
-    })
+      })
     res.json({time: time, date: date})
   })
 
@@ -128,7 +128,7 @@ export default function (app){
     News.findOneAndUpdate({ _id: parseInt(req.body.id) }, { $set: {'en.keywords': req.body.keywords} })
   })
   app.post('/admins/edit/keywordsRu', (req, res) => {
-      News.findOneAndUpdate({ _id: parseInt(req.body.id) }, { $set: {'ru.keywords': req.body.keywordsRu} })
+    News.findOneAndUpdate({ _id: parseInt(req.body.id) }, { $set: {'ru.keywords': req.body.keywordsRu} })
   })
 
   app.post('/admins/edit/file', (req, res) => {
@@ -136,11 +136,11 @@ export default function (app){
     form.parse(req, (err, fields, files) => {
 
       let id = fields.id,
-          url = fields.url,
-          oldPath = files.file.path,
-          fileExt = files.file.name.split('.').pop(),
-          fileName = url + '.' + fileExt,
-          newPath = path.join(__dirname, '../../', 'assets/pics/', fileName)
+        url = fields.url,
+        oldPath = files.file.path,
+        fileExt = files.file.name.split('.').pop(),
+        fileName = url + '.' + fileExt,
+        newPath = path.join(__dirname, '../../', 'assets/pics/', fileName)
 
       fs.readFile(oldPath, (err, data) => {
         if(err) console.log(err)

@@ -1,28 +1,16 @@
-import { CHANGE_LANG, CREATE_NEWS } from './actions'
-import axios from 'axios'
+import { INCREASE, DECREASE } from './actions'
 
-function apps( state, action) {
+export default function count(state, action) {
   switch (action.type) {
-    case CHANGE_LANG:
-      return Object.assign({}, state, { lang: action.lang })
-
-    case CREATE_NEWS:
-      axios.post('/admins/create', {title: action.title, category: action.category})
-        .then((response) => {
-          if(!response.data.news){
-            console.log('Something bad happened')
-          }else{
-            console.log(Object.assign({}, state, { news: response.data.news }))
-            return Object.assign({}, state, { news: response.data.news })
-          }
-        })
-        .catch((error)=>{
-          console.log(error)
-        })
-
+    case INCREASE:
+      return Object.assign({}, state, {
+        count: state.count + 1
+      })
+    case DECREASE:
+      return Object.assign({}, state, {
+        count: state.count - 1
+      })
     default:
       return state
   }
 }
-
-export default apps

@@ -1,13 +1,13 @@
 // html skeleton provider
-export default function template(sheetsRegistry, helmet, initialState = {}, content = "", bundles){
-  let css = sheetsRegistry.toString()
-  let scripts = ` <script>
+export default function template(sheetsRegistry, helmet, initialState = {}, content = '', bundles) {
+  const css = sheetsRegistry.toString()
+  const scripts = ` <script>
                    window.__STATE__ = ${JSON.stringify(initialState)}
                 </script>
-                <script src="/client.js"></script>
-                `
-  let page = `<!DOCTYPE html>
-              <html>
+                <script src="/client.js"></script>`
+
+  const page = `<!DOCTYPE html>
+              <html lang="en">
               <head>
                 ${helmet.title.toString()}
                 ${helmet.meta.toString()}
@@ -15,7 +15,6 @@ export default function template(sheetsRegistry, helmet, initialState = {}, cont
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
                 <meta name="theme-color" content="#810051">
-                <link rel="manifest" href="/manifest.json">
                 <link rel="shortcut icon" href="/assets/logos/favicon.ico" type="image/x-icon">
                 <link rel="icon" href="/assets/logos/favicon.ico" type="image/x-icon">
                 <link rel="stylesheet" href="/assets/global.css">
@@ -25,19 +24,10 @@ export default function template(sheetsRegistry, helmet, initialState = {}, cont
                    <div id="app" class="wrap-inner">
                       <!--- magic happens here -->  ${content}
                    </div>
-                   ${bundles.map(bundle => {
-    return `<script src="/${bundle.file}"></script>`
-  }).join('\n')}
+                   ${bundles.map(bundle => `<script src='/${bundle.file}'></script>`).join('\n')}
                 </div>
-                <script>
-                  if ('serviceWorker' in navigator) {
-                      window.addEventListener('load', function() {
-                          navigator.serviceWorker.register('/service-worker.js');
-                      });
-                  }
-                </script>
-                  <style id="jss-server-side">${css}</style>
-                  ${scripts}
+                <style id="jss-server-side">${css}</style>
+                ${scripts}
               </body>
               `
 

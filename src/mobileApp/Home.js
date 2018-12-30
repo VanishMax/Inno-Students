@@ -1,10 +1,10 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
 import * as Actions from '&/redux/actions'
 
-import Header from '../Header'
+import Header from './Header'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
@@ -12,8 +12,8 @@ import Button from '@material-ui/core/Button'
 const styles = {
   paper: {
     margin: "auto",
-    marginTop: 200,
-    width: "40%",
+    marginTop: 20,
+    width: "90%",
     padding: 15
   },
   btnLeft: {
@@ -21,7 +21,7 @@ const styles = {
   }
 }
 
-class Index extends React.Component{
+class Home extends React.Component{
   constructor(){
     super()
     this.increase = this.increase.bind(this)
@@ -36,11 +36,11 @@ class Index extends React.Component{
   render(){
     return (
       <div>
-        <Helmet>
-          <title>MWA - Home</title>
-          <meta name="description" content="Modern Web App - Home Page" />
-        </Helmet>
         <Header/>
+        <Helmet>
+          <title>VaMax Mobile</title>
+          <meta name="description" content="VaMax Mobile App" />
+        </Helmet>
         <Paper elevation={4} style={styles.paper} align="center">
           <Typography variant="h5">Redux-Counter</Typography>
           <Typography variant="subtitle1">Counter: {this.props.count}</Typography>
@@ -63,4 +63,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Index)
+)(Home)
