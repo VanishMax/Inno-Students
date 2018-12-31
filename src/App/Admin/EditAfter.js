@@ -58,7 +58,7 @@ class EditAfter extends React.Component {
       )
     }
     return(
-      <Paper elevation={3} align="center" style={styles.paper}>
+      <Paper elevation={3} align="center" style={styles.elemLeft}>
         <Button variant="contained" onClick={editToggle}>
           Go back
         </Button>

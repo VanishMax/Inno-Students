@@ -14,29 +14,29 @@ import DirectionsRun from '@material-ui/icons/DirectionsRun'
 import Mood from '@material-ui/icons/Mood'
 import Domain from '@material-ui/icons/Domain'
 
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import * as Actions from '&/redux/actions'
 
 import EditAfter from './EditAfter'
 import MyDialog from './MyDialog'
 
 const styles = {
-  gridItem: {
-    marginTop: '10%',
-    minHeight: '40%'
+  elemLeft: {
+    position: 'absolute',
+    top: '10%',
+    left: '15%',
+    width: '30%',
+    minHeight: '10%',
+    padding: '10%'
   },
-  paper: {
-    padding: '10%',
-    width: '100%',
-    height: '100%'
-  },
-  button: {
-    width: '100%',
-    height: '100%'
-  },
-  buttonMargin: {
-    marginRight: '10%'
+  elemRight: {
+    position: 'absolute',
+    top: '10%',
+    left: '55%',
+    width: '30%',
+    minHeight: '10%',
+    padding: '10%'
   }
 }
 
@@ -92,74 +92,70 @@ class Menu extends React.Component{
 
         <MyDialog created={created} dialogClose={this.dialogClose} title={title}/>
 
-        <Grid container direction="row" style={styles.gridItem}
-              justify="space-around" alignItems="center">
-          <Grid item xs={4}>
-            {edit ?
-              <Fade in={edit}>
-                <EditAfter editToggle={this.editToggle} styles={styles}/>
-              </Fade>
-              :
-              <Fade in={true}>
-                <ButtonBase style={styles.button} onClick={this.createToggle}>
-                  <Paper elevation={3} align="center" style={styles.paper}>
-                    <Typography variant="h3">
-                      Create
-                    </Typography>
-                  </Paper>
-                </ButtonBase>
-              </Fade>}
+        <div>
 
-          </Grid>
-          <Grid item xs={4}>
-
-            {create ?
-              <Fade in={create}>
-                <Paper elevation={3} align="center" style={styles.paper}>
-                  <Typography variant="h6">
-                    Please, type the title of the news.
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    You will be able to change it later.
-                  </Typography>
-                  <form noValidate autoComplete="off">
-                    <TextField id="newsTitle" label="Title" fullWidth value={this.state.title} error={error}
-                               placeholder="Bears attacked" onChange={this.changeTitle} margin="normal"
-                    />
-                    <br/><br/>
-                    <Select autoWidth={false} style={{width: '60%'}} name="Category"
-                            value={select}
-                            onChange={this.changeSelects}
-                            input={<Input name="Category"/>}
-                    >
-                      <MenuItem value="News"><Receipt/>News</MenuItem>
-                      <MenuItem value="Funny"><Mood/>Funny</MenuItem>
-                      <MenuItem value="Sport"><DirectionsRun/>Sports</MenuItem>
-                      <MenuItem value="Students life"><Domain/>Student's life</MenuItem>
-                    </Select>
-                  </form>
-                  <br/><br/>
-                  <Button variant="raised" onClick={this.createToggle} style={styles.buttonMargin}>
-                    Go back
-                  </Button>
-                  <Button variant="raised" color="primary" onClick={this.createNews}>
+          {edit ?
+            <Fade in={edit}>
+              <EditAfter editToggle={this.editToggle} styles={styles}/>
+            </Fade>
+            :
+            <Fade in={true}>
+              <ButtonBase style={styles.button} onClick={this.createToggle}>
+                <Paper elevation={3} align="center" style={styles.elemLeft}>
+                  <Typography variant="h3">
                     Create
-                  </Button>
+                  </Typography>
                 </Paper>
-              </Fade>
-              :
-              <Fade in={true}>
-                <ButtonBase style={styles.button} onClick={this.editToggle}>
-                  <Paper elevation={3} align="center" style={styles.paper}>
-                    <Typography variant="h3">
-                      Edit
-                    </Typography>
-                  </Paper>
-                </ButtonBase>
-              </Fade>
-            }
-          </Grid>
-        </Grid>
+              </ButtonBase>
+            </Fade>}
+
+
+          {create ?
+            <Fade in={create}>
+              <Paper elevation={3} align="center" style={styles.elemRight}>
+                <Typography variant="h6">
+                  Please, type the title of the news.
+                </Typography>
+                <Typography variant="subtitle1">
+                  You will be able to change it later.
+                </Typography>
+                <form noValidate autoComplete="off">
+                  <TextField id="newsTitle" label="Title" fullWidth value={this.state.title} error={error}
+                             placeholder="Bears attacked" onChange={this.changeTitle} margin="normal"
+                  />
+                  <br/><br/>
+                  <Select autoWidth={false} style={{width: '60%'}} name="Category"
+                          value={select}
+                          onChange={this.changeSelects}
+                          input={<Input name="Category"/>}
+                  >
+                    <MenuItem value="News"><Receipt/>News</MenuItem>
+                    <MenuItem value="Funny"><Mood/>Funny</MenuItem>
+                    <MenuItem value="Sport"><DirectionsRun/>Sports</MenuItem>
+                    <MenuItem value="Students life"><Domain/>Student's life</MenuItem>
+                  </Select>
+                </form>
+                <br/><br/>
+                <Button variant="raised" onClick={this.createToggle} style={styles.buttonMargin}>
+                  Go back
+                </Button>
+                <Button variant="raised" color="primary" onClick={this.createNews}>
+                  Create
+                </Button>
+              </Paper>
+            </Fade>
+            :
+            <Fade in={true}>
+              <ButtonBase style={styles.button} onClick={this.editToggle}>
+                <Paper elevation={3} align="center" style={styles.elemRight}>
+                  <Typography variant="h3">
+                    Edit
+                  </Typography>
+                </Paper>
+              </ButtonBase>
+            </Fade>
+          }
+        </div>
       </React.Fragment>
     )
   }
