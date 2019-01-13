@@ -50,16 +50,16 @@ class EditAfter extends React.Component {
       })
   }
   render(){
-    const {styles, editToggle} = this.props
-    const {newsToEditLoaded, newsToEdit, redir, readyNewsLoaded, readyNews} = this.state
+    const { editToggle } = this.props
+    const { newsToEditLoaded, newsToEdit, redir, readyNewsLoaded, readyNews } = this.state
     if(redir !== ''){
       return(
         <Redirect to={"/admins/edit/" + redir}/>
       )
     }
     return(
-      <Paper elevation={3} align="center" style={styles.elemLeft}>
-        <Button variant="contained" onClick={editToggle}>
+      <div>
+        <Button variant="contained" onClick={editToggle} style={{ marginBottom: 10 }}>
           Go back
         </Button>
         <Typography variant="h5">List of unpublished news</Typography>
@@ -103,15 +103,17 @@ class EditAfter extends React.Component {
             ) }
           </List>
           :
-          <Button variant="contained" color="primary" onClick={this.loadReady}>Load</Button>
+          <Button variant="contained" color="primary"
+                  onClick={this.loadReady} style={{ marginTop: 10 }}>
+            Load
+          </Button>
         }
-      </Paper>
+      </div>
     )
   }
 }
 
 EditAfter.propTypes = {
-  editToggle: PropTypes.func.isRequired,
-  styles: PropTypes.object.isRequired
+  editToggle: PropTypes.func.isRequired
 }
 export default EditAfter

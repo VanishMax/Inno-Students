@@ -24,19 +24,23 @@ import MyDialog from './MyDialog'
 const styles = {
   elemLeft: {
     position: 'absolute',
-    top: '10%',
+    top: '20%',
     left: '15%',
     width: '30%',
     minHeight: '10%',
-    padding: '10%'
+    padding: '2%'
   },
   elemRight: {
     position: 'absolute',
-    top: '10%',
+    top: '20%',
     left: '55%',
     width: '30%',
-    minHeight: '10%',
-    padding: '10%'
+    minHeight: '5%',
+    padding: '2%'
+  },
+  buttonBase: {
+    width: '100%',
+    height: '100%'
   }
 }
 
@@ -90,29 +94,27 @@ class Menu extends React.Component{
     return(
       <React.Fragment>
 
-        <MyDialog created={created} dialogClose={this.dialogClose} title={title}/>
 
-        <div>
-
+        <Paper elevation={3} style={styles.elemLeft} align="center">
           {edit ?
             <Fade in={edit}>
               <EditAfter editToggle={this.editToggle} styles={styles}/>
             </Fade>
             :
             <Fade in={true}>
-              <ButtonBase style={styles.button} onClick={this.createToggle}>
-                <Paper elevation={3} align="center" style={styles.elemLeft}>
-                  <Typography variant="h3">
-                    Create
-                  </Typography>
-                </Paper>
+              <ButtonBase style={styles.buttonBase} onClick={this.createToggle}>
+                <Typography variant="h3">
+                  Create
+                </Typography>
               </ButtonBase>
-            </Fade>}
+            </Fade>
+          }
+        </Paper>
 
-
+        <Paper elevation={3} style={styles.elemRight} align="center">
           {create ?
             <Fade in={create}>
-              <Paper elevation={3} align="center" style={styles.elemRight}>
+              <div style={styles.buttonBase}>
                 <Typography variant="h6">
                   Please, type the title of the news.
                 </Typography>
@@ -124,7 +126,7 @@ class Menu extends React.Component{
                              placeholder="Bears attacked" onChange={this.changeTitle} margin="normal"
                   />
                   <br/><br/>
-                  <Select autoWidth={false} style={{width: '60%'}} name="Category"
+                  <Select autoWidth={false} style={{ width: '60%' }} name="Category"
                           value={select}
                           onChange={this.changeSelects}
                           input={<Input name="Category"/>}
@@ -136,26 +138,27 @@ class Menu extends React.Component{
                   </Select>
                 </form>
                 <br/><br/>
-                <Button variant="raised" onClick={this.createToggle} style={styles.buttonMargin}>
+                <Button variant="contained" onClick={this.createToggle} style={{ marginRight: 20 }}>
                   Go back
                 </Button>
-                <Button variant="raised" color="primary" onClick={this.createNews}>
+                <Button variant="contained" color="primary" onClick={this.createNews}>
                   Create
                 </Button>
-              </Paper>
+              </div>
             </Fade>
             :
             <Fade in={true}>
-              <ButtonBase style={styles.button} onClick={this.editToggle}>
-                <Paper elevation={3} align="center" style={styles.elemRight}>
-                  <Typography variant="h3">
-                    Edit
-                  </Typography>
-                </Paper>
+              <ButtonBase style={styles.buttonBase} onClick={this.editToggle}>
+                <Typography variant="h3">
+                  Edit
+                </Typography>
               </ButtonBase>
             </Fade>
           }
-        </div>
+        </Paper>
+
+        <MyDialog created={created} dialogClose={this.dialogClose} title={title}/>
+
       </React.Fragment>
     )
   }

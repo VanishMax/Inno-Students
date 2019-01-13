@@ -10,9 +10,9 @@ import LoadableHOC from '&/HOCs/LoadableHOC'
 const AsyncMenu = LoadableHOC({
   loader: () => import(/* webpackChunkName: "AdminMenu" */ './Menu'),
 })
-// const AsyncEdit = LoadableHOC({
-//   loader: () => import(/* webpackChunkName: "AdminEdit" */ './Edit'),
-// })
+const AsyncEdit = LoadableHOC({
+  loader: () => import(/* webpackChunkName: "AdminEdit" */ './Edit'),
+})
 
 export default function (props) {
   return (
