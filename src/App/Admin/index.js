@@ -6,7 +6,6 @@ import { Route } from 'react-router'
 import config from '#/admin'
 
 import LoadableHOC from '&/HOCs/LoadableHOC'
-
 const AsyncMenu = LoadableHOC({
   loader: () => import(/* webpackChunkName: "AdminMenu" */ './Menu'),
 })
@@ -24,7 +23,7 @@ export default function (props) {
       <Header/>
       <React.Fragment>
         <Route path="/admins/edit" render={() => <AsyncEdit lang={props.lang}/>}/>
-        <Route path="/admins" render={() => <AsyncMenu lang={props.lang}/>}/>
+        <Route exact path="/admins" render={() => <AsyncMenu lang={props.lang}/>}/>
       </React.Fragment>
     </React.Fragment>
   )

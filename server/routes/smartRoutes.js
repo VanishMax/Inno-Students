@@ -115,6 +115,12 @@ export default function (app){
   app.post('/admins/edit/contentRu', (req, res) => {
     News.findOneAndUpdate({ _id: parseInt(req.body.id) }, { $set: {'ru.content': req.body.content} })
   })
+
+  app.post('/admins/edit/dante', (req, res) => {
+    console.log(req.body);
+    res.json({message: 'All right'})
+  })
+
   app.post('/admins/edit/authorName', (req, res) => {
     News.findOneAndUpdate({ _id: parseInt(req.body.id) }, { $set: {'en.authorName': req.body.authorName} })
   })

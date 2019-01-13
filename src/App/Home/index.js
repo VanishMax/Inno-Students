@@ -9,6 +9,7 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 
+
 const styles = {
   paper: {
     margin: "auto",
@@ -41,13 +42,6 @@ class Index extends React.Component{
           <meta name="description" content="Modern Web App - Home Page" />
         </Helmet>
         <Header/>
-        <Paper elevation={4} style={styles.paper} align="center">
-          <Typography variant="h5">Redux-Counter</Typography>
-          <Typography variant="subtitle1">Counter: {this.props.count}</Typography>
-          <br/>
-          <Button variant="contained" color="primary" onClick={this.increase} style={styles.btnLeft}>Increase</Button>
-          <Button variant="contained" color="primary" onClick={this.decrease}>Decrease</Button>
-        </Paper>
       </div>
     )
   }

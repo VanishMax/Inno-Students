@@ -15,7 +15,7 @@ export default function App() {
     <Switch>
       <Route exact path="/" component={ AsyncHome }/>
       <Route exact path="/about" component={ AsyncAbout }/>
-      <Route exact path="/admins" component={ () => <Admin lang="ru"/> }/>
+      <Route path="/admins" component={ () => <Admin lang="ru"/> }/>
     </Switch>
   )
 }
