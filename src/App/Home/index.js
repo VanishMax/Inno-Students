@@ -1,60 +1,27 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import * as Actions from '&/redux/actions'
 
 import Header from '../Header'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
+import config from '#/home' //See /babelrc file to understand what is #
 
+import LoadableHOC from '&/HOCs/LoadableHOC'
+const NewsGrid = LoadableHOC({ loader: () => import(/* webpackChunkName: "NewsGrid" */ './NewsGrid') })
 
-const styles = {
-  paper: {
-    margin: "auto",
-    marginTop: 200,
-    width: "40%",
-    padding: 15
-  },
-  btnLeft: {
-    marginRight: 20
-  }
-}
-
-class Index extends React.Component{
-  constructor(){
-    super()
-    this.increase = this.increase.bind(this)
-    this.decrease = this.decrease.bind(this)
-  }
-  increase(){
-    this.props.actions.increase()
-  }
-  decrease(){
-    this.props.actions.decrease()
+export default class Home extends React.Component {
+  constructor(props){
+    super(props)
   }
   render(){
+    const {lang} = this.props
     return (
       <div>
         <Helmet>
-          <title>MWA - Home</title>
-          <meta name="description" content="Modern Web App - Home Page" />
+          <title>{config.header[lang]}</title>
+          <meta name="description" content="VaMax app" />
         </Helmet>
-        <Header/>
+        <Header lang={lang} title={config.header[lang]}/>
+        <NewsGrid lang={lang}/>
       </div>
     )
   }
 }
-
-const mapStateToProps = (state) => ({
-  count: state.count
-})
-const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(Actions, dispatch)
-})
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Index)

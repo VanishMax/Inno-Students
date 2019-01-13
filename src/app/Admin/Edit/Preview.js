@@ -11,11 +11,11 @@ import DialogContentText from "@material-ui/core/DialogContentText/DialogContent
 import DialogActions from "@material-ui/core/DialogActions/DialogActions"
 import Dialog from "@material-ui/core/Dialog/Dialog"
 
-import NeewCard from '&/App/News/Preview'
+import NeewCard from '&/App/News/NewsCard'
 
 const styles = {
   paper: {
-    width: '50%',
+    width: '35%',
     margin: '2% auto 0',
     padding: 20
   },
@@ -52,7 +52,6 @@ export default class Preview extends React.Component{
       toDelete: false,
       publishDialog: false,
       published: false,
-      time: '',
       langEn: true
     }
     this.deleteNewsDialog = this.deleteNewsDialog.bind(this)
@@ -61,7 +60,7 @@ export default class Preview extends React.Component{
     this.publish = this.publish.bind(this)
     this.publishDialog = this.publishDialog.bind(this)
   }
-  componentDidMount(){
+  componentDidMount() {
     let url = window.location.pathname.split('/').pop()
     let id = url.split('-')[0]
     axios.post('/admins/getOneNews', {id: id})
@@ -69,7 +68,6 @@ export default class Preview extends React.Component{
         this.setState({
           neew: response.data,
           published: response.data.published,
-          time: (response.data.publishDate || '') + ', ' + (response.data.publishTime || '')
         })
         console.log(`length of content is ` + response.data.en.content.length)
       })
@@ -77,15 +75,9 @@ export default class Preview extends React.Component{
         console.log(error)
       })
   }
-  changeLang(){
-    this.setState({ langEn: !this.state.langEn})
-  }
-  handleExpandClick(){
-    this.setState({ expanded: !this.state.expanded })
-  }
-  deleteNewsDialog(){
-    this.setState({toDelete: !this.state.toDelete})
-  }
+  changeLang(){ this.setState({ langEn: !this.state.langEn}) }
+  handleExpandClick(){ this.setState({ expanded: !this.state.expanded }) }
+  deleteNewsDialog(){ this.setState({toDelete: !this.state.toDelete}) }
   deleteForever(){
     axios.post('/admins/deleteNews', {id: this.state.neew._id})
     window.location.pathname = '/admins/'
@@ -94,21 +86,19 @@ export default class Preview extends React.Component{
     axios.post('/admins/publishNews', {id: this.state.neew._id})
       .then((response) => {
         this.setState({
-          time: response.data.time + " " + response.data.date,
           published: true,
           publishDialog: false
         })
       })
   }
-  publishDialog(){
-    this.setState({ publishDialog: !this.state.publishDialog })
-  }
+  publishDialog(){ this.setState({ publishDialog: !this.state.publishDialog }) }
+
   render(){
-    const {neew, toDelete, publishDialog, published, time, langEn} = this.state
+    const { neew, toDelete, publishDialog, published, langEn } = this.state
     return(
       <div align="center">
         {published && <Typography variant="h5">The news is published</Typography>}
-        <Button variant="raised" color="secondary" style={{marginRight: 20}} onClick={this.deleteNewsDialog}>
+        <Button variant="raised" color="secondary" style={{ marginRight: 20 }} onClick={this.deleteNewsDialog}>
           Delete
         </Button>
         <Button variant="raised" color="primary" onClick={this.publishDialog} disabled={published}>
@@ -122,7 +112,7 @@ export default class Preview extends React.Component{
             <Typography variant="subtitle1">
               How your news will look like:
             </Typography>
-            <Button variant="contained" color="primary" onClick={this.changeLang}>
+            <Button variant="contained" color="primary" onClick={this.changeLang} style={{ marginBottom: 10 }}>
               {langEn ? `Change Lang` : `Изменить язык`}
             </Button>
           <Divider/>

@@ -15,9 +15,9 @@ const AsyncContent = LoadableHOC({
 const AsyncMeta = LoadableHOC({
   loader: () => import(/* webpackChunkName: "AdminEditMeta" */ './Meta'),
 })
-// const AsyncPreview = LoadableHOC({
-//   loader: () => import(/* webpackChunkName: "AdminEditPreview" */ './Preview'),
-// })
+const AsyncPreview = LoadableHOC({
+  loader: () => import(/* webpackChunkName: "AdminEditPreview" */ './Preview'),
+})
 
 export default class Index extends React.Component{
   constructor(props) {
@@ -61,7 +61,7 @@ export default class Index extends React.Component{
             Next
           </Button>
         </AsyncMeta>}
-        {/*{value === 3 && <AsyncPreview/>}*/}
+        {value === 3 && <AsyncPreview/>}
       </React.Fragment>
     )
   }

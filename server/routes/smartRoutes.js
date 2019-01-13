@@ -116,7 +116,7 @@ export default function (app){
     News.findOneAndUpdate({ _id: parseInt(req.body.id) }, { $set: {'ru.content': req.body.content} })
   })
 
-  app.post('/admins/edit/dante', (req, res) => {
+  app.post('/admins/edit/content', (req, res) => {
     console.log(req.body);
     res.json({message: 'All right'})
   })
