@@ -11,7 +11,7 @@ import DialogContentText from "@material-ui/core/DialogContentText/DialogContent
 import DialogActions from "@material-ui/core/DialogActions/DialogActions"
 import Dialog from "@material-ui/core/Dialog/Dialog"
 
-import NeewCard from '&/App/News/NewsCard'
+import NewsCard from '&/App/News/NewsCard'
 
 const styles = {
   paper: {
@@ -76,7 +76,6 @@ export default class Preview extends React.Component{
       })
   }
   changeLang(){ this.setState({ langEn: !this.state.langEn}) }
-  handleExpandClick(){ this.setState({ expanded: !this.state.expanded }) }
   deleteNewsDialog(){ this.setState({toDelete: !this.state.toDelete}) }
   deleteForever(){
     axios.post('/admins/deleteNews', {id: this.state.neew._id})
@@ -98,10 +97,10 @@ export default class Preview extends React.Component{
     return(
       <div align="center">
         {published && <Typography variant="h5">The news is published</Typography>}
-        <Button variant="raised" color="secondary" style={{ marginRight: 20 }} onClick={this.deleteNewsDialog}>
+        <Button variant="contained" color="secondary" style={{ marginRight: 20 }} onClick={this.deleteNewsDialog}>
           Delete
         </Button>
-        <Button variant="raised" color="primary" onClick={this.publishDialog} disabled={published}>
+        <Button variant="contained" color="primary" onClick={this.publishDialog} disabled={published}>
           Publish
         </Button>
 
@@ -118,7 +117,7 @@ export default class Preview extends React.Component{
           <Divider/>
 
           {neew !== null &&
-            <NeewCard lang={langEn ? 'en' : 'ru'} neew={neew} style={styles.card}/>
+            <NewsCard lang={langEn ? 'en' : 'ru'} neew={neew} style={styles.card}/>
           }
         </Paper>
 
