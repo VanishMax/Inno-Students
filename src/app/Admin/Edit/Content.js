@@ -5,8 +5,8 @@ import axios from 'axios'
 import { Helmet } from 'react-helmet'
 
 import NoSsr from '@material-ui/core/NoSsr'
-import { Editor, createEditorState, ImageSideButton, BreakSideButton } from 'medium-draft'
-import { convertToRaw } from 'draft-js'
+import { convertToRaw, convertFromRaw } from 'draft-js'
+import Dante from 'Dante2'
 import Button from '@material-ui/core/Button'
 
 const styles = {
@@ -26,8 +26,8 @@ export default class Content extends React.Component{
     this.state = {
       id: null,
       loaded: false,
-      content: createEditorState(),
-      contentRu: createEditorState(),
+      content: null,
+      contentRu: null,
       photosLink: '',
       published: false
     }
@@ -42,10 +42,10 @@ export default class Content extends React.Component{
     axios.post('/admins/getOneNews', {id: id})
       .then((response) => {
         let neew = response.data
+        if(neew.en.content) this.setState({ content: JSON.parse(neew.en.content) })
+        if(neew.ru.content) this.setState({ contentRu: JSON.parse(neew.ru.content) })
         this.setState({
           id: id,
-          content: createEditorState(neew.en.content),
-          contentRu: createEditorState(neew.ru.content),
           photosLink: neew.photosLink,
           published: neew.published
         })
@@ -54,24 +54,21 @@ export default class Content extends React.Component{
         console.log(error)
       })
   }
-  changeDraft(content) { this.setState({ content: content }) }
-  changeDraftRu(content) { this.setState({ contentRu: content }) }
+  changeDraft(content) { this.setState({ content: content.emitSerializedOutput() }); console.log(content) }
+  changeDraftRu(content) { this.setState({ contentRu: content.emitSerializedOutput() }) }
   saveDraft(){
-    const content = convertToRaw(this.state.content.getCurrentContent());
+    const content = JSON.stringify(this.state.content)
     axios.post('/admins/edit/content', { id: this.state.id, content: content })
     alert('Saved')
   }
   saveDraftRu(){
-    const content = convertToRaw(this.state.contentRu.getCurrentContent());
+    const content = JSON.stringify(this.state.contentRu)
     axios.post('/admins/edit/contentRu', { id: this.state.id, content: content })
     alert('Сохранено')
   }
   render(){
     return(
       <div align="center">
-        <Helmet>
-          <link rel="stylesheet" type="text/css" href="https://unpkg.com/medium-draft/dist/medium-draft.css"/>
-        </Helmet>
           <Typography variant="h5" style={{ marginTop: 15 }}>
             Content
           </Typography>
@@ -87,10 +84,9 @@ export default class Content extends React.Component{
 
         <Paper elevation={3} style={styles.paper}>
           <NoSsr>
-            <Editor
-              sideButtons={[{ title: 'Image', component: ImageSideButton }, { title: 'Break', component: BreakSideButton }]}
-              editorState={this.state.content}
-              onChange={this.changeDraft} />
+            <Dante onChange={this.changeDraft}
+                   content={this.state.content}
+                   />
           </NoSsr>
         </Paper>
 
@@ -103,10 +99,7 @@ export default class Content extends React.Component{
         </Button>
         <Paper elevation={3} style={styles.paper}>
           <NoSsr>
-            <Editor
-              sideButtons={[{ title: 'Image', component: ImageSideButton }, { title: 'Break', component: BreakSideButton }]}
-              editorState={this.state.contentRu}
-              onChange={this.changeDraftRu} />
+            <Dante onChange={this.changeDraft} content={this.state.contentRu}/>
           </NoSsr>
         </Paper>
 

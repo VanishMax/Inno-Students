@@ -5,7 +5,6 @@ import { Helmet } from 'react-helmet'
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import Header from '../Header'
-import { Editor, createEditorState } from 'medium-draft'
 
 const styles = {
   paper: {
@@ -68,7 +67,6 @@ class News extends React.Component {
             <br/>
             <Typography variant='h5'>{neew.title}</Typography>
             <br/>
-            <Editor editorState={createEditorState(neew.content)} editorEnabled={false}/>
           </Paper>
 
         </React.Fragment>
