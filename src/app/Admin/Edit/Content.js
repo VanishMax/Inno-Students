@@ -47,14 +47,15 @@ export default class Content extends React.Component{
         this.setState({
           id: id,
           photosLink: neew.photosLink,
-          published: neew.published
+          published: neew.published,
+          loaded: true
         })
       })
       .catch((error)=>{
         console.log(error)
       })
   }
-  changeDraft(content) { this.setState({ content: content.emitSerializedOutput() }); console.log(content) }
+  changeDraft(content) { this.setState({ content: content.emitSerializedOutput() }) }
   changeDraftRu(content) { this.setState({ contentRu: content.emitSerializedOutput() }) }
   saveDraft(){
     const content = JSON.stringify(this.state.content)
@@ -67,6 +68,16 @@ export default class Content extends React.Component{
     alert('Сохранено')
   }
   render(){
+
+    let dante
+    let danteRu
+    if(this.state.loaded){
+      dante = <Dante onChange={this.changeDraft} content={this.state.content}/>
+      danteRu = <Dante onChange={this.changeDraftRu} content={this.state.contentRu}/>
+    } else {
+      dante = <React.Fragment/>
+    }
+
     return(
       <div align="center">
           <Typography variant="h5" style={{ marginTop: 15 }}>
@@ -83,11 +94,7 @@ export default class Content extends React.Component{
           }
 
         <Paper elevation={3} style={styles.paper}>
-          <NoSsr>
-            <Dante onChange={this.changeDraft}
-                   content={this.state.content}
-                   />
-          </NoSsr>
+          {dante}
         </Paper>
 
         <Typography variant="h5" style={{ marginTop: 15 }}>
@@ -98,9 +105,7 @@ export default class Content extends React.Component{
           Сохранить
         </Button>
         <Paper elevation={3} style={styles.paper}>
-          <NoSsr>
-            <Dante onChange={this.changeDraft} content={this.state.contentRu}/>
-          </NoSsr>
+            {danteRu}
         </Paper>
 
         {this.props.children}

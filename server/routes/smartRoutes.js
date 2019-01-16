@@ -110,14 +110,7 @@ export default function (app){
     News.findOneAndUpdate({ _id: parseInt(req.body.id) }, { $set: {photosLink: req.body.photosLink} })
   })
   app.post('/admins/edit/content', (req, res) => {
-    console.log(req.body.id)
-    News.findOneAndUpdate({ _id: parseInt(req.body.id) }, { $set: {'en.content': req.body.content} }, function (err, neew) {
-      if(err) console.log(err)
-      console.log(neew)
-    })
-  })
-  app.post('/admins/test', (req, res) => {
-    console.log(req.body)
+    News.findOneAndUpdate({ _id: parseInt(req.body.id) }, { $set: {'en.content': req.body.content} })
   })
   app.post('/admins/edit/contentRu', (req, res) => {
     News.findOneAndUpdate({ _id: parseInt(req.body.id) }, { $set: {'ru.content': req.body.content} })
