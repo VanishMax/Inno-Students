@@ -6,8 +6,10 @@ import { Helmet } from 'react-helmet'
 
 import NoSsr from '@material-ui/core/NoSsr'
 import { convertToRaw, convertFromRaw } from 'draft-js'
-import Dante from 'Dante2'
 import Button from '@material-ui/core/Button'
+
+import Dante from 'Dante2'
+import { ImageBlockConfig } from 'Dante2/package/lib/components/blocks/image.js'
 
 const styles = {
   paper: {
@@ -46,6 +48,7 @@ export default class Content extends React.Component{
         if(neew.ru.content) this.setState({ contentRu: JSON.parse(neew.ru.content) })
         this.setState({
           id: id,
+          url: url,
           photosLink: neew.photosLink,
           published: neew.published,
           loaded: true
@@ -72,7 +75,13 @@ export default class Content extends React.Component{
     let dante
     let danteRu
     if(this.state.loaded){
-      dante = <Dante onChange={this.changeDraft} content={this.state.content}/>
+      dante = <Dante onChange={this.changeDraft} content={this.state.content}
+                     widgets={[ImageBlockConfig({ options: {
+                           upload_url: '/admins/edit/contentPicture',
+                           upload_callback: (ctx, img) => {
+                             console.log(ctx)
+                           } } })
+                     ]}/>
       danteRu = <Dante onChange={this.changeDraftRu} content={this.state.contentRu}/>
     } else {
       dante = <React.Fragment/>

@@ -131,34 +131,25 @@ export default function (app){
     News.findOneAndUpdate({ _id: parseInt(req.body.id) }, { $set: {'ru.keywords': req.body.keywordsRu} })
   })
 
-  app.post('/admins/edit/file', (req, res) => {
+  app.post('/admins/edit/contentPicture', (req, res) => {
     let form = new formidable.IncomingForm()
     form.parse(req, (err, fields, files) => {
 
-      let id = fields.id,
-        url = fields.url,
-        oldPath = files.file.path,
-        fileExt = files.file.name.split('.').pop(),
-        fileName = url + '.' + fileExt,
-        newPath = path.join(__dirname, '../../', 'assets/pics/', fileName)
+      let url = req.headers.referer.split('/')
+      url = url[url.length - 1]
+      let id = parseInt(url.split('-')[0])
+      let ext = files.file['name'].split('.')
+      ext = ext[ext.length - 1]
+      let fileName = url + '.' + ext
+      let newPath = path.join(__dirname, '../../', 'assets/pics/', fileName)
 
-      fs.readFile(oldPath, (err, data) => {
-        if(err) console.log(err)
+      // TODO: Make it possible to add many photos but only one is a preview
+      fs.readFile(files.file['path'], (err, data) => {
         fs.writeFile(newPath, data, (err) => {
-          if(err) console.log(err)
-          fs.unlink(oldPath, (err) => {
-            if (err) console.log(err)
-          })
+          res.json({ url: path.join('../../', 'assets/pics/', fileName) })
         })
       })
-      News.findOneAndUpdate(
-        { _id: parseInt(id) },
-        { $set: {previewImage: fileName} },
-        {new: true},
-        (err, neew) => {
-          if(err) console.log(err)
-        }
-      )
+      News.findOneAndUpdate({ _id: id }, { $set: { previewImage: fileName } }, { new: true })
     })
   })
 }
