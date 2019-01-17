@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {bindActionCreators} from 'redux'
+import { bindActionCreators } from 'redux'
 import * as Actions from '&/redux/actions'
 import {connect} from 'react-redux'
 import { withRouter } from 'react-router-dom'
@@ -36,21 +36,13 @@ const styles = {
 class NewsCard extends React.Component{
   constructor(props){
     super(props)
-    this.state = {
-      expanded: false
-    }
-    this.handleExpandClick = this.handleExpandClick.bind(this)
     this.redirect = this.redirect.bind(this)
-  }
-  handleExpandClick(){
-    this.setState({ expanded: !this.state.expanded })
   }
   redirect(id, url, e){
     this.props.actions.getNeew(id)
     this.props.history.push('/news/' + url)
   }
   render(){
-    const {expanded} = this.state
     const {neew, lang, starred} = this.props
     const news = neew[lang]
 

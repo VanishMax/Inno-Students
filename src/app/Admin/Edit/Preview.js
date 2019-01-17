@@ -69,7 +69,6 @@ export default class Preview extends React.Component{
           neew: response.data,
           published: response.data.published,
         })
-        console.log(`length of content is ` + response.data.en.content.length)
       })
       .catch((error)=>{
         console.log(error)
