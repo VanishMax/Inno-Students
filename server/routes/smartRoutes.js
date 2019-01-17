@@ -24,6 +24,7 @@ export default function (app){
         neew.category = req.body.category
         neew.previewImage = ''
         neew.published = false
+        neew.images = []
         let url = req.body.title.replace(new RegExp(' ', 'g'), '-')
 
         Counters.findOneAndUpdate(
@@ -58,8 +59,8 @@ export default function (app){
   })
 
   app.post('/admins/getNewsToEdit', (req, res) => {
-    News.find({published: false}, {'en.title': 1, url: 1, _id: 1}).sort({ _id: -1}).toArray((err, news) => {
-      news.length == 0 ? res.json({news: null}) : res.json({news: news})
+    News.find({ published: false }, { 'en.title': 1, url: 1, _id: 1 }).sort({ _id: -1 }).toArray((err, news) => {
+      news.length == 0 ? res.json({ news: null }) : res.json({ news: news })
     })
   })
   app.post('/admins/getPublishedNews', (req, res) => {
@@ -135,21 +136,33 @@ export default function (app){
     let form = new formidable.IncomingForm()
     form.parse(req, (err, fields, files) => {
 
-      let url = req.headers.referer.split('/')
-      url = url[url.length - 1]
-      let id = parseInt(url.split('-')[0])
-      let ext = files.file['name'].split('.')
-      ext = ext[ext.length - 1]
-      let fileName = url + '.' + ext
-      let newPath = path.join(__dirname, '../../', 'assets/pics/', fileName)
+      let url = req.headers.referer.split('/')      // localhost:3000/admins/edit/20-Dante2 splitted with slashed
+      url = url[url.length - 1]                     // 20-Dante2
+      let id = parseInt(url.split('-')[0]) // 20
+      let ext = files.file['name'].split('.')       // screen_capture2018.png splitted with dot
+      ext = ext[ext.length - 1]                     // png
 
-      // TODO: Make it possible to add many photos but only one is a preview
-      fs.readFile(files.file['path'], (err, data) => {
-        fs.writeFile(newPath, data, (err) => {
-          res.json({ url: path.join('../../', 'assets/pics/', fileName) })
-        })
+      News.findOne({ _id: id }, function (err, news) {
+        if(!news){
+          res.json({ url: files.file['path'] + '/' + files.file['name']})
+        } else {
+
+          let fileName = url + '-' + news.images.length + '.' + ext  // 20-Dante2-0.png
+          let newPath = path.join(__dirname, '../../', 'assets/pics/', fileName)
+
+          if(news.previewImage) {
+            News.findOneAndUpdate({ _id: id }, { $push: { images: fileName } })
+          } else {
+            News.findOneAndUpdate({ _id: id }, { $set: { previewImage: fileName }, $push: { images: fileName } })
+          }
+
+          fs.readFile(files.file['path'], (err, data) => {
+            fs.writeFile(newPath, data, (err) => {
+              res.json({ url: path.join('../../', 'assets/pics/', fileName) })
+            })
+          })
+        }
       })
-      News.findOneAndUpdate({ _id: id }, { $set: { previewImage: fileName } }, { new: true })
     })
   })
 }
