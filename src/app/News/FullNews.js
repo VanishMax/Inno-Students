@@ -1,9 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { Helmet } from 'react-helmet'
-
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
+import Dante from 'Dante2'
 import Header from '../Header'
 
 const styles = {
@@ -57,17 +57,14 @@ class News extends React.Component {
             <meta name='og:type' content="article"/>
             <meta property='article:author' content={news.authorLink || ''}/>
             <meta property='article:publishedTime' content={timePrint || ''}/>
-
-            <link rel="stylesheet" type="text/css" href="https://unpkg.com/medium-draft/dist/medium-draft.css"/>
           </Helmet>
           <Header title='Inno Media Club' lang={this.props.lang}/>
 
-          <Paper align='center' style={styles.paper} elevation={4}>
-            <img style={styles.img} src={'/assets/pics/' + news.previewImage} alt={neew.title}/>
-            <br/>
+          <div align='center' style={styles.paper}>
             <Typography variant='h5'>{neew.title}</Typography>
             <br/>
-          </Paper>
+            <Dante content={JSON.parse(neew.content)} read_only={true}/>
+          </div>
 
         </React.Fragment>
       )
