@@ -1,8 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-
-import Header from '../Header'
-import config from '#/home' //See /babelrc file to understand what is #
+import localization from '#/home' //See /babelrc file to understand what is #
 
 import LoadableHOC from '&/HOCs/LoadableHOC'
 const NewsGrid = LoadableHOC({ loader: () => import(/* webpackChunkName: "NewsGrid" */ './NewsGrid') })
@@ -16,11 +14,10 @@ export default class Home extends React.Component {
     return (
       <div>
         <Helmet>
-          <title>{config.header[lang]}</title>
+          <title>{ localization.header[lang] }</title>
           <meta name="description" content="VaMax app" />
         </Helmet>
-        <Header lang={lang} title={config.header[lang]}/>
-        <NewsGrid lang={lang}/>
+        <NewsGrid lang={ lang }/>
       </div>
     )
   }

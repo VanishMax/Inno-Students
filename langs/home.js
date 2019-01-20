@@ -1,4 +1,4 @@
-var obj = {
+const obj = {
   helmet: {
     title: {
       en: "Media Club",

@@ -1,5 +1,4 @@
 import React from 'react'
-import Header from '../Header'
 import { Helmet } from 'react-helmet'
 import { Route } from 'react-router'
 
@@ -20,7 +19,6 @@ export default function (props) {
         <title>{config.header[props.lang]}</title>
         <meta name="description" content="VaMax app" />
       </Helmet>
-      <Header/>
       <React.Fragment>
         <Route path="/admins/edit" render={() => <AsyncEdit lang={props.lang}/>}/>
         <Route exact path="/admins" render={() => <AsyncMenu lang={props.lang}/>}/>

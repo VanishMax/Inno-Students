@@ -1,5 +1,4 @@
 import React from 'react'
-import Header from './Header'
 import Typography from '@material-ui/core/Typography'
 import { Helmet } from 'react-helmet'
 import Paper from '@material-ui/core/Paper/Paper'
@@ -27,7 +26,6 @@ export default function About() {
         <title>MWA - About</title>
         <meta name="description" content="Modern Web App - About Page" />
       </Helmet>
-      <Header/>
       <Paper elevation={4} style={styles.paper} align="center">
         <Typography variant="h5" style={styles.typography}>About MWA</Typography>
         <img src="/assets/MWA.png" alt="MWA (Modern Web App) is a new way to build your web apps" style={styles.img}/>

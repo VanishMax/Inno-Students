@@ -4,6 +4,8 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { Link } from 'react-router-dom'
 
+import localization from '#/header'
+
 const styles = {
   link: {
     color: 'inherit'
@@ -18,25 +20,25 @@ const styles = {
   }
 }
 
-export default function Header() {
+export default function Header(props) {
   return (
     <div style={styles.grow}>
       <AppBar position="static">
         <Toolbar>
           <Link to="/" style={styles.link}>
             <Typography variant="h5" color="inherit">
-              Modern Web App
+              Inno Media Club
             </Typography>
           </Link>
           <Link to="/about" style={styles.about}>
             <Typography variant="h5" color="inherit">
-              About
+              { localization.about[props.lang] || localization.about.ru }
             </Typography>
           </Link>
           <React.Fragment>
             <Link to="/admins" style={styles.about}>
               <Typography variant="h5" color="inherit">
-                Admins
+                { localization.admins[props.lang] || localization.admins.ru }
               </Typography>
             </Link>
           </React.Fragment>

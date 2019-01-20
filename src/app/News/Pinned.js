@@ -39,7 +39,7 @@ class Pinned extends React.Component{
 
           <CardMedia
             component="img" alt={news.title || 'Simple Title'} title={news.title} style={styles.pic}
-            width="420" image={'/assets/pics/' + (neew.previewImage || 'Test-Picture.png')}
+            image={'/assets/pics/' + (neew.previewImage || 'Test-Picture.png')}
           />
 
           <CardContent style={styles.content}>

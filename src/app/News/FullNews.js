@@ -2,9 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { Helmet } from 'react-helmet'
 import Typography from '@material-ui/core/Typography'
-import Paper from '@material-ui/core/Paper'
 import Dante from 'Dante2'
-import Header from '../Header'
 
 const styles = {
   paper: {
@@ -32,7 +30,7 @@ class News extends React.Component {
     const { news } = this.props
 
     if (news === undefined) {
-      return <Header title='Inno Media Club' lang={this.props.lang}/>
+      return <React.Fragment/>
     } else {
       neew = news[this.props.lang]
       time = (news.publishDate || '') + ', ' + (news.publishTime || '')
@@ -58,7 +56,6 @@ class News extends React.Component {
             <meta property='article:author' content={news.authorLink || ''}/>
             <meta property='article:publishedTime' content={timePrint || ''}/>
           </Helmet>
-          <Header title='Inno Media Club' lang={this.props.lang}/>
 
           <div align='center' style={styles.paper}>
             <Typography variant='h5'>{neew.title}</Typography>

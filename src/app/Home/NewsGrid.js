@@ -8,27 +8,27 @@ import PinnedNeew from '../News/Pinned'
 const styles = {
   grid: {
     float: 'left',
-    minWidth: '48%',
-    width: '48%'
+    minWidth: '46%',
+    width: '46%'
   },
   grid0: {
-    marginRight: 'calc(100% - 96%)',
+    marginRight: 'calc(100% - 92%)',
     float: 'left',
-    minWidth: '48%',
-    width: '48%'
+    minWidth: '46%',
+    width: '46%'
   },
   item: {
     width: '100%',
     marginTop: 20
   },
   div: {
-    width: '80%',
+    width: '70%',
     margin: 'auto',
     paddingTop: 20
   },
   pinned: {
     margin: 'auto',
-    width: '60%'
+    width: '70%'
   }
 }
 
