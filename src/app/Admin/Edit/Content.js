@@ -30,7 +30,6 @@ export default class Content extends React.Component{
       loaded: false,
       content: null,
       contentRu: null,
-      photosLink: '',
       published: false
     }
     this.changeDraft = this.changeDraft.bind(this)
@@ -38,6 +37,7 @@ export default class Content extends React.Component{
     this.saveDraft = this.saveDraft.bind(this)
     this.saveDraftRu = this.saveDraftRu.bind(this)
   }
+
   componentDidMount() {
     let url = window.location.pathname.split('/').pop()
     let id = url.split('-')[0]
@@ -49,7 +49,6 @@ export default class Content extends React.Component{
         this.setState({
           id: id,
           url: url,
-          photosLink: neew.photosLink,
           published: neew.published,
           loaded: true
         })
@@ -60,16 +59,17 @@ export default class Content extends React.Component{
   }
   changeDraft(content) { this.setState({ content: content.emitSerializedOutput() }) }
   changeDraftRu(content) { this.setState({ contentRu: content.emitSerializedOutput() }) }
-  saveDraft(){
+  saveDraft() {
     const content = JSON.stringify(this.state.content)
     axios.post('/admins/edit/content', { id: this.state.id, content: content })
     alert('Saved')
   }
-  saveDraftRu(){
+  saveDraftRu() {
     const content = JSON.stringify(this.state.contentRu)
     axios.post('/admins/edit/contentRu', { id: this.state.id, content: content })
     alert('Сохранено')
   }
+
   render(){
 
     let dante
@@ -89,32 +89,32 @@ export default class Content extends React.Component{
 
     return(
       <div align="center">
-          <Typography variant="h5" style={{ marginTop: 15 }}>
-            Content
-          </Typography>
-          <Button variant="contained" color="primary"
-                  onClick={this.saveDraft} style={{ margin: '10px 0 0' }}>
-            Save
-          </Button>
-          {this.state.published &&
-            <Typography variant="body1" color="error">
-              The news is published. All the changes will be immediately published.
-            </Typography>
-          }
-
-        <Paper elevation={3} style={styles.paper}>
-          {dante}
-        </Paper>
 
         <Typography variant="h5" style={{ marginTop: 15 }}>
           Контент на русском
         </Typography>
+        {this.state.published &&
+          <Typography variant="body1" color="error">
+            The news is published. All the changes will be immediately published.
+          </Typography>
+        }
         <Button variant="contained" color="primary"
                 onClick={this.saveDraftRu} style={{ margin: '10px 0 0' }}>
           Сохранить
         </Button>
         <Paper elevation={3} style={styles.paper}>
             {danteRu}
+        </Paper>
+
+        <Typography variant="h5" style={{ marginTop: 15 }}>
+          Content
+        </Typography>
+        <Button variant="contained" color="primary"
+                onClick={this.saveDraft} style={{ margin: '10px 0 0' }}>
+          Save
+        </Button>
+        <Paper elevation={3} style={styles.paper}>
+          {dante}
         </Paper>
 
         {this.props.children}

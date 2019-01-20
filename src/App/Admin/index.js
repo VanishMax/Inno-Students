@@ -20,8 +20,8 @@ export default function (props) {
         <meta name="description" content="VaMax app" />
       </Helmet>
       <React.Fragment>
-        <Route path="/admins/edit" render={() => <AsyncEdit lang={props.lang}/>}/>
-        <Route exact path="/admins" render={() => <AsyncMenu lang={props.lang}/>}/>
+        <Route path="/admins/edit" render={() => <AsyncEdit/>}/>
+        <Route exact path="/admins" render={() => <AsyncMenu/>}/>
       </React.Fragment>
     </React.Fragment>
   )

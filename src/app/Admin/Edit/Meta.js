@@ -5,11 +5,6 @@ import axios from 'axios'
 import TextField from '@material-ui/core/TextField/TextField'
 
 const styles = {
-  paperMain: {
-    width: '50%',
-    margin: '5% auto 0',
-    padding: 20
-  },
   paper: {
     width: '50%',
     margin: '2% auto 0',
@@ -29,7 +24,7 @@ const styles = {
 }
 
 export default class Meta extends React.Component{
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       id: null,
@@ -54,7 +49,8 @@ export default class Meta extends React.Component{
     this.changeKeywords = this.changeKeywords.bind(this)
     this.changeKeywordsRu = this.changeKeywordsRu.bind(this)
   }
-  componentDidMount(){
+
+  componentDidMount() {
     let url = window.location.pathname.split('/').pop()
     let id = url.split('-')[0]
     axios.post('/admins/getOneNews', {id: id})
@@ -77,55 +73,53 @@ export default class Meta extends React.Component{
         console.log(error)
       })
   }
-  typeAuthorName(event){
-    this.setState({authorName : event.target.value })
-  }
-  typeAuthorNameRu(event){
-    this.setState({authorNameRu : event.target.value })
-  }
-  typeAuthorLink(event){
-    this.setState({authorLink : event.target.value })
-  }
-  typeKeywords(event){
-    this.setState({keywords : event.target.value })
-  }
-  typeKeywordsRu(event){
-    this.setState({keywordsRu : event.target.value })
-  }
-  changeAuthorName(event){
-    axios.post('/admins/edit/authorName', {id: this.state.id, authorName: this.state.authorName})
-  }
-  changeAuthorNameRu(event){
-    axios.post('/admins/edit/authorNameRu', {id: this.state.id, authorNameRu: this.state.authorNameRu})
-  }
-  changeAuthorLink(event){
-    axios.post('/admins/edit/authorLink', {id: this.state.id, authorLink: this.state.authorLink})
-  }
-  changeKeywords(event){
-    axios.post('/admins/edit/keywords', {id: this.state.id, keywords: this.state.keywords})
-  }
-  changeKeywordsRu(event){
-    axios.post('/admins/edit/keywordsRu', {id: this.state.id, keywordsRu: this.state.keywordsRu})
-  }
+
+  typeAuthorName(event) { this.setState({ authorName : event.target.value }) }
+  typeAuthorNameRu(event) { this.setState({ authorNameRu : event.target.value }) }
+  typeAuthorLink(event) { this.setState({ authorLink : event.target.value }) }
+  typeKeywords(event) { this.setState({ keywords : event.target.value }) }
+  typeKeywordsRu(event){ this.setState({ keywordsRu : event.target.value })}
+  changeAuthorName() { axios.post('/admins/edit/authorName', { id: this.state.id, authorName: this.state.authorName }) }
+  changeAuthorNameRu() { axios.post('/admins/edit/authorNameRu', { id: this.state.id, authorNameRu: this.state.authorNameRu }) }
+  changeAuthorLink() { axios.post('/admins/edit/authorLink', { id: this.state.id, authorLink: this.state.authorLink }) }
+  changeKeywords() { axios.post('/admins/edit/keywords', { id: this.state.id, keywords: this.state.keywords }) }
+  changeKeywordsRu() { axios.post('/admins/edit/keywordsRu', { id: this.state.id, keywordsRu: this.state.keywordsRu }) }
+
   render(){
-    const {authorName, authorNameRu, keywordsRu, authorLink,
-          keywords, neew, time, published} = this.state
+    const { authorName, authorNameRu, keywordsRu, authorLink,
+          keywords, neew, time, published } = this.state
     let timePrint = null
     if(time != '' && time != ', ') timePrint = time
     return(
       <div align="center">
-        <Paper elevation={3} style={styles.paperMain}>
-          <Typography variant="h5">
-            Meta
-          </Typography>
 
-          {published &&
+        <Typography variant="h5" style={{ marginTop: 15 }}>
+          Мета-данные
+        </Typography>
+        {published ?
           <Typography variant="body1" color="error">
             The news is published. All the changes will be immediately published.
+          </Typography>
+          :
+          <Typography variant="subtitle1">
+            All the data is automatically saved
           </Typography>}
 
+        <Paper elevation={3} style={styles.paper}>
+          <TextField id="author_name_ru" label="Имя автора" value={authorNameRu}
+                     style={styles.input} margin="normal" onBlur={this.changeAuthorNameRu}
+                     placeholder="Вася Пупкин" onChange={this.typeAuthorNameRu} />
+          <TextField id="keywords" label="Ключевые слов, разделенные запятой" value={keywordsRu}
+                     style={styles.input} margin="normal" onBlur={this.changeKeywordsRu}
+                     placeholder="Медиа, Медиа клуб, наш любимый ИнноУник" onChange={this.typeKeywordsRu} />
+          <br/>
+        </Paper>
 
-          <TextField id="author_name" label="Name of the autor" value={authorName}
+        <Typography variant="h5" style={{ marginTop: 15 }}>
+          Meta
+        </Typography>
+        <Paper elevation={3} style={styles.paper}>
+          <TextField id="author_name" label="Name of the author" value={authorName}
                      style={styles.input} margin="normal" onBlur={this.changeAuthorName}
                      placeholder="John Doue" onChange={this.typeAuthorName} />
           <TextField id="author_link" label="Any social media of the author" value={authorLink}
@@ -136,26 +130,12 @@ export default class Meta extends React.Component{
                      placeholder="Bears, Bears attacked, Bears attacked at night, shock" onChange={this.typeKeywords} />
           <br/>
         </Paper>
-        <Paper elevation={3} style={styles.paper}>
-          <Typography variant="h5">
-            Meta По-русски
-          </Typography>
-
-          <TextField id="author_name_ru" label="Имя автора" value={authorNameRu}
-                     style={styles.input} margin="normal" onBlur={this.changeAuthorNameRu}
-                     placeholder="Вася Пупкин" onChange={this.typeAuthorNameRu} />
-          <TextField id="keywords" label="Ключевые слов, разделенные запятой" value={keywordsRu}
-                     style={styles.input} margin="normal" onBlur={this.changeKeywordsRu}
-                     placeholder="Медиа, Медиа клуб, наш любимый ИнноУник" onChange={this.typeKeywordsRu} />
-          <br/>
-        </Paper>
 
         <Paper elevation={3} style={styles.paper}>
           <Typography variant="h6">How your {`<Head>`} will look like:</Typography>
           {neew !== null &&
           <pre style={styles.pre}>
-              {
-`<Helmet>
+                {`<Helmet>
     <title>${neew.en.title || ''}</title>
     <meta name="keywords" content="${neew.en.keywords || ''}"/>
     <meta name="description" content="${neew.en.description || ''}"/>
