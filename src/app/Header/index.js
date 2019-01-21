@@ -4,14 +4,14 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { Link } from 'react-router-dom'
 
-import ChangeLang from './ChangeLang'
+// import ChangeLang from './ChangeLang'
 import localization from '#/header'
 
 const styles = {
   link: {
     color: 'inherit'
   },
-  about:{
+  about: {
     textDecoration: 'none',
     color: 'inherit',
     marginLeft: 30
@@ -38,7 +38,9 @@ export default function Index(props) {
               { localization.admins[props.lang] || localization.admins.ru }
             </Typography>
           </Link>
-          <ChangeLang/>
+          {/*<div style={{ marginLeft: 30 }}>*/}
+            {/*<ChangeLang/>*/}
+          {/*</div>*/}
         </Toolbar>
       </AppBar>
     </React.Fragment>

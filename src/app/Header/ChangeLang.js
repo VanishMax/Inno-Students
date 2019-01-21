@@ -1,36 +1,34 @@
 import React from 'react'
-import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as Actions from '&/redux/actions'
-import Typography from '@material-ui/core/Typography'
 import { withRouter } from 'react-router'
 
 class ChangeLang extends React.Component{
   constructor(props){
     super(props)
     this.state = { link: '' }
-    this.props.lang == "en" ? this.setState({ english: true }) : this.setState({ english: false })
+    this.props.lang == "en" ? this.state.english = true : this.state.english = false
     this.changeLang  = this.changeLang.bind(this)
   }
 
   componentDidMount() {
     let uri = window.location.pathname
-    uri = uri.replace('/ru', '')
     uri = uri.replace('/', '')
+    uri = uri.replace('/en', '')
     console.log(uri)
     this.setState({ link: uri })
   }
   changeLang(){
     if(this.state.english){
       this.props.actions.changeLang("ru")
-      this.props.history.push('/ru/' + this.state.link)
+      this.props.history.push('/' + this.state.link)
     } else {
       this.props.actions.changeLang("en")
-      this.props.history.push('/' + this.state.link)
+      this.props.history.push('/en/' + this.state.link)
     }
     this.setState({ english: !this.state.english })
   }
@@ -38,12 +36,12 @@ class ChangeLang extends React.Component{
   render() {
     const { english } = this.state
     return (
-      <div style={{ marginLeft: 30 }}>
-        <FormControlLabel
+      <React.Fragment>
+        <FormControlLabel labelPlacement="start"
           control={ <Switch checked={english} onChange={this.changeLang} value="switchLang"/> }
           label={ this.props.lang == "en" ? "English" : "Английский" }
         />
-      </div>
+      </React.Fragment>
     )
   }
 }
