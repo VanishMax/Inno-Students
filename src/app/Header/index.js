@@ -20,7 +20,7 @@ const styles = {
   }
 }
 
-export default function Header(props) {
+export default function Index(props) {
   return (
     <div style={styles.grow}>
       <AppBar position="static">

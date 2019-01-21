@@ -186,7 +186,7 @@ export default class Main extends React.Component{
                      onBlur={this.leadFocusout} style={styles.input}/>
         </Paper>
 
-          {this.props.children}
+        {this.props.children}
       </div>
     )
   }
