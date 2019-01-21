@@ -1,22 +1,19 @@
 import React from 'react'
-import Button from '@material-ui/core/Button'
-import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
-import { Link } from 'react-router-dom'
+import FormGroup from '@material-ui/core/FormGroup'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Switch from '@material-ui/core/Switch'
 
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import * as Actions from '&/redux/actions'
+import Typography from '@material-ui/core/Typography'
+import { withRouter } from 'react-router'
 
 class ChangeLang extends React.Component{
   constructor(props){
     super(props)
-    this.state = {
-      anchorEl: null,
-      link: ''
-    }
-    this.handleClick = this.handleClick.bind(this)
-    this.handleClose = this.handleClose.bind(this)
+    this.state = { link: '' }
+    this.props.lang == "en" ? this.setState({ english: true }) : this.setState({ english: false })
     this.changeLang  = this.changeLang.bind(this)
   }
 
@@ -25,46 +22,27 @@ class ChangeLang extends React.Component{
     uri = uri.replace('/ru', '')
     uri = uri.replace('/', '')
     console.log(uri)
-    this.setState({link: uri})
+    this.setState({ link: uri })
   }
-
-  handleClick(event) {
-    this.setState({ anchorEl: event.currentTarget })
-  }
-
-  handleClose(){
-    this.setState({ anchorEl: null })
-  }
-
-  changeLang(value){
-    this.setState({ anchorEl: null })
-    this.props.actions.changeLang(value)
+  changeLang(){
+    if(this.state.english){
+      this.props.actions.changeLang("ru")
+      this.props.history.push('/ru/' + this.state.link)
+    } else {
+      this.props.actions.changeLang("en")
+      this.props.history.push('/' + this.state.link)
+    }
+    this.setState({ english: !this.state.english })
   }
 
   render() {
-    const { anchorEl } = this.state
-    var open = Boolean(anchorEl)
+    const { english } = this.state
     return (
-      <div>
-        <Button
-          aria-owns={anchorEl ? 'simple-menu' : null}
-          aria-haspopup="true"
-          onClick={this.handleClick}
-        >
-          {this.props.lang == "en" ? "Language" : "Язык"}
-        </Button>
-        <Menu id="simple-menu" open={open} anchorEl={anchorEl} onClose={this.handleClose}>
-          <Link to={'/' + this.state.link}>
-            <MenuItem onClick={() => this.changeLang("en")}>
-              English
-            </MenuItem>
-          </Link>
-          <Link to={'/ru/' + this.state.link}>
-            <MenuItem onClick={() => this.changeLang("ru")}>
-              Русский
-            </MenuItem>
-          </Link>
-        </Menu>
+      <div style={{ marginLeft: 30 }}>
+        <FormControlLabel
+          control={ <Switch checked={english} onChange={this.changeLang} value="switchLang"/> }
+          label={ this.props.lang == "en" ? "English" : "Английский" }
+        />
       </div>
     )
   }
@@ -78,7 +56,7 @@ const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(Actions, dispatch)
 })
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(ChangeLang)
+)(ChangeLang))

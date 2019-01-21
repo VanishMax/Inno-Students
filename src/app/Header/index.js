@@ -4,6 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { Link } from 'react-router-dom'
 
+import ChangeLang from './ChangeLang'
 import localization from '#/header'
 
 const styles = {
@@ -14,15 +15,12 @@ const styles = {
     textDecoration: 'none',
     color: 'inherit',
     marginLeft: 30
-  },
-  grow: {
-    flexGrow: 1
   }
 }
 
 export default function Index(props) {
   return (
-    <div style={styles.grow}>
+    <React.Fragment>
       <AppBar position="static">
         <Toolbar>
           <Link to="/" style={styles.link}>
@@ -35,15 +33,14 @@ export default function Index(props) {
               { localization.about[props.lang] || localization.about.ru }
             </Typography>
           </Link>
-          <React.Fragment>
-            <Link to="/admins" style={styles.about}>
-              <Typography variant="h5" color="inherit">
-                { localization.admins[props.lang] || localization.admins.ru }
-              </Typography>
-            </Link>
-          </React.Fragment>
+          <Link to="/admins" style={styles.about}>
+            <Typography variant="h5" color="inherit">
+              { localization.admins[props.lang] || localization.admins.ru }
+            </Typography>
+          </Link>
+          <ChangeLang/>
         </Toolbar>
       </AppBar>
-    </div>
+    </React.Fragment>
   )
 }
