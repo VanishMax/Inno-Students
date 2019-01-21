@@ -13,6 +13,7 @@ import Receipt from '@material-ui/icons/Receipt'
 import DirectionsRun from '@material-ui/icons/DirectionsRun'
 import Mood from '@material-ui/icons/Mood'
 import Domain from '@material-ui/icons/Domain'
+import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -132,6 +133,7 @@ class Menu extends React.Component{
                           input={<Input name="Category"/>}
                   >
                     <MenuItem value="News"><Receipt/>News</MenuItem>
+                    <MenuItem value="Article"><ChromeReaderMode/>Article</MenuItem>
                     <MenuItem value="Funny"><Mood/>Funny</MenuItem>
                     <MenuItem value="Sport"><DirectionsRun/>Sports</MenuItem>
                     <MenuItem value="Students life"><Domain/>Student's life</MenuItem>

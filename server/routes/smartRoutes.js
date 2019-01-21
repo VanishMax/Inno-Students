@@ -95,6 +95,9 @@ export default function (app){
   app.post('/admins/edit/titleRu', (req, res) => {
     News.findOneAndUpdate({ _id: parseInt(req.body.id) }, { $set: {'ru.title': req.body.titleRu} })
   })
+  app.post('/admins/edit/category', (req, res) => {
+    News.findOneAndUpdate({ _id: parseInt(req.body.id) }, { $set: { category : req.body.category} })
+  })
   app.post('/admins/edit/lead', (req, res) => {
     News.findOne({_id: parseInt(req.body.id)}, {'en.title': 1}, (err, news) => {
       News.findOneAndUpdate({ _id: parseInt(req.body.id) },

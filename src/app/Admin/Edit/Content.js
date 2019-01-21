@@ -76,15 +76,12 @@ export default class Content extends React.Component{
     let danteRu
     if(this.state.loaded){
       dante = <Dante onChange={this.changeDraft} content={this.state.content}
-                     widgets={[ImageBlockConfig({ options: {
-                           upload_url: '/admins/edit/contentPicture',
-                           upload_callback: (ctx, img) => {
-                             console.log(ctx)
-                           } } })
-                     ]}/>
-      danteRu = <Dante onChange={this.changeDraftRu} content={this.state.contentRu}/>
+                     widgets={[ImageBlockConfig({ options: { upload_url: '/admins/edit/contentPicture' } }) ]}/>
+      danteRu = <Dante onChange={this.changeDraftRu} content={this.state.contentRu}
+                       widgets={[ImageBlockConfig({ options: { upload_url: '/admins/edit/contentPicture' } }) ]}/>
     } else {
       dante = <React.Fragment/>
+      danteRu = <React.Fragment/>
     }
 
     return(

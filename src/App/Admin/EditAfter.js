@@ -13,6 +13,7 @@ import Receipt from '@material-ui/icons/Receipt'
 import DirectionsRun from '@material-ui/icons/DirectionsRun'
 import Mood from '@material-ui/icons/Mood'
 import Domain from '@material-ui/icons/Domain'
+import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
 
 
 class EditAfter extends React.Component {
@@ -70,6 +71,7 @@ class EditAfter extends React.Component {
               <div key={neew._id}>
                 <ListItem button onClick={(e) => this.setRedir(neew.url, e)}>
                   {neew.category == "News" && <Receipt/>}
+                  {neew.category == "Article" && <ChromeReaderMode/>}
                   {neew.category == "Funny" && <Mood/>}
                   {neew.category == "Sport" && <DirectionsRun/>}
                   {neew.category == "Students life" && <Domain/>}
@@ -93,6 +95,7 @@ class EditAfter extends React.Component {
               <div key={neew._id}>
                 <ListItem button onClick={(e) => this.setRedir(neew.url, e)}>
                   {neew.category == "News" && <Receipt/>}
+                  {neew.category == "Article" && <ChromeReaderMode/>}
                   {neew.category == "Funny" && <Mood/>}
                   {neew.category == "Sport" && <DirectionsRun/>}
                   {neew.category == "Students life" && <Domain/>}

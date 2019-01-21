@@ -11,6 +11,7 @@ import Receipt from '@material-ui/icons/Receipt'
 import DirectionsRun from '@material-ui/icons/DirectionsRun'
 import Mood from '@material-ui/icons/Mood'
 import Domain from '@material-ui/icons/Domain'
+import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
 
 const styles = {
   paperMain: {
@@ -115,7 +116,10 @@ export default class Main extends React.Component{
       this.setState({errorLeadRu: false})
     }
   }
-  changeSelects(event) { this.setState({ inputCategory: event.target.value }) }
+  changeSelects(event) {
+    this.setState({ inputCategory: event.target.value })
+    axios.post('/admins/edit/category', { id: this.state.id, category: event.target.value })
+  }
   titleFocusout(event){
     axios.post('/admins/edit/title', {id: this.state.id, title: event.target.value})
       .then((response) => {
@@ -165,6 +169,7 @@ export default class Main extends React.Component{
           <Select autoWidth={false} name="Category" value={inputCategory}
                   onChange={this.changeSelects} input={<Input name="Category"/>}>
             <MenuItem value="News"><Receipt/>News</MenuItem>
+            <MenuItem value="Article"><ChromeReaderMode/>Article</MenuItem>
             <MenuItem value="Funny"><Mood/>Funny</MenuItem>
             <MenuItem value="Sport"><DirectionsRun/>Sports</MenuItem>
             <MenuItem value="Students life"><Domain/>Student's life</MenuItem>
