@@ -1,6 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import Header from './Header'
 
 import isAdminHOC from '&/HOCs/isAdminHOC'
@@ -30,4 +31,4 @@ const mapStateToProps = (state) => ({
   lang: state.lang
 })
 
-export default connect( mapStateToProps, null )(App)
+export default withRouter(connect( mapStateToProps, null )(App))
