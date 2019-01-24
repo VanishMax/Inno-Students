@@ -10,6 +10,7 @@ db.getInstance((p_db) => {
 const initialState = {
   mobile: null,
   count: 5,
+  lang: 'ru'
 }
 
 export default function (app) {

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router'
+import { connect } from 'react-redux'
 import Header from './Header'
 
 import isAdminHOC from '&/HOCs/isAdminHOC'
@@ -10,17 +11,23 @@ const AsyncAdmin = LoadableHOC({ loader: () => import(/* webpackChunkName: "Abou
 const AsyncNeew = LoadableHOC({ loader: () => import(/* webpackChunkName: "Neew" */ './News/FullNews') })
 
 
-export default function App() {
+function App(props) {
   const Admin = isAdminHOC(AsyncAdmin)
   return(
     <React.Fragment>
-      <Header lang="ru"/>
+      <Header lang={props.lang}/>
       <Switch>
-        <Route exact path="/" component={ () => <AsyncHome lang="ru"/> }/>
+        <Route exact path="/" component={ () => <AsyncHome lang={props.lang}/> }/>
         <Route exact path="/about" component={ AsyncAbout }/>
         <Route path="/admins" component={ () => <Admin lang="ru"/> }/>
-        <Route path="/news/:neew" render={(props) => <AsyncNeew lang="ru" location={props.location}/>}/>
+        <Route path="/news/:neew" render={(props) => <AsyncNeew lang="ru"/>}/>
       </Switch>
     </React.Fragment>
   )
 }
+
+const mapStateToProps = (state) => ({
+  lang: state.lang
+})
+
+export default connect( mapStateToProps, null )(App)

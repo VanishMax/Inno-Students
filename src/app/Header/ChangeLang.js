@@ -1,6 +1,5 @@
 import React from 'react'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Switch from '@material-ui/core/Switch'
+import Button from '@material-ui/core/Button'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -19,7 +18,6 @@ class ChangeLang extends React.Component{
     let uri = window.location.pathname
     uri = uri.replace('/', '')
     uri = uri.replace('/en', '')
-    console.log(uri)
     this.setState({ link: uri })
   }
   changeLang(){
@@ -34,13 +32,11 @@ class ChangeLang extends React.Component{
   }
 
   render() {
-    const { english } = this.state
     return (
       <React.Fragment>
-        <FormControlLabel labelPlacement="start"
-          control={ <Switch checked={english} onChange={this.changeLang} value="switchLang"/> }
-          label={ this.props.lang == "en" ? "English" : "Английский" }
-        />
+        <Button variant='contained' color='secondary' onClick={this.changeLang}>
+          { this.props.lang == "en" ? "Russian" : "Английский" }
+        </Button>
       </React.Fragment>
     )
   }
