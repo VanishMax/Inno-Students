@@ -10,6 +10,8 @@ import Button from '@material-ui/core/Button'
 
 import Dante from 'Dante2'
 import { ImageBlockConfig } from 'Dante2/package/lib/components/blocks/image.js'
+import { EmbedBlockConfig } from 'Dante2/package/lib/components/blocks/embed.js'
+import { VideoBlockConfig } from 'Dante2/package/lib/components/blocks/video.js'
 
 const styles = {
   paper: {
@@ -76,9 +78,13 @@ export default class Content extends React.Component{
     let danteRu
     if(this.state.loaded){
       dante = <Dante onChange={this.changeDraft} content={this.state.content}
-                     widgets={[ImageBlockConfig({ options: { upload_url: '/admins/edit/contentPicture' } }) ]}/>
+                     widgets={[ImageBlockConfig({ options: { upload_url: '/admins/edit/contentPicture' } }),
+                       EmbedBlockConfig({ options: { placeholder: 'Put an external link', endpoint: '//open.iframe.ly/api/oembed?origin=https://github.com&url=', }, }),
+                       VideoBlockConfig({ options: { placeholder: 'Put an external video link', endpoint: '//open.iframe.ly/api/oembed?origin=https://github.com&url=', caption: 'optional caption', }, }),]}/>
       danteRu = <Dante onChange={this.changeDraftRu} content={this.state.contentRu}
-                       widgets={[ImageBlockConfig({ options: { upload_url: '/admins/edit/contentPicture' } }) ]}/>
+                       widgets={[ImageBlockConfig({ options: { upload_url: '/admins/edit/contentPicture' } }),
+                         EmbedBlockConfig({ options: { placeholder: 'Put an external link', endpoint: '//open.iframe.ly/api/oembed?origin=https://github.com&url=', }, }),
+                         VideoBlockConfig({ options: { placeholder: 'Put an external video link', endpoint: '//open.iframe.ly/api/oembed?origin=https://github.com&url=', caption: 'optional caption', }, }),]}/>
     } else {
       dante = <React.Fragment/>
       danteRu = <React.Fragment/>
