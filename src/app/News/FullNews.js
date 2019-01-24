@@ -24,9 +24,9 @@ class News extends React.Component {
     super(props)
   }
   render(){
-    let timePrint;
-    let neew;
-    let time;
+    let timePrint
+    let neew
+    let time
     const { news } = this.props
 
     if (news === undefined) {
