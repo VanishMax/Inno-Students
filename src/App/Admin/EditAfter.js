@@ -8,7 +8,6 @@ import List from "@material-ui/core/List/List"
 import Divider from "@material-ui/core/Divider/Divider"
 import ListItem from "@material-ui/core/ListItem/ListItem"
 import ListItemText from "@material-ui/core/ListItemText/ListItemText"
-import Paper from "@material-ui/core/Paper/Paper"
 import Receipt from '@material-ui/icons/Receipt'
 import DirectionsRun from '@material-ui/icons/DirectionsRun'
 import Mood from '@material-ui/icons/Mood'
@@ -70,11 +69,11 @@ class EditAfter extends React.Component {
             {newsToEdit.map( (neew) =>
               <div key={neew._id}>
                 <ListItem button onClick={(e) => this.setRedir(neew.url, e)}>
-                  {neew.category == "News" && <Receipt/>}
-                  {neew.category == "Article" && <ChromeReaderMode/>}
-                  {neew.category == "Funny" && <Mood/>}
-                  {neew.category == "Sport" && <DirectionsRun/>}
-                  {neew.category == "Students life" && <Domain/>}
+                  {neew.category === "News" && <Receipt/>}
+                  {neew.category === "Article" && <ChromeReaderMode/>}
+                  {neew.category === "Funny" && <Mood/>}
+                  {neew.category === "Sport" && <DirectionsRun/>}
+                  {neew.category === "Students life" && <Domain/>}
                   <ListItemText primary={neew.en.title}/>
                 </ListItem>
                 <Divider/>
@@ -94,11 +93,11 @@ class EditAfter extends React.Component {
             {readyNews.map( (neew) =>
               <div key={neew._id}>
                 <ListItem button onClick={(e) => this.setRedir(neew.url, e)}>
-                  {neew.category == "News" && <Receipt/>}
-                  {neew.category == "Article" && <ChromeReaderMode/>}
-                  {neew.category == "Funny" && <Mood/>}
-                  {neew.category == "Sport" && <DirectionsRun/>}
-                  {neew.category == "Students life" && <Domain/>}
+                  {neew.category === "News" && <Receipt/>}
+                  {neew.category === "Article" && <ChromeReaderMode/>}
+                  {neew.category === "Funny" && <Mood/>}
+                  {neew.category === "Sport" && <DirectionsRun/>}
+                  {neew.category === "Students life" && <Domain/>}
                   <ListItemText primary={neew.en.title}/>
                 </ListItem>
                 <Divider/>

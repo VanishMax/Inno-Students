@@ -37,7 +37,7 @@ export default class Header extends React.Component{
     this.toggleDrawer = this.toggleDrawer.bind(this)
   }
   toggleDrawer(){
-    this.setState({opened: !this.state.opened})
+    this.setState({ opened: !this.state.opened })
   }
   render(){
     return (

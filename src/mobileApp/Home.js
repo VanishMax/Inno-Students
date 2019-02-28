@@ -1,13 +1,8 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
-import * as Actions from '&/redux/actions'
-
 import Header from './Header'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
 
 const styles = {
   paper: {
@@ -24,14 +19,6 @@ const styles = {
 class Home extends React.Component{
   constructor(){
     super()
-    this.increase = this.increase.bind(this)
-    this.decrease = this.decrease.bind(this)
-  }
-  increase(){
-    this.props.actions.increase()
-  }
-  decrease(){
-    this.props.actions.decrease()
   }
   render(){
     return (
@@ -42,25 +29,11 @@ class Home extends React.Component{
           <meta name="description" content="VaMax Mobile App" />
         </Helmet>
         <Paper elevation={4} style={styles.paper} align="center">
-          <Typography variant="h5">Redux-Counter</Typography>
-          <Typography variant="subtitle1">Counter: {this.props.count}</Typography>
-          <br/>
-          <Button variant="contained" color="primary" onClick={this.increase} style={styles.btnLeft}>Increase</Button>
-          <Button variant="contained" color="primary" onClick={this.decrease}>Decrease</Button>
+          <Typography variant="h5">Watta hell?</Typography>
         </Paper>
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => ({
-  count: state.count
-})
-const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(Actions, dispatch)
-})
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home)
+export default Home
