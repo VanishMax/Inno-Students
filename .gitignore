@@ -1,10 +1,5 @@
 node_modules
-.idea
-.env
+.next
 .DS_Store
+.idea
 package-lock.json
-public/*
-!public/manifest.json
-!public/robots.txt
-assets/pics/*
-!assets/pics/Test-Picture.png
