@@ -8,6 +8,11 @@
   font-family: Helvetica, 'sans-serif';
 }
 
+.w-60-auto {
+  width: 60% !important;
+  margin: auto;
+}
+
 .font-comforta {
   font-family: Comfortaa, sans-serif;
 }
