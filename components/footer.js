@@ -12,22 +12,25 @@ export default function Footer () {
         </div>
 
         <div className="flex justify-between text-gray-900 no-underline font-semibold text-base text-sm">
-          <div className="mr-10">
-            <Link prefetch href="/about">
-              <a className=" py-2 pl-3 hover:text-gray-200">About Us</a>
-            </Link>
-          </div>
-          <div className="mr-10">
-            <Link prefetch href="/writer">
-              <a className="py-2 pl-3 hover:text-gray-200">Become a writer</a>
-            </Link>
-          </div>
-          <div className="mr-10">
-            <Link prefetch href="/donate">
-              <a className="py-2 pl-3 hover:text-gray-200">Donate</a>
-            </Link>
+          <div className="hidden sm:flex">
+            <div className="mr-6 md:mr-10">
+              <Link prefetch href="/about">
+                <a className=" py-2 pl-3 hover:text-gray-200">About Us</a>
+              </Link>
+            </div>
+            <div className="mr-6 md:mr-10">
+              <Link prefetch href="/writer">
+                <a className="py-2 pl-3 hover:text-gray-200">Become a writer</a>
+              </Link>
+            </div>
+            <div className="mr-6 md:mr-10">
+              <Link prefetch href="/donate">
+                <a className="py-2 pl-3 hover:text-gray-200">Donate</a>
+              </Link>
+            </div>
           </div>
         </div>
+
 
         <div className="flex justify-end">
           <Link prefetch href="/login">
