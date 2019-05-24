@@ -6,7 +6,7 @@ import Head from 'next/head'
 import { Provider } from 'react-redux'
 import withStore from '../redux/withStore'
 
-import Nav from '../components/nav'
+import Header from '../components/header'
 
 class MyApp extends App {
   render () {
@@ -19,10 +19,11 @@ class MyApp extends App {
           <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon"/>
           <link rel="icon" href="/static/favicon.ico" type="image/x-icon"/>
           <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet"/>
+          <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"/>
           <meta name='keywords' content='MWA, Modern Web App, PWA, Progressive Web App, Next.js, Next, Tailwind, Redux, WebDev'/>
           <meta name='author' content='VanishMax'/>
         </Head>
-        <Nav/>
+        <Header/>
         <Provider store={reduxStore}>
           <Component {...pageProps} />
         </Provider>
