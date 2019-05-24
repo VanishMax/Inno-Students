@@ -8,6 +8,21 @@
   font-family: Roboto, sans-serif;
 }
 
+html, body, .wrap {min-height: 100vh; width: auto}
+.main {padding-bottom: 8rem;}
+.clearfix:after {content: "."; display: block; height: 0; clear: both; visibility: hidden;}
+.clearfix {display: inline-block;}
+* html .clearfix { height: 1%;}
+.clearfix {display: block;}
+
+.footer {
+  position: relative;
+  margin-top: -8rem;
+  height: 8rem;
+  clear:both;
+  box-shadow: 0 0 15px 0 rgba(0,0,0,.5);
+}
+
 .w-10-12-auto {
   width: 80% !important;
   margin: auto;

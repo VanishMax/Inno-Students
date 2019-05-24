@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import withStore from '../redux/withStore'
 
 import Header from '../components/header'
+import Footer from '../components/footer'
 
 class MyApp extends App {
   render () {
@@ -23,10 +24,15 @@ class MyApp extends App {
           <meta name='keywords' content='MWA, Modern Web App, PWA, Progressive Web App, Next.js, Next, Tailwind, Redux, WebDev'/>
           <meta name='author' content='VanishMax'/>
         </Head>
-        <Header/>
-        <Provider store={reduxStore}>
-          <Component {...pageProps} />
-        </Provider>
+        <div className="wrap">
+          <Header/>
+          <div className="main clearfix">
+            <Provider store={reduxStore}>
+              <Component {...pageProps} />
+            </Provider>
+          </div>
+        </div>
+        <Footer/>
       </Container>
     )
   }
