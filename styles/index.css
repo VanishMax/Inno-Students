@@ -9,7 +9,7 @@
 }
 
 html, body, .wrap {min-height: 100vh; width: auto}
-.main {padding-bottom: 8rem;}
+.main {padding-bottom: 7rem;}
 .clearfix:after {content: "."; display: block; height: 0; clear: both; visibility: hidden;}
 .clearfix {display: inline-block;}
 * html .clearfix { height: 1%;}
@@ -17,15 +17,26 @@ html, body, .wrap {min-height: 100vh; width: auto}
 
 .footer {
   position: relative;
-  margin-top: -8rem;
-  height: 8rem;
+  margin-top: -7rem;
+  height: 7rem;
   clear:both;
   box-shadow: 0 0 15px 0 rgba(0,0,0,.5);
 }
 
-.w-10-12-auto {
-  width: 80% !important;
+.app {
   margin: auto;
+  width: 96% !important;
+}
+@media (min-width: 1024px) {
+  .app {width: 88% !important;}
+}
+@media (min-width: 1200px) {
+  .app {width: 80% !important;}
+}
+
+.mw-10p {
+  max-width: 10%;
+  min-width: 2%;
 }
 
 .font-comforta {
