@@ -34,14 +34,6 @@ html, body, .wrap {min-height: 100vh; width: auto}
   .app {width: 80% !important;}
 }
 
-.mw-10p {
-  max-width: 10%;
-  min-width: 2%;
-}
-
-.font-comforta {
-  font-family: Comfortaa, sans-serif;
-}
 
 .title {
   @apply w-full text-center leading-tight m-0 pt-8 text-4xl;

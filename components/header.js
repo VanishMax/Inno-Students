@@ -12,36 +12,39 @@ export default function Header () {
         </div>
 
         <div className="flex justify-between text-gray-900 no-underline font-semibold text-base text-sm">
-          <div className="mr-10">
+          <div className="mr-12">
             <Link prefetch href="/">
-              <a className=" py-2 pl-3 hover:text-gray-200">Events</a>
+              <a className="hover:text-green-800">Events</a>
             </Link>
           </div>
-          <div className="mr-10">
+          <div className="mr-12">
             <Link prefetch href="/">
-              <a className="py-2 pl-3 hover:text-gray-200">Clubs</a>
+              <a className="hover:text-green-800">Clubs</a>
             </Link>
           </div>
-          <div className="mr-10">
+          <div className="mr-12">
             <Link prefetch href="/">
-              <a className="py-2 pl-3 hover:text-gray-200">People</a>
+              <a className="hover:text-green-800">People</a>
             </Link>
           </div>
-          <div className="mr-10">
+          <div className="mr-12">
             <Link prefetch href="/">
-              <a className="py-2 pl-3 hover:text-gray-200">Campus life</a>
+              <a className="hover:text-green-800">Campus life</a>
             </Link>
           </div>
           <div>
             <Link prefetch href="/">
-              <a className="py-2 pl-3 hover:text-gray-200">Videos</a>
+              <a className="hover:text-green-800">Videos</a>
             </Link>
           </div>
         </div>
 
         <div className="flex justify-end">
           <Link href="/">
-            <a className="text-gray-800 font-bold font-comforta no-underline" target="_blank">English</a>
+            <a className="mr-8 text-gray-800 font-bold no-underline" target="_blank">English</a>
+          </Link>
+          <Link href="/login">
+            <a className="text-gray-800 font-bold no-underline" target="_blank">Log In</a>
           </Link>
         </div>
       </div>
