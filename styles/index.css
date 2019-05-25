@@ -23,6 +23,32 @@ html, body, .wrap {min-height: 100vh; width: auto}
   box-shadow: 0 0 15px 0 rgba(0,0,0,.5);
 }
 
+#menu {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: RGBa(255,255,255,1);
+  opacity: 0;
+  z-index: -1;
+  transition: 0.5s ease;
+}
+header label, header > .flex > .flex {z-index: 100;}
+#openMenu {display: none;}
+#openMenu:checked + #menu{
+  opacity: 1;
+  z-index: 1;
+}
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+
 .app {
   margin: auto;
   width: 96% !important;
