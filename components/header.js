@@ -51,6 +51,7 @@ export default function Header () {
         </div>
       </div>
 
+
       {/* Small viewport (<1024px) */}
       <div className="flex lg:hidden flex-grow items-center justify-between">
         <input type="checkbox" id="openMenu"/>
@@ -58,37 +59,37 @@ export default function Header () {
         {/* Menu overlay works only if checkbox is checked after clicking on hamburger */}
         {/* Styles are in the index.css file */}
         <div id="menu" className="pt-24">
-          <div className="flex flex-col flex-grow justify-center items-center">
+          <div className="flex flex-col flex-grow justify-center items-center text-xl font-semibold no-underline">
             <Link href="/">
-              <a className="text-xl mb-2 text-gray-800 hover:text-green-800 font-bold no-underline">Events</a>
+              <a className="mb-2 hover:text-green-800">Events</a>
             </Link>
             <Link href="/">
-              <a className="text-xl mb-2 text-gray-800 hover:text-green-800 font-bold no-underline">Clubs</a>
+              <a className="mb-2 hover:text-green-800">Clubs</a>
             </Link>
             <Link href="/">
-              <a className="text-xl mb-2 text-gray-800 hover:text-green-800 font-bold no-underline">People</a>
+              <a className="mb-2 hover:text-green-800">People</a>
             </Link>
             <Link href="/">
-              <a className="text-xl mb-2 text-gray-800 hover:text-green-800 font-bold no-underline">Campus Life</a>
+              <a className="mb-2 hover:text-green-800">Campus Life</a>
             </Link>
             <Link href="/">
-              <a className="text-xl mb-2 text-gray-800 hover:text-green-800 font-bold no-underline">Videos</a>
+              <a className="mb-2 hover:text-green-800">Videos</a>
             </Link>
           </div>
 
           <hr/>
-          <div className="flex flex-col flex-grow justify-center items-center pt-4">
+          <div className="flex flex-col flex-grow justify-center items-center pt-4 text-xl font-semibold no-underline">
             <Link href="/login">
-              <a className="text-xl mb-2 text-gray-800 hover:text-green-800 font-bold no-underline">Log In</a>
+              <a className="mb-2 hover:text-green-800">Log In</a>
             </Link>
             <Link href="/about">
-              <a className="text-xl mb-2 text-gray-800 hover:text-green-800 font-bold no-underline">About Us</a>
+              <a className="mb-2 hover:text-green-800">About Us</a>
             </Link>
             <Link href="/writer">
-              <a className="text-xl mb-2 text-gray-800 hover:text-green-800 font-bold no-underline">Become a writer</a>
+              <a className="mb-2 hover:text-green-800">Become a writer</a>
             </Link>
             <Link href="/donate">
-              <a className="text-xl mb-2 text-gray-800 hover:text-green-800 font-bold no-underline">Donate</a>
+              <a className="mb-2 hover:text-green-800">Donate</a>
             </Link>
           </div>
 
