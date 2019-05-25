@@ -1,7 +1,10 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Link from 'next/link'
+import Lang from '../langs/header'
+import { LangContext } from '../langs/langContext'
 
 export default function Footer () {
+  const lang = useContext(LangContext)
   return (
     <footer className="bg-white footer w-full">
       <div className="flex items-center justify-between py-8 px-4 lg:px-8">
@@ -15,17 +18,17 @@ export default function Footer () {
           <div className="hidden sm:flex">
             <div className="mr-8 md:mr-12">
               <Link prefetch href="/about">
-                <a className="hover:text-green-800">About Us</a>
+                <a className="hover:text-green-800">{Lang.about[lang]}</a>
               </Link>
             </div>
             <div className="mr-8 md:mr-12">
               <Link prefetch href="/writer">
-                <a className="hover:text-green-800">Become a writer</a>
+                <a className="hover:text-green-800">{Lang.writer[lang]}</a>
               </Link>
             </div>
             <div>
               <Link prefetch href="/donate">
-                <a className="hover:text-green-800">Donate</a>
+                <a className="hover:text-green-800">{Lang.donate[lang]}</a>
               </Link>
             </div>
           </div>

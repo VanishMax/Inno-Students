@@ -6,10 +6,25 @@ import Head from 'next/head'
 import { Provider } from 'react-redux'
 import withStore from '../redux/withStore'
 
+import { lang, LangContext } from '../langs/langContext'
 import Header from '../components/header'
 import Footer from '../components/footer'
 
 class MyApp extends App {
+  constructor(props) {
+    super(props)
+    this.state = {
+      lang: lang
+    }
+
+    this.toggleLang = () => {
+      this.setState(state => ({
+        lang: state.lang === 'en' ? 'ru' : 'en'
+      }));
+    };
+  }
+
+
   render () {
     const { Component, pageProps, reduxStore } = this.props
 
@@ -23,15 +38,17 @@ class MyApp extends App {
           <meta name='keywords' content='MWA, Modern Web App, PWA, Progressive Web App, Next.js, Next, Tailwind, Redux, WebDev'/>
           <meta name='author' content='VanishMax'/>
         </Head>
-        <div className="wrap">
-          <Header/>
-          <div className="main clearfix">
-            <Provider store={reduxStore}>
-              <Component {...pageProps} />
-            </Provider>
+        <LangContext.Provider value={this.state.lang}>
+          <div className="wrap">
+            <Header changeLang={this.toggleLang}/>
+            <div className="main clearfix">
+              <Provider store={reduxStore}>
+                <Component {...pageProps} />
+              </Provider>
+            </div>
           </div>
-        </div>
-        <Footer/>
+          <Footer/>
+        </LangContext.Provider>
       </Container>
     )
   }

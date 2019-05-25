@@ -35,13 +35,13 @@ html, body, .wrap {min-height: 100vh; width: auto}
   background: RGBa(255,255,255,1);
   opacity: 0;
   z-index: -1;
-  transition: 0.5s ease;
 }
 header label, header > .flex > .flex {z-index: 100;}
 #openMenu {display: none;}
 #openMenu:checked + #menu{
   opacity: 1;
   z-index: 1;
+  transition: 0.5s ease;
 }
 hr {
   border: 0;

@@ -1,7 +1,10 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Link from 'next/link'
+import Lang from '../langs/header'
+import { LangContext } from '../langs/langContext'
 
-export default function Header () {
+export default function Header (props) {
+  const lang = useContext(LangContext)
   return (
     <header className="app flex items-center justify-between p-3">
 
@@ -16,37 +19,35 @@ export default function Header () {
         <div className="flex justify-between text-gray-900 no-underline font-semibold text-base text-sm">
           <div className="mr-12">
             <Link prefetch href="/">
-              <a className="hover:text-green-800">Events</a>
+              <a className="hover:text-green-800">{Lang.events[lang]}</a>
             </Link>
           </div>
           <div className="mr-12">
             <Link prefetch href="/">
-              <a className="hover:text-green-800">Clubs</a>
+              <a className="hover:text-green-800">{Lang.clubs[lang]}</a>
             </Link>
           </div>
           <div className="mr-12">
             <Link prefetch href="/">
-              <a className="hover:text-green-800">People</a>
+              <a className="hover:text-green-800">{Lang.people[lang]}</a>
             </Link>
           </div>
           <div className="mr-12">
             <Link prefetch href="/">
-              <a className="hover:text-green-800">Campus life</a>
+              <a className="hover:text-green-800">{Lang.campuslife[lang]}</a>
             </Link>
           </div>
           <div>
             <Link prefetch href="/">
-              <a className="hover:text-green-800">Videos</a>
+              <a className="hover:text-green-800">{Lang.videos[lang]}</a>
             </Link>
           </div>
         </div>
 
         <div className="flex justify-end">
-          <Link href="/">
-            <a className="mr-8 text-gray-800 font-bold no-underline hover:text-green-800">English</a>
-          </Link>
+          <span onClick={props.changeLang} className="mr-8 text-gray-800 font-bold no-underline hover:text-green-800 cursor-pointer">{Lang.lang[lang]}</span>
           <Link href="/login">
-            <a className="text-gray-800 font-bold no-underline hover:text-green-800">Log In</a>
+            <a className="text-gray-800 font-bold no-underline hover:text-green-800">{Lang.login[lang]}</a>
           </Link>
         </div>
       </div>
@@ -59,37 +60,37 @@ export default function Header () {
         {/* Menu overlay works only if checkbox is checked after clicking on hamburger */}
         {/* Styles are in the index.css file */}
         <div id="menu" className="pt-24">
-          <div className="flex flex-col flex-grow justify-center items-center text-xl font-semibold no-underline">
+          <div className="flex flex-col flex-grow justify-center items-center text-xl no-underline">
             <Link href="/">
-              <a className="mb-2 hover:text-green-800">Events</a>
+              <a className="mb-2 hover:text-green-800">{Lang.events[lang]}</a>
             </Link>
             <Link href="/">
-              <a className="mb-2 hover:text-green-800">Clubs</a>
+              <a className="mb-2 hover:text-green-800">{Lang.clubs[lang]}</a>
             </Link>
             <Link href="/">
-              <a className="mb-2 hover:text-green-800">People</a>
+              <a className="mb-2 hover:text-green-800">{Lang.people[lang]}</a>
             </Link>
             <Link href="/">
-              <a className="mb-2 hover:text-green-800">Campus Life</a>
+              <a className="mb-2 hover:text-green-800">{Lang.campuslife[lang]}</a>
             </Link>
             <Link href="/">
-              <a className="mb-2 hover:text-green-800">Videos</a>
+              <a className="mb-2 hover:text-green-800">{Lang.videos[lang]}</a>
             </Link>
           </div>
 
           <hr/>
-          <div className="flex flex-col flex-grow justify-center items-center pt-4 text-xl font-semibold no-underline">
+          <div className="flex flex-col flex-grow justify-center items-center pt-4 text-xl no-underline">
             <Link href="/login">
-              <a className="mb-2 hover:text-green-800">Log In</a>
+              <a className="mb-2 hover:text-green-800">{Lang.login[lang]}</a>
             </Link>
             <Link href="/about">
-              <a className="mb-2 hover:text-green-800">About Us</a>
+              <a className="mb-2 hover:text-green-800">{Lang.about[lang]}</a>
             </Link>
             <Link href="/writer">
-              <a className="mb-2 hover:text-green-800">Become a writer</a>
+              <a className="mb-2 hover:text-green-800">{Lang.writer[lang]}</a>
             </Link>
             <Link href="/donate">
-              <a className="mb-2 hover:text-green-800">Donate</a>
+              <a className="mb-2 hover:text-green-800">{Lang.donate[lang]}</a>
             </Link>
           </div>
 
@@ -137,16 +138,15 @@ export default function Header () {
         <div className="flex justify-end">
           <Link href="/">
             <span className="cursor-pointer text-base text-gray-800 hover:text-green-800 font-bold no-underline">
-              <a className="hidden lg:inline mr-8">English</a>
-              <a className="inline lg:hidden">EN</a>
+              <a className="hidden lg:inline mr-8">{Lang.lang[lang]}</a>
+              <a className="inline lg:hidden font-normal">{Lang.langSm[lang]}</a>
             </span>
           </Link>
           <Link href="/login">
-            <a className="hidden lg:inline text-gray-800 hover:text-green-800 font-bold no-underline">Log In</a>
+            <a className="hidden lg:inline text-gray-800 hover:text-green-800 font-bold no-underline">{Lang.login[lang]}</a>
           </Link>
         </div>
       </div>
-
     </header>
   )
 }
