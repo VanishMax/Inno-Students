@@ -46,7 +46,7 @@ export default function Header (props) {
 
         <div className="flex justify-end">
           <span onClick={props.changeLang} className="mr-8 text-gray-800 font-bold no-underline hover:text-green-800 cursor-pointer">{Lang.lang[lang]}</span>
-          <Link href="/login">
+          <Link href="/user/login">
             <a className="text-gray-800 font-bold no-underline hover:text-green-800">{Lang.login[lang]}</a>
           </Link>
         </div>
@@ -108,7 +108,7 @@ export default function Header (props) {
 
             <hr/>
             <div className="flex flex-col flex-grow justify-center items-center pt-4 text-xl no-underline">
-              <Link href="/login">
+              <Link href="/user/login">
                 <a className="mb-2">{Lang.login[lang]}</a>
               </Link>
               <Link href="/about">

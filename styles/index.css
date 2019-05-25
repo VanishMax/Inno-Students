@@ -10,7 +10,7 @@
 }
 
 html, body, .wrap {min-height: 100vh; width: auto}
-.main {padding-bottom: 7rem;}
+.main {padding-bottom: 8rem;}
 .clearfix:after {content: "."; display: block; height: 0; clear: both; visibility: hidden;}
 .clearfix {display: inline-block;}
 * html .clearfix { height: 1%;}
