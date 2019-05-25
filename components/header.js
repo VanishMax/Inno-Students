@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import Link from 'next/link'
+import Link from '../components/Link'
 import Lang from '../langs/header'
 import { LangContext } from '../langs/langContext'
 
@@ -152,8 +152,6 @@ export default function Header (props) {
             </div>
           </div>
         </div>
-
-
       </div>
     </header>
   )

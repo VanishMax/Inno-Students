@@ -1,9 +1,9 @@
 import React, {useContext} from 'react'
-import Link from 'next/link'
 import Lang from '../langs/header'
 import { LangContext } from '../langs/langContext'
+import Link from '../components/Link'
 
-export default function Footer () {
+export default function Footer (props) {
   const lang = useContext(LangContext)
   return (
     <footer className="bg-white footer w-full">
