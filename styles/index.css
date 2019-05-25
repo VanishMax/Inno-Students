@@ -6,6 +6,7 @@
   margin: 0;
   padding: 0;
   font-family: Roboto, sans-serif;
+  webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 html, body, .wrap {min-height: 100vh; width: auto}
@@ -25,10 +26,10 @@ html, body, .wrap {min-height: 100vh; width: auto}
 
 #menu {
   position: fixed;
-  height: 100vh;
+  height: calc(100vh - 4rem);
   width: 100vw;
   overflow-y: hidden;
-  top: 0;
+  top: 4rem;
   left: 0;
   right: 0;
   bottom: 0;
@@ -38,9 +39,18 @@ html, body, .wrap {min-height: 100vh; width: auto}
 }
 header label, header > .flex > .flex {z-index: 100;}
 #openMenu {display: none;}
-#openMenu:checked + #menu{
+.closeMenu {display: none; position: relative; z-index: 100;}
+#openMenu:checked + .afterChecking > #menu{
   opacity: 1;
   z-index: 1;
+  transition: 0.15s ease;
+}
+#openMenu:checked + .afterChecking > label.openMenu{
+  display: none;
+  transition: 0.3s ease;
+}
+#openMenu:checked + .afterChecking > label.closeMenu{
+  display: inline;
   transition: 0.3s ease;
 }
 hr {
