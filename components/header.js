@@ -138,8 +138,7 @@ export default function Header (props) {
         <div className="flex justify-end">
           <Link href="/">
             <span className="cursor-pointer text-base text-gray-800 hover:text-green-800 font-bold no-underline">
-              <a className="hidden lg:inline mr-8">{Lang.lang[lang]}</a>
-              <a className="inline lg:hidden font-normal">{Lang.langSm[lang]}</a>
+              <span onClick={props.changeLang} className="inline lg:hidden font-normal cursor-pointer">{Lang.langSm[lang]}</span>
             </span>
           </Link>
           <Link href="/login">
