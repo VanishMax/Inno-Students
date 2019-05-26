@@ -34,31 +34,25 @@ html, body, .wrap {min-height: 100vh; width: auto}
   right: 0;
   bottom: 0;
   background: RGBa(255,255,255,1);
-  opacity: 0;
-  z-index: -1;
 }
-header label, header > .flex > .flex {z-index: 100;}
-#openMenu {display: none;}
-.closeMenu {display: none; position: relative; z-index: 100;}
-#openMenu:checked + .afterChecking > #menu{
+#menu.opened {
   opacity: 1;
   z-index: 1;
   transition: 0.15s ease;
 }
-#openMenu:checked + .afterChecking > label.openMenu{
-  display: none;
-  transition: 0.3s ease;
+#menu.closed {
+  opacity: 0;
+  z-index: -1;
 }
-#openMenu:checked + .afterChecking > label.closeMenu{
-  display: inline;
-  transition: 0.3s ease;
-}
+.openMenu.opened {display: none;}  .openMenu.closed {display: flex;}
+.closeMenu.opened {display: flex;}  .closeMenu.closed {display: none;}
+
+
 hr {
   border: 0;
   height: 1px;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
-
 
 .app {
   margin: auto;

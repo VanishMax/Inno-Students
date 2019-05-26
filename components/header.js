@@ -1,10 +1,14 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import Link from '../components/Link'
 import Lang from '../langs/header'
 import { LangContext } from '../langs/langContext'
 
 export default function Header (props) {
   const lang = useContext(LangContext)
+  const [opened, setOpen] = useState('closed')
+  const open = () => setOpen('opened')
+  const close = () => setOpen('closed')
+
   return (
     <header className="app flex items-center justify-between p-3">
 
@@ -66,92 +70,88 @@ export default function Header (props) {
 
         <div className="flex flex-grow justify-center">
           <Link prefetch href="/">
-            <img src="/static/headerMini.png" alt="header logo" className="cursor-pointer"/>
+            <img src="/static/headerMini.png" alt="header logo" className="cursor-pointer" onClick={close}/>
           </Link>
         </div>
 
 
-        <input type="checkbox" id="openMenu"/>
-
         {/* Menu overlay works only if checkbox is checked after clicking on hamburger */}
         {/* Styles are in the index.css file */}
-        <div className="afterChecking">
-          <label htmlFor="openMenu" className="openMenu">
-            <div className="flex justify-start cursor-pointer">
-              <img src="/static/menu.png" alt="menu icon"/>
-            </div>
-          </label>
-          <label htmlFor="openMenu" className="closeMenu">
-            <div className="flex justify-start cursor-pointer">
-              <img src="/static/close.png" alt="close menu icon"/>
-            </div>
-          </label>
 
-          <div id="menu" className="pt-4">
-            <div className="flex flex-col flex-grow justify-center items-center text-xl no-underline">
-              <Link href="/">
-                <a className="mb-2">{Lang.events[lang]}</a>
-              </Link>
-              <Link href="/">
-                <a className="mb-2">{Lang.clubs[lang]}</a>
-              </Link>
-              <Link href="/">
-                <a className="mb-2">{Lang.people[lang]}</a>
-              </Link>
-              <Link href="/">
-                <a className="mb-2">{Lang.campuslife[lang]}</a>
-              </Link>
-              <Link href="/">
-                <a className="mb-2">{Lang.videos[lang]}</a>
-              </Link>
-            </div>
-
-            <hr/>
-            <div className="flex flex-col flex-grow justify-center items-center pt-4 text-xl no-underline">
-              <Link href="/user/login">
-                <a className="mb-2">{Lang.login[lang]}</a>
-              </Link>
-              <Link href="/about">
-                <a className="mb-2">{Lang.about[lang]}</a>
-              </Link>
-              <Link href="/writer">
-                <a className="mb-2">{Lang.writer[lang]}</a>
-              </Link>
-              <Link href="/donate">
-                <a className="mb-2">{Lang.donate[lang]}</a>
-              </Link>
-            </div>
-
-            <hr/>
-            <div className="flex pt-4 justify-center">
-              <Link href="https://t.me/InnoStudents">
-                <a className="mr-2" target="_blank">
-                  <img src="/static/socials/telegram.png"/>
-                </a>
-              </Link>
-              <Link href="https://vk.com/InnoStudents">
-                <a className="mr-2" target="_blank">
-                  <img src="/static/socials/vk.png"/>
-                </a>
-              </Link>
-              <Link href="https://instagram.com/InnoStudents">
-                <a className="mr-2" target="_blank">
-                  <img src="/static/socials/instagram.png"/>
-                </a>
-              </Link>
-              <Link href="https://facebook.com/InnopolisStudents">
-                <a className="mr-2" target="_blank">
-                  <img src="/static/socials/facebook.png"/>
-                </a>
-              </Link>
-              <Link href="https://www.youtube.com/channel/UCwmOq5S4wwmycTgcxUT0-eQ">
-                <a target="_blank">
-                  <img src="/static/socials/youtube.png"/>
-                </a>
-              </Link>
-            </div>
+        <div>
+          <div className={"openMenu justify-start cursor-pointer " + opened} onClick={open}>
+            <img src="/static/menu.png" alt="menu icon"/>
+          </div>
+          <div className={"closeMenu justify-start cursor-pointer " + opened} onClick={close}>
+            <img src="/static/close.png" alt="close menu icon"/>
           </div>
         </div>
+
+        <div id="menu" className={"pt-4 " + (opened)}>
+          <div className="flex flex-col flex-grow justify-center items-center text-xl no-underline">
+            <Link href="/">
+              <a className="mb-2" onClick={close}>{Lang.events[lang]}</a>
+            </Link>
+            <Link href="/">
+              <a className="mb-2" onClick={close}>{Lang.clubs[lang]}</a>
+            </Link>
+            <Link href="/">
+              <a className="mb-2" onClick={close}>{Lang.people[lang]}</a>
+            </Link>
+            <Link href="/">
+              <a className="mb-2" onClick={close}>{Lang.campuslife[lang]}</a>
+            </Link>
+            <Link href="/">
+              <a className="mb-2" onClick={close}>{Lang.videos[lang]}</a>
+            </Link>
+          </div>
+
+          <hr/>
+          <div className="flex flex-col flex-grow justify-center items-center pt-4 text-xl no-underline">
+            <Link href="/user/login">
+              <a className="mb-2" onClick={close}>{Lang.login[lang]}</a>
+            </Link>
+            <Link href="/about">
+              <a className="mb-2" onClick={close}>{Lang.about[lang]}</a>
+            </Link>
+            <Link href="/writer">
+              <a className="mb-2" onClick={close}>{Lang.writer[lang]}</a>
+            </Link>
+            <Link href="/donate">
+              <a className="mb-2" onClick={close}>{Lang.donate[lang]}</a>
+            </Link>
+          </div>
+
+          <hr/>
+          <div className="flex pt-4 justify-center">
+            <Link href="https://t.me/InnoStudents">
+              <a className="mr-2" target="_blank">
+                <img src="/static/socials/telegram.png"/>
+              </a>
+            </Link>
+            <Link href="https://vk.com/InnoStudents">
+              <a className="mr-2" target="_blank">
+                <img src="/static/socials/vk.png"/>
+              </a>
+            </Link>
+            <Link href="https://instagram.com/InnoStudents">
+              <a className="mr-2" target="_blank">
+                <img src="/static/socials/instagram.png"/>
+              </a>
+            </Link>
+            <Link href="https://facebook.com/InnopolisStudents">
+              <a className="mr-2" target="_blank">
+                <img src="/static/socials/facebook.png"/>
+              </a>
+            </Link>
+            <Link href="https://www.youtube.com/channel/UCwmOq5S4wwmycTgcxUT0-eQ">
+              <a target="_blank">
+                <img src="/static/socials/youtube.png"/>
+              </a>
+            </Link>
+          </div>
+        </div>
+
       </div>
     </header>
   )
