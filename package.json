@@ -4,9 +4,8 @@
   "description": "Media Club website rewritten for the third time. Now the next.js and tailwind css are used",
   "main": "pages/_app.js",
   "scripts": {
-    "start": "next build && next start -p $PORT",
-    "prod": "next build && next start",
-    "dev": "next"
+    "start": "next build && cross-env NODE_ENV=production node server.js",
+    "dev": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +16,7 @@
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
     "autoprefixer": "^9.5.1",
+    "express": "^4.17.1",
     "next": "^8.1.0",
     "next-cookies": "^1.1.2",
     "postcss-easy-import": "^3.0.0",
@@ -24,7 +24,7 @@
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0-alpha.4",
     "redux": "^4.0.1",
-    "tailwindcss": "^1.0.0-beta.8",
+    "tailwindcss": "^1.0.1",
     "webpack": "^4.32.1"
   }
 }

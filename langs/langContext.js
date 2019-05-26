@@ -1,4 +1,3 @@
 import React from 'react'
-export const lang = 'en'
 
-export const LangContext = React.createContext(lang)
+export const LangContext = React.createContext('en')

@@ -14,11 +14,21 @@ import Header from '../components/header'
 import Footer from '../components/footer'
 
 class MyApp extends App {
-  static async getInitialProps(ctx) {
-    const { cookieLang } = cookies(ctx.ctx) || ''
+  static async getInitialProps({ ctx }) {
+    const { cookieLang } = cookies(ctx) || ''
     let lang = 'en'
-    if((ctx.ctx.query && ctx.ctx.query.lang === 'ru') || cookieLang === 'ru') lang = 'ru'
-    return {lang: lang}
+    if((ctx.query && ctx.query.lang === 'ru') || cookieLang === 'ru') lang = 'ru'
+
+    if(cookieLang === 'ru' && (!ctx.query || ctx.query.lang !== 'ru')) {
+      if (ctx.res) {
+        ctx.res.writeHead(302, { Location: ctx.pathname + '?lang=ru' })
+        ctx.res.end()
+      } else {
+        Router.replace({ pathname: Router.pathname, query: { lang: 'ru' }, shallow: true})
+      }
+    }
+
+    return {lang: lang, path: ctx.pathname}
   }
 
   constructor(props) {
@@ -41,11 +51,13 @@ class MyApp extends App {
 
   render () {
     const { Component, pageProps, reduxStore } = this.props
+    const baseDomain = 'https://inno-students.herokuapp.com'
 
     return (
       <Container>
         <Head>
           <meta name="theme-color" content="#75a261"/>
+          <link rel="alternate" hrefLang="en" href={baseDomain + this.props.path + '?lang=' + this.props.lang }/>
           <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon"/>
           <link rel="icon" href="/static/favicon.ico" type="image/x-icon"/>
           <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"/>
