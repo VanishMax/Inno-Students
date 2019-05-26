@@ -1,5 +1,11 @@
+require('dotenv').config()
+
 const express = require('express')
 const path = require('path')
+const bodyParser = require('body-parser')
+const cookieSession = require('cookie-session')
+const passport = require('passport')
+
 const next = require('next')
 
 const port = process.env.PORT || 3000
@@ -7,8 +13,22 @@ const dev = process.env.NODE_ENV !== 'production'
 const server = next({ dev })
 const handle = server.getRequestHandler()
 
+const config = require('./server/config/config')
+const db = require('./server/config/connection')
+db.initPool()
+
 server.prepare().then(() => {
   const app = express()
+
+  app.use(bodyParser.json());
+  app.use(
+    cookieSession({
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+      keys: [config.cookieKey]
+    })
+  )
+  app.use(passport.initialize())
+  app.use(passport.session())
 
   app.get('/robots.txt', (req, res) => {
     return res.sendFile(path.join(__dirname, 'static/robots.txt'))
