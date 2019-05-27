@@ -1,7 +1,6 @@
 require('dotenv').config()
 
 const express = require('express')
-const path = require('path')
 const bodyParser = require('body-parser')
 const cookieSession = require('cookie-session')
 const passport = require('passport')
@@ -20,7 +19,7 @@ db.initPool()
 server.prepare().then(() => {
   const app = express()
 
-  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }))
   app.use(
     cookieSession({
       maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -29,10 +28,10 @@ server.prepare().then(() => {
   )
   app.use(passport.initialize())
   app.use(passport.session())
+  require('./server/config/localAuth')(passport)
 
-  app.get('/robots.txt', (req, res) => {
-    return res.sendFile(path.join(__dirname, 'static/robots.txt'))
-  })
+  require('./server/routes/static')(app)
+  require('./server/routes/auth')(app, server)
 
   app.get('*', (req, res) => {
     return handle(req, res)
