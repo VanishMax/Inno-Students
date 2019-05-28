@@ -1,4 +1,5 @@
 import React from 'react'
+import 'isomorphic-unfetch'
 
 import '../styles/index.css'
 import App, { Container } from 'next/app'
@@ -27,6 +28,14 @@ class MyApp extends App {
         Router.replace({ pathname: Router.pathname, query: { lang: 'ru' }, shallow: true})
       }
     }
+
+    if(ctx.req) {
+      console.log('ctx', ctx.req.user)
+    }
+    // const baseUrl = ctx.req ? `${ctx.req.protocol}://${ctx.req.get('Host')}` : ''
+    // const res = await fetch(baseUrl + '/user/isAdmin', {method: 'POST'})
+    // const json = await res.json()
+    // console.log(json)
 
     return {lang: lang, path: ctx.pathname}
   }

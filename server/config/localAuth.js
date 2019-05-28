@@ -16,7 +16,10 @@ module.exports = (passport) => {
   })
 
   passport.deserializeUser((user, done) => {
-    done(null, user)
+    User.findOne({ _id: user._id }, (err, user) => {
+      console.log('deser', user)
+      done(null, user)
+    })
   })
 
   passport.use('local-signup', new Strategy({
@@ -62,7 +65,7 @@ module.exports = (passport) => {
     }, (req, username, password, done) => {
     let body = req.body
 
-    User.findOne({ 'username' :  body.username }, (err, user) => {
+    User.findOne({ name :  body.username }, (err, user) => {
       if (err) return done(err)
 
       if (user) {
