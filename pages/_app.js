@@ -7,7 +7,7 @@ import Head from 'next/head'
 import { Provider } from 'react-redux'
 import withStore from '../redux/withStore'
 
-import { LangContext } from '../langs/langContext'
+import { LangContext, AuthContext } from '../redux/context'
 import cookies from 'next-cookies'
 import Router from 'next/router'
 
@@ -29,15 +29,12 @@ class MyApp extends App {
       }
     }
 
-    if(ctx.req) {
-      console.log('ctx', ctx.req.user)
+    let user = {}
+    if(ctx.req && ctx.req.user) {
+      user = ctx.req.user
     }
-    // const baseUrl = ctx.req ? `${ctx.req.protocol}://${ctx.req.get('Host')}` : ''
-    // const res = await fetch(baseUrl + '/user/isAdmin', {method: 'POST'})
-    // const json = await res.json()
-    // console.log(json)
 
-    return {lang: lang, path: ctx.pathname}
+    return {lang: lang, path: ctx.pathname, user: user}
   }
 
   constructor(props) {
@@ -74,15 +71,17 @@ class MyApp extends App {
           <meta name='author' content='VanishMax'/>
         </Head>
         <LangContext.Provider value={this.state.lang}>
-          <div className="wrap">
-            <Header changeLang={this.toggleLang}/>
-            <div className="main clearfix">
-              <Provider store={reduxStore}>
-                <Component {...pageProps} />
-              </Provider>
+          <AuthContext.Provider value={this.props.user}>
+            <div className="wrap">
+              <Header changeLang={this.toggleLang}/>
+              <div className="main clearfix">
+                <Provider store={reduxStore}>
+                  <Component {...pageProps} />
+                </Provider>
+              </div>
             </div>
-          </div>
-          <Footer/>
+            <Footer/>
+          </AuthContext.Provider>
         </LangContext.Provider>
       </Container>
     )

@@ -1,13 +1,16 @@
 import React, {useContext, useState} from 'react'
 import Link from '../components/Link'
 import Lang from '../langs/header'
-import { LangContext } from '../langs/langContext'
+import { LangContext, AuthContext } from '../redux/context'
 
 export default function Header (props) {
   const lang = useContext(LangContext)
   const [opened, setOpen] = useState('closed')
   const open = () => setOpen('opened')
   const close = () => setOpen('closed')
+
+  const user = useContext(AuthContext)
+  const [isAuthed] = useState(user._id !== undefined)
 
   return (
     <header className="app flex items-center justify-between p-3">
@@ -50,9 +53,16 @@ export default function Header (props) {
 
         <div className="flex justify-end">
           <span onClick={props.changeLang} className="mr-8 text-gray-800 font-bold no-underline hover:text-green-800 cursor-pointer">{Lang.lang[lang]}</span>
-          <Link href="/user/login">
-            <a className="text-gray-800 font-bold no-underline hover:text-green-800">{Lang.login[lang]}</a>
-          </Link>
+
+          {isAuthed ?
+            <Link href="/user/logout">
+              <a className="text-gray-800 font-bold no-underline hover:text-green-800">{Lang.logout[lang]}</a>
+            </Link>
+          :
+            <Link href="/user/login">
+              <a className="text-gray-800 font-bold no-underline hover:text-green-800">{Lang.login[lang]}</a>
+            </Link>
+          }
         </div>
       </div>
 
@@ -108,9 +118,17 @@ export default function Header (props) {
 
           <hr/>
           <div className="flex flex-col flex-grow justify-center items-center pt-4 text-xl no-underline">
-            <Link href="/user/login">
-              <a className="mb-2" onClick={close}>{Lang.login[lang]}</a>
-            </Link>
+
+            {isAuthed ?
+              <Link href="/user/logout">
+                <a className="mb-2" onClick={close}>{Lang.logout[lang]}</a>
+              </Link>
+              :
+              <Link href="/user/login">
+                <a className="mb-2" onClick={close}>{Lang.login[lang]}</a>
+              </Link>
+            }
+
             <Link href="/about">
               <a className="mb-2" onClick={close}>{Lang.about[lang]}</a>
             </Link>

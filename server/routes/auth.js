@@ -11,11 +11,16 @@ module.exports = (app, server) => {
   app.post('/user/signup', (req, res, next) => {
     passport.authenticate('local-signup', {},async function (err, user, message) {
       user = await user
+
       if (err) return server.render(req, res, '/user/signup', {error: err.message})
       if (!user) {
         return server.render(req, res, '/user/signup', {error: message})
       } else {
-        res.redirect('/user')
+        req.logIn(user, function(err) {
+          if (err) return server.render(req, res, '/user/signup', {error: err.message})
+          res.redirect('/')
+          return server.render(req, res, '/')
+        })
       }
     })(req, res, next)
   })
@@ -30,6 +35,7 @@ module.exports = (app, server) => {
       } else {
         req.logIn(user, function(err) {
           if (err) return server.render(req, res, '/user/login', {error: err.message})
+          res.redirect('/')
           return server.render(req, res, '/')
         })
       }
@@ -37,15 +43,15 @@ module.exports = (app, server) => {
   })
 
   //Delete User's session - logOut
-  app.get('/logout', (req, res) => {
+  app.get('/user/logout', (req, res) => {
     req.logout()
+    res.redirect('/')
     server.render(req, res, '/')
   })
 
   app.post('/user/isAdmin', (req, res) => {
     let isAdmin = false
     if(req.user) {
-      console.log(req.user.role)
       if (req.user.role === 'A')  {
         isAdmin = true
       }

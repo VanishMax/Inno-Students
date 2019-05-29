@@ -17,7 +17,6 @@ module.exports = (passport) => {
 
   passport.deserializeUser((user, done) => {
     User.findOne({ _id: user._id }, (err, user) => {
-      console.log('deser', user)
       done(null, user)
     })
   })

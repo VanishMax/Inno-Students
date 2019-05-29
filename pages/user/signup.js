@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 import Link from '../../components/Link'
 import Lang from '../../langs/login'
-import {LangContext} from '../../langs/langContext'
+import { LangContext } from '../../redux/context'
 import Head from 'next/head'
 
 export default () => {

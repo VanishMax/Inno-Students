@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import Lang from '../langs/header'
-import { LangContext } from '../langs/langContext'
+import { LangContext } from '../redux/context'
 import Link from '../components/Link'
 
 export default function Footer (props) {
