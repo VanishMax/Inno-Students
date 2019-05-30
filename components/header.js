@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react'
 import Link from '../components/Link'
 import Lang from '../langs/header'
-import { LangContext, AuthContext } from '../redux/context'
+import { LangContext, AuthContext } from '../middleware/context'
 
 export default function Header (props) {
   const lang = useContext(LangContext)

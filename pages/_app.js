@@ -1,42 +1,21 @@
 import React from 'react'
-import 'isomorphic-unfetch'
 
 import '../styles/index.css'
 import App, { Container } from 'next/app'
 import Head from 'next/head'
 import { Provider } from 'react-redux'
 import withStore from '../redux/withStore'
-
-import { LangContext, AuthContext } from '../redux/context'
-import cookies from 'next-cookies'
+import { LangContext, AuthContext } from '../middleware/context'
 import Router from 'next/router'
+
+import cookieHOC from '../middleware/cookieHOC'
+import authHOC from '../middleware/authHOC'
+import flowRight from 'lodash.flowright'
 
 import Header from '../components/header'
 import Footer from '../components/footer'
 
 class MyApp extends App {
-  static async getInitialProps({ ctx }) {
-    const { cookieLang } = cookies(ctx) || ''
-    let lang = 'en'
-    if((ctx.query && ctx.query.lang === 'ru') || cookieLang === 'ru') lang = 'ru'
-
-    if(cookieLang === 'ru' && (!ctx.query || ctx.query.lang !== 'ru')) {
-      if (ctx.res) {
-        ctx.res.writeHead(302, { Location: ctx.pathname + '?lang=ru' })
-        ctx.res.end()
-      } else {
-        Router.replace({ pathname: Router.pathname, query: { lang: 'ru' }, shallow: true})
-      }
-    }
-
-    let user = {}
-    if(ctx.req && ctx.req.user) {
-      user = ctx.req.user
-    }
-
-    return {lang: lang, path: ctx.pathname, user: user}
-  }
-
   constructor(props) {
     super(props)
     this.state = {
@@ -88,4 +67,4 @@ class MyApp extends App {
   }
 }
 
-export default withStore(MyApp)
+export default withStore(flowRight([authHOC, cookieHOC])(MyApp))
