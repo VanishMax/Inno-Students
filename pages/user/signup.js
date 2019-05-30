@@ -4,6 +4,7 @@ import Lang from '../../langs/login'
 import { LangContext } from '../../middleware/context'
 import Head from 'next/head'
 import authErrorHOC from '../../middleware/authErrorHOC'
+import ErrorLang from "../../langs/authError";
 
 const Signup = (props) => {
   const lang = useContext(LangContext)
@@ -57,7 +58,9 @@ const Signup = (props) => {
                 id="inline-confirm" type="password" name="confirmPassword" placeholder="**********"/>
             </div>
           </div>
-          <h3 className="mb-4 text-center text-base italic text-red-800">{props.message}</h3>
+          <h3 className="mb-4 text-center text-base italic text-red-800">
+            {lang === 'en' ? props.message : ErrorLang[props.message]}
+          </h3>
           <div className="flex items-center justify-center">
             <button
               className="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"

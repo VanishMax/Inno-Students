@@ -31,7 +31,7 @@ module.exports = (passport) => {
           if (err) return done(err)
 
           if(user) {
-            return done(null, false, {message: 'That username "' + body.username + '" already exists'})
+            return done(null, false, {message: 'That username already exists'})
           } else {
             if(body.confirmPassword !== body.password) {
               return done(null, false, {message: 'Password is not confirmed'})

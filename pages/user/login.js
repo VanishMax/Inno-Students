@@ -1,13 +1,14 @@
 import React, {useContext} from 'react'
 import Head from 'next/head'
+import {LangContext} from '../../middleware/context'
 import authErrorHOC from '../../middleware/authErrorHOC'
 import Link from '../../components/Link'
 import Lang from '../../langs/login'
-import {LangContext} from '../../middleware/context'
+import ErrorLang from '../../langs/authError'
 
 const Login = (props) => {
   const lang = useContext(LangContext)
-  console.log(props)
+
   return(
     <div className="w-4/5 md:w-3/5 lg:w-2/5 mx-auto">
       <Head>
@@ -45,7 +46,9 @@ const Login = (props) => {
                 id="inline-username" type="password" name="password" placeholder="**********"/>
             </div>
           </div>
-          <h3 className="mb-4 text-center text-base italic text-red-800">{props.message}</h3>
+          <h3 className="mb-4 text-center text-base italic text-red-800">
+            {lang === 'en' ? props.message : ErrorLang[props.message]}
+          </h3>
           <div className="flex items-center justify-center">
             <button
               className="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"

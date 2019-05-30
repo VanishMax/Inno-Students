@@ -1,5 +1,6 @@
 const passport = require('passport')
 const db = require('../config/connection')
+const isRus = require('../isRus')
 
 let User
 db.getInstance((p_db) => {
@@ -29,14 +30,14 @@ module.exports = (app, server) => {
     passport.authenticate('local-login', {},async function (err, user, message) {
       user = await user
 
-      if (err) return server.render(req, res, '/user/login', {error: err})
+      if (err) server.render(req, res, '/user/login', {error: err})
       if (!user) {
-        return server.render(req, res, '/user/login', {error: message})
+        server.render(req, res, '/user/login', {error: message})
       } else {
         req.logIn(user, function(err) {
-          if (err) return server.render(req, res, '/user/login', {error: err})
+          if (err) server.render(req, res, '/user/login', {error: err})
           res.redirect('/')
-          return server.render(req, res, '/')
+          server.render(req, res, '/')
         })
       }
     })(req, res, next)
