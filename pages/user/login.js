@@ -1,11 +1,13 @@
 import React, {useContext} from 'react'
 import Head from 'next/head'
+import authErrorHOC from '../../middleware/authErrorHOC'
 import Link from '../../components/Link'
 import Lang from '../../langs/login'
 import {LangContext} from '../../middleware/context'
 
-const Login = () => {
+const Login = (props) => {
   const lang = useContext(LangContext)
+  console.log(props)
   return(
     <div className="w-4/5 md:w-3/5 lg:w-2/5 mx-auto">
       <Head>
@@ -15,7 +17,7 @@ const Login = () => {
       <h1 className="title italic">{Lang.titleLog[lang]}</h1>
       <div className="w-full mt-8 p-4 rounded shadow-lg">
 
-        <h3 className="mb-4 text-center text-lg text-base text-gray-800">{Lang.subtitle[lang]}</h3>
+        <h3 className="mb-4 text-center text-lg text-gray-800">{Lang.subtitle[lang]}</h3>
         <form className="w-full max-w-sm mx-auto" method="post" action="/user/login">
           <div className="md:flex md:items-center mb-6">
             <div className="md:w-1/3">
@@ -43,6 +45,7 @@ const Login = () => {
                 id="inline-username" type="password" name="password" placeholder="**********"/>
             </div>
           </div>
+          <h3 className="mb-4 text-center text-base italic text-red-800">{props.message}</h3>
           <div className="flex items-center justify-center">
             <button
               className="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
@@ -62,4 +65,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default authErrorHOC(Login)

@@ -27,14 +27,14 @@ module.exports = (passport) => {
       let body = req.body
 
       if(body.username && body.password && body.confirmPassword) {
-        User.findOne({'username': body.username}, (err, user) => {
+        User.findOne({ name: body.username}, (err, user) => {
           if (err) return done(err)
 
           if(user) {
-            return done(null, false, 'User with email "' + body.username + '" already exists')
+            return done(null, false, {message: 'That username "' + body.username + '" already exists'})
           } else {
             if(body.confirmPassword !== body.password) {
-              return done(null, false, 'Password is not confirmed')
+              return done(null, false, {message: 'Password is not confirmed'})
             } else {
               Counter.findOneAndUpdate({ _id: 'userid' }, { $inc: { seq: 1 } }, { new: true }, (err, seq) => {
                 if (err) return done(err)
@@ -54,7 +54,7 @@ module.exports = (passport) => {
           }
         })
       } else {
-        return done(null, false, 'Please, provide the username, password and the confirmation')
+        return done(null, false, {message: 'Please, provide the username, password and the confirmation'})
       }
     })
   )
@@ -71,10 +71,10 @@ module.exports = (passport) => {
         if(bcrypt.compareSync(body.password, user.password)) {
           return done(null, user)
         } else {
-          return done(null, false, 'Wrong password')
+          return done(null, false, {message: 'Wrong password'})
         }
       } else {
-        return done(null, false, 'No such user with this email')
+        return done(null, false, {message: 'No such user with this username'})
       }
     })
   }))

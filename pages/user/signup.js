@@ -3,8 +3,9 @@ import Link from '../../components/Link'
 import Lang from '../../langs/login'
 import { LangContext } from '../../middleware/context'
 import Head from 'next/head'
+import authErrorHOC from '../../middleware/authErrorHOC'
 
-export default () => {
+const Signup = (props) => {
   const lang = useContext(LangContext)
   return(
     <div className="w-4/5 md:w-3/5 lg:w-2/5 mx-auto">
@@ -56,6 +57,7 @@ export default () => {
                 id="inline-confirm" type="password" name="confirmPassword" placeholder="**********"/>
             </div>
           </div>
+          <h3 className="mb-4 text-center text-base italic text-red-800">{props.message}</h3>
           <div className="flex items-center justify-center">
             <button
               className="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
@@ -74,3 +76,5 @@ export default () => {
     </div>
   )
 }
+
+export default authErrorHOC(Signup)

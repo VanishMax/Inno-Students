@@ -12,12 +12,12 @@ module.exports = (app, server) => {
     passport.authenticate('local-signup', {},async function (err, user, message) {
       user = await user
 
-      if (err) return server.render(req, res, '/user/signup', {error: err.message})
+      if (err) return server.render(req, res, '/user/signup', {error: err})
       if (!user) {
         return server.render(req, res, '/user/signup', {error: message})
       } else {
         req.logIn(user, function(err) {
-          if (err) return server.render(req, res, '/user/signup', {error: err.message})
+          if (err) return server.render(req, res, '/user/signup', {error: err})
           res.redirect('/')
           return server.render(req, res, '/')
         })
@@ -29,12 +29,12 @@ module.exports = (app, server) => {
     passport.authenticate('local-login', {},async function (err, user, message) {
       user = await user
 
-      if (err) return server.render(req, res, '/user/login', {error: err.message})
+      if (err) return server.render(req, res, '/user/login', {error: err})
       if (!user) {
         return server.render(req, res, '/user/login', {error: message})
       } else {
         req.logIn(user, function(err) {
-          if (err) return server.render(req, res, '/user/login', {error: err.message})
+          if (err) return server.render(req, res, '/user/login', {error: err})
           res.redirect('/')
           return server.render(req, res, '/')
         })
