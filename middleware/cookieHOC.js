@@ -2,14 +2,14 @@ import cookies from 'next-cookies'
 import Router from 'next/router'
 
 const makeURLWithQuery = (query) => {
-  console.log(query)
   let str = '?'
   for(let x in query) {
     x === 'error' ?
       str += 'message=' + query[x].message + '&' :
       str += x + '=' + query[x] + '&'
   }
-  return str
+
+  return str.substring(0, str.length - 1)
 }
 
 const withCookiesHOC = Page => {

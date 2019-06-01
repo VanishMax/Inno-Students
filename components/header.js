@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect, useRef} from 'react'
 import Link from '../components/Link'
 import Lang from '../langs/header'
 import { LangContext, AuthContext } from '../middleware/context'
@@ -8,6 +8,8 @@ export default function Header (props) {
   const [opened, setOpen] = useState('closed')
   const open = () => setOpen('opened')
   const close = () => setOpen('closed')
+
+  const {ref, isComponentVisible, setIsComponentVisible} = useComponentVisible(false);
 
   const user = useContext(AuthContext)
   const [isAuthed] = useState(user._id !== undefined)
@@ -55,9 +57,23 @@ export default function Header (props) {
           <span onClick={props.changeLang} className="mr-8 text-gray-800 font-bold no-underline hover:text-green-800 cursor-pointer">{Lang.lang[lang]}</span>
 
           {isAuthed ?
-            <Link href="/user/logout">
-              <a className="text-gray-800 font-bold no-underline hover:text-green-800">{Lang.logout[lang]}</a>
-            </Link>
+            <React.Fragment>
+              <span>
+                <img onClick={() => setIsComponentVisible(!isComponentVisible)} src="/static/user.png" className="cursor-pointer"/>
+              </span>
+
+              {isComponentVisible &&
+                <div ref={ref} className="absolute w-32 mt-8 bg-white shadow rounded py-3 px-6">
+                  <Link href="/user">
+                    <a onClick={() => setIsComponentVisible(false)} className="text-gray-800 font-semibold no-underline hover:text-green-800 leading-loose">{Lang.profile[lang]}</a>
+                  </Link>
+                  <br/>
+                  <Link href="/logout">
+                    <a onClick={() => setIsComponentVisible(false)} className="text-gray-800 font-semibold no-underline hover:text-green-800 leading-loose">{Lang.logout[lang]}</a>
+                  </Link>
+                </div>
+              }
+            </React.Fragment>
           :
             <Link href="/user/login">
               <a className="text-gray-800 font-bold no-underline hover:text-green-800">{Lang.login[lang]}</a>
@@ -120,9 +136,15 @@ export default function Header (props) {
           <div className="flex flex-col flex-grow justify-center items-center pt-4 text-xl no-underline">
 
             {isAuthed ?
-              <Link href="/user/logout">
-                <a className="mb-2" onClick={close}>{Lang.logout[lang]}</a>
-              </Link>
+              <React.Fragment>
+                <Link href="/user">
+                  <a className="mb-2" onClick={close}>{Lang.profile[lang]}</a>
+                </Link>
+                <Link href="/user/logout">
+                  <a className="mb-2" onClick={close}>{Lang.logout[lang]}</a>
+                </Link>
+              </React.Fragment>
+
               :
               <Link href="/user/login">
                 <a className="mb-2" onClick={close}>{Lang.login[lang]}</a>
@@ -173,4 +195,24 @@ export default function Header (props) {
       </div>
     </header>
   )
+}
+
+const useComponentVisible = (initialIsVisible) => {
+  const [isComponentVisible, setIsComponentVisible] = useState(initialIsVisible)
+  const ref = useRef(null)
+
+  const handleClickOutside = (event) => {
+    if (ref.current && !ref.current.contains(event.target)) {
+      setIsComponentVisible(false)
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, true)
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true)
+    }
+  })
+
+  return { ref, isComponentVisible, setIsComponentVisible }
 }

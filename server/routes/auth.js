@@ -1,6 +1,5 @@
 const passport = require('passport')
 const db = require('../config/connection')
-const isRus = require('../isRus')
 
 let User
 db.getInstance((p_db) => {

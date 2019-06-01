@@ -35,6 +35,10 @@ const header = {
     en: 'Log Out',
     ru: 'Выйти'
   },
+  profile: {
+    en: 'Profile',
+    ru: 'Профиль'
+  },
   about: {
     en: 'About Us',
     ru: 'Про нас'
