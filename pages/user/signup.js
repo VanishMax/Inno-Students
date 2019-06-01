@@ -4,7 +4,7 @@ import Lang from '../../langs/login'
 import { LangContext } from '../../middleware/context'
 import Head from 'next/head'
 import authErrorHOC from '../../middleware/authErrorHOC'
-import ErrorLang from "../../langs/authError";
+import ErrorLang from '../../langs/authError'
 
 const Signup = (props) => {
   const lang = useContext(LangContext)
