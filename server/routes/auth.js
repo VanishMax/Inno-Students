@@ -8,6 +8,10 @@ db.getInstance((p_db) => {
 
 module.exports = (app, server) => {
 
+  app.post('/user', (req, res) => {
+    res.json({user: req.user})
+  })
+
   app.post('/user/signup', (req, res, next) => {
     passport.authenticate('local-signup', {},async function (err, user, message) {
       user = await user
@@ -18,8 +22,8 @@ module.exports = (app, server) => {
       } else {
         req.logIn(user, function(err) {
           if (err) return server.render(req, res, '/user/signup', {error: err})
-          res.redirect('/')
-          return server.render(req, res, '/')
+          res.redirect('/user')
+          return server.render(req, res, '/user')
         })
       }
     })(req, res, next)
@@ -35,8 +39,8 @@ module.exports = (app, server) => {
       } else {
         req.logIn(user, function(err) {
           if (err) server.render(req, res, '/user/login', {error: err})
-          res.redirect('/')
-          server.render(req, res, '/')
+          res.redirect('/user')
+          server.render(req, res, '/user')
         })
       }
     })(req, res, next)

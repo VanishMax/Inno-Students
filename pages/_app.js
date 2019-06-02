@@ -8,8 +8,8 @@ import withStore from '../redux/withStore'
 import { LangContext, AuthContext } from '../middleware/context'
 import Router from 'next/router'
 
-import cookieHOC from '../middleware/cookieHOC'
-import authHOC from '../middleware/authHOC'
+import withLang from '../middleware/HOCs/withLang'
+import withUser from '../middleware/HOCs/withUser'
 import flowRight from 'lodash.flowright'
 
 import Header from '../components/header'
@@ -19,7 +19,8 @@ class MyApp extends App {
   constructor(props) {
     super(props)
     this.state = {
-      lang: this.props.lang
+      lang: this.props.lang,
+      user: this.props.user
     }
 
     this.toggleLang = () => {
@@ -50,7 +51,7 @@ class MyApp extends App {
           <meta name='author' content='VanishMax'/>
         </Head>
         <LangContext.Provider value={this.state.lang}>
-          <AuthContext.Provider value={this.props.user}>
+          <AuthContext.Provider value={this.state.user}>
             <div className="wrap">
               <Header changeLang={this.toggleLang}/>
               <div className="main clearfix">
@@ -67,4 +68,4 @@ class MyApp extends App {
   }
 }
 
-export default withStore(flowRight([authHOC, cookieHOC])(MyApp))
+export default withStore(flowRight([withUser, withLang])(MyApp))

@@ -1,4 +1,4 @@
-const authErrorHOC = Page => {
+const withAuthError = Page => {
   const AuthError = props => <Page {...props} />
 
   AuthError.getInitialProps = async ctx => {
@@ -16,4 +16,4 @@ const authErrorHOC = Page => {
   return AuthError
 }
 
-export default authErrorHOC
+export default withAuthError

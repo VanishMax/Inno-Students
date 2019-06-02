@@ -3,7 +3,7 @@ import Link from '../../components/Link'
 import Lang from '../../langs/login'
 import { LangContext } from '../../middleware/context'
 import Head from 'next/head'
-import authErrorHOC from '../../middleware/authErrorHOC'
+import withAuthError from '../../middleware/HOCs/withAuthError'
 import ErrorLang from '../../langs/authError'
 
 const Signup = (props) => {
@@ -80,4 +80,4 @@ const Signup = (props) => {
   )
 }
 
-export default authErrorHOC(Signup)
+export default withAuthError(Signup)

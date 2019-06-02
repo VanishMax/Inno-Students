@@ -1,16 +1,6 @@
 import cookies from 'next-cookies'
 import Router from 'next/router'
-
-const makeURLWithQuery = (query) => {
-  let str = '?'
-  for(let x in query) {
-    x === 'error' ?
-      str += 'message=' + query[x].message + '&' :
-      str += x + '=' + query[x] + '&'
-  }
-
-  return str.substring(0, str.length - 1)
-}
+import {makeURLWithQuery} from '../makeURLWithQuery'
 
 const withCookiesHOC = Page => {
   const WithCookies = props => <Page {...props} />

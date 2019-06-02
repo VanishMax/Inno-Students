@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 import Head from 'next/head'
 import {LangContext} from '../../middleware/context'
-import authErrorHOC from '../../middleware/authErrorHOC'
+import withAuthError from '../../middleware/HOCs/withAuthError'
 import Link from '../../components/Link'
 import Lang from '../../langs/login'
 import ErrorLang from '../../langs/authError'
@@ -68,4 +68,4 @@ const Login = (props) => {
   )
 }
 
-export default authErrorHOC(Login)
+export default withAuthError(Login)

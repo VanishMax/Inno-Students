@@ -3,7 +3,7 @@ import Lang from '../langs/header'
 import { LangContext } from '../middleware/context'
 import Link from '../components/Link'
 
-export default function Footer (props) {
+export default () => {
   const lang = useContext(LangContext)
   return (
     <footer className="bg-white footer w-full">

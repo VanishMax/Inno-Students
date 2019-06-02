@@ -1,8 +1,13 @@
 import React from 'react'
+import isAuthed from '../../middleware/HOCs/isAuthed'
 
-export default () => {
-
+const Profile = (props) => {
+  console.log('profile:', props.user)
   return (
-    <div/>
+    <h1>
+      Nu cho
+    </h1>
   )
 }
+
+export default isAuthed(Profile)
