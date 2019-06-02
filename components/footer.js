@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 import Lang from '../langs/header'
 import { LangContext } from '../middleware/context'
-import Link from '../components/Link'
+import Link from './link'
 
 export default () => {
   const lang = useContext(LangContext)
@@ -10,7 +10,7 @@ export default () => {
       <div className="flex items-center justify-between py-8 px-4 lg:px-8">
         <div className="flex">
           <Link prefetch href="/">
-            <img src="/static/headerMini.png" alt="header logo" className="cursor-pointer"/>
+            <img src="/static/images/headerMini.png" alt="header logo" className="cursor-pointer"/>
           </Link>
         </div>
 
@@ -38,27 +38,27 @@ export default () => {
         <div className="flex justify-end">
           <Link href="https://t.me/InnoStudents">
             <a className="mr-2" target="_blank">
-              <img src="/static/socials/telegram.png"/>
+              <img src="/static/images/socials/telegram.png"/>
             </a>
           </Link>
           <Link href="https://vk.com/InnoStudents">
             <a className="mr-2" target="_blank">
-              <img src="/static/socials/vk.png"/>
+              <img src="/static/images/socials/vk.png"/>
             </a>
           </Link>
           <Link href="https://instagram.com/InnoStudents">
             <a className="mr-2" target="_blank">
-              <img src="/static/socials/instagram.png"/>
+              <img src="/static/images/socials/instagram.png"/>
             </a>
           </Link>
           <Link href="https://facebook.com/InnopolisStudents">
             <a className="mr-2" target="_blank">
-              <img src="/static/socials/facebook.png"/>
+              <img src="/static/images/socials/facebook.png"/>
             </a>
           </Link>
           <Link href="https://www.youtube.com/channel/UCwmOq5S4wwmycTgcxUT0-eQ">
             <a target="_blank">
-              <img src="/static/socials/youtube.png"/>
+              <img src="/static/images/socials/youtube.png"/>
             </a>
           </Link>
         </div>

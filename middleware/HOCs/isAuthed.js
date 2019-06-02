@@ -1,7 +1,7 @@
 import React from 'react'
 import Router from 'next/router'
-import {makeURLWithQuery} from '../makeURLWithQuery'
 import 'isomorphic-unfetch'
+import makeURLWithQuery from '../makeURLWithQuery'
 
 export default Page => {
   const WithAuth = props => <Page {...props} />
@@ -11,7 +11,7 @@ export default Page => {
       if(ctx.req.user) {
         return {user: ctx.req.user}
       } else {
-        ctx.res.writeHead(302, { Location: '/user/login' + makeURLWithQuery(ctx.query)})
+        ctx.res.writeHead(302, {Location: '/user/login' + makeURLWithQuery(ctx.query)})
         ctx.res.end()
       }
     } else {

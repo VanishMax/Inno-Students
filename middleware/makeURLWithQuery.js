@@ -1,4 +1,6 @@
-export const makeURLWithQuery = (query) => {
+// Util to create an url query string from object
+
+export default query => {
   let str = '?'
   for(let x in query) {
     x === 'error' ?

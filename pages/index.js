@@ -11,7 +11,7 @@ export default class Home extends React.Component {
           <meta name="description" content="MWA is a progressive solution to build awesome web applications"/>
         </Head>
         <div className="w-full">
-          <h1 className="title font-comforta">Redux Counter</h1>
+          <h1 className="title">Redux Counter</h1>
           <div className="w-3/4 md:w-1/2 lg:w-1/4 my-8 mx-auto">
             <div className="rounded shadow-lg text-lg p-4">
               <Counter/>

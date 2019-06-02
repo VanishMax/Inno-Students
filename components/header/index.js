@@ -1,16 +1,22 @@
 import React, {useState, useContext, useRef, useEffect} from 'react'
 import {LangContext, AuthContext} from '../../middleware/context'
 
+// Viewport components for the Header
 import Big from './big'
 import Small from './small'
 
+// Component that divides logic and design
 export default props => {
+
+  // State hook to open or close small-viewport menu by clicking on the burger
   const [opened, setOpen] = useState('closed')
   const open = () => setOpen('opened')
   const close = () => setOpen('closed')
 
+  // ClickAwayListener for the dropdown menu by clicking on the profile icon
   const {ref, isComponentVisible, setIsComponentVisible} = useComponentVisible(false)
 
+  // Get data from global context
   const lang = useContext(LangContext)
   const user = useContext(AuthContext)
   const isAuthed = user._id !== undefined
@@ -30,6 +36,7 @@ export default props => {
   )
 }
 
+// ClickAwayListener for React made with hooks
 const useComponentVisible = (initialIsVisible) => {
   const [isComponentVisible, setIsComponentVisible] = useState(initialIsVisible)
   const ref = useRef(null)

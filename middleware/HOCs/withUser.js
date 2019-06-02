@@ -1,9 +1,10 @@
-const withAuthHOC = Page => {
-  const WithAuth = props => <Page {...props} />
+export default Page => {
+  const WithUser = props => <Page {...props} />
 
-  WithAuth.getInitialProps = async context => {
+  WithUser.getInitialProps = async context => {
     const ctx = context.ctx
 
+    // Get user from the server (Used only in the _app page)
     let user = {}
     if(ctx.req && ctx.req.user) {
       user = ctx.req.user
@@ -15,7 +16,5 @@ const withAuthHOC = Page => {
     }
   }
 
-  return WithAuth
+  return WithUser
 }
-
-export default withAuthHOC

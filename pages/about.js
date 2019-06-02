@@ -10,7 +10,7 @@ export default () => (
     <div className="w-full">
       <h1 className="title font-comforta">About MWA</h1>
       <div className="max-w-lg rounded overflow-hidden shadow-lg my-8 mx-auto">
-        <img className="w-full" src="/static/square.png" alt="Sunset in the mountains"/>
+        <img className="w-full" src="/static/images/square.png" alt="Sunset in the mountains"/>
         <div className="px-6 py-6">
           <div className="font-bold text-xl mb-2">Modern Web App</div>
           <p className="text-gray-700 text-base text-justify">

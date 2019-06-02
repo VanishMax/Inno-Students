@@ -52,14 +52,4 @@ module.exports = (app, server) => {
     res.redirect('/')
     server.render(req, res, '/')
   })
-
-  app.post('/user/isAdmin', (req, res) => {
-    let isAdmin = false
-    if(req.user) {
-      if (req.user.role === 'A')  {
-        isAdmin = true
-      }
-    }
-    res.send({admin: isAdmin})
-  })
 }

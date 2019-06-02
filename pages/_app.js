@@ -1,6 +1,6 @@
 import React from 'react'
 
-import '../styles/index.css'
+import '../static/css/index.css'
 import App, { Container } from 'next/app'
 import Head from 'next/head'
 import { Provider } from 'react-redux'
@@ -8,6 +8,7 @@ import withStore from '../redux/withStore'
 import { LangContext, AuthContext } from '../middleware/context'
 import Router from 'next/router'
 
+// HOCs to inject user and language props to the application (from server)
 import withLang from '../middleware/HOCs/withLang'
 import withUser from '../middleware/HOCs/withUser'
 import flowRight from 'lodash.flowright'
@@ -23,6 +24,7 @@ class MyApp extends App {
       user: this.props.user
     }
 
+    // Change global language (URL also)
     this.toggleLang = () => {
       let lang = this.state.lang === 'en' ? 'ru' : 'en'
       document.cookie = `cookieLang=${lang}`
@@ -44,8 +46,8 @@ class MyApp extends App {
         <Head>
           <meta name="theme-color" content="#75a261"/>
           <link rel="alternate" hrefLang="en" href={baseDomain + this.props.path + '?lang=' + this.props.lang }/>
-          <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon"/>
-          <link rel="icon" href="/static/favicon.ico" type="image/x-icon"/>
+          <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon"/>
+          <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon"/>
           <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"/>
           <meta name='keywords' content='MWA, Modern Web App, PWA, Progressive Web App, Next.js, Next, Tailwind, Redux, WebDev'/>
           <meta name='author' content='VanishMax'/>
@@ -68,4 +70,5 @@ class MyApp extends App {
   }
 }
 
+// Merging HOCs
 export default withStore(flowRight([withUser, withLang])(MyApp))

@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from '../../components/Link'
+import Link from '../link'
 import Lang from '../../langs/header'
 
 export default ({lang, isAuthed, myref, isComponentVisible, setIsComponentVisible, changeLang}) => {
@@ -8,7 +8,7 @@ export default ({lang, isAuthed, myref, isComponentVisible, setIsComponentVisibl
     <div className="hidden lg:flex flex-grow items-center justify-between">
       <div className="flex">
         <Link prefetch href="/">
-          <img src="/static/headerMini.png" alt="header logo" className="cursor-pointer"/>
+          <img src="/static/images/headerMini.png" alt="header logo" className="cursor-pointer"/>
         </Link>
       </div>
 
@@ -46,7 +46,7 @@ export default ({lang, isAuthed, myref, isComponentVisible, setIsComponentVisibl
         {isAuthed ?
           <React.Fragment>
               <span>
-                <img onClick={() => setIsComponentVisible(!isComponentVisible)} src="/static/user.png" className="cursor-pointer"/>
+                <img onClick={() => setIsComponentVisible(!isComponentVisible)} src="/static/images/icons/user.png" className="cursor-pointer"/>
               </span>
 
             {isComponentVisible &&

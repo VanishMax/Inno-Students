@@ -1,13 +1,15 @@
 import React, {useContext} from 'react'
-import Link from '../../components/Link'
-import Lang from '../../langs/login'
-import { LangContext } from '../../middleware/context'
 import Head from 'next/head'
-import withAuthError from '../../middleware/HOCs/withAuthError'
+
+import Link from '../../components/link'
+import Lang from '../../langs/login'
 import ErrorLang from '../../langs/authError'
+import withAuthError from '../../middleware/HOCs/withAuthError'
+import { LangContext } from '../../middleware/context'
 
 const Signup = (props) => {
   const lang = useContext(LangContext)
+
   return(
     <div className="w-4/5 md:w-3/5 lg:w-2/5 mx-auto">
       <Head>

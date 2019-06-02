@@ -12,11 +12,11 @@ db.getInstance(p_db => {
 module.exports = (passport) => {
 
   passport.serializeUser((user, done) => {
-    done(null, user)
+    done(null, user._id)
   })
 
   passport.deserializeUser((user, done) => {
-    User.findOne({ _id: user._id }, (err, user) => {
+    User.findOne({_id: user}, {projection: {password: 0}}, (err, user) => {
       done(null, user)
     })
   })

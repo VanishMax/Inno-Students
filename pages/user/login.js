@@ -1,10 +1,11 @@
 import React, {useContext} from 'react'
 import Head from 'next/head'
-import {LangContext} from '../../middleware/context'
-import withAuthError from '../../middleware/HOCs/withAuthError'
-import Link from '../../components/Link'
+
+import Link from '../../components/link'
 import Lang from '../../langs/login'
 import ErrorLang from '../../langs/authError'
+import {LangContext} from '../../middleware/context'
+import withAuthError from '../../middleware/HOCs/withAuthError'
 
 const Login = (props) => {
   const lang = useContext(LangContext)

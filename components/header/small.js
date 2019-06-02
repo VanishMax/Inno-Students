@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from '../../components/Link'
+import Link from '../link'
 import Lang from '../../langs/header'
 
 export default ({lang, isAuthed, opened, open, close, changeLang}) => {
@@ -17,7 +17,7 @@ export default ({lang, isAuthed, opened, open, close, changeLang}) => {
 
       <div className="flex flex-grow justify-center">
         <Link prefetch href="/">
-          <img src="/static/headerMini.png" alt="header logo" className="cursor-pointer" onClick={close}/>
+          <img src="/static/images/headerMini.png" alt="header logo" className="cursor-pointer" onClick={close}/>
         </Link>
       </div>
 
@@ -27,10 +27,10 @@ export default ({lang, isAuthed, opened, open, close, changeLang}) => {
 
       <div>
         <div className={"openMenu justify-start cursor-pointer " + opened} onClick={open}>
-          <img src="/static/menu.png" alt="menu icon"/>
+          <img src="/static/images/icons/menu.png" alt="menu icon"/>
         </div>
         <div className={"closeMenu justify-start cursor-pointer " + opened} onClick={close}>
-          <img src="/static/close.png" alt="close menu icon"/>
+          <img src="/static/images/icons/close.png" alt="close menu icon"/>
         </div>
       </div>
 
@@ -87,27 +87,27 @@ export default ({lang, isAuthed, opened, open, close, changeLang}) => {
         <div className="flex pt-4 justify-center">
           <Link href="https://t.me/InnoStudents">
             <a className="mr-2" target="_blank">
-              <img src="/static/socials/telegram.png"/>
+              <img src="/static/images/socials/telegram.png"/>
             </a>
           </Link>
           <Link href="https://vk.com/InnoStudents">
             <a className="mr-2" target="_blank">
-              <img src="/static/socials/vk.png"/>
+              <img src="/static/images/socials/vk.png"/>
             </a>
           </Link>
           <Link href="https://instagram.com/InnoStudents">
             <a className="mr-2" target="_blank">
-              <img src="/static/socials/instagram.png"/>
+              <img src="/static/images/socials/instagram.png"/>
             </a>
           </Link>
           <Link href="https://facebook.com/InnopolisStudents">
             <a className="mr-2" target="_blank">
-              <img src="/static/socials/facebook.png"/>
+              <img src="/static/images/socials/facebook.png"/>
             </a>
           </Link>
           <Link href="https://www.youtube.com/channel/UCwmOq5S4wwmycTgcxUT0-eQ">
             <a target="_blank">
-              <img src="/static/socials/youtube.png"/>
+              <img src="/static/images/socials/youtube.png"/>
             </a>
           </Link>
         </div>
