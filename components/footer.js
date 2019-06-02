@@ -14,21 +14,21 @@ export default () => {
           </Link>
         </div>
 
-        <div className="flex justify-between text-gray-900 no-underline font-semibold text-base text-sm">
-          <div className="hidden sm:flex">
-            <div className="mr-8 md:mr-12">
-              <Link prefetch href="/about">
-                <a className="hover:text-green-800">{Lang.about[lang]}</a>
+        <div className="flex justify-between">
+          <div className="hidden md:flex">
+            <div className="md:mr-12">
+              <Link href="/about">
+                <a className="header-link">{Lang.about[lang]}</a>
               </Link>
             </div>
-            <div className="mr-8 md:mr-12">
-              <Link prefetch href="/writer">
-                <a className="hover:text-green-800">{Lang.writer[lang]}</a>
+            <div className="md:mr-12">
+              <Link href="/writer">
+                <a className="header-link">{Lang.writer[lang]}</a>
               </Link>
             </div>
             <div>
-              <Link prefetch href="/donate">
-                <a className="hover:text-green-800">{Lang.donate[lang]}</a>
+              <Link href="/donate">
+                <a className="header-link">{Lang.donate[lang]}</a>
               </Link>
             </div>
           </div>

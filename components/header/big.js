@@ -12,36 +12,36 @@ export default ({lang, isAuthed, myref, isComponentVisible, setIsComponentVisibl
         </Link>
       </div>
 
-      <div className="flex justify-between text-gray-900 no-underline font-semibold text-base text-sm">
+      <div className="flex justify-between">
         <div className="mr-12">
-          <Link prefetch href="/">
-            <a className="hover:text-green-800">{Lang.events[lang]}</a>
+          <Link href="/">
+            <a className="header-link">{Lang.events[lang]}</a>
           </Link>
         </div>
         <div className="mr-12">
-          <Link prefetch href="/">
-            <a className="hover:text-green-800">{Lang.clubs[lang]}</a>
+          <Link href="/">
+            <a className="header-link">{Lang.clubs[lang]}</a>
           </Link>
         </div>
         <div className="mr-12">
-          <Link prefetch href="/">
-            <a className="hover:text-green-800">{Lang.people[lang]}</a>
+          <Link href="/">
+            <a className="header-link">{Lang.people[lang]}</a>
           </Link>
         </div>
         <div className="mr-12">
-          <Link prefetch href="/">
-            <a className="hover:text-green-800">{Lang.campuslife[lang]}</a>
+          <Link href="/">
+            <a className="header-link">{Lang.campuslife[lang]}</a>
           </Link>
         </div>
         <div>
-          <Link prefetch href="/">
-            <a className="hover:text-green-800">{Lang.videos[lang]}</a>
+          <Link href="/">
+            <a className="header-link">{Lang.videos[lang]}</a>
           </Link>
         </div>
       </div>
 
       <div className="flex justify-end">
-        <span onClick={changeLang} className="mr-8 text-gray-800 font-bold no-underline hover:text-green-800 cursor-pointer">{Lang.lang[lang]}</span>
+        <span onClick={changeLang} className="mr-8 header-link">{Lang.lang[lang]}</span>
 
         {isAuthed ?
           <React.Fragment>
@@ -63,7 +63,7 @@ export default ({lang, isAuthed, myref, isComponentVisible, setIsComponentVisibl
           </React.Fragment>
           :
           <Link href="/user/login">
-            <a className="text-gray-800 font-bold no-underline hover:text-green-800">{Lang.login[lang]}</a>
+            <a className="header-link">{Lang.login[lang]}</a>
           </Link>
         }
       </div>
