@@ -22,7 +22,7 @@ export default props => {
   const isAuthed = user._id !== undefined
 
   return (
-    <header className="app flex items-center justify-between p-3">
+    <header className="app flex items-center justify-between py-3">
 
       {/* Large viewport (>1024px) */}
       <Big isAuthed={isAuthed} lang={lang} myref={ref} isComponentVisible={isComponentVisible}

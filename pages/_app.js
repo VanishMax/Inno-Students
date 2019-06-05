@@ -56,7 +56,7 @@ class MyApp extends App {
           <AuthContext.Provider value={this.state.user}>
             <div className="wrap">
               <Header changeLang={this.toggleLang}/>
-              <div className="main clearfix">
+              <div className="pb-32 mt-4 clearfix">
                 <Provider store={reduxStore}>
                   <Component {...pageProps} />
                 </Provider>

@@ -10,7 +10,6 @@
 }
 
 html, body, .wrap {min-height: 100vh; width: auto}
-.main {padding-bottom: 8rem;}
 .clearfix:after {content: "."; display: block; height: 0; clear: both; visibility: hidden;}
 .clearfix {display: inline-block;}
 * html .clearfix { height: 1%;}
@@ -73,10 +72,72 @@ hr {
   .app {width: 80% !important;}
 }
 
-
 .title {
   @apply w-full text-center leading-tight m-0 pt-8 text-4xl;
 }
+
+.news-grid {
+  @apply w-full;
+}
+.news-grid-row {
+  @apply flex mb-6;
+}
+.news-card {
+  position: relative;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 1rem;
+  min-height: 400px;
+  max-height: 500px;
+  cursor: pointer;
+}
+.news-card-big {
+  @apply w-full;
+}
+.news-card-small {
+  @apply w-1/2;
+}
+@media (max-width: 768px) {
+  .news-card-small {
+    @apply w-full;
+  }
+}
+.news-card-cover {
+  position: absolute;
+  z-index: 1;
+  top: 0;right: 0;left: 0;bottom: 0;
+  border-radius: 1rem;
+  background-size: cover;
+  background-position: center center;
+}
+.news-card-caption {
+  position: absolute;
+  left: 5%; right: 5%;
+  z-index: 10;
+  @apply w-11/12 mx-auto text-white;
+}
+.news-card-big .news-card-caption {
+  top: 70%;
+}
+.news-card-small .news-card-caption {
+  top: 65%;
+}
+.news-card-big .news-card-caption > .big {
+  @apply text-4xl truncate;
+}
+.news-card-small .news-card-caption > .big {
+  @apply text-2xl;
+}
+.news-card-caption > .small > span {
+  @apply inline-block text-gray-200 text-sm mr-4;
+}
+.news-card-overlay {
+  position: absolute;
+  z-index: 5;
+  top: 0;right: 0;left: 0;bottom: 0;
+  border-radius: 1rem;
+  background: linear-gradient(-180deg, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.50) 100%);
+}
+
 
 .btn-gray-outlined {
   @apply bg-transparent text-gray-800 text-lg font-semibold py-2 my-2 px-4 border border-gray-600 rounded mx-1;
