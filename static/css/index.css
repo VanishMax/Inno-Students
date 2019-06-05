@@ -37,7 +37,7 @@ html, body, .wrap {min-height: 100vh; width: auto}
 }
 #menu.opened {
   opacity: 1;
-  z-index: 1;
+  z-index: 1000;
   transition: 0.15s ease;
 }
 #menu.closed {
@@ -121,8 +121,18 @@ hr {
 .news-card-small .news-card-caption {
   top: 65%;
 }
-.news-card-big .news-card-caption > .big {
-  @apply text-4xl truncate;
+@media (max-width: 768px) {
+  .news-card-big .news-card-caption > .big {
+    @apply text-2xl;
+  }
+  .news-card-big .news-card-caption {
+    top: 65%;
+  }
+}
+@media (min-width: 768px) {
+  .news-card-big .news-card-caption > .big {
+    @apply text-4xl truncate;
+  }
 }
 .news-card-small .news-card-caption > .big {
   @apply text-2xl;

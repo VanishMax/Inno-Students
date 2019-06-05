@@ -93,7 +93,6 @@ export default class Home extends React.Component {
                       <React.Fragment/>
                     }
                   </React.Fragment>
-
                 }
               </React.Fragment>
             ))}
