@@ -13,7 +13,7 @@ export default ({news, big, margin}) => {
             <span key={top}>{top}</span>
           ))}
         </div>
-        <div className="big">{news.title.length > 70 ? news.title.substring(0, 69) + '...' : news.title}</div>
+        <div className="big">{news.title}</div>
       </div>
     </div>
   )
