@@ -15,7 +15,7 @@ const fakeUser = {
   }
 }
 
-export default ({lang, user}) => {
+export default ({lang, user, goToEdit}) => {
 
   const locale = user[lang]
   const fakeLocale = fakeUser[lang]
@@ -35,7 +35,7 @@ export default ({lang, user}) => {
       <div className="text-xl mb-6">
         {user.role === "A" ? Lang.admin[lang] : Lang.author[lang]}
       </div>
-      <div className="border border-gray-900 cursor-pointer rounded shadow px-4 py-2 hover:border-green-700 hover:text-green-700">
+      <div onClick={goToEdit} className="border border-gray-900 cursor-pointer rounded shadow px-4 py-2 hover:border-green-700 hover:text-green-700">
         {Lang.edit[lang]}
       </div>
     </React.Fragment>
