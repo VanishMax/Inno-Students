@@ -27,7 +27,7 @@ module.exports = (passport) => {
       let body = req.body
 
       if(body.username && body.password && body.confirmPassword) {
-        User.findOne({ name: body.username}, (err, user) => {
+        User.findOne({ username: body.username}, (err, user) => {
           if (err) return done(err)
 
           if(user) {
@@ -41,10 +41,19 @@ module.exports = (passport) => {
 
                 let newUser = {
                   _id: seq.value.seq,
-                  name: body.username,
+                  username: body.username,
                   role: 'U',
                   password: bcrypt.hashSync(body.password, bcrypt.genSaltSync(8), null),
-                  signedDate: moment().format('DD-MM-YYYY')
+                  signedDate: moment().format('DD-MM-YYYY'),
+                  website: '',
+                  en: {
+                    name: '',
+                    surname: ''
+                  },
+                  ru: {
+                    name: '',
+                    surname: ''
+                  }
                 }
 
                 User.insertOne(newUser)
@@ -64,7 +73,7 @@ module.exports = (passport) => {
     }, (req, username, password, done) => {
     let body = req.body
 
-    User.findOne({ name :  body.username }, (err, user) => {
+    User.findOne({ username :  body.username }, (err, user) => {
       if (err) return done(err)
 
       if (user) {
