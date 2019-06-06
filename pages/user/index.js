@@ -8,6 +8,8 @@ import AdminNav from '../../components/profile/adminNav'
 import MainNav from '../../components/profile/mainNav'
 import User from '../../components/profile/user'
 
+const fakeUserImg = '/static/images/fakeUser.png'
+
 const Profile = ({user}) => {
   const lang = useContext(LangContext)
   return (
@@ -17,7 +19,7 @@ const Profile = ({user}) => {
       </Head>
       <div className="app mt-10">
 
-        <MainNav lang={lang} />
+        <MainNav lang={lang} img={user.img || fakeUserImg} />
 
         <div className="flex flex-col items-center justify-center mt-16">
           <User lang={lang} user={user} />

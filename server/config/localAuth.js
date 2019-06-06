@@ -45,6 +45,7 @@ module.exports = (passport) => {
                   role: 'U',
                   password: bcrypt.hashSync(body.password, bcrypt.genSaltSync(8), null),
                   signedDate: moment().format('DD-MM-YYYY'),
+                  img: '',
                   website: '',
                   en: {
                     name: '',

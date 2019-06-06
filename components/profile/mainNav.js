@@ -2,7 +2,7 @@ import React from 'react'
 import Link from '../link'
 import Lang from '../../langs/profile'
 
-export default ({lang, imgUrl}) => {
+export default ({lang, img}) => {
   return (
     <React.Fragment>
       <div className="flex justify-around items-end">
@@ -18,7 +18,7 @@ export default ({lang, imgUrl}) => {
         </div>
         <div className="flex justify-center w-1/5">
           <Link href="/">
-            <img src="/static/images/square.png" className="avatar user cursor-pointer shadow w-24 h-24" />
+            <img src={img} className="avatar user cursor-pointer shadow w-24 h-24" />
           </Link>
         </div>
         <div className="flex justify-center w-1/5">
