@@ -2,27 +2,18 @@ import React from 'react'
 import NewsCard from './card'
 
 const NewsRow = ({data}) => {
-  if(data.length === 1) {
-    const news = data[0]
-    return(
-      <div className="news-grid-row md:flex-row flex-col">
-        <div className="news-card news-card-big">
-          <NewsCard news={news} />
-        </div>
-      </div>
-    )
-  } else if(data.length === 2) {
-    return(
-      <div className="news-grid-row md:flex-row flex-col">
-        <div className="news-card news-card-small md:mr-6 md:mb-0 mb-6">
-          <NewsCard news={data[0]} />
-        </div>
-        <div className="news-card news-card-small">
+  return (
+    <div className="news-grid-row md:flex-row flex-col">
+      {data.length === 1 ?
+        <NewsCard news={data[0]} big />
+      :
+        <React.Fragment>
+          <NewsCard news={data[0]} margin />
           <NewsCard news={data[1]} />
-        </div>
-      </div>
-    )
-  }
+        </React.Fragment>
+      }
+    </div>
+  )
 }
 
 export default ({data}) => {
@@ -37,10 +28,11 @@ export default ({data}) => {
     }
     i++;
   }
+
   return (
     <div className="news-grid">
       {allNews.map((row, i) => (
-        <div key="i">
+        <div key={i}>
           {row}
         </div>
       ))}

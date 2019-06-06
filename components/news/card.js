@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default ({news}) => {
+export default ({news, big, margin}) => {
 
   return (
-    <React.Fragment>
+    <div className={'news-card news-card-' + (big ? 'big' : 'small') + (margin ? ' md:mr-6 md:mb-0 mb-6' : '')}>
       <div className="news-card-cover"
            style={{backgroundImage: `url("${news.img}")`}}/>
       <div className="news-card-overlay" />
@@ -15,6 +15,6 @@ export default ({news}) => {
         </div>
         <div className="big">{news.title.length > 70 ? news.title.substring(0, 69) + '...' : news.title}</div>
       </div>
-    </React.Fragment>
+    </div>
   )
 }
