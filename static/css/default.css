@@ -1,0 +1,29 @@
+/*
+---DEFAULT BEHAVIOR---
+*/
+
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.app {
+    margin: auto;
+    width: 96% !important;
+}
+@media (min-width: 1024px) {
+    .app {width: 88% !important;}
+}
+@media (min-width: 1200px) {
+    .app {width: 80% !important;}
+}
+
+.title {
+    @apply w-full text-center leading-tight m-0 pt-8 text-4xl;
+}
+
+.avatar {
+    display: inline-block;
+    border-radius: 50%;
+}

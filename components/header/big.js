@@ -50,7 +50,7 @@ export default ({lang, isAuthed, myref, isComponentVisible, setIsComponentVisibl
               </span>
 
             {isComponentVisible &&
-            <div ref={myref} className="absolute w-32 mt-8 bg-white shadow rounded py-3 px-6">
+            <div ref={myref} className="absolute w-32 mt-8 bg-white shadow rounded py-3 px-6 z-10">
               <Link href="/user">
                 <a onClick={() => setIsComponentVisible(false)} className="text-gray-800 font-semibold no-underline hover:text-green-800 leading-loose">{Lang.profile[lang]}</a>
               </Link>

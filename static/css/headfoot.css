@@ -1,0 +1,41 @@
+/*
+---HEADER AND FOOTER---
+*/
+
+.footer {
+    position: relative;
+    margin-top: -7rem;
+    height: 7rem;
+    clear:both;
+    box-shadow: 0 0 15px 0 rgba(0,0,0,.5);
+}
+
+#menu {
+    position: fixed;
+    height: calc(100vh - 4rem);
+    width: 100vw;
+    overflow-y: hidden;
+    top: 4rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: RGBa(255,255,255,1);
+}
+#menu.opened {
+    opacity: 1;
+    z-index: 1000;
+    transition: 0.15s ease;
+}
+#menu.closed {
+    opacity: 0;
+    z-index: -1;
+}
+.openMenu.opened {display: none;}  .openMenu.closed {display: flex;}
+.closeMenu.opened {display: flex;}  .closeMenu.closed {display: none;}
+
+.header-link {
+    @apply text-gray-900 no-underline text-base tracking-wide cursor-pointer;
+}
+.header-link:hover {
+    @apply text-green-800 font-black;
+}
