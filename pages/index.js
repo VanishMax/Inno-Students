@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import Counter from '../components/counter'
+import NewsGrid from '../components/news/grid'
 
 const data = [
   {
@@ -44,22 +44,6 @@ const data = [
 export default class Home extends React.Component {
   render() {
 
-    const neew = i => (
-      <React.Fragment>
-        <div className="news-card-cover"
-             style={{backgroundImage: `url("${data[i].img}")`}}/>
-        <div className="news-card-overlay" />
-        <div className="news-card-caption">
-          <div className="small">
-            {data[i].top.map(top => (
-              <span key={top}>{top}</span>
-            ))}
-          </div>
-          <div className="big">{data[i].title.length > 70 ? data[i].title.substring(0, 69) + '...' : data[i].title}</div>
-        </div>
-      </React.Fragment>
-    )
-
     return (
       <div>
         <Head>
@@ -68,35 +52,7 @@ export default class Home extends React.Component {
         </Head>
 
         <div className="app flex justify-between">
-          <div className="news-grid">
-
-            {data.map((news, i) => (
-              <React.Fragment>
-                {i % 3 === 0 ?
-                  <div key={i} className="news-grid-row md:flex-row flex-col">
-                    <div className="news-card news-card-big">
-                      {neew(i)}
-                    </div>
-                  </div>
-                :
-                  <React.Fragment>
-                    {i % 3 === 1 ?
-                      <div key={i} className="news-grid-row md:flex-row flex-col">
-                        <div className="news-card news-card-small md:mr-6 md:mb-0 mb-6">
-                          {neew(i)}
-                        </div>
-                        <div className="news-card news-card-small">
-                          {neew(i+1)}
-                        </div>
-                      </div>
-                    :
-                      <React.Fragment/>
-                    }
-                  </React.Fragment>
-                }
-              </React.Fragment>
-            ))}
-          </div>
+          <NewsGrid data={data} />
         </div>
       </div>
     )
