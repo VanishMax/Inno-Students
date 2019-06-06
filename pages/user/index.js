@@ -1,34 +1,47 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Head from 'next/head'
 import isAuthed from '../../middleware/HOCs/isAuthed'
+import {LangContext} from '../../middleware/context'
 import Link from '../../components/link'
+import Lang from '../../langs/profile'
 
 const Profile = ({user}) => {
-
+  const lang = useContext(LangContext)
   return (
     <React.Fragment>
       <Head>
-        <title>Profile | InnoStudents</title>
+        <title>{Lang.profile[lang]} | InnoStudents</title>
       </Head>
       <div className="app mt-10">
 
         <div className="flex justify-around items-end">
-          <Link href="/">
-            <a className="hover:text-green-700">Мои посты</a>
-          </Link>
-          <Link href="/">
-            <a className="hover:text-green-700">Новый пост</a>
-          </Link>
-          <Link href="/">
-            <img src="/static/images/square.png" className="avatar user cursor-pointer shadow w-24 h-24" />
-          </Link>
-          <Link href="/">
-            <a className="hover:text-green-700">Черновики</a>
-          </Link>
-          <Link href="/user/logout">
-            <a className="hover:text-green-700">Выйти</a>
-          </Link>
+          <div className="flex justify-center w-1/5">
+            <Link href="/">
+              <a className="hover:text-green-700">{Lang.myposts[lang]}</a>
+            </Link>
+          </div>
+          <div className="flex justify-center w-1/5">
+            <Link href="/">
+              <a className="hover:text-green-700">{Lang.newpost[lang]}</a>
+            </Link>
+          </div>
+          <div className="flex justify-center w-1/5">
+            <Link href="/">
+              <img src="/static/images/square.png" className="avatar user cursor-pointer shadow w-24 h-24" />
+            </Link>
+          </div>
+          <div className="flex justify-center w-1/5">
+            <Link href="/">
+              <a className="hover:text-green-700">{Lang.drafts[lang]}</a>
+            </Link>
+          </div>
+          <div className="flex justify-center w-1/5">
+            <Link href="/user/logout">
+              <a className="hover:text-green-700">{Lang.logout[lang]}</a>
+            </Link>
+          </div>
         </div>
+
         <hr />
 
         <div className="flex flex-col items-center justify-center mt-16">
@@ -41,29 +54,37 @@ const Profile = ({user}) => {
             instagram.com/vanishmax
           </a>
           <div className="text-xl mb-6">
-            Администратор
+            {user.role === "A" ? Lang.admin[lang] : Lang.author[lang]}
           </div>
           <div className="border border-gray-900 cursor-pointer rounded shadow px-4 py-2 hover:border-green-700 hover:text-green-700">
-            Редактировать
+            {Lang.edit[lang]}
           </div>
         </div>
 
         {user.role === "A" &&
           <React.Fragment>
             <hr className="mt-24" />
-            <div className="flex justify-around items-start">
-              <Link href="/">
-                <a className="hover:text-green-700">Все черновики</a>
-              </Link>
-              <Link href="/">
-                <a className="hover:text-green-700">Пользователи</a>
-              </Link>
-              <Link href="/">
-                <a className="hover:text-green-700">Сообщения</a>
-              </Link>
-              <Link href="/">
-                <a className="hover:text-green-700">Статистика</a>
-              </Link>
+            <div className="flex justify-around items-end">
+              <div className="flex justify-center w-1/5">
+                <Link href="/">
+                  <a className="hover:text-green-700">{Lang.alldrafts[lang]}</a>
+                </Link>
+              </div>
+              <div className="flex justify-center w-1/5">
+                <Link href="/">
+                  <a className="hover:text-green-700">{Lang.users[lang]}</a>
+                </Link>
+              </div>
+              <div className="flex justify-center w-1/5">
+                <Link href="/">
+                  <a className="hover:text-green-700">{Lang.messages[lang]}</a>
+                </Link>
+              </div>
+              <div className="flex justify-center w-1/5">
+                <Link href="/">
+                  <a className="hover:text-green-700">{Lang.stats[lang]}</a>
+                </Link>
+              </div>
             </div>
           </React.Fragment>
         }
