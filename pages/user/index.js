@@ -10,7 +10,7 @@ import MainNav from '../../components/profile/mainNav'
 import User from '../../components/profile/user'
 import Edit from '../../components/profile/edit'
 
-const fakeUserImg = '/static/images/fakeUser.png'
+const fakeUserImg = '/static/images/fakeUser.jpg'
 
 const Profile = ({user}) => {
   const lang = useContext(LangContext)
