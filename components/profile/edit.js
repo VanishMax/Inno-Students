@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useRef} from 'react'
 import 'isomorphic-unfetch'
 import Form from './form'
 
@@ -11,11 +11,40 @@ export default ({lang, user, goFromEdit}) => {
     enSurname: user.en.surname || '',
     ruName: user.ru.name || '',
     ruSurname: user.ru.surname || '',
-    img: user.img || ''
+    img: user.img || '',
+    src: ''
   })
+
+  const ref = useRef(null)
 
   const changeVal = e => {
     changeForm({...form, [e.target.name] : e.target.value})
+  }
+
+  const changeImage = async e => {
+    if(window.FileReader){
+      let file = e.target.files[0], reader = new FileReader()
+
+      reader.onload = r => {
+        changeForm({...form, src: r.target.result})
+      }
+      await reader.readAsDataURL(file)
+
+      let ext = file.name.split('.').pop().toLowerCase();
+      let filename = `avatars/${user.username}.${ext}`
+      changeForm({...form, img: filename})
+
+      ref.current.submit()
+
+      await fetch('/user/edit/img', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({_id: user._id, img: filename})
+      })
+    }
+    else {
+      alert(`Soryy, your browser doesn't support the preview`)
+    }
   }
 
   const submit = async e => {
@@ -33,7 +62,7 @@ export default ({lang, user, goFromEdit}) => {
 
   return (
     <React.Fragment>
-      <Form form={form} lang={lang} change={changeVal} submit={submit} />
+      <Form form={form} lang={lang} change={changeVal} submit={submit} changeImage={changeImage} refToForm={ref} />
     </React.Fragment>
   )
 }

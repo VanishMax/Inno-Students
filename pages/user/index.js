@@ -22,6 +22,8 @@ const Profile = ({user}) => {
     changeEdit(false)
   }
 
+  const bucket = 'http://inno-students.s3.amazonaws.com/'
+
   return (
     <React.Fragment>
       <Head>
@@ -29,7 +31,7 @@ const Profile = ({user}) => {
       </Head>
       <div className="app mt-10">
 
-        <MainNav lang={lang} img={user.img || fakeUserImg} goFromEdit={goFromEdit} />
+        <MainNav lang={lang} img={user.img !== '' ? bucket + user.img : fakeUserImg} goFromEdit={goFromEdit} />
 
         <div className="flex flex-col items-center justify-center mt-16">
           {isEdit ?

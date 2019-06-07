@@ -5,8 +5,8 @@ import Lang from '../../langs/profile'
 export default ({lang}) => {
   return (
     <React.Fragment>
-      <hr className="mt-24" />
-      <div className="flex justify-around items-end">
+      <hr className="mt-16" />
+      <div className="flex justify-around items-end mb-24">
         <div className="flex justify-center w-1/5">
           <Link href="/">
             <a className="hover:text-green-700">{Lang.alldrafts[lang]}</a>
