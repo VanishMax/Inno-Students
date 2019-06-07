@@ -2,7 +2,7 @@ import React from 'react'
 import Link from '../link'
 import Lang from '../../langs/profile'
 
-export default ({lang, img}) => {
+export default ({lang, img, goFromEdit}) => {
   return (
     <React.Fragment>
       <div className="flex justify-around items-end">
@@ -17,9 +17,7 @@ export default ({lang, img}) => {
           </Link>
         </div>
         <div className="flex justify-center w-1/5">
-          <Link href="/">
-            <img src={img} className="avatar user cursor-pointer shadow w-24 h-24" />
-          </Link>
+          <img src={img} onClick={goFromEdit} className="avatar user cursor-pointer shadow w-24 h-24" />
         </div>
         <div className="flex justify-center w-1/5">
           <Link href="/">

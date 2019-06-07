@@ -1,27 +1,39 @@
-import React from 'react'
-import Lang from '../../langs/profile'
+import React, {useState} from 'react'
+import 'isomorphic-unfetch'
+import Form from './form'
 
-const fakeUser = {
-  username: 'petro',
-  website: 'example.com',
-  img: '/static/images/fakeUser.png',
-  en: {
-    name: 'Kalivan',
-    surname: 'Ivanov'
-  },
-  ru: {
-    name: 'Калыван',
-    surname: 'Иванов'
+export default ({lang, user, goFromEdit}) => {
+
+  const [form, changeForm] = useState({
+    username: user.username || '',
+    website: user.website || '',
+    enName: user.en.name || '',
+    enSurname: user.en.surname || '',
+    ruName: user.ru.name || '',
+    ruSurname: user.ru.surname || '',
+    img: user.img || ''
+  })
+
+  const changeVal = e => {
+    changeForm({...form, [e.target.name] : e.target.value})
   }
-}
 
-export default ({lang, user}) => {
+  const submit = async e => {
+    e.preventDefault()
+    await fetch('/user/edit', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({...form, _id: user._id})
+    })
+      .then(res => {
+        return res.json()
+      })
+    goFromEdit()
+  }
 
   return (
     <React.Fragment>
-      <div className="text-xl text-semibold mb-4 tracking-wider">
-        Edit
-      </div>
+      <Form form={form} lang={lang} change={changeVal} submit={submit} />
     </React.Fragment>
   )
 }

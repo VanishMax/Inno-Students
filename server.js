@@ -20,6 +20,7 @@ server.prepare().then(() => {
   const app = express()
 
   app.use(bodyParser.urlencoded({ extended: false }))
+  app.use(bodyParser.json())
   app.use(
     cookieSession({
       maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -32,6 +33,7 @@ server.prepare().then(() => {
 
   require('./server/routes/static')(app)
   require('./server/routes/auth')(app, server)
+  require('./server/routes/user')(app)
 
   app.get('*', (req, res) => {
     return handle(req, res)

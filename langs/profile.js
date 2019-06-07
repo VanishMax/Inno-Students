@@ -46,6 +46,10 @@ const profile = {
   stats: {
     en: 'Statistics',
     ru: 'Статистика'
+  },
+  save: {
+    en: 'Save',
+    ru: 'Сохранить'
   }
 }
 

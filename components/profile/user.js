@@ -23,7 +23,9 @@ export default ({lang, user, goToEdit}) => {
   return (
     <React.Fragment>
       <div className="text-xl text-semibold mb-4 tracking-wider">
-        {locale.name || fakeLocale.name} @{user.username || fakeUser.username} {locale.surname || fakeLocale.surname}
+        <span className="inline-block mr-4">{locale.name || fakeLocale.name}</span>
+        <span className="inline-block mr-4">@{user.username || fakeUser.username}</span>
+        <span className="inline-block">{locale.surname || fakeLocale.surname}</span>
       </div>
       <a
         href={'//' + (user.website || fakeUser.website)}
