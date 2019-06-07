@@ -54,8 +54,10 @@ class MyApp extends App {
           <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon"/>
           <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon"/>
           <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"/>
-          <meta name='keywords' content='MWA, Modern Web App, PWA, Progressive Web App, Next.js, Next, Tailwind, Redux, WebDev'/>
-          <meta name='author' content='VanishMax'/>
+          <meta name="keywords" content="InnoStudents, Media, Media club, club, Innopolis University, university"/>
+          <meta name="copyright" content="Inno Media Club"/>
+          <meta name="og:image" content="/static/images/square.png"/>
+          <meta name="og:type" content="website"/>
         </Head>
         <LangContext.Provider value={this.state.lang}>
           <AuthContext.Provider value={this.state.user}>

@@ -48,7 +48,7 @@ export default class Home extends React.Component {
       <div>
         <Head>
           <title>Media Club</title>
-          <meta name="description" content="MWA is a progressive solution to build awesome web applications"/>
+          <meta name="description" content="InnoStudents is an Innopolis University's media club that provides news about students life"/>
         </Head>
 
         <div className="app flex justify-between">
