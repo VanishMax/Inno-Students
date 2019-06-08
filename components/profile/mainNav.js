@@ -6,7 +6,7 @@ export default ({lang, img, goFromEdit}) => {
   return (
     <React.Fragment>
       <div className="flex justify-around items-end">
-        <div className="flex justify-center w-1/5">
+        <div className="flex justify-center w-1/3 md:w-1/5">
           <Link href="/">
             <a className="hover:text-green-700">{Lang.myposts[lang]}</a>
           </Link>
@@ -16,10 +16,10 @@ export default ({lang, img, goFromEdit}) => {
             <a className="hover:text-green-700">{Lang.newpost[lang]}</a>
           </Link>
         </div>
-        <div className="flex justify-center w-1/5">
+        <div className="flex justify-center w-1/3 md:w-1/5">
           <img src={img} onClick={goFromEdit} className="avatar user cursor-pointer shadow w-24 h-24" />
         </div>
-        <div className="flex justify-center w-1/5">
+        <div className="flex justify-center w-1/3 md:w-1/5">
           <Link href="/">
             <a className="hover:text-green-700">{Lang.drafts[lang]}</a>
           </Link>
@@ -32,13 +32,13 @@ export default ({lang, img, goFromEdit}) => {
       <hr />
 
       <div className="flex justify-around items-end md:hidden">
-        <div className="flex justify-center w-1/5">
+        <div className="flex justify-center w-1/3">
           <Link href="/">
             <a className="hover:text-green-700">{Lang.newpost[lang]}</a>
           </Link>
         </div>
-        <div className="flex justify-center w-1/5"/>
-        <div className="flex justify-center w-1/5">
+        <div className="flex justify-center w-1/3"/>
+        <div className="flex justify-center w-1/3">
           <a href="/user/logout" className="hover:text-green-700">{Lang.logout[lang]}</a>
         </div>
       </div>

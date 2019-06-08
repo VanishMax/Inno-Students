@@ -23,10 +23,16 @@ export default ({lang, user, goToEdit}) => {
   return (
     <React.Fragment>
       <div className="text-xl text-semibold mb-4 tracking-wider">
-        <span className="inline-block mr-4">{locale.name || fakeLocale.name}</span>
-        <span className="inline-block mr-4">@{user.username || fakeUser.username}</span>
-        <span className="inline-block">{locale.surname || fakeLocale.surname}</span>
+        <div className="md:hidden mb-4 text-center">
+          <span>@{user.username || fakeUser.username}</span>
+        </div>
+        <div>
+          <span className="inline-block mr-4">{locale.name || fakeLocale.name}</span>
+          <span className="hidden md:inline-block mr-4">@{user.username || fakeUser.username}</span>
+          <span className="inline-block">{locale.surname || fakeLocale.surname}</span>
+        </div>
       </div>
+
       <a
         href={'//' + (user.website || fakeUser.website)}
         className="text-lg italic hover:text-green-700 mb-4"

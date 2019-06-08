@@ -31,7 +31,7 @@ export default ({lang, form, refToForm, change, submit, changeImage}) => {
         <div className="flex flex-row justify-around">
           <div className="flex w-full items-center justify-center bg-grey-lighter">
 
-            <label className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-green-700">
+            <label className="w-1/2 md:w-1/3 flex flex-col items-center px-2 py-3 md:px-4 md:py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-green-700">
               {form.src !== '' ?
                 <React.Fragment>
                   <img src={form.src} className="avatar" />

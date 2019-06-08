@@ -1,6 +1,6 @@
 {
   "name": "media_club",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "Media Club website rewritten for the third time. Now the next.js and tailwind css are used",
   "main": "pages/_app.js",
   "scripts": {
