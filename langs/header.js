@@ -44,7 +44,7 @@ const header = {
     ru: 'Про нас'
   },
   writer: {
-    en: 'Become a writer',
+    en: 'Become an author',
     ru: 'Стать автором'
   },
   donate: {

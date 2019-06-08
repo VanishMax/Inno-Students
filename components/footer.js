@@ -22,7 +22,7 @@ export default () => {
               </Link>
             </div>
             <div className="md:mr-12">
-              <Link href="/writer">
+              <Link href="/author">
                 <a className="header-link">{Lang.writer[lang]}</a>
               </Link>
             </div>
