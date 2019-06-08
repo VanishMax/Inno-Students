@@ -2,6 +2,7 @@ import React, {useContext} from 'react'
 import Lang from '../langs/header'
 import { LangContext } from '../middleware/context'
 import Link from './link'
+import Socials from './socials'
 
 export default () => {
   const lang = useContext(LangContext)
@@ -36,31 +37,7 @@ export default () => {
 
 
         <div className="flex justify-end">
-          <Link href="https://t.me/InnoStudents">
-            <a className="mr-2" target="_blank">
-              <img src="/static/images/socials/telegram.png"/>
-            </a>
-          </Link>
-          <Link href="https://vk.com/InnoStudents">
-            <a className="mr-2" target="_blank">
-              <img src="/static/images/socials/vk.png"/>
-            </a>
-          </Link>
-          <Link href="https://instagram.com/InnoStudents">
-            <a className="mr-2" target="_blank">
-              <img src="/static/images/socials/instagram.png"/>
-            </a>
-          </Link>
-          <Link href="https://facebook.com/InnopolisStudents">
-            <a className="mr-2" target="_blank">
-              <img src="/static/images/socials/facebook.png"/>
-            </a>
-          </Link>
-          <Link href="https://www.youtube.com/channel/UCwmOq5S4wwmycTgcxUT0-eQ">
-            <a target="_blank">
-              <img src="/static/images/socials/youtube.png"/>
-            </a>
-          </Link>
+          <Socials size={6} />
         </div>
       </div>
     </footer>

@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from '../link'
 import Lang from '../../langs/header'
+import Socials from '../socials'
 
 export default ({lang, isAuthed, opened, open, close, changeLang}) => {
 
@@ -83,31 +84,7 @@ export default ({lang, isAuthed, opened, open, close, changeLang}) => {
 
         <hr/>
         <div className="flex pt-4 justify-center">
-          <Link href="https://t.me/InnoStudents">
-            <a className="mr-2" target="_blank">
-              <img src="/static/images/socials/telegram.png"/>
-            </a>
-          </Link>
-          <Link href="https://vk.com/InnoStudents">
-            <a className="mr-2" target="_blank">
-              <img src="/static/images/socials/vk.png"/>
-            </a>
-          </Link>
-          <Link href="https://instagram.com/InnoStudents">
-            <a className="mr-2" target="_blank">
-              <img src="/static/images/socials/instagram.png"/>
-            </a>
-          </Link>
-          <Link href="https://facebook.com/InnopolisStudents">
-            <a className="mr-2" target="_blank">
-              <img src="/static/images/socials/facebook.png"/>
-            </a>
-          </Link>
-          <Link href="https://www.youtube.com/channel/UCwmOq5S4wwmycTgcxUT0-eQ">
-            <a target="_blank">
-              <img src="/static/images/socials/youtube.png"/>
-            </a>
-          </Link>
+          <Socials size={6} />
         </div>
       </div>
 
