@@ -50,14 +50,12 @@ class MyApp extends App {
       <Container>
         <Head>
           <meta name="theme-color" content="#75a261"/>
-          <link rel="alternate" hrefLang="en" href={baseDomain + this.props.path + '?lang=' + this.props.lang }/>
+          <link rel="alternate" hrefLang={this.props.lang !== 'ru' ? 'ru': 'en'}
+                href={baseDomain + this.props.path + (this.props.lang !== 'ru' ? '?lang=ru' : '') }/>
           <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon"/>
           <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon"/>
           <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"/>
-          <meta name="keywords" content="InnoStudents, Media, Media club, club, Innopolis University, university"/>
           <meta name="copyright" content="Inno Media Club"/>
-          <meta name="og:image" content="/static/images/square.png"/>
-          <meta name="og:type" content="website"/>
         </Head>
         <LangContext.Provider value={this.state.lang}>
           <AuthContext.Provider value={this.state.user}>

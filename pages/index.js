@@ -1,5 +1,7 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Head from 'next/head'
+import {LangContext} from '../middleware/context'
+import Lang from '../langs/home'
 import NewsGrid from '../components/news/grid'
 
 const data = [
@@ -41,20 +43,21 @@ const data = [
   }
 ]
 
-export default class Home extends React.Component {
-  render() {
+export default () => {
+  const lang = useContext(LangContext)
+  return (
+    <div>
+      <Head>
+        <title>{Lang.metatitle[lang]} | InnoStudents</title>
+        <meta name="description" content={Lang.description[lang]}/>
+        <meta name="keywords" content={Lang.keywords[lang]}/>
+        <meta name="og:image" content="static/images/square.png"/>
+        <meta name="og:type" content="website"/>
+      </Head>
 
-    return (
-      <div>
-        <Head>
-          <title>Media Club</title>
-          <meta name="description" content="InnoStudents is an Innopolis University's media club that provides news about students life"/>
-        </Head>
-
-        <div className="app flex justify-between">
-          <NewsGrid data={data} />
-        </div>
+      <div className="app flex justify-between">
+        <NewsGrid data={data} />
       </div>
-    )
-  }
+    </div>
+  )
 }
