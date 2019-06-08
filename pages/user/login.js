@@ -16,7 +16,7 @@ const Login = (props) => {
         <title>{Lang.headLogTitle[lang]} | InnoStudents</title>
         <meta name="description" content={Lang.headLogDescr[lang]}/>
       </Head>
-      <h1 className="title italic">{Lang.titleLog[lang]}</h1>
+      <h1 className="title">{Lang.titleLog[lang]}</h1>
       <div className="w-full mt-8 p-4 rounded shadow-lg">
 
         <h3 className="mb-4 text-center text-lg text-gray-800">{Lang.subtitle[lang]}</h3>
@@ -62,7 +62,7 @@ const Login = (props) => {
       <div className="mt-4 text-center text-lg text-gray-800">
         <h3 className="">{Lang.donthave[lang]}</h3>
         <Link href="/user/signup">
-          <a className="hover:text-green-600 italic">{Lang.titleSign[lang]}</a>
+          <a className="hover:text-green-600 italic underline">{Lang.titleSign[lang]}</a>
         </Link>
       </div>
     </div>

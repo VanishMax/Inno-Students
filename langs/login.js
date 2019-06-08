@@ -1,7 +1,7 @@
 const login = {
   headSignTitle: {
     en: 'Sign Up Page',
-    ru: 'Страница регистрации'
+    ru: 'Регистрация'
   },
   headSignDescr: {
     en: 'Create a profile to get more features as an authorized user',
@@ -9,7 +9,7 @@ const login = {
   },
   headLogTitle: {
     en: 'Log In Page',
-    ru: 'Страница авторизации'
+    ru: 'Авторизация'
   },
   headLogDescr: {
     en: 'Log In to get more features as an authorized user',
@@ -29,15 +29,15 @@ const login = {
   },
   subtitle: {
     en: 'Please, provide your info',
-    ru: 'Пожалуйста, заполните форму'
+    ru: 'Пожалуйста, введите данные'
   },
   username: {
     en: 'Username',
-    ru: 'Имя пользователя'
+    ru: 'Никнейм'
   },
   placeholder: {
     en: 'Nickname12',
-    ru: 'Васёк'
+    ru: 'Nickname12'
   },
   password: {
     en: 'Password',
@@ -45,7 +45,7 @@ const login = {
   },
   confirm: {
     en: 'Confirm Password',
-    ru: 'Подтвердите пароль',
+    ru: 'Подтверждение',
   },
   donthave: {
     en: 'Don\'t have an account?',
