@@ -11,7 +11,7 @@ export default ({lang, img, goFromEdit}) => {
             <a className="hover:text-green-700">{Lang.myposts[lang]}</a>
           </Link>
         </div>
-        <div className="flex justify-center w-1/5">
+        <div className="hidden md:flex md:justify-center md:w-1/5">
           <Link href="/">
             <a className="hover:text-green-700">{Lang.newpost[lang]}</a>
           </Link>
@@ -24,12 +24,25 @@ export default ({lang, img, goFromEdit}) => {
             <a className="hover:text-green-700">{Lang.drafts[lang]}</a>
           </Link>
         </div>
-        <div className="flex justify-center w-1/5">
+        <div className="hidden md:flex md:justify-center md:w-1/5">
           <a href="/user/logout" className="hover:text-green-700">{Lang.logout[lang]}</a>
         </div>
       </div>
 
       <hr />
+
+      <div className="flex justify-around items-end md:hidden">
+        <div className="flex justify-center w-1/5">
+          <Link href="/">
+            <a className="hover:text-green-700">{Lang.newpost[lang]}</a>
+          </Link>
+        </div>
+        <div className="flex justify-center w-1/5"/>
+        <div className="flex justify-center w-1/5">
+          <a href="/user/logout" className="hover:text-green-700">{Lang.logout[lang]}</a>
+        </div>
+      </div>
+
     </React.Fragment>
   )
 }

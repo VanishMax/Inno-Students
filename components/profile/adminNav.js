@@ -5,24 +5,39 @@ import Lang from '../../langs/profile'
 export default ({lang}) => {
   return (
     <React.Fragment>
-      <hr className="mt-16" />
-      <div className="flex justify-around items-end mb-24">
-        <div className="flex justify-center w-1/5">
-          <Link href="/">
-            <a className="hover:text-green-700">{Lang.alldrafts[lang]}</a>
-          </Link>
-        </div>
-        <div className="flex justify-center w-1/5">
+
+      <div className="mt-16 md:mt-0 flex justify-around items-end md:hidden">
+        <div className="flex justify-center w-1/4">
           <Link href="/">
             <a className="hover:text-green-700">{Lang.users[lang]}</a>
           </Link>
         </div>
-        <div className="flex justify-center w-1/5">
+        <div className="flex justify-center w-1/4">
+          <Link href="/">
+            <a className="hover:text-green-700">{Lang.stats[lang]}</a>
+          </Link>
+        </div>
+      </div>
+
+      <hr className="md:mt-16" />
+
+      <div className="flex justify-around items-start mb-24">
+        <div className="flex justify-center w-1/4">
+          <Link href="/">
+            <a className="hover:text-green-700">{Lang.alldrafts[lang]}</a>
+          </Link>
+        </div>
+        <div className="hidden md:flex md:justify-center md:w-1/4">
+          <Link href="/">
+            <a className="hover:text-green-700">{Lang.users[lang]}</a>
+          </Link>
+        </div>
+        <div className="flex justify-center w-1/4">
           <Link href="/">
             <a className="hover:text-green-700">{Lang.messages[lang]}</a>
           </Link>
         </div>
-        <div className="flex justify-center w-1/5">
+        <div className="hidden md:flex md:justify-center md:w-1/4">
           <Link href="/">
             <a className="hover:text-green-700">{Lang.stats[lang]}</a>
           </Link>
