@@ -61,9 +61,7 @@ export default ({lang, isAuthed, opened, open, close, changeLang}) => {
               <Link href="/user">
                 <a className="mb-2" onClick={close}>{Lang.profile[lang]}</a>
               </Link>
-              <Link href="/user/logout">
-                <a className="mb-2" onClick={close}>{Lang.logout[lang]}</a>
-              </Link>
+              <a className="mb-2" onClick={close} href="/user/logout">{Lang.logout[lang]}</a>
             </React.Fragment>
 
             :

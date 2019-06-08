@@ -55,9 +55,7 @@ export default ({lang, isAuthed, myref, isComponentVisible, setIsComponentVisibl
                 <a onClick={() => setIsComponentVisible(false)} className="text-gray-800 font-semibold no-underline hover:text-green-800 leading-loose">{Lang.profile[lang]}</a>
               </Link>
               <br/>
-              <Link href="/user/logout">
-                <a onClick={() => setIsComponentVisible(false)} className="text-gray-800 font-semibold no-underline hover:text-green-800 leading-loose">{Lang.logout[lang]}</a>
-              </Link>
+              <a onClick={() => setIsComponentVisible(false)} href="/user/logout" className="text-gray-800 font-semibold no-underline hover:text-green-800 leading-loose">{Lang.logout[lang]}</a>
             </div>
             }
           </React.Fragment>

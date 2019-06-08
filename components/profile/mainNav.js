@@ -25,9 +25,7 @@ export default ({lang, img, goFromEdit}) => {
           </Link>
         </div>
         <div className="flex justify-center w-1/5">
-          <Link href="/user/logout">
-            <a className="hover:text-green-700">{Lang.logout[lang]}</a>
-          </Link>
+          <a href="/user/logout" className="hover:text-green-700">{Lang.logout[lang]}</a>
         </div>
       </div>
 
