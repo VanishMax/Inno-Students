@@ -6,7 +6,7 @@ import NewsGrid from '../components/news/grid'
 
 const data = [
   {
-    img: 'https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
+    img: 'https://images.unsplash.com/photo-1560067017-24140fbbfe86?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
     top: [
       'VanishMax',
       '05-06-2019',
@@ -24,7 +24,7 @@ const data = [
     title: 'Сегодня мы поговорим про секретную технологию, разработанную в США. Она основана на измельчении грубой кожи ваших врагов'
   },
   {
-    img: 'https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=620&q=80',
+    img: 'https://images.unsplash.com/photo-1560070094-e1f2ddec4337?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
     top: [
       'VanishMax',
       '05-06-2019',
@@ -33,7 +33,7 @@ const data = [
     title: 'Что вообще происходит с этим сайтом?'
   },
   {
-    img: 'https://images.unsplash.com/photo-1483519173755-be893fab1f46?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1083&q=80',
+    img: 'https://images.unsplash.com/photo-1559549200-4cae6f9d5535?ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80',
     top: [
       'VanishMax',
       '05-06-2019',

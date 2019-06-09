@@ -20,6 +20,7 @@
     cursor: pointer;
     display: flex;
     flex-grow: 1;
+    overflow:hidden;
 }
 
 .news-card.big { @apply w-full }
@@ -32,9 +33,31 @@
     position: absolute;
     z-index: 1;
     top: 0;right: 0;left: 0;bottom: 0;
+    transition: 0.3s ease;
     border-radius: 1rem;
     background-size: cover;
     background-position: center center;
+}
+.news-card:hover .news-card-cover {
+    transition: .3s ease;
+    filter: contrast(125%);
+    background-position: calc(50% - 1px) calc(50% - 1px), calc(50% + 1px) calc(50% + 1px);
+
+    /* Chalkboard */
+    /*background-blend-mode: difference;*/
+    /*filter: brightness(1.3) grayscale(1);*/
+
+    /* Colored chalkboard */
+    /*background-blend-mode: color, difference;*/
+    /*filter: brightness(1.5);*/
+
+    /* Infra-red filter */
+    /*background-size: cover;*/
+    /*filter: hue-rotate(180deg) saturate(1.2);*/
+
+    /* Emboss filter */
+    /*background-blend-mode: difference, screen;*/
+    /*filter: brightness(2) invert(1) grayscale(1);*/
 }
 
 .news-card-caption {

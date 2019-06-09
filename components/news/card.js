@@ -1,11 +1,11 @@
 import React from 'react'
 
 export default ({news, big, last}) => {
+  const url = `url("${news.img}")`
   return (
     <React.Fragment>
       <div className={'news-card' + (last ? '' : ' md:mr-6 md:mb-0 mb-6') + (big ? ' big' : '')}>
-        <div className="news-card-cover"
-             style={{backgroundImage: `url("${news.img}")`}}/>
+        <div className="news-card-cover" style={{backgroundImage: url}}/>
         <div className="news-card-overlay" />
         <div className="news-card-caption">
           <div className="small">
