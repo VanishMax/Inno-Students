@@ -12,7 +12,7 @@ export default ({lang, img, goFromEdit}) => {
           </Link>
         </div>
         <div className="hidden md:flex md:justify-center md:w-1/5">
-          <Link href="/">
+          <Link href="/user/newpost">
             <a className="hover:text-green-700">{Lang.newpost[lang]}</a>
           </Link>
         </div>

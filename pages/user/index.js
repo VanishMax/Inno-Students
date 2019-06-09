@@ -1,12 +1,10 @@
 import React, {useContext, useState} from 'react'
 import Router from 'next/router'
-import Head from 'next/head'
 import isAuthed from '../../middleware/HOCs/isAuthed'
 import {LangContext} from '../../middleware/context'
 import Lang from '../../langs/profile'
 
-import AdminNav from '../../components/profile/adminNav'
-import MainNav from '../../components/profile/mainNav'
+import Layout from '../../layouts/user'
 import User from '../../components/profile/user'
 import Edit from '../../components/profile/edit'
 
@@ -17,7 +15,7 @@ const Profile = ({user}) => {
 
   const [isEdit, changeEdit] = useState(false)
   const goToEdit = () => changeEdit(true)
-  const goFromEdit = () => {
+  const goFromEdit = (e) => {
     Router.replace({ pathname: Router.pathname, query: { ...Router.query }})
     changeEdit(false)
   }
@@ -26,25 +24,16 @@ const Profile = ({user}) => {
 
   return (
     <React.Fragment>
-      <Head>
-        <title>{Lang.profile[lang]} | InnoStudents</title>
-      </Head>
-      <div className="app mt-10">
-
-        <MainNav lang={lang} img={user.img !== '' ? bucket + user.img : fakeUserImg} goFromEdit={goFromEdit} />
-
-        <div className="flex flex-col items-center justify-center mt-16">
-          {isEdit ?
-            <Edit lang={lang} user={user} goFromEdit={goFromEdit} />
+      <Layout lang={lang} title={Lang.profile[lang]}
+              img={user.img !== '' ? bucket + user.img : fakeUserImg}
+              goFromEdit={goFromEdit} isAdmin={user.role === "A"}
+      >
+        {isEdit ?
+          <Edit lang={lang} user={user} goFromEdit={goFromEdit} />
           :
-            <User lang={lang} user={user} goToEdit={goToEdit} />
-          }
-        </div>
-
-        {user.role === "A" &&
-          <AdminNav lang={lang} />
+          <User lang={lang} user={user} goToEdit={goToEdit} />
         }
-      </div>
+      </Layout>
     </React.Fragment>
   )
 }
