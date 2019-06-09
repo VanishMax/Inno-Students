@@ -12,18 +12,20 @@ hr {
     margin: auto;
     width: 96% !important;
 }
+
 @media (min-width: 1024px) {
     .app {width: 88% !important;}
 }
+
 @media (min-width: 1200px) {
     .app {width: 80% !important;}
 }
 
-.title {
-    @apply w-full text-center leading-tight m-0 pt-8 text-4xl;
-}
+.title { @apply w-full text-center leading-tight m-0 pt-8 text-4xl; }
 
 .avatar {
     display: inline-block;
     border-radius: 50%;
 }
+
+.avatar.user { margin-bottom: -3rem; }

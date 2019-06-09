@@ -2,16 +2,15 @@
 ---NEWS GRID---
 */
 
-.news-grid {
-    @apply w-full;
-}
-.news-grid-row {
-    @apply flex flex-wrap;
-}
+.news-grid { @apply w-full }
+
+.news-grid-row { @apply flex flex-wrap }
+
 .fullBr {
     @apply w-full mb-6;
     content: '';
 }
+
 .news-card {
     position: relative;
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3);
@@ -22,14 +21,13 @@
     display: flex;
     flex-grow: 1;
 }
-.news-card.big {
-    @apply w-full;
-}
+
+.news-card.big { @apply w-full }
+
 @media (max-width: 768px) {
-    .news-card-small {
-        @apply w-full;
-    }
+    .news-card-small { @apply w-full }
 }
+
 .news-card-cover {
     position: absolute;
     z-index: 1;
@@ -38,28 +36,26 @@
     background-size: cover;
     background-position: center center;
 }
+
 .news-card-caption {
     position: absolute;
     left: 5%; right: 5%; bottom: 10%;
     z-index: 10;
     @apply w-11/12 mx-auto text-white leading-tight;
 }
-.news-card .news-card-caption > .big {
-    @apply text-2xl;
-}
+
+.news-card .news-card-caption > .big { @apply text-2xl }
+
 @media (max-width: 768px) {
-    .news-card.big .news-card-caption > .big {
-        @apply text-2xl;
-    }
+    .news-card.big .news-card-caption > .big { @apply text-2xl }
 }
+
 @media (min-width: 768px) {
-    .news-card.big .news-card-caption > .big {
-        @apply text-4xl;
-    }
+    .news-card.big .news-card-caption > .big { @apply text-4xl }
 }
-.news-card-caption > .small > span {
-    @apply inline-block text-gray-200 text-sm mr-4;
-}
+
+.news-card-caption > .small > span { @apply inline-block text-gray-200 text-sm mr-4 }
+
 .news-card-overlay {
     position: absolute;
     z-index: 5;
