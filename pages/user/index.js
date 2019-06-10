@@ -15,7 +15,7 @@ const Profile = ({user}) => {
 
   const [isEdit, changeEdit] = useState(false)
   const goToEdit = () => changeEdit(true)
-  const goFromEdit = (e) => {
+  const goFromEdit = () => {
     Router.replace({ pathname: Router.pathname, query: { ...Router.query }})
     changeEdit(false)
   }
