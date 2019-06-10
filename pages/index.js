@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import Head from 'next/head'
+import Layout from '../layouts/default'
 import {LangContext} from '../middleware/context'
 import Lang from '../langs/home'
 import NewsGrid from '../components/news/grid'
@@ -46,18 +46,10 @@ const data = [
 export default () => {
   const lang = useContext(LangContext)
   return (
-    <div>
-      <Head>
-        <title>{Lang.metatitle[lang]} | InnoStudents</title>
-        <meta name="description" content={Lang.description[lang]}/>
-        <meta name="keywords" content={Lang.keywords[lang]}/>
-        <meta name="og:image" content="static/images/square.png"/>
-        <meta name="og:type" content="website"/>
-      </Head>
-
+    <Layout title={Lang.metatitle[lang]} description={Lang.description[lang]} keywords={Lang.keywords[lang]}>
       <div className="app flex justify-between">
         <NewsGrid data={data} />
       </div>
-    </div>
+    </Layout>
   )
 }
