@@ -11,6 +11,10 @@ const newPost = {
     en: 'Title (RU)',
     ru: 'Название (RU)'
   },
+  tag: {
+    en: 'Tag',
+    ru: 'Тег'
+  },
   create: {
     en: 'Create',
     ru: 'Создать'

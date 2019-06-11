@@ -1,4 +1,4 @@
-import React, {useState, useContext, useRef, useEffect} from 'react'
+import React, {useState, useContext} from 'react'
 import {LangContext, AuthContext} from '../../middleware/context'
 
 // Viewport components for the Header
@@ -13,9 +13,6 @@ export default props => {
   const open = () => setOpen('opened')
   const close = () => setOpen('closed')
 
-  // ClickAwayListener for the dropdown menu by clicking on the profile icon
-  const {ref, isComponentVisible, setIsComponentVisible} = useComponentVisible(false)
-
   // Get data from global context
   const lang = useContext(LangContext)
   const user = useContext(AuthContext)
@@ -25,8 +22,8 @@ export default props => {
     <header className="app flex items-center justify-between py-3">
 
       {/* Large viewport (>1024px) */}
-      <Big isAuthed={isAuthed} lang={lang} myref={ref} isComponentVisible={isComponentVisible}
-           setIsComponentVisible={setIsComponentVisible} changeLang={props.changeLang}/>
+      <Big isAuthed={isAuthed} lang={lang}
+           changeLang={props.changeLang}/>
 
       {/* Small viewport (<1024px) */}
       <Small isAuthed={isAuthed} lang={lang} opened={opened}
@@ -34,25 +31,4 @@ export default props => {
 
     </header>
   )
-}
-
-// ClickAwayListener for React made with hooks
-const useComponentVisible = (initialIsVisible) => {
-  const [isComponentVisible, setIsComponentVisible] = useState(initialIsVisible)
-  const ref = useRef(null)
-
-  const handleClickOutside = (event) => {
-    if (ref.current && !ref.current.contains(event.target)) {
-      setIsComponentVisible(false)
-    }
-  }
-
-  useEffect(() => {
-    document.addEventListener('click', handleClickOutside, true)
-    return () => {
-      document.removeEventListener('click', handleClickOutside, true)
-    }
-  })
-
-  return { ref, isComponentVisible, setIsComponentVisible }
 }
