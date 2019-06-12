@@ -50,7 +50,7 @@ export default ({lang, isAuthed, changeLang}) => {
         <span onClick={changeLang} className="mr-8 header-link">{Lang.lang[lang]}</span>
 
         {isAuthed ?
-          <Dropdown Opener={Opener} size={32}>
+          <Dropdown Opener={Opener} size={32} margin={8}>
             <Link href="/user">
               <a className="text-gray-800 font-semibold no-underline hover:text-green-800 leading-loose">
                 {Lang.profile[lang]}

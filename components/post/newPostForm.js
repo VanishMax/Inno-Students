@@ -1,11 +1,38 @@
 import React from 'react'
 import Lang from '../../langs/newpost'
 import Layout from '../../layouts/user'
+import Dropdown from '../dropdown'
 
 const fakeUserImg = '/static/images/fakeUser.jpg'
 const bucket = 'http://inno-students.s3.amazonaws.com/'
+const tags = [
+  {key: 0, value: 'News'},
+  {key: 1, value: 'Sport'},
+  {key: 2, value: 'Clubs'},
+  {key: 3, value: 'Event'},
+  {key: 4, value: 'Campus Life'},
+  {key: 5, value: 'Video'},
+  {key: 6, value: 'People'},
+]
 
-export default ({lang, user}) => {
+export default ({lang, user, changeTitle, changeTag, form}) => {
+
+  const DropValue = ({index, open}) => (
+    <div
+      onClick={() => open ? open() : changeTag(index)}
+      className={open ? `bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full cursor-pointer
+        py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-300`
+        : 'leading-normal tracking-wide border-b-2 border-gray-100 border-solid py-1 cursor-pointer'}
+    >
+      {tags[index].value}
+    </div>
+  )
+  const Opener = ({open}) => (
+    <span>
+      <DropValue open={open} index={form.tag}/>
+    </span>
+  )
+
   return(
     <Layout lang={lang} title={Lang.metatitle[lang]}
             img={user.img !== '' ? bucket + user.img : fakeUserImg}
@@ -21,7 +48,7 @@ export default ({lang, user}) => {
           <div className="md:w-2/3">
             <input
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-300"
-              type="text" autoComplete="off"
+              type="text" autoComplete="off" onChange={changeTitle} value={form.titleEn}
               name="titleEn" placeholder="Name of the post" />
           </div>
         </div>
@@ -35,7 +62,7 @@ export default ({lang, user}) => {
           <div className="md:w-2/3">
             <input
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-300"
-              type="text" autoComplete="off"
+              type="text" autoComplete="off" onChange={changeTitle} value={form.titleRu}
               name="titleRu" placeholder="Название нового поста" />
           </div>
         </div>
@@ -47,10 +74,11 @@ export default ({lang, user}) => {
             </span>
           </div>
           <div className="md:w-2/3">
-            <input
-              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-300"
-              type="text" autoComplete="off"
-              name="titleRu" placeholder="Название нового поста" />
+            <Dropdown Opener={Opener} size={48} margin={2}>
+              {tags.map(tag => (
+                <DropValue index={tag.key} key={tag.key} />
+              ))}
+            </Dropdown>
           </div>
         </div>
 
