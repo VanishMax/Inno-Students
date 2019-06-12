@@ -1,4 +1,5 @@
 import React, {useContext, useState} from 'react'
+import Router from 'next/router'
 import 'isomorphic-unfetch'
 
 import isAuthed from '../../middleware/HOCs/isAuthed'
@@ -36,12 +37,13 @@ const NewPost = ({user}) => {
     const data = await fetch('/post/new', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({user: user._id, titleEn: form.titleEn, titleRu: form.titleRu, tag: tags[form.tag]})
+      body: JSON.stringify({user: user._id, titleEn: form.titleEn, titleRu: form.titleRu, tag: tags[form.tag].value})
     })
       .then(res => {
-        return res.json()
+        if(res.status !== 400) return res.json()
+        return {}
       })
-    console.log(data)
+    if(data.url) Router.push({ pathname: '/post/' + data.url, query: Router.query})
   }
 
   return (
