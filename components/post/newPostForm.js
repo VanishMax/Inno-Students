@@ -3,6 +3,8 @@ import Lang from '../../langs/newpost'
 import Layout from '../../layouts/user'
 import Dropdown from '../dropdown'
 
+// TODO: Move constants
+// TODO: Add icons
 const fakeUserImg = '/static/images/fakeUser.jpg'
 const bucket = 'http://inno-students.s3.amazonaws.com/'
 const tags = [
@@ -15,18 +17,19 @@ const tags = [
   {key: 6, value: 'People'},
 ]
 
-export default ({lang, user, changeTitle, changeTag, form}) => {
+export default ({lang, user, changeTitle, changeTag, submit, form}) => {
 
   const DropValue = ({index, open}) => (
     <div
       onClick={() => open ? open() : changeTag(index)}
       className={open ? `bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full cursor-pointer
-        py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-300`
+        py-2 px-4 text-gray-700 leading-tight`
         : 'leading-normal tracking-wide border-b-2 border-gray-100 border-solid py-1 cursor-pointer'}
     >
       {tags[index].value}
     </div>
   )
+
   const Opener = ({open}) => (
     <span>
       <DropValue open={open} index={form.tag}/>
@@ -82,14 +85,17 @@ export default ({lang, user, changeTitle, changeTag, form}) => {
           </div>
         </div>
 
-        <h3 className="mb-4 text-center text-base italic text-red-800">
-          Some error
-        </h3>
+        {form.error !== null &&
+          <h3 className="mb-4 text-center text-base italic text-red-800">
+            {Lang.errors[form.error][lang]}
+          </h3>
+        }
+
 
         <div className="flex items-center justify-center">
           <button
             className="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-            type="submit" name="submit"
+            type="button" onClick={submit}
           >
             {Lang.create[lang]}
           </button>

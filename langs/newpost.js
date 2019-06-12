@@ -18,7 +18,21 @@ const newPost = {
   create: {
     en: 'Create',
     ru: 'Создать'
-  }
+  },
+  errors: [
+    {
+      en: 'Titles are not provided',
+      ru: 'Названия не введены'
+    },
+    {
+      en: 'English title is not provided',
+      ru: 'Название на аглийском не введено'
+    },
+    {
+      en: 'Russian title is not provided',
+      ru: 'Название на русском не введено'
+    }
+  ]
 }
 
 export default newPost
