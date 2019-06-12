@@ -1,9 +1,10 @@
 import React, {useContext, useState} from 'react'
+import 'isomorphic-unfetch'
 
 import isAuthed from '../../middleware/HOCs/isAuthed'
 import {LangContext} from '../../middleware/context'
 import NewPostForm from '../../components/post/newPostForm'
-
+import tags from '../../constants/tags'
 
 const NewPost = ({user}) => {
   const lang = useContext(LangContext)
@@ -23,8 +24,7 @@ const NewPost = ({user}) => {
     changeForm({...form, tag: index})
   }
 
-  // TODO: Implement submit
-  const submit = () => {
+  const submit = async () => {
     if(!form.titleEn && !form.titleRu) {
       return changeForm({...form, error: 0})
     } else if(!form.titleEn) {
@@ -32,12 +32,23 @@ const NewPost = ({user}) => {
     } else if(!form.titleRu) {
       return changeForm({...form, error: 2})
     }
-    console.log(form)
+
+    const data = await fetch('/post/new', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({user: user._id, titleEn: form.titleEn, titleRu: form.titleRu, tag: tags[form.tag]})
+    })
+      .then(res => {
+        return res.json()
+      })
+    console.log(data)
   }
 
   return (
     <React.Fragment>
-      <NewPostForm lang={lang} user={user} form={form} changeTitle={changeTitle} changeTag={changeTag} submit={submit} />
+      <NewPostForm lang={lang} user={user} form={form}
+                   changeTitle={changeTitle} changeTag={changeTag}
+                   submit={submit} tags={tags} />
     </React.Fragment>
   )
 }

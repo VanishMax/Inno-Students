@@ -1,19 +1,7 @@
 import React from 'react'
 import Lang from '../../langs/profile'
 
-const fakeUser = {
-  username: 'petro',
-  website: 'example.com',
-  img: '/static/images/fakeUser.png',
-  en: {
-    name: 'Kalivan',
-    surname: 'Ivanov'
-  },
-  ru: {
-    name: 'Калыван',
-    surname: 'Иванов'
-  }
-}
+import {fakeUser} from '../../constants/user'
 
 export default ({lang, user, goToEdit}) => {
 

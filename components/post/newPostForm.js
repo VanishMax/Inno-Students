@@ -3,21 +3,9 @@ import Lang from '../../langs/newpost'
 import Layout from '../../layouts/user'
 import Dropdown from '../dropdown'
 
-// TODO: Move constants
-// TODO: Add icons
-const fakeUserImg = '/static/images/fakeUser.jpg'
-const bucket = 'http://inno-students.s3.amazonaws.com/'
-const tags = [
-  {key: 0, value: 'News'},
-  {key: 1, value: 'Sport'},
-  {key: 2, value: 'Clubs'},
-  {key: 3, value: 'Event'},
-  {key: 4, value: 'Campus Life'},
-  {key: 5, value: 'Video'},
-  {key: 6, value: 'People'},
-]
+import {bucket, fakeUserImg} from '../../constants/user'
 
-export default ({lang, user, changeTitle, changeTag, submit, form}) => {
+export default ({lang, user, changeTitle, changeTag, submit, form, tags}) => {
 
   const DropValue = ({index, open}) => (
     <div
