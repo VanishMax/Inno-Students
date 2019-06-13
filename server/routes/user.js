@@ -89,10 +89,21 @@ module.exports = (app, server) => {
   })
 
 
-  // Edit User profile: img and then text
+  // Edit User profile: img, role and then text
   app.post('/user/edit/img', (req, res) => {
     if(req.user) {
       User.findOneAndUpdate({_id: req.body._id}, {$set: {img: req.body.img !== '' ? req.body.img : req.user.img}}, (err) => {
+        if(err) res.json({message: err.message})
+        res.json({message: 'all right'})
+      })
+    } else {
+      res.json({message: 'go fuck yourself'})
+    }
+  })
+
+  app.post('/user/edit/role', (req, res) => {
+    if(req.user && req.user.role === 'A' && req.body.role) {
+      User.findOneAndUpdate({_id: req.body._id}, {$set: {role: req.body.role}}, (err) => {
         if(err) res.json({message: err.message})
         res.json({message: 'all right'})
       })
