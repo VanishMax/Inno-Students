@@ -8,7 +8,7 @@ import Layout from '../../layouts/user'
 import User from '../../components/profile/user'
 import Edit from '../../components/profile/edit'
 
-const fakeUserImg = '/static/images/fakeUser.jpg'
+import {fakeUserImg, bucket} from '../../constants/user'
 
 const Profile = ({user}) => {
   const lang = useContext(LangContext)
@@ -19,8 +19,6 @@ const Profile = ({user}) => {
     Router.replace({ pathname: Router.pathname, query: { ...Router.query }})
     changeEdit(false)
   }
-
-  const bucket = 'http://inno-students.s3.amazonaws.com/'
 
   return (
     <React.Fragment>

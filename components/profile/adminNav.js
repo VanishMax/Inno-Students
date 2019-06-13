@@ -23,7 +23,7 @@ export default ({lang}) => {
 
       <div className="flex justify-around items-start mb-24">
         <div className="flex justify-center w-1/2 md:w-1/4">
-          <Link href="/">
+          <Link href="/user/alldrafts">
             <a className="hover:text-green-700">{Lang.alldrafts[lang]}</a>
           </Link>
         </div>

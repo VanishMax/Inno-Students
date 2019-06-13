@@ -34,7 +34,7 @@ server.prepare().then(() => {
   require('./server/routes/static')(app)
   require('./server/routes/auth')(app, server)
   require('./server/routes/user')(app)
-  require('./server/routes/post')(app)
+  require('./server/routes/post')(app, server)
 
   app.get('*', (req, res) => {
     return handle(req, res)

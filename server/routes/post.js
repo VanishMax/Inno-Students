@@ -7,7 +7,27 @@ db.getInstance((p_db) => {
   Post = p_db.collection('posts')
 })
 
-module.exports = (app) => {
+module.exports = (app, server) => {
+
+  app.get('/user/alldrafts', (req, res) => {
+    if(req.user && req.user.role === 'A') {
+      Post.find({status: 'E'}).toArray((err, posts) => {
+        server.render(req, res, '/user/alldrafts', {posts: posts, user: req.user})
+      })
+    } else {
+      server.render(req, res, '/user/alldrafts', {})
+    }
+  })
+
+  app.post('/user/alldrafts', (req, res) => {
+    if(req.user && req.user.role === 'A') {
+      Post.find({status: 'E'}).toArray((err, posts) => {
+        res.json({posts: posts, user: req.user})
+      })
+    } else {
+      res.json({})
+    }
+  })
 
   app.post('/post/new', (req, res) => {
     const body = req.body
