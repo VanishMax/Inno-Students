@@ -33,7 +33,7 @@ export default ({lang, img, goFromEdit}) => {
 
       <div className="flex justify-around items-end md:hidden">
         <div className="flex justify-center w-1/3">
-          <Link href="/">
+          <Link href="/user/newpost">
             <a className="hover:text-green-700">{Lang.newpost[lang]}</a>
           </Link>
         </div>
