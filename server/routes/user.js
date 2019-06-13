@@ -1,12 +1,95 @@
 const db = require('../config/connection')
 
-let User
+let User, Post
 db.getInstance((p_db) => {
   User = p_db.collection('users')
+  Post = p_db.collection('posts')
 })
 
-module.exports = (app) => {
+module.exports = (app, server) => {
 
+  // My published posts
+  app.get('/user/posts', (req, res) => {
+    if(req.user) {
+      Post.find({status: 'P', author: req.user._id}).toArray((err, posts) => {
+        server.render(req, res, '/user/posts', {posts: posts, user: req.user})
+      })
+    } else {
+      server.render(req, res, '/user/posts', {})
+    }
+  })
+  app.post('/user/posts', (req, res) => {
+    if (req.user) {
+      Post.find({status: 'P', author: req.user._id}).toArray((err, posts) => {
+        res.json({posts: posts, user: req.user})
+      })
+    } else {
+      res.json({})
+    }
+  })
+
+  // My drafts
+  app.get('/user/drafts', (req, res) => {
+    if(req.user) {
+      Post.find({status: 'E', author: req.user._id}).toArray((err, posts) => {
+        server.render(req, res, '/user/drafts', {posts: posts, user: req.user})
+      })
+    } else {
+      server.render(req, res, '/user/drafts', {})
+    }
+  })
+  app.post('/user/drafts', (req, res) => {
+    if(req.user) {
+      Post.find({status: 'E', author: req.user._id}).toArray((err, posts) => {
+        res.json({posts: posts, user: req.user})
+      })
+    } else {
+      res.json({})
+    }
+  })
+
+  // Admin's all drafts
+  app.get('/user/alldrafts', (req, res) => {
+    if(req.user && req.user.role === 'A') {
+      Post.find({status: 'E'}).toArray((err, posts) => {
+        server.render(req, res, '/user/alldrafts', {posts: posts, user: req.user})
+      })
+    } else {
+      server.render(req, res, '/user/alldrafts', {})
+    }
+  })
+  app.post('/user/alldrafts', (req, res) => {
+    if(req.user && req.user.role === 'A') {
+      Post.find({status: 'E'}).toArray((err, posts) => {
+        res.json({posts: posts, user: req.user})
+      })
+    } else {
+      res.json({})
+    }
+  })
+
+  // Admin's all users
+  app.get('/user/users', (req, res) => {
+    if(req.user && req.user.role === 'A') {
+      User.find({_id: {$ne: req.user._id}}).toArray((err, users) => {
+        server.render(req, res, '/user/users', {users: users, user: req.user})
+      })
+    } else {
+      server.render(req, res, '/user/users', {})
+    }
+  })
+  app.post('/user/users', (req, res) => {
+    if(req.user && req.user.role === 'A') {
+      User.find({_id: {$ne: req.user._id}}).toArray((err, users) => {
+        res.json({users: users, user: req.user})
+      })
+    } else {
+      res.json({})
+    }
+  })
+
+
+  // Edit User profile: img and then text
   app.post('/user/edit/img', (req, res) => {
     if(req.user) {
       User.findOneAndUpdate({_id: req.body._id}, {$set: {img: req.body.img !== '' ? req.body.img : req.user.img}}, (err) => {

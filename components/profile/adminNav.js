@@ -28,17 +28,17 @@ export default ({lang}) => {
           </Link>
         </div>
         <div className="hidden md:flex md:justify-center md:w-1/4">
-          <Link href="/">
+          <Link href="/user/users">
             <a className="hover:text-green-700">{Lang.users[lang]}</a>
           </Link>
         </div>
         <div className="flex justify-center w-1/2 md:w-1/4">
-          <Link href="/">
+          <Link href="/user">
             <a className="hover:text-green-700">{Lang.messages[lang]}</a>
           </Link>
         </div>
         <div className="hidden md:flex md:justify-center md:w-1/4">
-          <Link href="/">
+          <Link href="/user">
             <a className="hover:text-green-700">{Lang.stats[lang]}</a>
           </Link>
         </div>

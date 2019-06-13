@@ -3,7 +3,7 @@ import 'isomorphic-unfetch'
 
 import {LangContext} from '../../middleware/context'
 import Layout from '../../layouts/user'
-import withPost from '../../middleware/HOCs/withPost'
+import withData from '../../middleware/HOCs/withData'
 import {fakeUserImg, bucket} from '../../constants/user'
 import PostsTable from '../../components/post/postsTable'
 
@@ -22,4 +22,4 @@ const Drafts = ({posts, user}) => {
   )
 }
 
-export default withPost(Drafts)
+export default withData(Drafts)

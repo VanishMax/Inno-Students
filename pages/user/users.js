@@ -5,9 +5,9 @@ import {LangContext} from '../../middleware/context'
 import Layout from '../../layouts/user'
 import withData from '../../middleware/HOCs/withData'
 import {fakeUserImg, bucket} from '../../constants/user'
-import PostsTable from '../../components/post/postsTable'
+import UsersTable from '../../components/profile/usersTable'
 
-const Drafts = ({posts, user}) => {
+const Users = ({users, user}) => {
 
   const lang = useContext(LangContext)
 
@@ -16,10 +16,10 @@ const Drafts = ({posts, user}) => {
       <Layout lang={lang} title={'All your drafts'}
               img={user.img !== '' ? bucket + user.img : fakeUserImg}
               isAdmin={user.role === "A"}>
-        <PostsTable posts={posts} lang={lang} />
+        <UsersTable users={users} lang={lang} />
       </Layout>
     </React.Fragment>
   )
 }
 
-export default withData(Drafts)
+export default withData(Users)

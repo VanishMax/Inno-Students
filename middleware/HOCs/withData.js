@@ -4,10 +4,9 @@ import 'isomorphic-unfetch'
 import makeURLWithQuery from '../makeURLWithQuery'
 
 export default Page => {
-  const WithPost = props => <Page {...props} />
+  const WithData = props => <Page {...props} />
 
-  WithPost.getInitialProps = async (ctx) => {
-    let data, user
+  WithData.getInitialProps = async (ctx) => {
     if(ctx.req) {
       if(ctx.query.user) {
         return ctx.query
@@ -18,18 +17,18 @@ export default Page => {
 
     } else {
 
+      let data
+
       data = await fetch(ctx.pathname, {method: 'POST'})
         .then(res => {
           return res.json()
         })
-      if(data.user) {
-        user = data.user
-      } else {
-        Router.replace({ pathname: '/user/login', query: ctx.query, shallow: true})
-      }
+
+      if(!data.user) return Router.replace({ pathname: '/user/login', query: ctx.query, shallow: true})
+
+      return {...data}
     }
-    return {posts: data.posts, user: user}
   }
 
-  return WithPost
+  return WithData
 }
