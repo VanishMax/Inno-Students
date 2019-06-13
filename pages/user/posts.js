@@ -7,7 +7,7 @@ import withPost from '../../middleware/HOCs/withPost'
 import {fakeUserImg, bucket} from '../../constants/user'
 import PostsTable from '../../components/post/postsTable'
 
-const Drafts = ({posts, user}) => {
+const Posts = ({posts, user}) => {
 
   const lang = useContext(LangContext)
 
@@ -16,10 +16,10 @@ const Drafts = ({posts, user}) => {
       <Layout lang={lang} title={'All your drafts'}
               img={user.img !== '' ? bucket + user.img : fakeUserImg}
               isAdmin={user.role === "A"}>
-        <PostsTable posts={posts} lang={lang} />
+        <PostsTable posts={posts} lang={lang} isPublished />
       </Layout>
     </React.Fragment>
   )
 }
 
-export default withPost(Drafts)
+export default withPost(Posts)

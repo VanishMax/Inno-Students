@@ -2,7 +2,6 @@ import React from 'react'
 import Router from 'next/router'
 
 export default ({posts, lang, isPublished}) => {
-  console.log('ddd', isPublished)
   if(isPublished === undefined) isPublished = false
 
   return (

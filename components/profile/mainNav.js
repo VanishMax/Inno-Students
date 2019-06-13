@@ -7,7 +7,7 @@ export default ({lang, img, goFromEdit}) => {
     <React.Fragment>
       <div className="flex justify-around items-end">
         <div className="flex justify-center w-1/3 md:w-1/5">
-          <Link href="/">
+          <Link href="/user/posts">
             <a className="hover:text-green-700">{Lang.myposts[lang]}</a>
           </Link>
         </div>
@@ -20,7 +20,7 @@ export default ({lang, img, goFromEdit}) => {
           <img src={img} onClick={goFromEdit} className="avatar user cursor-pointer shadow w-24 h-24" />
         </div>
         <div className="flex justify-center w-1/3 md:w-1/5">
-          <Link href="/">
+          <Link href="/user/drafts">
             <a className="hover:text-green-700">{Lang.drafts[lang]}</a>
           </Link>
         </div>
