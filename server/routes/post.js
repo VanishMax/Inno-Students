@@ -9,6 +9,49 @@ db.getInstance((p_db) => {
 
 module.exports = (app, server) => {
 
+  // My published posts
+  app.get('/user/posts', (req, res) => {
+    if(req.user) {
+      Post.find({status: 'P', author: req.user._id}).toArray((err, posts) => {
+        server.render(req, res, '/user/posts', {posts: posts, user: req.user})
+      })
+    } else {
+      server.render(req, res, '/user/posts', {})
+    }
+  })
+
+  app.post('/user/posts', (req, res) => {
+    if (req.user) {
+      Post.find({status: 'P', author: req.user._id}).toArray((err, posts) => {
+        res.json({posts: posts, user: req.user})
+      })
+    } else {
+      res.json({})
+    }
+  })
+
+  // My drafts
+  app.get('/user/drafts', (req, res) => {
+    if(req.user) {
+      Post.find({status: 'E', author: req.user._id}).toArray((err, posts) => {
+        server.render(req, res, '/user/drafts', {posts: posts, user: req.user})
+      })
+    } else {
+      server.render(req, res, '/user/drafts', {})
+    }
+  })
+
+  app.post('/user/drafts', (req, res) => {
+    if(req.user) {
+      Post.find({status: 'E', author: req.user._id}).toArray((err, posts) => {
+        res.json({posts: posts, user: req.user})
+      })
+    } else {
+      res.json({})
+    }
+  })
+
+  // Admin's all drafts
   app.get('/user/alldrafts', (req, res) => {
     if(req.user && req.user.role === 'A') {
       Post.find({status: 'E'}).toArray((err, posts) => {
