@@ -23,6 +23,8 @@ export default ({user, lang}) => {
       return changeForm({...form, error: 0})
     } else if(!form.content) {
       return changeForm({...form, error: 1})
+    } else if(form.alias.match(/[^A-Za-z0-9]/)) {
+      return changeForm({...form, error: 3})
     }
 
     const data = await fetch('/user/request', {
@@ -64,7 +66,8 @@ export default ({user, lang}) => {
               <div className="md:w-2/3">
                 <input
                   className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-300"
-                  type="text" name="alias" value={form.alias} onChange={change} placeholder={Lang.tgPlaceholder[lang]}/>
+                  type="text" name="alias" maxLength={32}
+                  value={form.alias} onChange={change} placeholder={Lang.tgPlaceholder[lang]}/>
               </div>
             </div>
 

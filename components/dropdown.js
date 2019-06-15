@@ -1,7 +1,7 @@
 import React from 'react'
 import clickAway from '../middleware/clickAway'
 
-export default ({Opener, children, size, margin}) => {
+export default ({Opener, children, size, margin, height}) => {
   const {ref, isComponentVisible, setIsComponentVisible} = clickAway(false)
 
   return(
@@ -10,7 +10,8 @@ export default ({Opener, children, size, margin}) => {
       <Opener open={() => setIsComponentVisible(true)} />
 
       {isComponentVisible &&
-        <div ref={ref} onClick={() => setIsComponentVisible(false)} className={`w-${size} mt-${margin} absolute bg-white shadow rounded py-3 px-6 z-10`}>
+        <div ref={ref} onClick={() => setIsComponentVisible(false)}
+             className={`w-${size} mt-${margin} h-${height} absolute bg-white shadow rounded py-3 px-6 z-10 overflow-y-scroll`}>
           {children}
         </div>
       }

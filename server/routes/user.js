@@ -92,7 +92,7 @@ module.exports = (app, server) => {
   // Admin's request messages
   app.get('/user/requests', (req, res) => {
     if(req.user && req.user.role === 'A') {
-      User.find({'request.date': {$ne: ''}}, {projection: {request: 1, username: 1, _id: 1}}).toArray((err, users) => {
+      User.find({'request.date': {$ne: ''}, 'request.approved': false}, {projection: {request: 1, username: 1, _id: 1}}).toArray((err, users) => {
         server.render(req, res, '/user/requests', {users: users, user: req.user})
       })
     } else {
@@ -101,7 +101,7 @@ module.exports = (app, server) => {
   })
   app.post('/user/requests', (req, res) => {
     if(req.user && req.user.role === 'A') {
-      User.find({'request.date': {$ne: ''}}, {projection: {request: 1, username: 1, _id: 1}}).toArray((err, users) => {
+      User.find({'request.date': {$ne: ''}, 'request.approved': false}, {projection: {request: 1, username: 1, _id: 1}}).toArray((err, users) => {
         res.json({users: users, user: req.user})
       })
     } else {

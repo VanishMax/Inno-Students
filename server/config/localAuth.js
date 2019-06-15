@@ -58,7 +58,8 @@ module.exports = (passport) => {
                   request: {
                     alias: '',
                     text: '',
-                    date: ''
+                    date: '',
+                    approved: false
                   }
                 }
 

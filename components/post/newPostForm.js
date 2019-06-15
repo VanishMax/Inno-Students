@@ -69,7 +69,7 @@ export default ({lang, user, changeTitle, changeTag, submit, form, tags}) => {
             </span>
           </div>
           <div className="md:w-2/3">
-            <Dropdown Opener={Opener} size={48} margin={2}>
+            <Dropdown Opener={Opener} size={48} margin={2} height={40}>
               {tags.map(tag => (
                 <DropValue index={tag.key} key={tag.key} />
               ))}
