@@ -1,11 +1,7 @@
 import React from 'react'
 import Link from './link'
 
-import Telegram from './icons/tg'
-import Vkontakte from './icons/vk'
-import Instagram from './icons/insta'
-import FaceBook from './icons/fb'
-import YouTube from './icons/yt'
+import {Telegram, FaceBook, Instagram, YouTube, Vkontakte} from './icons/socials'
 
 export default ({size}) => {
   const classes = `mr-2 w-${size} h-${size}`
