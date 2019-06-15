@@ -3,8 +3,9 @@ import Router from 'next/router'
 import Head from 'next/head'
 import AdminNav from '../components/profile/adminNav'
 import MainNav from '../components/profile/mainNav'
+import Request from '../components/profile/requst'
 
-export default ({ children, lang, img, isAdmin, goFromEdit, title }) => {
+export default ({ children, lang, img, role, goFromEdit, title, username }) => {
 
   if(!goFromEdit) {
     goFromEdit = () => {
@@ -18,13 +19,22 @@ export default ({ children, lang, img, isAdmin, goFromEdit, title }) => {
         <title>{title} | InnoStudents</title>
       </Head>
       <div className="app mt-10">
-        <MainNav lang={lang} img={img} goFromEdit={goFromEdit} />
+        {role === 'A' || role === 'E' ?
+          <React.Fragment>
+            <MainNav lang={lang} img={img} goFromEdit={goFromEdit} />
 
-        <div className="flex flex-col items-center justify-center mt-16">
-          { children }
-        </div>
+            <div className="flex flex-col items-center justify-center mt-16">
+              { children }
+            </div>
 
-        { isAdmin && <AdminNav lang={lang} /> }
+            { role === 'A' && <AdminNav lang={lang} /> }
+          </React.Fragment>
+        :
+          <React.Fragment>
+            <Request username={username} />
+          </React.Fragment>
+        }
+
       </div>
     </React.Fragment>
 

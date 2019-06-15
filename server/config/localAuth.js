@@ -54,6 +54,11 @@ module.exports = (passport) => {
                   ru: {
                     name: '',
                     surname: ''
+                  },
+                  request: {
+                    alias: '',
+                    text: '',
+                    date: ''
                   }
                 }
 

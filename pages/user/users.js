@@ -14,7 +14,7 @@ const Users = ({users, user}) => {
     <React.Fragment>
       <Layout lang={lang} title={'All your drafts'}
               img={user.img !== '' ? bucket + user.img : fakeUserImg}
-              isAdmin={user.role === "A"}>
+              role={user.role} username={user.username}>
         <UsersTable users={users} lang={lang}/>
       </Layout>
     </React.Fragment>

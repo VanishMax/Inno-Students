@@ -24,7 +24,7 @@ const Profile = ({user}) => {
     <React.Fragment>
       <Layout lang={lang} title={Lang.profile[lang]}
               img={user.img !== '' ? bucket + user.img : fakeUserImg}
-              goFromEdit={goFromEdit} isAdmin={user.role === "A"}
+              goFromEdit={goFromEdit} role={user.role} username={user.username}
       >
         {isEdit ?
           <Edit lang={lang} user={user} goFromEdit={goFromEdit} />
