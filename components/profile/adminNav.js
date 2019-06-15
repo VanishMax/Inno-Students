@@ -8,7 +8,7 @@ export default ({lang}) => {
 
       <div className="mt-16 md:mt-0 flex justify-around items-end md:hidden">
         <div className="flex justify-center w-1/2">
-          <Link href="/">
+          <Link href="/user/users">
             <a className="hover:text-green-700">{Lang.users[lang]}</a>
           </Link>
         </div>
