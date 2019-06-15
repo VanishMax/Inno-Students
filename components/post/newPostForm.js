@@ -31,7 +31,7 @@ export default ({lang, user, changeTitle, changeTag, submit, form, tags}) => {
   return(
     <Layout lang={lang} title={Lang.metatitle[lang]}
             img={user.img !== '' ? bucket + user.img : fakeUserImg}
-            isAdmin={user.role === "A"}>
+            user={user}>
       <form className="w-full max-w-sm mx-auto">
 
         <div className="md:flex md:items-center mb-6">
