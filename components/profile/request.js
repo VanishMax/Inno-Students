@@ -34,7 +34,6 @@ export default ({user, lang}) => {
         if(res.status !== 400) return res.json()
         return {}
       })
-    console.log(data.message)
     if(data.message) changeRequested(true)
   }
 

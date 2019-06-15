@@ -39,9 +39,9 @@ const profile = {
     en: 'Users',
     ru: 'Пользователи'
   },
-  messages: {
-    en: 'Messages',
-    ru: 'Сообщения'
+  requests: {
+    en: 'Requests',
+    ru: 'Заявки'
   },
   stats: {
     en: 'Statistics',

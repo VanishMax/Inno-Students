@@ -4,21 +4,23 @@ import {LangContext} from '../../middleware/context'
 import Layout from '../../layouts/user'
 import withData from '../../middleware/HOCs/withData'
 import {fakeUserImg, bucket} from '../../constants/user'
-import UsersTable from '../../components/profile/usersTable'
+import RequestCard from '../../components/profile/requestCard'
 
-const Users = ({users, user}) => {
+const Requests = ({users, user}) => {
 
   const lang = useContext(LangContext)
 
   return (
     <React.Fragment>
-      <Layout lang={lang} title={'All Users'}
+      <Layout lang={lang} title={'Requests for authoring'}
               img={user.img !== '' ? bucket + user.img : fakeUserImg}
               user={user}>
-        <UsersTable users={users} lang={lang}/>
+        {users.map((us, i) => (
+          <RequestCard key={i} user={us} />
+        ))}
       </Layout>
     </React.Fragment>
   )
 }
 
-export default withData(Users)
+export default withData(Requests)

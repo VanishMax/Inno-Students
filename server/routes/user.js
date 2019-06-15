@@ -72,7 +72,7 @@ module.exports = (app, server) => {
   // Admin's all users
   app.get('/user/users', (req, res) => {
     if(req.user && req.user.role === 'A') {
-      User.find({_id: {$ne: req.user._id}}).toArray((err, users) => {
+      User.find({_id: {$ne: req.user._id}}, {projection: {password: 0}}).toArray((err, users) => {
         server.render(req, res, '/user/users', {users: users, user: req.user})
       })
     } else {
@@ -81,7 +81,27 @@ module.exports = (app, server) => {
   })
   app.post('/user/users', (req, res) => {
     if(req.user && req.user.role === 'A') {
-      User.find({_id: {$ne: req.user._id}}).toArray((err, users) => {
+      User.find({_id: {$ne: req.user._id}}, {projection: {password: 0}}).toArray((err, users) => {
+        res.json({users: users, user: req.user})
+      })
+    } else {
+      res.json({})
+    }
+  })
+
+  // Admin's request messages
+  app.get('/user/requests', (req, res) => {
+    if(req.user && req.user.role === 'A') {
+      User.find({'request.date': {$ne: ''}}, {projection: {request: 1, username: 1, _id: 1}}).toArray((err, users) => {
+        server.render(req, res, '/user/requests', {users: users, user: req.user})
+      })
+    } else {
+      server.render(req, res, '/user/requests', {})
+    }
+  })
+  app.post('/user/requests', (req, res) => {
+    if(req.user && req.user.role === 'A') {
+      User.find({'request.date': {$ne: ''}}, {projection: {request: 1, username: 1, _id: 1}}).toArray((err, users) => {
         res.json({users: users, user: req.user})
       })
     } else {
@@ -118,9 +138,21 @@ module.exports = (app, server) => {
     }
   })
 
+  // Change role of some user
   app.post('/user/edit/role', (req, res) => {
     if(req.user && req.user.role === 'A' && req.body.role) {
       User.findOneAndUpdate({_id: req.body._id}, {$set: {role: req.body.role}}, (err) => {
+        if(err) res.json({message: err.message})
+        res.json({message: 'all right'})
+      })
+    } else {
+      res.json({message: 'go fuck yourself'})
+    }
+  })
+
+  app.post('/user/request/approve', (req, res) => {
+    if(req.user && req.user.role === 'A' && req.body.role) {
+      User.findOneAndUpdate({_id: req.body._id}, {$set: {role: req.body.role, 'request.approved': true}}, (err) => {
         if(err) res.json({message: err.message})
         res.json({message: 'all right'})
       })

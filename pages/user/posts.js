@@ -1,5 +1,4 @@
 import React, {useContext} from 'react'
-import 'isomorphic-unfetch'
 
 import {LangContext} from '../../middleware/context'
 import Layout from '../../layouts/user'
@@ -13,7 +12,7 @@ const Posts = ({posts, user}) => {
 
   return (
     <React.Fragment>
-      <Layout lang={lang} title={'All your drafts'}
+      <Layout lang={lang} title={'Your Posts'}
               img={user.img !== '' ? bucket + user.img : fakeUserImg}
               user={user}>
         <PostsTable posts={posts} lang={lang} isPublished />
