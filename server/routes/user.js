@@ -1,3 +1,4 @@
+const moment = require('moment')
 const db = require('../config/connection')
 
 let User, Post
@@ -88,6 +89,22 @@ module.exports = (app, server) => {
     }
   })
 
+  // Request for becoming an author
+  app.post('/user/request', (req, res) => {
+    if(req.user) {
+      User.findOneAndUpdate({_id: req.body.user}, {
+        $set: {
+          'request.alias': req.body.alias,
+          'request.text': req.body.text,
+          'request.date': moment().format('DD-MM-YYYY HH:mm')
+          }}, (err) => {
+        if(err) res.json({message: err.message})
+        res.json({message: 'all right'})
+      })
+    } else {
+      res.status(403).json({message: 'go fuck yourself'})
+    }
+  })
 
   // Edit User profile: img, role and then text
   app.post('/user/edit/img', (req, res) => {

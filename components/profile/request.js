@@ -1,9 +1,42 @@
 import React, {useState} from 'react'
+import 'isomorphic-unfetch'
 import Lang from '../../langs/request'
 
 export default ({user, lang}) => {
 
   const [isRequested, changeRequested] = useState(user.request.date !== '')
+
+  const [form, changeForm] = useState({
+    alias: '',
+    content: '',
+    error: null
+  })
+
+  const change = e => {
+    changeForm({...form, [e.target.name] : e.target.value, error: null})
+  }
+
+  const submit = async () => {
+    if(!form.alias && !form.content) {
+      return changeForm({...form, error: 2})
+    } else if(!form.alias) {
+      return changeForm({...form, error: 0})
+    } else if(!form.content) {
+      return changeForm({...form, error: 1})
+    }
+
+    const data = await fetch('/user/request', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({user: user._id, alias: form.alias, text: form.content})
+    })
+      .then(res => {
+        if(res.status !== 400) return res.json()
+        return {}
+      })
+    console.log(data.message)
+    if(data.message) changeRequested(true)
+  }
 
   return (
     <div className="mb-4">
@@ -32,7 +65,7 @@ export default ({user, lang}) => {
               <div className="md:w-2/3">
                 <input
                   className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-300"
-                  type="text" name="alias" placeholder={Lang.tgPlaceholder[lang]}/>
+                  type="text" name="alias" value={form.alias} onChange={change} placeholder={Lang.tgPlaceholder[lang]}/>
               </div>
             </div>
 
@@ -40,17 +73,20 @@ export default ({user, lang}) => {
               <label className="text-black font-bold md:text-right mb-1 md:mb-0 pr-4">
                 {Lang.why[lang]}<span className="text-red-800">*</span>
               </label>
-              <textarea className="w-full border border-gray-200 focus:border-green-200 focus:outline-none p-1" name="content" rows={5} />
+              <textarea className="w-full border border-gray-200 focus:border-green-200 focus:outline-none p-1"
+                        name="content" rows={5} onChange={change} value={form.content} />
             </div>
 
+            {form.error !== null &&
             <h3 className="mb-4 text-center text-base italic text-red-800">
-              Some error
+              {Lang.errors[form.error][lang]}
             </h3>
+            }
 
             <div className="flex items-center justify-center mb-8">
               <button
                 className="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-                type="button"
+                type="button" onClick={submit}
               >
                 {Lang.create[lang]}
               </button>
