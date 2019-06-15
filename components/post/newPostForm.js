@@ -7,16 +7,20 @@ import {bucket, fakeUserImg} from '../../constants/user'
 
 export default ({lang, user, changeTitle, changeTag, submit, form, tags}) => {
 
-  const DropValue = ({index, open}) => (
-    <div
-      onClick={() => open ? open() : changeTag(index)}
-      className={open ? `bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full cursor-pointer
+  const DropValue = ({index, open}) => {
+    const Icon = tags[index].icon
+    return (
+      <div
+        onClick={() => open ? open() : changeTag(index)}
+        className={open ? `bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full cursor-pointer
         py-2 px-4 text-gray-700 leading-tight`
-        : 'leading-normal tracking-wide border-b-2 border-gray-100 border-solid py-1 cursor-pointer'}
-    >
-      {tags[index].value}
-    </div>
-  )
+          : 'leading-normal tracking-wide border-b-2 border-gray-100 border-solid py-1 cursor-pointer'}
+      >
+        <span className="inline-block mr-2 w-5 h-5"><Icon /></span>
+        <span>{tags[index].value}</span>
+      </div>
+    )
+  }
 
   const Opener = ({open}) => (
     <span>

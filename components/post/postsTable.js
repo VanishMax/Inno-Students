@@ -1,8 +1,15 @@
 import React from 'react'
 import Router from 'next/router'
+import tags from '../../constants/tags'
 
 export default ({posts, lang, isPublished}) => {
   if(isPublished === undefined) isPublished = false
+
+  let toIcon = tag => {
+    let found = tags.find(x => x.value === tag)
+    let Icon = found.icon
+    return <Icon />
+  }
 
   return (
     <div className="w-full md:w-2/3">
@@ -33,7 +40,7 @@ export default ({posts, lang, isPublished}) => {
                 {i}
               </td>
               <td className="py-4 px-2 md:px-6 border-b border-gray-100">
-                {post.tag}
+                <span className="inline-block w-6 h-6">{toIcon(post.tag)}</span>
               </td>
               <td className="py-4 px-2 md:px-6 border-b border-gray-100">
                 {post[lang].title}
