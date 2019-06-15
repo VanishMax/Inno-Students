@@ -15,7 +15,7 @@ const Posts = ({posts, user}) => {
     <React.Fragment>
       <Layout lang={lang} title={'All your drafts'}
               img={user.img !== '' ? bucket + user.img : fakeUserImg}
-              role={user.role} username={user.username}>
+              user={user}>
         <PostsTable posts={posts} lang={lang} isPublished />
       </Layout>
     </React.Fragment>
