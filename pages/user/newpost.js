@@ -43,7 +43,10 @@ const NewPost = ({user}) => {
         if(res.status !== 400) return res.json()
         return {}
       })
-    if(data.url) Router.push({ pathname: '/post/' + data.url, query: Router.query})
+    if(data.url) Router.push({
+      pathname: '/post',
+      query: {...Router.query, slug: data.url}
+    }, '/post/' + data.url)
   }
 
   return (

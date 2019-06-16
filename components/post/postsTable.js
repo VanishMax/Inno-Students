@@ -34,7 +34,10 @@ export default ({posts, lang, isPublished}) => {
           <tbody>
           {posts.map((post, i) =>
             <tr key={i}
-                onClick={() => Router.push({ pathname: '/post/' + post.url, query: Router.query})}
+                onClick={() => Router.push({
+                  pathname: '/post',
+                  query: {...Router.query, slug: post.url}
+                }, '/post/' + post.url)}
                 className="cursor-pointer hover:bg-gray-100">
               <td className="py-4 px-2 md:px-6 border-b border-gray-100">
                 {i}
