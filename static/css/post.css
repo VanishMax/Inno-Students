@@ -1,0 +1,30 @@
+.content {
+    margin: auto;
+    width: 96%;
+}
+
+@media (min-width: 1024px) {
+    .content {width: 70%}
+}
+
+@media (min-width: 1200px) {
+    .content {width: 60%}
+}
+
+.post-actions {
+    position: absolute;
+    right: 10%;
+    top: 15%;
+}
+
+.post-actions svg {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 2rem;
+    border-radius: 50%;
+    box-shadow: 0 0 3px rgba(0, 0, 0, .3);
+}
+
+.post-actions > *:hover {
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, .3);
+}

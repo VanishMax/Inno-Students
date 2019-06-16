@@ -69,11 +69,15 @@ module.exports = (app, server) => {
 
   app.post('/post/:url', (req, res) => {
     Post.findOne({url: req.params.url}, async (err, post) => {
-      post.author = await User.findOne({_id: post.author}, {projection: {password: 0}});
-      if(req.user && (req.user._id === post.author._id || req.user.role === 'A')) {
-        res.json({post: post, user: req.user, isAuthor: true})
+      if(!err && post) {
+        post.author = await User.findOne({_id: post.author}, {projection: {password: 0}});
+        if(req.user && (req.user._id === post.author._id || req.user.role === 'A')) {
+          res.json({post: post, user: req.user, isAuthor: true})
+        } else {
+          res.json({post: post, user: {}, isAuthor: false})
+        }
       } else {
-        res.json({post: post, user: {}, isAuthor: false})
+        res.json({post: null, user: null, isAuthor: null})
       }
     })
   })

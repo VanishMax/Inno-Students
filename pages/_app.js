@@ -3,6 +3,7 @@ import React from 'react'
 import '../static/css/index.css'
 import '../static/css/normalize.css'
 import '../static/css/default.css'
+import '../static/css/post.css'
 import '../static/css/headfoot.css'
 import '../static/css/news.css'
 
@@ -33,12 +34,26 @@ class MyApp extends App {
     this.toggleLang = () => {
       let lang = this.state.lang === 'en' ? 'ru' : 'en'
       document.cookie = `cookieLang=${lang}`
-      this.setState({lang: lang})
-      if(lang === 'ru') {
-        Router.replace({ pathname: Router.pathname, query: { lang: 'ru' }, shallow: true})
+      if(Router.query.slug) {
+        if(lang === 'ru') {
+          Router.replace({
+            pathname: Router.pathname,
+            query: { slug: Router.query.slug, lang: 'ru' }},
+            Router.asPath + '?lang=ru')
+        } else {
+          Router.replace({ pathname: Router.pathname, query: { slug: Router.query.slug }}, Router.asPath)
+        }
       } else {
-        Router.replace({ pathname: Router.pathname, shallow: true})
+        if(lang === 'ru') {
+          Router.replace({
+            pathname: Router.pathname,
+            query: { lang: 'ru' }},
+            Router.asPath + '?lang=ru')
+        } else {
+          Router.replace({ pathname: Router.pathname})
+        }
       }
+      this.setState({lang: lang})
     }
   }
 
