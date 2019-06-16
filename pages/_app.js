@@ -39,7 +39,7 @@ class MyApp extends App {
           Router.replace({
             pathname: Router.pathname,
             query: { slug: Router.query.slug, lang: 'ru' }},
-            Router.asPath + '?lang=ru')
+            Router.asPath.match(/lang=ru/) ? '' : Router.asPath + '?lang=ru')
         } else {
           Router.replace({ pathname: Router.pathname, query: { slug: Router.query.slug }}, Router.asPath)
         }
@@ -48,7 +48,7 @@ class MyApp extends App {
           Router.replace({
             pathname: Router.pathname,
             query: { lang: 'ru' }},
-            Router.asPath + '?lang=ru')
+            Router.asPath.match(/lang=ru/) ? '' : Router.asPath + '?lang=ru')
         } else {
           Router.replace({ pathname: Router.pathname})
         }
