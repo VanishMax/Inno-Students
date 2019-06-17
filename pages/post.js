@@ -27,8 +27,11 @@ const Post = ({post, user, isAuthor}) => {
 
   if(!post) {
     return (
-      <div className="content">
-        <div className="block text-5xl">Unexisting post</div>
+      <div className="content mt-6">
+        <Head>
+          <title>Not Found</title>
+        </Head>
+        <div className="block text-4xl">Unexisting post</div>
       </div>
     )
   } else {
@@ -38,21 +41,63 @@ const Post = ({post, user, isAuthor}) => {
           <title>{post[lang].title}</title>
         </Head>
 
-        <div className="post-actions">
-          <div onClick={edit}>
-            <Edit />
+        {isAuthor &&
+          <div className="mb-4">
+            <hr />
+            <div className="flex justify-around items-center py-2">
+              <div className="flex justify-between">
+                {isEdit ?
+                  <div onClick={edit}
+                    className="border border-gray-200 rounded bg-white text-black py-2 px-4 mr-4 cursor-pointer hover:border-green-700 hover:text-green-700">
+                    Save
+                  </div>
+                :
+                  <div onClick={edit}
+                    className="border border-gray-200 rounded bg-white text-black py-2 px-4 mr-4 cursor-pointer hover:border-green-700 hover:text-green-700">
+                    Edit
+                  </div>
+                }
+
+                <div className="border border-gray-200 rounded bg-white text-black py-2 px-4 mr-4 cursor-pointer hover:border-green-700 hover:text-green-700">
+                  Cover <span className="hidden md:inline">change</span>
+                </div>
+                {isEdit &&
+                  <div className="border border-gray-200 rounded bg-white text-black py-2 px-4 mr-4 cursor-pointer hover:border-green-700 hover:text-green-700">
+                    <span className="hidden md:inline">Switch to </span>Russian
+                  </div>
+                }
+                {isEdit &&
+                <div className="border border-gray-200 rounded bg-white text-black py-2 px-4 mr-4 cursor-pointer hover:border-green-700 hover:text-green-700">
+                  <span className="hidden md:inline">Connect to </span>G.Photo
+                </div>
+                }
+              </div>
+
+              {!isEdit &&
+                <div className="flex justify-between">
+                  <div className="border border-green-300 rounded bg-white text-black py-2 px-4 mr-4 cursor-pointer hover:border-green-700 hover:text-green-700">
+                    Publish
+                  </div>
+                </div>
+              }
+
+              {!isEdit &&
+                <div className="flex justify-between">
+                  <div className="border border-gray-200 rounded bg-white text-black py-2 px-4 mr-4 cursor-pointer hover:border-green-700 hover:text-green-700">
+                    <span className="hidden md:inline">Share with </span>Editors
+                  </div>
+                  <div className="border border-red-300 rounded bg-white text-black py-2 px-4 mr-4 cursor-pointer hover:border-red-700 hover:text-red-700">
+                    Delete
+                  </div>
+                </div>
+              }
+
+            </div>
+            <hr />
           </div>
 
-          {isEdit &&
-            <div>
-              {lang === 'ru' ?
-                <Rus />
-                :
-                <Eng />
-              }
-            </div>
-          }
-        </div>
+        }
+
 
         <div className={'snackbar ' + (isSnak ? 'show' : '')}>
           {isSnak}
@@ -67,7 +112,7 @@ const Post = ({post, user, isAuthor}) => {
             <span>{post.views || 0} {Lang.views[lang]}</span>
           </div>
           <input className="block w-full text-5xl px-0" placeholder={Lang.titlePlaceholder[lang]}
-                 value={post[lang].title} name="title" disabled={!isEdit} />
+                 value={post[lang].title} name="title" disabled={!isEdit}  />
           <input className="block w-full text-2xl text-gray-600" value={post[lang].lead}
                  placeholder={Lang.leadPlaceholder[lang]} name="lead" disabled={!isEdit} />
         </div>
