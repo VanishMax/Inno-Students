@@ -51,3 +51,11 @@
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
 }
+
+.inlineTooltip-button .tooltip-icon svg {
+    margin: auto !important;
+}
+
+.inlineTooltip-button {
+    background: white !important;
+}

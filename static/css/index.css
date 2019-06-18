@@ -3,6 +3,17 @@
 @tailwind utilities;
 
 
+
+.fullBr {
+  @apply w-full mb-6;
+  content: '';
+}
+
+.fullBrSmall {
+  @apply w-full mb-2;
+  content: '';
+}
+
 /*
 ---BUTTONS---
 */
