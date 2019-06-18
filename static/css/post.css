@@ -52,10 +52,15 @@
     to {bottom: 0; opacity: 0;}
 }
 
-.inlineTooltip-button .tooltip-icon svg {
+.DraftEditor-root .inlineTooltip-button .tooltip-icon svg {
     margin: auto !important;
 }
 
-.inlineTooltip-button {
+.DraftEditor-root .inlineTooltip-button {
     background: white !important;
+}
+
+.DraftEditor-root figure img {
+    box-shadow: 0 0 7px 2px rgba(0, 0, 0, .3);
+    border-radius: 10px;
 }
