@@ -11,6 +11,7 @@
     .content {width: 60%}
 }
 
+/* SNACKBAR */
 .snackbar {
     visibility: hidden;
     min-width: 250px;
@@ -23,7 +24,7 @@
     position: fixed;
     z-index: 1;
     left: 50%;
-    bottom: 30px;
+    top: 30px;
 }
 
 .snackbar.show {
@@ -33,24 +34,77 @@
 }
 
 @-webkit-keyframes fadein {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
+    from {top: 0; opacity: 0;}
+    to {top: 30px; opacity: 1;}
 }
 
 @keyframes fadein {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
+    from {top: 0; opacity: 0;}
+    to {top: 30px; opacity: 1;}
 }
 
 @-webkit-keyframes fadeout {
-    from {bottom: 30px; opacity: 1;}
-    to {bottom: 0; opacity: 0;}
+    from {top: 30px; opacity: 1;}
+    to {top: 0; opacity: 0;}
 }
 
 @keyframes fadeout {
-    from {bottom: 30px; opacity: 1;}
-    to {bottom: 0; opacity: 0;}
+    from {top: 30px; opacity: 1;}
+    to {top: 0; opacity: 0;}
 }
+
+/* COVER DIALOG */
+
+.coverDialog {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 1000;
+    display: none;
+    overflow-y: scroll;
+}
+
+.coverDialog.show {
+    display: block;
+}
+
+.coverDialogClose {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 25px;
+}
+
+.coverImageOverlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+}
+
+.coverImageOverlay:hover {
+    background: rgba(0, 0, 0, .6);
+}
+
+.coverImageOverlay.chosen {
+    background: rgba(0, 0, 0, .6);
+}
+
+.coverImageOverlay .coverImageOverlayChosen {
+    display: none;
+}
+
+.coverImageOverlay.chosen .coverImageOverlayChosen {
+    display: block;
+    position: absolute;
+    top: 40%; left: 40%;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid white;
+    font-size: 35px;
+    text-align: center;
+    color: white;
+}
+
+/* DANTE EDITOR */
 
 .DraftEditor-root .inlineTooltip-button .tooltip-icon svg {
     margin: auto !important;

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default ({isEdit, edit}) => {
+export default ({isEdit, edit, toggleCover}) => {
   return (
     <div className="mb-4">
       <hr />
@@ -17,7 +17,8 @@ export default ({isEdit, edit}) => {
           </div>
         }
 
-        <div className="border border-gray-200 rounded bg-white text-black py-2 px-4 cursor-pointer hover:border-green-700 hover:text-green-700">
+        <div onClick={toggleCover}
+          className="border border-gray-200 rounded bg-white text-black py-2 px-4 cursor-pointer hover:border-green-700 hover:text-green-700">
           Cover <span className="hidden md:inline">change</span>
         </div>
 

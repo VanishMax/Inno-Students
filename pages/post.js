@@ -6,6 +6,7 @@ import withPost from '../middleware/HOCs/withPost'
 import {LangContext} from '../middleware/context'
 import Lang from '../langs/post'
 
+import CoverDialog from '../components/post/coverDialog'
 import Unexisting from '../components/post/unexisting'
 import Actions from '../components/post/actions'
 import PostHeader from '../components/post/header'
@@ -19,6 +20,12 @@ const Post = ({post, user, isAuthor}) => {
 
   const titleRef = useRef(null)
   const leadRef = useRef(null)
+
+  const [isCoverOpen, openCover] = useState(false)
+  const [chosenCover, chooseCover] = useState(post.img)
+  const toggleCover = () => {
+    openCover(!isCoverOpen)
+  }
 
   const [form, editForm] = useState({
     title: post[lang].title || Lang.titlePlaceholder[lang],
@@ -78,8 +85,11 @@ const Post = ({post, user, isAuthor}) => {
           <title>{post[lang].title}</title>
         </Head>
 
+        <CoverDialog images={post.images} isOpen={isCoverOpen} toggle={toggleCover}
+                     choose={chooseCover} chosen={chosenCover} />
+
         {isAuthor &&
-          <Actions isEdit={isEdit} edit={edit} />
+          <Actions isEdit={isEdit} edit={edit} toggleCover={toggleCover} />
         }
 
         <div className={'snackbar ' + (isSnak ? 'show' : '')}>
