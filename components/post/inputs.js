@@ -9,7 +9,7 @@ import {ImageBlockConfig} from 'Dante2/package/lib/components/blocks/image'
 import {VideoBlockConfig} from 'Dante2/package/lib/components/blocks/video'
 import {DividerBlockConfig} from 'Dante2/package/lib/components/blocks/divider'
 
-export default ({lang, changeContent, form, changeForm, isEdit, titleRef, leadRef, clearPlaceholder}) => {
+export default ({lang, post, changeContent, form, changeForm, isEdit, titleRef, leadRef, clearPlaceholder}) => {
   return (
     <React.Fragment>
       <ContentEditable
@@ -30,7 +30,7 @@ export default ({lang, changeContent, form, changeForm, isEdit, titleRef, leadRe
       />
 
       <Dante onChange={changeContent} content={form.content} read_only={!isEdit}
-             widgets={[ImageBlockConfig({ options: { upload_url: '/post/urlll' } }),
+             widgets={[ImageBlockConfig({ options: { upload_url: '/post/edit/img?post=' + post } }),
                VideoBlockConfig({ options: { placeholder: 'Put an external video link', endpoint: '//open.iframe.ly/api/oembed?origin=https://github.com&url=', caption: 'optional caption', }, }),
                DividerBlockConfig()]}/>
     </React.Fragment>

@@ -1,5 +1,10 @@
 const db = require('../config/connection')
+const fetch = require('isomorphic-unfetch')
+const fs = require('fs')
+const formidable = require('formidable')
+const FormData = require('form-data')
 const moment = require('moment')
+const bucket = 'http://inno-students.s3.amazonaws.com/'
 
 let Post, Counter, User
 db.getInstance((p_db) => {
@@ -52,6 +57,74 @@ module.exports = (app, server) => {
       } else {
         res.status(400).send()
       }
+    })
+  })
+
+  // Save titles, leads and content with different languages
+  app.post('/post/edit/text', (req, res) => {
+    Post.findOne({_id: req.body.post}, (err, post) => {
+      if(post) {
+        if(req.user && (req.user._id === post.author._id || req.user.role === 'A')) {
+          let field = req.body.lang + '.' + req.body.name
+          Post.findOneAndUpdate({_id: req.body.post}, {$set: {[field]: req.body[req.body.name]}})
+          res.json({message: 'Done'})
+        } else {
+          res.json({message: 'Go Fuck Yourself'})
+        }
+      } else {
+        res.json({message: 'Go Fuck Yourself'})
+      }
+    })
+  })
+
+
+  // Save image on Amazon S3
+  app.post('/post/edit/img', (req, res) => {
+    const id = parseInt(req.query.post)
+
+    let form = new formidable.IncomingForm()
+    form.parse(req, (err, fields, files) => {
+
+      Post.findOne({_id: id}, (err, post) => {
+        if(post) {
+          if(req.user && (req.user._id === post.author._id || req.user.role === 'A')) {
+
+            fs.readFile(files.file['path'], async (err, image) => {
+              if (err) throw err
+
+              let name = 'images/' + post.url + '-' + (post.images.length + 1) + '.' + files.file['name'].split('.')[1]
+
+              const formData = new FormData();
+              formData.append('key', name)
+              formData.append('file', image, {
+                filepath: files.file['path'],
+                contentType: 'image/jpeg',
+              })
+
+              let data = await fetch(bucket, {
+                method: 'POST',
+                body: formData
+              }).then(response => response.status)
+
+              if(data === 204){
+                let ready
+                if(post.img !== '') {
+                  ready = await Post.findOneAndUpdate({_id: id}, {$push: {images: name}})
+                } else {
+                  ready = await Post.findOneAndUpdate({_id: id}, {$set: {img: name}, $push: {images: name}})
+                }
+                if(ready) res.json({message: 'Done', url: bucket + name})
+              } else {
+                res.json({message: 'Cannot upload'})
+              }
+            })
+          } else {
+            res.json({message: 'Go Fuck Yourself'})
+          }
+        } else {
+          res.json({message: 'Go Fuck Yourself'})
+        }
+      })
     })
   })
 

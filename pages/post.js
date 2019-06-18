@@ -1,5 +1,6 @@
 import React, {useContext, useState, useRef} from 'react'
 import Head from 'next/head'
+import 'isomorphic-unfetch'
 
 import withPost from '../middleware/HOCs/withPost'
 import {LangContext} from '../middleware/context'
@@ -22,18 +23,36 @@ const Post = ({post, user, isAuthor}) => {
   const [form, editForm] = useState({
     title: post[lang].title || Lang.titlePlaceholder[lang],
     lead: post[lang].lead || Lang.leadPlaceholder[lang],
-    content: post[lang].content || null
+    content: post[lang].content === '' ? null : JSON.parse(post[lang].content)
   })
-  const changeForm = (e, name) => {
-    editForm({...form, [name]: e.target.value})
-  }
   const clearPlaceholder = (e, name) => {
     if(e.target.textContent.indexOf(Lang[name + 'Placeholder'][lang]) !== -1)
       editForm({...form, [name]: ''})
   }
+
+  const [timeout, changeTimeout] = useState(null)
+  const changeForm = (e, name) => {
+    editForm({...form, [name]: e.target.value})
+
+    if(timeout) clearTimeout(timeout)
+    changeTimeout(setTimeout(() => save(name, e.target.value), 1000))
+  }
+
   const changeContent = (content) => {
-    // console.log(content.emitSerializedOutput())
     editForm({...form, content: content.emitSerializedOutput()})
+
+    if(timeout) clearTimeout(timeout)
+    changeTimeout(setTimeout(() => {
+      if(content !== null) save('content', JSON.stringify(content.emitSerializedOutput()))
+    }, 1000))
+  }
+
+  const save = async (name, value) => {
+    return await fetch('/post/edit/text', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({lang: lang, post: post._id, [name]: value, name: name})
+    }).then(res => res.json())
   }
 
   const edit = () => {
@@ -69,7 +88,7 @@ const Post = ({post, user, isAuthor}) => {
 
         <div className="content">
           <PostHeader lang={lang} post={post} />
-          <Inputs lang={lang} isEdit={isEdit} form={form}
+          <Inputs lang={lang} isEdit={isEdit} form={form} post={post._id}
                   titleRef={titleRef} leadRef={leadRef} clearPlaceholder={clearPlaceholder}
                   changeForm={changeForm} changeContent={changeContent} />
         </div>
