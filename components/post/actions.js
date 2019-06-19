@@ -3,8 +3,8 @@ import 'isomorphic-unfetch'
 import Dropdown from '../dropdown'
 
 
-export default ({isEdit, edit, toggleCover, postID, sharedWith,
-                  lang, snack, isDelete, changeDeletion}) => {
+export default ({isEdit, edit, toggleCover, togglePublish, postID,
+                  lang, snack, isDelete, changeDeletion, sharedWith}) => {
 
   // Sharing the post with other editors
   const [users, changeUsers] = useState(null)
@@ -107,7 +107,8 @@ export default ({isEdit, edit, toggleCover, postID, sharedWith,
 
           <br className="fullBrSmall sm:hidden" />
 
-          <div className="border border-green-300 rounded bg-white text-black py-2 px-4 cursor-pointer hover:border-green-700 hover:text-green-700">
+          <div onClick={togglePublish}
+            className="border border-green-300 rounded bg-white text-black py-2 px-4 cursor-pointer hover:border-green-700 hover:text-green-700">
             Publish
           </div>
 

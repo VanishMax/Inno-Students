@@ -10,6 +10,7 @@ import Lang from '../langs/post'
 
 import dynamic from 'next/dynamic'
 const CoverDialog = dynamic(() => import('../components/post/coverDialog'), {ssr: false})
+const PublishDialog = dynamic(() => import('../components/post/publishDialog'), {ssr: false})
 
 import Unexisting from '../components/post/unexisting'
 import Actions from '../components/post/actions'
@@ -67,6 +68,13 @@ const Post = ({post, user, role}) => {
     })
     changeSnack('Image deleted')
     changeImages(images.filter(x => x !== img))
+  }
+
+
+  // Before publishing we have to show the statistics dialog
+  const [isPublishOpen, openPublish] = useState(false)
+  const togglePublish = () => {
+    openPublish(!isPublishOpen)
   }
 
   // Deletion colors the button in red, an on the second click deletes the post
@@ -162,8 +170,11 @@ const Post = ({post, user, role}) => {
             <CoverDialog images={images} isOpen={isCoverOpen} toggle={toggleCover}
                          choose={choose} chosen={chosenCover} del={deleteCover} />
 
-            <Actions isEdit={isEdit} edit={edit} toggleCover={toggleCover} snack={changeSnack}
-                     postID={post._id} sharedWith={post.sharedWith} lang={lang}
+            <PublishDialog post={post} isOpen={isPublishOpen} toggle={togglePublish} lang={lang}/>
+
+            <Actions isEdit={isEdit} edit={edit} toggleCover={toggleCover}
+                     snack={changeSnack} lang={lang} togglePublish={togglePublish}
+                     postID={post._id} sharedWith={post.sharedWith}
                      isDelete={isDelete} changeDeletion={changeDeletion} />
 
             <div className={'snackbar ' + (isSnak ? 'show' : '')}>
