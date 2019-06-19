@@ -15,7 +15,10 @@ import Actions from '../components/post/actions'
 import PostHeader from '../components/post/header'
 import Inputs from '../components/post/inputs'
 
-const Post = ({post, user, isAuthor}) => {
+const Post = ({post, user, role}) => {
+
+  const isAuthor = role === 'A'
+  const isEditor = role === 'E'
 
   const lang = useContext(LangContext)
 
@@ -131,7 +134,7 @@ const Post = ({post, user, isAuthor}) => {
         <CoverDialog images={images} isOpen={isCoverOpen} toggle={toggleCover}
                      choose={choose} chosen={chosenCover} del={del} />
 
-        {isAuthor &&
+        {(isAuthor || isEditor) &&
           <Actions isEdit={isEdit} edit={edit} toggleCover={toggleCover} snack={changeSnack}
                    postID={post._id} sharedWith={post.sharedWith} lang={lang} />
         }

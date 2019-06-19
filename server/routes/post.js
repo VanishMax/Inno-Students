@@ -65,7 +65,9 @@ module.exports = (app, server) => {
   app.post('/post/edit/text', (req, res) => {
     Post.findOne({_id: req.body.post}, (err, post) => {
       if(post) {
-        if(req.user && (req.user._id === post.author._id || req.user.role === 'A')) {
+        if(req.user && (req.user._id === post.author._id || req.user.role === 'A'
+          || post.sharedWith.indexOf(req.user._id) !== -1)) {
+
           let field = req.body.lang + '.' + req.body.name
           Post.findOneAndUpdate({_id: req.body.post}, {$set: {[field]: req.body[req.body.name]}})
           res.json({message: 'Done'})
@@ -88,7 +90,8 @@ module.exports = (app, server) => {
 
       Post.findOne({_id: id}, (err, post) => {
         if(post) {
-          if(req.user && (req.user._id === post.author._id || req.user.role === 'A')) {
+          if(req.user && (req.user._id === post.author._id || req.user.role === 'A'
+            || post.sharedWith.indexOf(req.user._id) !== -1)) {
 
             fs.readFile(files.file['path'], async (err, image) => {
               if (err) throw err
@@ -134,7 +137,9 @@ module.exports = (app, server) => {
     const id = parseInt(req.body.post), img = req.body.img
     if(id && img) {
       Post.findOne({_id: id}, (err, post) => {
-        if(req.user && (req.user._id === post.author._id || req.user.role === 'A')) {
+        if(req.user && (req.user._id === post.author._id || req.user.role === 'A'
+          || post.sharedWith.indexOf(req.user._id) !== -1)) {
+
           Post.findOneAndUpdate({_id: id}, {$set: {img: img}})
           res.json({message: 'Done'})
         } else {
@@ -151,7 +156,9 @@ module.exports = (app, server) => {
     const id = parseInt(req.body.post), img = req.body.img
     if(id && img) {
       Post.findOne({_id: id}, (err, post) => {
-        if(req.user && (req.user._id === post.author._id || req.user.role === 'A')) {
+        if(req.user && (req.user._id === post.author._id || req.user.role === 'A'
+          || post.sharedWith.indexOf(req.user._id) !== -1)) {
+
           Post.findOneAndUpdate({_id: id}, {$pull: {images: img}})
           res.json({message: 'Done'})
         } else {
@@ -193,11 +200,17 @@ module.exports = (app, server) => {
   // Get a post page
   app.get('/post/:url', (req, res) => {
     Post.findOne({url: req.params.url}, async (err, post) => {
-      post.author = await User.findOne({_id: post.author}, {projection: {password: 0}});
-      if(req.user && (req.user._id === post.author._id || req.user.role === 'A')) {
-        server.render(req, res, '/post', {slug: req.params.url, post: post, user: req.user, isAuthor: true})
+      if(!err && post) {
+        post.author = await User.findOne({_id: post.author}, {projection: {password: 0}});
+        if(!req.user) {
+          server.render(req, res, '/post', {slug: req.params.url, post: post, user: {}, role: 'U'})
+        } else if(req.user._id === post.author._id || req.user.role === 'A') {
+          server.render(req, res, '/post', {slug: req.params.url, post: post, user: req.user, role: 'A'})
+        } else if(post.sharedWith.indexOf(req.user._id) !== -1) {
+          server.render(req, res, '/post', {slug: req.params.url, post: post, user: req.user, role: 'E'})
+        }
       } else {
-        server.render(req, res, '/post', {slug: req.params.url, post: post, user: {}, isAuthor: false})
+        server.render(req, res, '/post', {post: null, user: null, isAuthor: null})
       }
     })
   })
@@ -206,10 +219,12 @@ module.exports = (app, server) => {
     Post.findOne({url: req.params.url}, async (err, post) => {
       if(!err && post) {
         post.author = await User.findOne({_id: post.author}, {projection: {password: 0}});
-        if(req.user && (req.user._id === post.author._id || req.user.role === 'A')) {
-          res.json({post: post, user: req.user, isAuthor: true})
-        } else {
-          res.json({post: post, user: {}, isAuthor: false})
+        if(!req.user) {
+          res.json({slug: req.params.url, post: post, user: {}, role: 'U'})
+        } else if(req.user._id === post.author._id || req.user.role === 'A') {
+          res.json({slug: req.params.url, post: post, user: req.user, role: 'A'})
+        } else if(post.sharedWith.indexOf(req.user._id) !== -1) {
+          res.json({slug: req.params.url, post: post, user: req.user, role: 'E'})
         }
       } else {
         res.json({post: null, user: null, isAuthor: null})

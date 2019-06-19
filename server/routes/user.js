@@ -32,7 +32,7 @@ module.exports = (app, server) => {
   // My drafts
   app.get('/user/drafts', (req, res) => {
     if(req.user) {
-      Post.find({status: 'E', author: req.user._id}).toArray((err, posts) => {
+      Post.find({status: 'E', $or: [{author: req.user._id}, {sharedWith: req.user._id}]}).toArray((err, posts) => {
         server.render(req, res, '/user/drafts', {posts: posts, user: req.user})
       })
     } else {
@@ -41,7 +41,7 @@ module.exports = (app, server) => {
   })
   app.post('/user/drafts', (req, res) => {
     if(req.user) {
-      Post.find({status: 'E', author: req.user._id}).toArray((err, posts) => {
+      Post.find({status: 'E', $or: [{author: req.user._id}, {sharedWith: req.user._id}]}).toArray((err, posts) => {
         res.json({posts: posts, user: req.user})
       })
     } else {
@@ -89,6 +89,17 @@ module.exports = (app, server) => {
     }
   })
 
+  // Get all users with role Editor
+  app.post('/user/editors', (req, res) => {
+    if(req.user) {
+      User.find({_id: {$ne: req.user._id}, role: 'E'}, {projection: {username: 1, _id: 1, ru: 1, en: 1}}).toArray((err, users) => {
+        res.json({users: users})
+      })
+    } else {
+      res.json({})
+    }
+  })
+
   // Admin's request messages
   app.get('/user/requests', (req, res) => {
     if(req.user && req.user.role === 'A') {
@@ -103,17 +114,6 @@ module.exports = (app, server) => {
     if(req.user && req.user.role === 'A') {
       User.find({'request.date': {$ne: ''}, 'request.approved': false}, {projection: {request: 1, username: 1, _id: 1}}).toArray((err, users) => {
         res.json({users: users, user: req.user})
-      })
-    } else {
-      res.json({})
-    }
-  })
-
-  // Get all users with role Editor
-  app.post('/user/editors', (req, res) => {
-    if(req.user) {
-      User.find({_id: {$ne: req.user._id}, role: 'E'}, {projection: {username: 1, _id: 1, ru: 1, en: 1}}).toArray((err, users) => {
-        res.json({users: users})
       })
     } else {
       res.json({})
