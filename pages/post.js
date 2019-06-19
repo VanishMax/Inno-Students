@@ -1,4 +1,5 @@
 import React, {useContext, useState, useRef} from 'react'
+import Router from 'next/router'
 import Head from 'next/head'
 import {bucket} from '../constants/user'
 import 'isomorphic-unfetch'
@@ -17,10 +18,16 @@ import Inputs from '../components/post/inputs'
 
 const Post = ({post, user, role}) => {
 
-  const isAuthor = role === 'A'
-  const isEditor = role === 'E'
+  if(!post) {
+    return (
+      <Unexisting />
+    )
+  }
 
   const lang = useContext(LangContext)
+
+  const isAuthor = role === 'A'
+  const isEditor = role === 'E'
 
   const [isEdit, goToEdit] = useState(false)
 
@@ -48,7 +55,7 @@ const Post = ({post, user, role}) => {
     chooseCover(img)
     changeSnack('You\'ve changed the cover image')
   }
-  const del = (e, img) => {
+  const deleteCover = (e, img) => {
     e.stopPropagation()
     fetch(bucket + img, {
       method: 'DELETE'
@@ -60,6 +67,29 @@ const Post = ({post, user, role}) => {
     })
     changeSnack('Image deleted')
     changeImages(images.filter(x => x !== img))
+  }
+
+  // Deletion colors the button in red, an on the second click deletes the post
+  const [delTimeout, delChangeTimeout] = useState(null)
+  const [isDelete, editDeletion] = useState(false)
+  const changeDeletion = () => {
+    if(isDelete) {
+      fetch('/post/delete', {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({post: post._id})
+      })
+      Router.replace({
+          pathname: Router.pathname,
+          query: { lang: Router.query.lang === 'ru' ? 'ru' : null }},
+          Router.asPath.match(/lang=ru/) ? '' : Router.asPath + '?lang=ru'
+      )
+    } else {
+      editDeletion(true)
+      changeSnack('Click again to delete')
+      if(delTimeout) clearTimeout(delTimeout)
+      delChangeTimeout(setTimeout(() => editDeletion(false), 5000))
+    }
   }
 
 
@@ -120,28 +150,27 @@ const Post = ({post, user, role}) => {
   }
 
 
-  if(!post) {
-    return (
-      <Unexisting />
-    )
-  } else {
     return (
       <React.Fragment>
         <Head>
           <title>{post[lang].title}</title>
         </Head>
 
-        <CoverDialog images={images} isOpen={isCoverOpen} toggle={toggleCover}
-                     choose={choose} chosen={chosenCover} del={del} />
 
         {(isAuthor || isEditor) &&
-          <Actions isEdit={isEdit} edit={edit} toggleCover={toggleCover} snack={changeSnack}
-                   postID={post._id} sharedWith={post.sharedWith} lang={lang} />
-        }
+          <React.Fragment>
+            <CoverDialog images={images} isOpen={isCoverOpen} toggle={toggleCover}
+                         choose={choose} chosen={chosenCover} del={deleteCover} />
 
-        <div className={'snackbar ' + (isSnak ? 'show' : '')}>
-          {isSnak}
-        </div>
+            <Actions isEdit={isEdit} edit={edit} toggleCover={toggleCover} snack={changeSnack}
+                     postID={post._id} sharedWith={post.sharedWith} lang={lang}
+                     isDelete={isDelete} changeDeletion={changeDeletion} />
+
+            <div className={'snackbar ' + (isSnak ? 'show' : '')}>
+              {isSnak}
+            </div>
+          </React.Fragment>
+        }
 
         <div className="content">
           <PostHeader lang={lang} post={post} />
@@ -151,7 +180,6 @@ const Post = ({post, user, role}) => {
         </div>
       </React.Fragment>
     )
-  }
 }
 
 export default withPost(Post)

@@ -231,4 +231,25 @@ module.exports = (app, server) => {
       }
     })
   })
+
+  // Delete post
+  app.delete('/post/delete', (req, res) => {
+    const id = req.body.post
+    if(id) {
+      Post.findOne({_id: id}, async (err, post) => {
+        if(!err && post) {
+          if(req.user._id === post.author._id || req.user.role === 'A') {
+            Post.remove({_id: id}, true)
+            res.json({message: 'Deleted'})
+          } else {
+            res.status(403).json({message: 'Not enough privileges'})
+          }
+        } else {
+          res.json({message: 'Nothing to delete'})
+        }
+      })
+    } else {
+     res.json({message: 'No id'})
+    }
+  })
 }

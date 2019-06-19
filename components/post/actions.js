@@ -3,8 +3,10 @@ import 'isomorphic-unfetch'
 import Dropdown from '../dropdown'
 
 
-export default ({isEdit, edit, toggleCover, postID, sharedWith, lang, snack}) => {
+export default ({isEdit, edit, toggleCover, postID, sharedWith,
+                  lang, snack, isDelete, changeDeletion}) => {
 
+  // Sharing the post with other editors
   const [users, changeUsers] = useState(null)
   const getUsers = async () => {
     const data = await fetch('/user/editors', {
@@ -16,6 +18,7 @@ export default ({isEdit, edit, toggleCover, postID, sharedWith, lang, snack}) =>
     }))
   }
 
+  // By clicking in the dropdown on the name of the editor
   const toggleShare = async (id) => {
     let action = ''
     changeUsers(users.map(user => {
@@ -34,7 +37,7 @@ export default ({isEdit, edit, toggleCover, postID, sharedWith, lang, snack}) =>
     snack(data.message)
   }
 
-  const DropValue = ({user, open, index}) => {
+  const DropValue = ({user}) => {
     return (
       <div onClick={() => toggleShare(user._id)}
         className={`w-full px-4 leading-normal tracking-wide border-b-2 border-gray-100 border-solid py-2 cursor-pointer
@@ -108,7 +111,10 @@ export default ({isEdit, edit, toggleCover, postID, sharedWith, lang, snack}) =>
             Publish
           </div>
 
-          <div className="border border-red-300 rounded bg-white text-black py-2 px-4 cursor-pointer hover:border-red-700 hover:text-red-700">
+          <div onClick={changeDeletion}
+            className={`border rounded text-black py-2 px-4 cursor-pointer
+              ${isDelete ? 'border-red-600 bg-red-600 text-white hover:border-red-900 hover:border-red-900' : 
+              ' border-red-300 bg-white hover:border-red-700 hover:text-red-700'}`}>
             Delete
           </div>
         </React.Fragment>
