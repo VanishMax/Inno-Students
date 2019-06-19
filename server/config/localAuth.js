@@ -47,6 +47,7 @@ module.exports = (passport) => {
                   signedDate: moment().format('DD-MM-YYYY'),
                   img: '',
                   website: '',
+                  accessTo: [],
                   en: {
                     name: '',
                     surname: ''

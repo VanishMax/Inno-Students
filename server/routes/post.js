@@ -40,6 +40,7 @@ module.exports = (app, server) => {
           views: null,
           comments: [],
           url: url,
+          sharedWith: [],
           en: {
             title: body.titleEn.trim(),
             lead: '',
@@ -161,6 +162,33 @@ module.exports = (app, server) => {
       res.json({message: 'Go Fuck Yourself'})
     }
   })
+
+  // Only author or the admin can share the post
+  app.post('/post/edit/share', (req, res) => {
+    const id = req.body.post, user = req.body.user, action = req.body.action
+    if(id && user) {
+      Post.findOne({_id: id}, (err, post) => {
+        if(req.user && (req.user._id === post.author._id || req.user.role === 'A')) {
+          if(action === 'Share') {
+            Post.findOneAndUpdate({_id: id}, {$push: {sharedWith: user}})
+            User.findOneAndUpdate({_id: user}, {$push: {accessTo: id}})
+            res.json({message: 'Shared'})
+          } else if(action === 'Deshare') {
+            Post.findOneAndUpdate({_id: id}, {$pull: {sharedWith: user}})
+            User.findOneAndUpdate({_id: user}, {$pull: {accessTo: id}})
+            res.json({message: 'Deshared'})
+          } else {
+            res.json({message: 'No action'})
+          }
+        } else {
+          res.status(403).json({message: 'No the author'})
+        }
+      })
+    } else {
+      res.status(403).json({message: 'Go Fuck Yourself'})
+    }
+  })
+
 
   // Get a post page
   app.get('/post/:url', (req, res) => {

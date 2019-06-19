@@ -109,6 +109,17 @@ module.exports = (app, server) => {
     }
   })
 
+  // Get all users with role Editor
+  app.post('/user/editors', (req, res) => {
+    if(req.user) {
+      User.find({_id: {$ne: req.user._id}, role: 'E'}, {projection: {username: 1, _id: 1, ru: 1, en: 1}}).toArray((err, users) => {
+        res.json({users: users})
+      })
+    } else {
+      res.json({})
+    }
+  })
+
   // Request for becoming an author
   app.post('/user/request', (req, res) => {
     if(req.user) {
