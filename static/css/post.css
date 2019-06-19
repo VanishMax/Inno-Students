@@ -22,7 +22,7 @@
     border-radius: 5px;
     padding: 16px;
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     left: 50%;
     top: 30px;
 }
@@ -58,7 +58,7 @@
 .coverDialog {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    z-index: 1000;
+    z-index: 500;
     display: none;
     overflow-y: scroll;
 }
@@ -87,6 +87,10 @@
     background: rgba(0, 0, 0, .6);
 }
 
+.coverImageOverlay.chosen .coverImageOverlayTrash {
+    display: none !important;
+}
+
 .coverImageOverlay .coverImageOverlayChosen {
     display: none;
 }
@@ -102,6 +106,27 @@
     font-size: 35px;
     text-align: center;
     color: white;
+}
+
+.coverImageOverlay .coverImageOverlayTrash {
+    display: none;
+    padding: 3px;
+    position: absolute;
+    top: 5%; right: 5%;
+}
+
+.coverImageOverlay .coverImageOverlayTrash svg {
+    width: 25px;
+    height: 30px;
+}
+
+.coverImageOverlay:hover .coverImageOverlayTrash svg:hover {
+    box-shadow: 0 0 3px 1px rgba(255, 255, 255, .5);
+    border-radius: 15px;
+}
+
+.coverImageOverlay:hover .coverImageOverlayTrash {
+    display: block;
 }
 
 /* DANTE EDITOR */

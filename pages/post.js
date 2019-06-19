@@ -1,5 +1,6 @@
 import React, {useContext, useState, useRef} from 'react'
 import Head from 'next/head'
+import {bucket} from '../constants/user'
 import 'isomorphic-unfetch'
 
 import withPost from '../middleware/HOCs/withPost'
@@ -16,16 +17,45 @@ const Post = ({post, user, isAuthor}) => {
 
   const lang = useContext(LangContext)
   const [isEdit, goToEdit] = useState(false)
-  const [isSnak, changeSnack] = useState(null)
+  const [isSnak, editSnack] = useState(null)
+  const changeSnack = (text) => {
+    editSnack(text)
+    setTimeout(() => changeSnack(null), 3000)
+  }
 
   const titleRef = useRef(null)
   const leadRef = useRef(null)
 
+
   const [isCoverOpen, openCover] = useState(false)
+  const [images, changeImages] = useState(post.images)
   const [chosenCover, chooseCover] = useState(post.img)
   const toggleCover = () => {
     openCover(!isCoverOpen)
   }
+  const choose = (img) => {
+    fetch('/post/edit/changeCover', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({img: img, post: post._id})
+    })
+    chooseCover(img)
+    changeSnack('You\'ve changed the cover image')
+  }
+  const del = (e, img) => {
+    e.stopPropagation()
+    fetch(bucket + img, {
+      method: 'DELETE'
+    })
+    fetch('/post/edit/imgRemove', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({img: img, post: post._id})
+    })
+    changeSnack('Image deleted')
+    changeImages(images.filter(x => x !== img))
+  }
+
 
   const [form, editForm] = useState({
     title: post[lang].title || Lang.titlePlaceholder[lang],
@@ -66,11 +96,9 @@ const Post = ({post, user, isAuthor}) => {
     if(isEdit) {
       goToEdit(false)
       changeSnack('You\'ve quitted the editing mode')
-      setTimeout(() => changeSnack(null), 3000)
     } else {
       goToEdit(true)
       changeSnack('You\'re now in editing mode')
-      setTimeout(() => changeSnack(null), 3000)
     }
   }
 
@@ -85,8 +113,8 @@ const Post = ({post, user, isAuthor}) => {
           <title>{post[lang].title}</title>
         </Head>
 
-        <CoverDialog images={post.images} isOpen={isCoverOpen} toggle={toggleCover}
-                     choose={chooseCover} chosen={chosenCover} />
+        <CoverDialog images={images} isOpen={isCoverOpen} toggle={toggleCover}
+                     choose={choose} chosen={chosenCover} del={del} />
 
         {isAuthor &&
           <Actions isEdit={isEdit} edit={edit} toggleCover={toggleCover} />

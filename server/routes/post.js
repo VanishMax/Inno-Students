@@ -128,6 +128,40 @@ module.exports = (app, server) => {
     })
   })
 
+  // Change Cover image
+  app.post('/post/edit/changeCover', (req, res) => {
+    const id = parseInt(req.body.post), img = req.body.img
+    if(id && img) {
+      Post.findOne({_id: id}, (err, post) => {
+        if(req.user && (req.user._id === post.author._id || req.user.role === 'A')) {
+          Post.findOneAndUpdate({_id: id}, {$set: {img: img}})
+          res.json({message: 'Done'})
+        } else {
+          res.json({message: 'Go Fuck Yourself'})
+        }
+      })
+    } else {
+      res.json({message: 'Go Fuck Yourself'})
+    }
+  })
+
+  // Delete image
+  app.post('/post/edit/imgRemove', (req, res) => {
+    const id = parseInt(req.body.post), img = req.body.img
+    if(id && img) {
+      Post.findOne({_id: id}, (err, post) => {
+        if(req.user && (req.user._id === post.author._id || req.user.role === 'A')) {
+          Post.findOneAndUpdate({_id: id}, {$pull: {images: img}})
+          res.json({message: 'Done'})
+        } else {
+          res.json({message: 'Go Fuck Yourself'})
+        }
+      })
+    } else {
+      res.json({message: 'Go Fuck Yourself'})
+    }
+  })
+
   // Get a post page
   app.get('/post/:url', (req, res) => {
     Post.findOne({url: req.params.url}, async (err, post) => {
