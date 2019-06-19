@@ -73,7 +73,17 @@ const Post = ({post, user, role}) => {
 
   // Before publishing we have to show the statistics dialog
   const [isPublishOpen, openPublish] = useState(false)
-  const togglePublish = () => {
+  const [publishData, editPublishData] = useState(null)
+  const togglePublish = async () => {
+    if(!isPublishOpen) {
+      const data = await fetch('/post/publishData', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({post: post._id})
+      }).then(res => res.json())
+      console.log(data)
+      editPublishData(data)
+    }
     openPublish(!isPublishOpen)
   }
 
@@ -158,39 +168,40 @@ const Post = ({post, user, role}) => {
   }
 
 
-    return (
-      <React.Fragment>
-        <Head>
-          <title>{post[lang].title}</title>
-        </Head>
+  return (
+    <React.Fragment>
+      <Head>
+        <title>{post[lang].title}</title>
+      </Head>
 
 
-        {(isAuthor || isEditor) &&
-          <React.Fragment>
-            <CoverDialog images={images} isOpen={isCoverOpen} toggle={toggleCover}
-                         choose={choose} chosen={chosenCover} del={deleteCover} />
+      {(isAuthor || isEditor) &&
+        <React.Fragment>
+          <CoverDialog images={images} isOpen={isCoverOpen} toggle={toggleCover}
+                       choose={choose} chosen={chosenCover} del={deleteCover} />
 
-            <PublishDialog post={post} isOpen={isPublishOpen} toggle={togglePublish} lang={lang}/>
+          <PublishDialog post={post} isOpen={isPublishOpen} toggle={togglePublish}
+                         lang={lang} data={publishData} />
 
-            <Actions isEdit={isEdit} edit={edit} toggleCover={toggleCover}
-                     snack={changeSnack} lang={lang} togglePublish={togglePublish}
-                     postID={post._id} sharedWith={post.sharedWith}
-                     isDelete={isDelete} changeDeletion={changeDeletion} />
+          <Actions isEdit={isEdit} edit={edit} toggleCover={toggleCover}
+                   snack={changeSnack} lang={lang} togglePublish={togglePublish}
+                   postID={post._id} sharedWith={post.sharedWith}
+                   isDelete={isDelete} changeDeletion={changeDeletion} />
 
-            <div className={'snackbar ' + (isSnak ? 'show' : '')}>
-              {isSnak}
-            </div>
-          </React.Fragment>
-        }
+          <div className={'snackbar ' + (isSnak ? 'show' : '')}>
+            {isSnak}
+          </div>
+        </React.Fragment>
+      }
 
-        <div className="content">
-          <PostHeader lang={lang} post={post} />
-          <Inputs lang={lang} isEdit={isEdit} form={form} post={post._id}
-                  titleRef={titleRef} leadRef={leadRef} clearPlaceholder={clearPlaceholder}
-                  changeForm={changeForm} changeContent={changeContent} />
-        </div>
-      </React.Fragment>
-    )
+      <div className="content">
+        <PostHeader lang={lang} post={post} />
+        <Inputs lang={lang} isEdit={isEdit} form={form} post={post._id}
+                titleRef={titleRef} leadRef={leadRef} clearPlaceholder={clearPlaceholder}
+                changeForm={changeForm} changeContent={changeContent} />
+      </div>
+    </React.Fragment>
+  )
 }
 
 export default withPost(Post)

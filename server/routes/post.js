@@ -65,7 +65,7 @@ module.exports = (app, server) => {
   app.post('/post/edit/text', (req, res) => {
     Post.findOne({_id: req.body.post}, (err, post) => {
       if(post) {
-        if(req.user && (req.user._id === post.author._id || req.user.role === 'A'
+        if(req.user && (req.user._id === post.author || req.user.role === 'A'
           || post.sharedWith.indexOf(req.user._id) !== -1)) {
 
           let field = req.body.lang + '.' + req.body.name
@@ -80,7 +80,6 @@ module.exports = (app, server) => {
     })
   })
 
-
   // Save image on Amazon S3
   app.post('/post/edit/img', (req, res) => {
     const id = parseInt(req.query.post)
@@ -90,7 +89,7 @@ module.exports = (app, server) => {
 
       Post.findOne({_id: id}, (err, post) => {
         if(post) {
-          if(req.user && (req.user._id === post.author._id || req.user.role === 'A'
+          if(req.user && (req.user._id === post.author || req.user.role === 'A'
             || post.sharedWith.indexOf(req.user._id) !== -1)) {
 
             fs.readFile(files.file['path'], async (err, image) => {
@@ -137,7 +136,7 @@ module.exports = (app, server) => {
     const id = parseInt(req.body.post), img = req.body.img
     if(id && img) {
       Post.findOne({_id: id}, (err, post) => {
-        if(req.user && (req.user._id === post.author._id || req.user.role === 'A'
+        if(req.user && (req.user._id === post.author || req.user.role === 'A'
           || post.sharedWith.indexOf(req.user._id) !== -1)) {
 
           Post.findOneAndUpdate({_id: id}, {$set: {img: img}})
@@ -156,7 +155,7 @@ module.exports = (app, server) => {
     const id = parseInt(req.body.post), img = req.body.img
     if(id && img) {
       Post.findOne({_id: id}, (err, post) => {
-        if(req.user && (req.user._id === post.author._id || req.user.role === 'A'
+        if(req.user && (req.user._id === post.author || req.user.role === 'A'
           || post.sharedWith.indexOf(req.user._id) !== -1)) {
 
           Post.findOneAndUpdate({_id: id}, {$pull: {images: img}})
@@ -175,7 +174,7 @@ module.exports = (app, server) => {
     const id = req.body.post, user = req.body.user, action = req.body.action
     if(id && user) {
       Post.findOne({_id: id}, (err, post) => {
-        if(req.user && (req.user._id === post.author._id || req.user.role === 'A')) {
+        if(req.user && (req.user._id === post.author || req.user.role === 'A')) {
           if(action === 'Share') {
             Post.findOneAndUpdate({_id: id}, {$push: {sharedWith: user}})
             User.findOneAndUpdate({_id: user}, {$push: {accessTo: id}})
@@ -193,6 +192,79 @@ module.exports = (app, server) => {
       })
     } else {
       res.status(403).json({message: 'Go Fuck Yourself'})
+    }
+  })
+
+
+  app.post('/post/publishData', (req, res) => {
+    const id = req.body.post
+    if(id) {
+      Post.findOne({_id: id}, async (err, post) => {
+        if(post) {
+
+          post.author = await User.findOne({_id: post.author}, {projection: {password: 0}})
+          if(req.user && (req.user._id === post.author || req.user.role === 'A'
+            || post.sharedWith.indexOf(req.user._id) !== -1)) {
+
+            let content = post.en.content ? JSON.parse(post.en.content) : ''
+            let contentRu = post.ru.content ? JSON.parse(post.ru.content) : ''
+
+            let data = {
+              en: {
+                title: post.en.title !== '',
+                lead: post.en.lead !== '',
+                content: content === '' ? false :
+                  !(content.blocks[0].type === 'unstyled' && content.blocks[0].text === '')
+              },
+              ru: {
+                title: post.ru.title !== '',
+                lead: post.ru.lead !== '',
+                content: contentRu === '' ? false :
+                  !(contentRu.blocks[0].type === 'unstyled' && contentRu.blocks[0].text === '')
+              },
+              author: {
+                en: {
+                  name: post.author.en.name !== '',
+                  surname: post.author.en.surname !== ''
+                },
+                ru: {
+                  name: post.author.ru.name !== '',
+                  surname: post.author.ru.surname !== ''
+                },
+                website: post.author.en.website !== '',
+              },
+              cover: post.img !== '',
+            }
+
+            let codes = []
+            if( (!data.en.title || !data.en.lead || !data.en.content) && (!data.ru.title || !data.ru.lead || !data.ru.content)) {
+              codes.push(0)
+            } else if(!data.en.title || !data.en.lead || !data.en.content) {
+              codes.push(1)
+            } else if(!data.ru.title || !data.ru.lead || !data.ru.content) {
+              codes.push(2)
+            }
+            if(!data.cover) codes.push(3)
+            if((!data.author.en.name || !data.author.en.surname) && (!data.author.ru.name || !data.author.ru.surname)) {
+              codes.push(4)
+            } else if(!data.author.en.name || !data.author.en.surname) {
+              codes.push(5)
+            } else if(!data.author.ru.name || !data.author.ru.surname) {
+              codes.push(6)
+            }
+            if(!data.author.website) codes.push(7)
+
+            res.json({data: data, codes: codes})
+
+          } else {
+            res.status(403).json({message: 'Not allowed'})
+          }
+        } else {
+          res.json({message: 'No such post'})
+        }
+      })
+    } else {
+      res.json({message: 'No ID provided'})
     }
   })
 
@@ -238,7 +310,7 @@ module.exports = (app, server) => {
     if(id) {
       Post.findOne({_id: id}, async (err, post) => {
         if(!err && post) {
-          if(req.user._id === post.author._id || req.user.role === 'A') {
+          if(req.user._id === post.author || req.user.role === 'A') {
             Post.remove({_id: id}, true)
             res.json({message: 'Deleted'})
           } else {

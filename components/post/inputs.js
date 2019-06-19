@@ -9,7 +9,7 @@ import {ImageBlockConfig} from 'Dante2/package/lib/components/blocks/image'
 import {VideoBlockConfig} from 'Dante2/package/lib/components/blocks/video'
 import {DividerBlockConfig} from 'Dante2/package/lib/components/blocks/divider'
 
-export default ({lang, post, changeContent, form, changeForm, isEdit, titleRef, leadRef, clearPlaceholder}) => {
+export default ({post, changeContent, form, changeForm, isEdit, titleRef, leadRef, clearPlaceholder}) => {
   return (
     <React.Fragment>
       <ContentEditable

@@ -3,6 +3,7 @@ import {bucket} from '../../constants/user'
 
 export default ({news, big, last, lang}) => {
   const url = `url("${bucket + news.img}")`
+
   let top = []
   top.push(news.tag)
   top.push(news.author[lang].name ? news.author[lang].name + ' ' + news.author[lang].surname : news.author.username)
