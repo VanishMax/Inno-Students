@@ -232,36 +232,42 @@ module.exports = (app, server) => {
           if (req.user && (req.user._id === post.author._id || req.user.role === 'A'
             || post.sharedWith.indexOf(req.user._id) !== -1)) {
 
-            let publishDate = moment().format('YY-MM-DD')
-            let titleToUrl = post.en.title
-              .trim().toLowerCase()
-              .replace(/[^A-Za-z0-9 ]/g, '')
-              .replace(/ /g, '-')
+            if(post.status !== 'A') {
+              let publishDate = moment().format('YY-MM-DD')
+              let titleToUrl = post.en.title
+                .trim().toLowerCase()
+                .replace(/[^A-Za-z0-9 ]/g, '')
+                .replace(/ /g, '-')
 
-            if(titleToUrl !== '') {
-              let url = publishDate + '-' + titleToUrl
+              if(titleToUrl !== '') {
+                let url = publishDate + '-' + titleToUrl
 
-              if(exclusive) {
-                let check = checkPost(post)
-                Post.findOneAndUpdate({_id: id}, {$set: {
-                    exclusive: check.exclusive,
-                    status: 'P',
-                    publishTime: moment().format('YYYY-MM-DD HH-mm'),
-                    url: url
-                  }})
-                res.json({message: 'Success', url: url})
+                if(exclusive) {
+                  let check = checkPost(post)
+                  Post.findOneAndUpdate({_id: id}, {$set: {
+                      exclusive: check.exclusive,
+                      status: 'P',
+                      publishTime: moment().format('YYYY-MM-DD HH-mm'),
+                      url: url
+                    }})
+                  res.json({message: 'Success', url: url})
 
+                } else {
+                  Post.findOneAndUpdate({_id: id}, {$set: {
+                      status: 'P',
+                      exclusive: '',
+                      publishTime: moment().format('YYYY-MM-DD HH-mm'),
+                      url: url
+                    }})
+                  res.json({message: 'Success', url: url})
+                }
               } else {
-                Post.findOneAndUpdate({_id: id}, {$set: {
-                    status: 'P',
-                    exclusive: '',
-                    publishTime: moment().format('YYYY-MM-DD HH-mm'),
-                    url: url
-                  }})
-                res.json({message: 'Success', url: url})
+                res.json({message: 'Wrong title'})
               }
             } else {
-              res.json({message: 'Wrong title'})
+              // If it was archived - just change status
+              Post.findOneAndUpdate({_id: id}, {$set: {status: 'P'}})
+              res.json({message: 'Success', url: post.url})
             }
           } else {
             res.status(403).json({message: 'Not allowed'})

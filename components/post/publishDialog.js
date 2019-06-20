@@ -66,7 +66,7 @@ export default ({isOpen, toggle, post, lang, data, publish}) => {
                   {Lang.back[langg]}
                 </div>
                 {(data.codes.indexOf(0) === -1 && data.codes.indexOf(3) === -1 &&
-                  data.codes.indexOf(1) !== -1 && data.codes.indexOf(2) !== -1) &&
+                  data.codes.indexOf(1) === -1 && data.codes.indexOf(2) === -1) &&
                   <div onClick={() => publish(false)}
                     className="rounded border border-green-200 py-2 px-4 text-lg hover:text-green-700 hover:border-green-700 cursor-pointer">
                     {Lang.publish[langg]}

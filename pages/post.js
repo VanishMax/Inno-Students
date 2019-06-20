@@ -19,7 +19,8 @@ import Inputs from '../components/post/inputs'
 
 const Post = ({post, user, role}) => {
 
-  if(!post || post.status === 'A') {
+  // Dont show the news if there is no news in result or if it is archieved
+  if(!post || (post.status === 'A' && !role)) {
     return (
       <Unexisting />
     )
