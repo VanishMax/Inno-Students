@@ -4,7 +4,8 @@ import Dropdown from '../dropdown'
 
 
 export default ({isEdit, edit, toggleCover, togglePublish, postID,
-                  lang, snack, isDelete, changeDeletion, sharedWith}) => {
+                  lang, snack, isDelete, changeDeletion, sharedWith,
+                  isPublished, isExclusive}) => {
 
   // Sharing the post with other editors
   const [users, changeUsers] = useState(null)
@@ -61,7 +62,7 @@ export default ({isEdit, edit, toggleCover, togglePublish, postID,
         {isEdit ?
           <div onClick={edit}
                className="border border-gray-200 rounded bg-white text-black py-2 px-4 cursor-pointer hover:border-green-700 hover:text-green-700">
-            Save
+            Read
           </div>
           :
           <div onClick={edit}
@@ -89,7 +90,7 @@ export default ({isEdit, edit, toggleCover, togglePublish, postID,
         </React.Fragment>
         }
 
-        {!isEdit &&
+        {(!isEdit && !isPublished) &&
         <React.Fragment>
           <Dropdown Opener={Opener} size={48} margin={32} height={48} padding={'0'} stopAutoclose>
             {users === null ?
@@ -104,22 +105,33 @@ export default ({isEdit, edit, toggleCover, togglePublish, postID,
               </React.Fragment>
             }
           </Dropdown>
+        </React.Fragment>
+        }
 
           <br className="fullBrSmall sm:hidden" />
 
-          <div onClick={togglePublish}
-            className="border border-green-300 rounded bg-white text-black py-2 px-4 cursor-pointer hover:border-green-700 hover:text-green-700">
-            Publish
-          </div>
+          {(!isPublished || isExclusive) &&
+            <div onClick={togglePublish}
+                 className="border border-green-300 rounded bg-white text-black py-2 px-4 cursor-pointer hover:border-green-700 hover:text-green-700">
+              Publish
+            </div>
+          }
 
-          <div onClick={changeDeletion}
-            className={`border rounded text-black py-2 px-4 cursor-pointer
-              ${isDelete ? 'border-red-600 bg-red-600 text-white hover:border-red-900 hover:border-red-900' : 
-              ' border-red-300 bg-white hover:border-red-700 hover:text-red-700'}`}>
-            Delete
-          </div>
-        </React.Fragment>
-        }
+          {isPublished ?
+            <div onClick={changeDeletion}
+                 className={`border rounded text-black py-2 px-4 cursor-pointer
+              ${isDelete ? 'border-red-600 bg-red-600 text-white hover:border-red-900 hover:border-red-900' :
+                   ' border-red-300 bg-white hover:border-red-700 hover:text-red-700'}`}>
+              Archive
+            </div>
+          :
+            <div onClick={changeDeletion}
+                 className={`border rounded text-black py-2 px-4 cursor-pointer
+              ${isDelete ? 'border-red-600 bg-red-600 text-white hover:border-red-900 hover:border-red-900' :
+                   ' border-red-300 bg-white hover:border-red-700 hover:text-red-700'}`}>
+              Delete
+            </div>
+          }
 
       </div>
       <hr />

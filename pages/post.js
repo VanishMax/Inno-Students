@@ -112,13 +112,22 @@ const Post = ({post, user, role}) => {
   // Deletion colors the button in red, an on the second click deletes the post
   const [delTimeout, delChangeTimeout] = useState(null)
   const [isDelete, editDeletion] = useState(false)
-  const changeDeletion = () => {
+  const changeDeletion = (archive) => {
     if(isDelete) {
-      fetch('/post/delete', {
-        method: 'DELETE',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({post: post._id})
-      })
+      if(!archive) {
+        fetch('/post/delete', {
+          method: 'DELETE',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({post: post._id})
+        })
+      } else {
+        fetch('/post/archive', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({post: post._id})
+        })
+      }
+
       Router.replace({
           pathname: Router.pathname,
           query: { lang: Router.query.lang === 'ru' ? 'ru' : null }},
@@ -126,7 +135,7 @@ const Post = ({post, user, role}) => {
       )
     } else {
       editDeletion(true)
-      changeSnack('Click again to delete')
+      changeSnack('Click again to ' + (archive ? 'archive' : 'delete'))
       if(delTimeout) clearTimeout(delTimeout)
       delChangeTimeout(setTimeout(() => editDeletion(false), 5000))
     }
@@ -208,6 +217,7 @@ const Post = ({post, user, role}) => {
           <Actions isEdit={isEdit} edit={edit} toggleCover={toggleCover}
                    snack={changeSnack} lang={lang} togglePublish={togglePublish}
                    postID={post._id} sharedWith={post.sharedWith}
+                   isPublished={isPublished} isExclusive={isExclusive}
                    isDelete={isDelete} changeDeletion={changeDeletion} />
 
           <div className={'snackbar ' + (isSnak ? 'show' : '')}>

@@ -275,6 +275,27 @@ module.exports = (app, server) => {
     }
   })
 
+  // Archive the post
+  app.post('/post/archive', (req, res) => {
+    const id = req.body.post
+    if(id) {
+      Post.findOne({_id: id}, async (err, post) => {
+        if(!err && post) {
+          if(req.user._id === post.author || req.user.role === 'A') {
+            Post.findOneAndUpdate({_id: id}, {$set: {status: 'A'}})
+            res.json({message: 'Archived'})
+          } else {
+            res.status(403).json({message: 'Not enough privileges'})
+          }
+        } else {
+          res.json({message: 'Nothing to archive'})
+        }
+      })
+    } else {
+      res.json({message: 'No id'})
+    }
+  })
+
   // Get a post page
   app.get('/post/:url', (req, res) => {
     Post.findOne({url: req.params.url}, async (err, post) => {
@@ -309,6 +330,7 @@ module.exports = (app, server) => {
       }
     })
   })
+
 
   // Delete post
   app.delete('/post/delete', (req, res) => {
