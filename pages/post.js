@@ -19,7 +19,7 @@ import Inputs from '../components/post/inputs'
 
 const Post = ({post, user, role}) => {
 
-  if(!post) {
+  if(!post || post.status === 'A') {
     return (
       <Unexisting />
     )
@@ -29,6 +29,8 @@ const Post = ({post, user, role}) => {
 
   const isAuthor = role === 'A'
   const isEditor = role === 'E'
+  const isPublished = post.status === 'P'
+  const isExclusive = post.exclusive !== null && post.exclusive !== ''
 
   const [isEdit, goToEdit] = useState(false)
 
@@ -81,10 +83,30 @@ const Post = ({post, user, role}) => {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({post: post._id})
       }).then(res => res.json())
-      console.log(data)
       editPublishData(data)
     }
     openPublish(!isPublishOpen)
+  }
+
+  const publish = async (exclusive) => {
+    changeSnack('Publishing. Wait for redirect')
+    const data = await fetch('/post/publish', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({post: post._id, exclusive: exclusive})
+    }).then(res => res.json())
+    console.log(data)
+    togglePublish()
+    if(data.url) {
+      Router.push({
+        pathname: '/post',
+        query: {...Router.query, slug: data.url}
+      },  '/post/' + data.url)
+      // Router.push({
+      //   pathname: '/post',
+      //   query: {...Router.query, slug: data.url}
+      // },  '/post/' + data.url + (Router.asPath.match(/lang=ru/) ? '?lang=ru' : ''))
+    }
   }
 
   // Deletion colors the button in red, an on the second click deletes the post
@@ -181,7 +203,7 @@ const Post = ({post, user, role}) => {
                        choose={choose} chosen={chosenCover} del={deleteCover} />
 
           <PublishDialog post={post} isOpen={isPublishOpen} toggle={togglePublish}
-                         lang={lang} data={publishData} />
+                         lang={lang} data={publishData} publish={publish} />
 
           <Actions isEdit={isEdit} edit={edit} toggleCover={toggleCover}
                    snack={changeSnack} lang={lang} togglePublish={togglePublish}

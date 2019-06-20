@@ -38,6 +38,7 @@ module.exports = (app, server) => {
           img: '',
           publishTime: null,
           views: null,
+          exclusive: null,
           comments: [],
           url: url,
           sharedWith: [],
@@ -195,7 +196,7 @@ module.exports = (app, server) => {
     }
   })
 
-
+  // Get the stats of the post before publishing
   app.post('/post/publishData', (req, res) => {
     const id = req.body.post
     if(id) {
@@ -206,55 +207,7 @@ module.exports = (app, server) => {
           if(req.user && (req.user._id === post.author || req.user.role === 'A'
             || post.sharedWith.indexOf(req.user._id) !== -1)) {
 
-            let content = post.en.content ? JSON.parse(post.en.content) : ''
-            let contentRu = post.ru.content ? JSON.parse(post.ru.content) : ''
-
-            let data = {
-              en: {
-                title: post.en.title !== '',
-                lead: post.en.lead !== '',
-                content: content === '' ? false :
-                  !(content.blocks[0].type === 'unstyled' && content.blocks[0].text === '')
-              },
-              ru: {
-                title: post.ru.title !== '',
-                lead: post.ru.lead !== '',
-                content: contentRu === '' ? false :
-                  !(contentRu.blocks[0].type === 'unstyled' && contentRu.blocks[0].text === '')
-              },
-              author: {
-                en: {
-                  name: post.author.en.name !== '',
-                  surname: post.author.en.surname !== ''
-                },
-                ru: {
-                  name: post.author.ru.name !== '',
-                  surname: post.author.ru.surname !== ''
-                },
-                website: post.author.en.website !== '',
-              },
-              cover: post.img !== '',
-            }
-
-            let codes = []
-            if( (!data.en.title || !data.en.lead || !data.en.content) && (!data.ru.title || !data.ru.lead || !data.ru.content)) {
-              codes.push(0)
-            } else if(!data.en.title || !data.en.lead || !data.en.content) {
-              codes.push(1)
-            } else if(!data.ru.title || !data.ru.lead || !data.ru.content) {
-              codes.push(2)
-            }
-            if(!data.cover) codes.push(3)
-            if((!data.author.en.name || !data.author.en.surname) && (!data.author.ru.name || !data.author.ru.surname)) {
-              codes.push(4)
-            } else if(!data.author.en.name || !data.author.en.surname) {
-              codes.push(5)
-            } else if(!data.author.ru.name || !data.author.ru.surname) {
-              codes.push(6)
-            }
-            if(!data.author.website) codes.push(7)
-
-            res.json({data: data, codes: codes})
+            res.json(checkPost(post))
 
           } else {
             res.status(403).json({message: 'Not allowed'})
@@ -268,6 +221,59 @@ module.exports = (app, server) => {
     }
   })
 
+  // Publish the post, check whether it's an exclusive
+  app.post('/post/publish', (req, res) => {
+    const id = req.body.post, exclusive = req.body.exclusive
+    if(id && exclusive !== undefined) {
+      Post.findOne({_id: id}, async (err, post) => {
+        if (post) {
+
+          post.author = await User.findOne({_id: post.author}, {projection: {password: 0}})
+          if (req.user && (req.user._id === post.author._id || req.user.role === 'A'
+            || post.sharedWith.indexOf(req.user._id) !== -1)) {
+
+            let publishDate = moment().format('YY-MM-DD')
+            let titleToUrl = post.en.title
+              .trim().toLowerCase()
+              .replace(/[^A-Za-z0-9 ]/g, '')
+              .replace(/ /g, '-')
+
+            if(titleToUrl !== '') {
+              let url = publishDate + '-' + titleToUrl
+
+              if(exclusive) {
+                let check = checkPost(post)
+                Post.findOneAndUpdate({_id: id}, {$set: {
+                    exclusive: check.exclusive,
+                    status: 'P',
+                    publishTime: moment().format('YYYY-MM-DD HH-mm'),
+                    url: url
+                  }})
+                res.json({message: 'Success', url: url})
+
+              } else {
+                Post.findOneAndUpdate({_id: id}, {$set: {
+                    status: 'P',
+                    exclusive: '',
+                    publishTime: moment().format('YYYY-MM-DD HH-mm'),
+                    url: url
+                  }})
+                res.json({message: 'Success', url: url})
+              }
+            } else {
+              res.json({message: 'Wrong title'})
+            }
+          } else {
+            res.status(403).json({message: 'Not allowed'})
+          }
+        } else {
+          res.json({message: 'No such post'})
+        }
+      })
+    } else {
+      res.json({message: 'Not enough data'})
+    }
+  })
 
   // Get a post page
   app.get('/post/:url', (req, res) => {
@@ -324,4 +330,59 @@ module.exports = (app, server) => {
      res.json({message: 'No id'})
     }
   })
+}
+
+
+const checkPost = (post) => {
+  let content = post.en.content ? JSON.parse(post.en.content) : ''
+  let contentRu = post.ru.content ? JSON.parse(post.ru.content) : ''
+
+  let data = {
+    en: {
+      title: post.en.title !== '',
+      lead: post.en.lead !== '',
+      content: content === '' ? false :
+        !(content.blocks[0].type === 'unstyled' && content.blocks[0].text === '')
+    },
+    ru: {
+      title: post.ru.title !== '',
+      lead: post.ru.lead !== '',
+      content: contentRu === '' ? false :
+        !(contentRu.blocks[0].type === 'unstyled' && contentRu.blocks[0].text === '')
+    },
+    author: {
+      en: {
+        name: post.author.en.name !== '',
+        surname: post.author.en.surname !== ''
+      },
+      ru: {
+        name: post.author.ru.name !== '',
+        surname: post.author.ru.surname !== ''
+      },
+      website: post.author.en.website !== '',
+    },
+    cover: post.img !== '',
+  }
+
+  let codes = [], exclusive = ''
+  if( (!data.en.title || !data.en.lead || !data.en.content) && (!data.ru.title || !data.ru.lead || !data.ru.content)) {
+    codes.push(0)
+  } else if(!data.en.title || !data.en.lead || !data.en.content) {
+    codes.push(1)
+    exclusive = 'en'
+  } else if(!data.ru.title || !data.ru.lead || !data.ru.content) {
+    codes.push(2)
+    exclusive = 'ru'
+  }
+  if(!data.cover) codes.push(3)
+  if((!data.author.en.name || !data.author.en.surname) && (!data.author.ru.name || !data.author.ru.surname)) {
+    codes.push(4)
+  } else if(!data.author.en.name || !data.author.en.surname) {
+    codes.push(5)
+  } else if(!data.author.ru.name || !data.author.ru.surname) {
+    codes.push(6)
+  }
+  if(!data.author.website) codes.push(7)
+
+  return {codes: codes, data: data, exclusive: exclusive}
 }

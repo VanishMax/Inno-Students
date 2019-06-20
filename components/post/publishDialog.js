@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import NewsCard from '../news/card'
 import {CodesLang, Lang} from '../../langs/publish'
 
-export default ({isOpen, toggle, post, lang, data}) => {
+export default ({isOpen, toggle, post, lang, data, publish}) => {
 
   const [langg, changeLangg] = useState(lang)
   const toggleLangg = () => changeLangg(langg === 'ru' ? 'en' : 'ru')
@@ -67,12 +67,14 @@ export default ({isOpen, toggle, post, lang, data}) => {
                 </div>
                 {(data.codes.indexOf(0) === -1 && data.codes.indexOf(3) === -1 &&
                   data.codes.indexOf(1) !== -1 && data.codes.indexOf(2) !== -1) &&
-                  <div className="rounded border border-green-200 py-2 px-4 text-lg hover:text-green-700 hover:border-green-700 cursor-pointer">
+                  <div onClick={() => publish(false)}
+                    className="rounded border border-green-200 py-2 px-4 text-lg hover:text-green-700 hover:border-green-700 cursor-pointer">
                     {Lang.publish[langg]}
                   </div>
                 }
                 {(data.codes.indexOf(1) !== -1 || data.codes.indexOf(2) !== -1) &&
-                  <div className="rounded border border-green-200 py-2 px-4 text-lg hover:text-green-700 hover:border-green-700 cursor-pointer">
+                  <div onClick={() => publish(true)}
+                    className="rounded border border-green-200 py-2 px-4 text-lg hover:text-green-700 hover:border-green-700 cursor-pointer">
                     {Lang.exclusive[langg]}
                   </div>
                 }
