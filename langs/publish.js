@@ -40,3 +40,62 @@ export const CodesLang = [
     type: 'W'
   }
 ]
+
+export const Lang = {
+  publication: {
+    en: 'Publication',
+    ru: 'Публикация'
+  },
+  en: {
+    en: 'En',
+    ru: 'Анг'
+  },
+  ru: {
+    en: 'Ru',
+    ru: 'Рус'
+  },
+  title: {
+    en: 'Title',
+    ru: 'Заголовок'
+  },
+  lead: {
+    en: 'Lead',
+    ru: 'Лид'
+  },
+  content: {
+    en: 'Content',
+    ru: 'Контент'
+  },
+  cover: {
+    en: 'Cover image',
+    ru: 'Обложка'
+  },
+  author: {
+    en: 'Author',
+    ru: 'Автор'
+  },
+  name: {
+    en: 'Name',
+    ru: 'Имя'
+  },
+  surname: {
+    en: 'Surname',
+    ru: 'Фамилия'
+  },
+  website: {
+    en: 'Website',
+    ru: 'Веб-сайт'
+  },
+  back: {
+    en: 'Back to editing',
+    ru: 'Вернуться к редактированию'
+  },
+  exclusive: {
+    en: 'Publish as exclusive',
+    ru: 'Опубликовать как эксклюзив'
+  },
+  publish: {
+    en: 'Publish',
+    ru: 'Опубликовать'
+  }
+}
