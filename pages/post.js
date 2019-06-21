@@ -159,9 +159,16 @@ const Post = ({post, role}) => {
 
   // State of the form: title, lead and content
   const [form, editForm] = useState({
-    title: post[lang].title || Lang.titlePlaceholder[lang],
-    lead: post[lang].lead || '',
-    content: post[lang].content === '' ? null : JSON.parse(post[lang].content)
+    en: {
+      title: post.en.title,
+      lead: post.en.lead,
+      content: post.en.content === '' ? null : JSON.parse(post.en.content)
+    },
+    ru: {
+      title: post.ru.title,
+      lead: post.ru.lead,
+      content: post.ru.content === '' ? null : JSON.parse(post.ru.content)
+    }
   })
 
   // Change read_only to edit mode
@@ -178,19 +185,15 @@ const Post = ({post, role}) => {
   // Wait until user stop typing and then save data on the server
   const [timeout, changeTimeout] = useState(null)
   const changeForm = (e, name) => {
-    editForm({...form, [name]: e.target.value})
+    editForm({...form, [lang]: {...form[lang], [name]: e.target.value}})
 
     if(timeout) clearTimeout(timeout)
     changeTimeout(setTimeout(() => save(name, e.target.value), 1000))
   }
-  // const controlLength = (e, name, len) => {
-  //   console.log(form[name].length, form[name])
-  //   if(form[name].length > len) editForm({...form, [name]: form[name].substring(0, len - 3)})
-  // }
 
   // Change Dante2 content
   const changeContent = (content) => {
-    editForm({...form, content: content.emitSerializedOutput()})
+    editForm({...form, [lang]: {...form[lang], content: content.emitSerializedOutput()}})
     // console.log(content.getTextFromEditor())
 
     if(timeout) clearTimeout(timeout)
