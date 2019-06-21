@@ -150,11 +150,11 @@
 
 /* DANTE EDITOR */
 
-.DraftEditor-root .inlineTooltip-button .tooltip-icon svg {
+.inlineTooltip-button .tooltip-icon svg {
     margin: auto !important;
 }
 
-.DraftEditor-root .inlineTooltip-button {
+.inlineTooltip-button {
     background: white !important;
 }
 

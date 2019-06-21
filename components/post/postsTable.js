@@ -2,8 +2,7 @@ import React from 'react'
 import Router from 'next/router'
 import tags from '../../constants/tags'
 
-export default ({posts, lang, isPublished}) => {
-  if(isPublished === undefined) isPublished = false
+export default ({posts, lang, isPublished = false, authors = false}) => {
 
   let toIcon = tag => {
     let found = tags.find(x => x.value === tag)
@@ -26,6 +25,11 @@ export default ({posts, lang, isPublished}) => {
               <th className="py-4 px-2 md:px-6 border-b border-grey-light">
                 Title
               </th>
+              {authors &&
+              <th className="py-4 px-2 md:px-6 border-b border-grey-light">
+                Author
+              </th>
+              }
               <th className="py-4 px-2 md:px-6 border-b border-grey-light">
                 {isPublished ? 'Publish time': 'Creation date'}
               </th>
@@ -48,6 +52,11 @@ export default ({posts, lang, isPublished}) => {
               <td className="py-4 px-2 md:px-6 border-b border-gray-100">
                 {post[lang].title}
               </td>
+              {authors &&
+              <th className="py-4 px-2 md:px-6 border-b border-gray-100">
+                {post.author.username}
+              </th>
+              }
               <td className="py-4 px-2 md:px-6 border-b border-gray-100">
                 {isPublished ? post.publishTime : post.creationDate}
               </td>

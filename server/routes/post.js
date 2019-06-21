@@ -22,6 +22,7 @@ module.exports = (app, server) => {
       let creationDate = moment().format('YY-MM-DD')
       let titleToUrl = body.titleEn
         .trim().toLowerCase()
+        .substring(0, 30)
         .replace(/[^A-Za-z0-9 ]/g, '')
         .replace(/ /g, '-')
 
@@ -251,6 +252,7 @@ module.exports = (app, server) => {
               let publishDate = moment().format('YY-MM-DD')
               let titleToUrl = post.en.title
                 .trim().toLowerCase()
+                .substring(0, 30)
                 .replace(/[^A-Za-z0-9 ]/g, '')
                 .replace(/ /g, '-')
 

@@ -44,7 +44,7 @@ export default ({lang, user, changeTitle, changeTag, submit, form, tags}) => {
             <input
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-300"
               type="text" autoComplete="off" onChange={changeTitle} value={form.titleEn}
-              name="titleEn" placeholder="Name of the post" />
+              name="titleEn" placeholder="Name of the post" maxLength={70} />
           </div>
         </div>
 
@@ -58,7 +58,7 @@ export default ({lang, user, changeTitle, changeTag, submit, form, tags}) => {
             <input
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-300"
               type="text" autoComplete="off" onChange={changeTitle} value={form.titleRu}
-              name="titleRu" placeholder="Название нового поста" />
+              name="titleRu" placeholder="Название нового поста" maxLength={70} />
           </div>
         </div>
 

@@ -32,7 +32,35 @@ module.exports = (app, server) => {
   // My drafts
   app.get('/user/drafts', (req, res) => {
     if(req.user) {
-      Post.find({status: 'E', $or: [{author: req.user._id}, {sharedWith: req.user._id}]}).toArray((err, posts) => {
+      Post.aggregate([
+        {
+          $match : {
+            status : 'E',
+            $or: [
+              {author: req.user._id},
+              {sharedWith: req.user._id}
+            ]
+          }
+        }, {
+          $lookup: {
+            from: 'users',
+            localField: 'author',
+            foreignField: '_id',
+            as: 'author'
+          }
+        },{
+          $unwind: '$author'
+        }, {
+          $project: {
+            'author.username': 1,
+            'creationDate': 1,
+            'publishTime': 1,
+            'en.title': 1,
+            'ru.title': 1,
+            'tag': 1
+          }
+        }
+      ]).sort({publishTime: -1}).toArray((err, posts) => {
         server.render(req, res, '/user/drafts', {posts: posts, user: req.user})
       })
     } else {
@@ -41,7 +69,35 @@ module.exports = (app, server) => {
   })
   app.post('/user/drafts', (req, res) => {
     if(req.user) {
-      Post.find({status: 'E', $or: [{author: req.user._id}, {sharedWith: req.user._id}]}).toArray((err, posts) => {
+      Post.aggregate([
+        {
+          $match : {
+            status : 'E',
+            $or: [
+              {author: req.user._id},
+              {sharedWith: req.user._id}
+            ]
+          }
+        }, {
+          $lookup: {
+            from: 'users',
+            localField: 'author',
+            foreignField: '_id',
+            as: 'author'
+          }
+        },{
+          $unwind: '$author'
+        }, {
+          $project: {
+            'author.username': 1,
+            'creationDate': 1,
+            'publishTime': 1,
+            'en.title': 1,
+            'ru.title': 1,
+            'tag': 1
+          }
+        }
+      ]).sort({publishTime: -1}).toArray((err, posts) => {
         res.json({posts: posts, user: req.user})
       })
     } else {
@@ -52,7 +108,31 @@ module.exports = (app, server) => {
   // Admin's all drafts
   app.get('/user/alldrafts', (req, res) => {
     if(req.user && req.user.role === 'A') {
-      Post.find({status: 'E'}).toArray((err, posts) => {
+      Post.aggregate([
+        {
+          $match : {
+            status : 'E'
+          }
+        }, {
+          $lookup: {
+            from: 'users',
+            localField: 'author',
+            foreignField: '_id',
+            as: 'author'
+          }
+        },{
+          $unwind: '$author'
+        }, {
+          $project: {
+            'author.username': 1,
+            'creationDate': 1,
+            'publishTime': 1,
+            'en.title': 1,
+            'ru.title': 1,
+            'tag': 1
+          }
+        }
+      ]).sort({publishTime: -1}).toArray((err, posts) => {
         server.render(req, res, '/user/alldrafts', {posts: posts, user: req.user})
       })
     } else {
@@ -61,7 +141,31 @@ module.exports = (app, server) => {
   })
   app.post('/user/alldrafts', (req, res) => {
     if(req.user && req.user.role === 'A') {
-      Post.find({status: 'E'}).toArray((err, posts) => {
+      Post.aggregate([
+        {
+          $match : {
+            status : 'E'
+          }
+        }, {
+          $lookup: {
+            from: 'users',
+            localField: 'author',
+            foreignField: '_id',
+            as: 'author'
+          }
+        },{
+          $unwind: '$author'
+        }, {
+          $project: {
+            'author.username': 1,
+            'creationDate': 1,
+            'publishTime': 1,
+            'en.title': 1,
+            'ru.title': 1,
+            'tag': 1
+          }
+        }
+      ]).sort({publishTime: -1}).toArray((err, posts) => {
         res.json({posts: posts, user: req.user})
       })
     } else {
