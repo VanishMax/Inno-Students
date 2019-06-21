@@ -247,7 +247,7 @@ module.exports = (app, server) => {
                   Post.findOneAndUpdate({_id: id}, {$set: {
                       exclusive: check.exclusive,
                       status: 'P',
-                      publishTime: moment().format('YYYY-MM-DD HH-mm'),
+                      publishTime: moment().format('YYYY-MM-DD HH:mm'),
                       url: url
                     }})
                   res.json({message: 'Success', url: url})
@@ -256,7 +256,7 @@ module.exports = (app, server) => {
                   Post.findOneAndUpdate({_id: id}, {$set: {
                       status: 'P',
                       exclusive: '',
-                      publishTime: moment().format('YYYY-MM-DD HH-mm'),
+                      publishTime: moment().format('YYYY-MM-DD HH:mm'),
                       url: url
                     }})
                   res.json({message: 'Success', url: url})
@@ -308,14 +308,14 @@ module.exports = (app, server) => {
       if(!err && post) {
         post.author = await User.findOne({_id: post.author}, {projection: {password: 0}});
         if(!req.user) {
-          server.render(req, res, '/post', {slug: req.params.url, post: post, user: {}, role: 'U'})
+          server.render(req, res, '/post', {slug: req.params.url, post: post, role: 'U'})
         } else if(req.user._id === post.author._id || req.user.role === 'A') {
-          server.render(req, res, '/post', {slug: req.params.url, post: post, user: req.user, role: 'A'})
+          server.render(req, res, '/post', {slug: req.params.url, post: post, role: 'A'})
         } else if(post.sharedWith.indexOf(req.user._id) !== -1) {
-          server.render(req, res, '/post', {slug: req.params.url, post: post, user: req.user, role: 'E'})
+          server.render(req, res, '/post', {slug: req.params.url, post: post, role: 'E'})
         }
       } else {
-        server.render(req, res, '/post', {post: null, user: null, isAuthor: null})
+        server.render(req, res, '/post', {post: null, isAuthor: null})
       }
     })
   })
@@ -325,15 +325,81 @@ module.exports = (app, server) => {
       if(!err && post) {
         post.author = await User.findOne({_id: post.author}, {projection: {password: 0}});
         if(!req.user) {
-          res.json({slug: req.params.url, post: post, user: {}, role: 'U'})
+          res.json({slug: req.params.url, post: post, role: 'U'})
         } else if(req.user._id === post.author._id || req.user.role === 'A') {
-          res.json({slug: req.params.url, post: post, user: req.user, role: 'A'})
+          res.json({slug: req.params.url, post: post, role: 'A'})
         } else if(post.sharedWith.indexOf(req.user._id) !== -1) {
-          res.json({slug: req.params.url, post: post, user: req.user, role: 'E'})
+          res.json({slug: req.params.url, post: post, role: 'E'})
         }
       } else {
-        res.json({post: null, user: null, isAuthor: null})
+        res.json({post: null, isAuthor: null})
       }
+    })
+  })
+
+  // Get posts with query
+  app.get('/', (req, res) => {
+
+    Post.aggregate([
+      {
+        $match : {
+          status : 'P'
+        }
+      }, {
+        $lookup: {
+          from: 'users',
+          localField: 'author',
+          foreignField: '_id',
+          as: 'author'
+        }
+      },{
+        $unwind: '$author'
+      }, {
+        $project: {
+          'author.signedDate': 0,
+          'author.password': 0,
+          'author.request': 0,
+          'creationDate': 0,
+          'sharedWith': 0,
+          'en.content': 0,
+          'ru.content': 0,
+          'comments': 0
+        }
+      }
+    ]).sort({publishTime: -1}).toArray((err, posts) => {
+      server.render(req, res, '/', {posts: posts})
+    })
+  })
+  app.post('/', (req, res) => {
+
+    Post.aggregate([
+      {
+        $match : {
+          status : 'P'
+        }
+      }, {
+        $lookup: {
+          from: 'users',
+          localField: 'author',
+          foreignField: '_id',
+          as: 'author'
+        }
+      },{
+        $unwind: '$author'
+      }, {
+        $project: {
+          'author.signedDate': 0,
+          'author.password': 0,
+          'author.request': 0,
+          'creationDate': 0,
+          'sharedWith': 0,
+          'en.content': 0,
+          'ru.content': 0,
+          'comments': 0
+        }
+      }
+    ]).sort({publishTime: -1}).toArray((err, posts) => {
+      res.json({posts: posts})
     })
   })
 

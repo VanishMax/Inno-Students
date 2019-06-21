@@ -9,8 +9,6 @@ import '../static/css/news.css'
 
 import App, { Container } from 'next/app'
 import Head from 'next/head'
-import { Provider } from 'react-redux'
-import withStore from '../redux/withStore'
 import { LangContext, AuthContext } from '../middleware/context'
 import Router from 'next/router'
 
@@ -77,9 +75,7 @@ class MyApp extends App {
             <div className="wrap">
               <Header changeLang={this.toggleLang}/>
               <div className="pb-32 mt-4 clearfix">
-                <Provider store={reduxStore}>
-                  <Component {...pageProps} />
-                </Provider>
+                <Component {...pageProps} />
               </div>
             </div>
             <Footer/>
@@ -91,4 +87,4 @@ class MyApp extends App {
 }
 
 // Merging HOCs
-export default withStore(flowRight([withUser, withLang])(MyApp))
+export default flowRight([withUser, withLang])(MyApp)

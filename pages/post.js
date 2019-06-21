@@ -17,9 +17,9 @@ import Actions from '../components/post/actions'
 import PostHeader from '../components/post/header'
 import Inputs from '../components/post/inputs'
 
-const Post = ({post, user, role}) => {
+const Post = ({post, role}) => {
 
-  // Dont show the news if there is no news in result or if it is archieved
+  // Dont show the news if there is no news in result or if it is archived
   if(!post || (post.status === 'A' && !role)) {
     return (
       <Unexisting />
@@ -96,17 +96,12 @@ const Post = ({post, user, role}) => {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({post: post._id, exclusive: exclusive})
     }).then(res => res.json())
-    console.log(data)
     togglePublish()
     if(data.url) {
       Router.push({
         pathname: '/post',
         query: {...Router.query, slug: data.url}
       },  '/post/' + data.url)
-      // Router.push({
-      //   pathname: '/post',
-      //   query: {...Router.query, slug: data.url}
-      // },  '/post/' + data.url + (Router.asPath.match(/lang=ru/) ? '?lang=ru' : ''))
     }
   }
 
