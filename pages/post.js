@@ -1,12 +1,12 @@
 import React, {useContext, useState, useRef} from 'react'
 import Router from 'next/router'
-import Head from 'next/head'
 import {bucket} from '../constants/user'
 import 'isomorphic-unfetch'
 
 import withPost from '../middleware/HOCs/withPost'
 import {LangContext} from '../middleware/context'
 import Lang from '../langs/post'
+import Head from '../components/post/head'
 
 import dynamic from 'next/dynamic'
 const CoverDialog = dynamic(() => import('../components/post/coverDialog'), {ssr: false})
@@ -178,6 +178,7 @@ const Post = ({post, role}) => {
   // Change Dante2 content
   const changeContent = (content) => {
     editForm({...form, content: content.emitSerializedOutput()})
+    // console.log(content.getTextFromEditor())
 
     if(timeout) clearTimeout(timeout)
     changeTimeout(setTimeout(() => {
@@ -197,9 +198,7 @@ const Post = ({post, role}) => {
 
   return (
     <React.Fragment>
-      <Head>
-        <title>{post[lang].title}</title>
-      </Head>
+      <Head lang={lang} post={post} isPublished={isPublished} />
 
 
       {(isAuthor || isEditor) &&
