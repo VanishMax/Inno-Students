@@ -145,7 +145,7 @@ const Post = ({post, role}) => {
   // State of the form: title, lead and content
   const [form, editForm] = useState({
     title: post[lang].title || Lang.titlePlaceholder[lang],
-    lead: post[lang].lead || Lang.leadPlaceholder[lang],
+    lead: post[lang].lead || '',
     content: post[lang].content === '' ? null : JSON.parse(post[lang].content)
   })
 
@@ -160,12 +160,6 @@ const Post = ({post, role}) => {
     }
   }
 
-  // Contenteditable does not provide a placeholder, so create ours
-  const clearPlaceholder = (e, name) => {
-    if(e.target.textContent.indexOf(Lang[name + 'Placeholder'][lang]) !== -1)
-      editForm({...form, [name]: ''})
-  }
-
   // Wait until user stop typing and then save data on the server
   const [timeout, changeTimeout] = useState(null)
   const changeForm = (e, name) => {
@@ -174,6 +168,10 @@ const Post = ({post, role}) => {
     if(timeout) clearTimeout(timeout)
     changeTimeout(setTimeout(() => save(name, e.target.value), 1000))
   }
+  // const controlLength = (e, name, len) => {
+  //   console.log(form[name].length, form[name])
+  //   if(form[name].length > len) editForm({...form, [name]: form[name].substring(0, len - 3)})
+  // }
 
   // Change Dante2 content
   const changeContent = (content) => {
@@ -224,7 +222,7 @@ const Post = ({post, role}) => {
       <div className="content">
         <PostHeader lang={lang} post={post} />
         <Inputs lang={lang} isEdit={isEdit} form={form} post={post._id}
-                titleRef={titleRef} leadRef={leadRef} clearPlaceholder={clearPlaceholder}
+                titleRef={titleRef} leadRef={leadRef}
                 changeForm={changeForm} changeContent={changeContent} />
       </div>
     </React.Fragment>

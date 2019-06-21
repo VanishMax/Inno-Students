@@ -136,7 +136,17 @@
     display: block;
 }
 
-/* PUBLISH DIALOG */
+
+/* INPUTS */
+
+[contenteditable=true]:empty:before {
+    content: attr(placeholder);
+    display: block;
+}
+[contenteditable=false][disabled]:empty:before {
+    content: attr(placeholder);
+    display: block;
+}
 
 /* DANTE EDITOR */
 

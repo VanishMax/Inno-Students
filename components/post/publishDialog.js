@@ -19,8 +19,9 @@ export default ({isOpen, toggle, post, lang, data, publish}) => {
         <div className="mt-6">
           {data &&
             <React.Fragment>
+
               <div className="flex flex-col">
-                <div className="flex justify-center text-lg">{Lang.publication[langg]}</div>
+                <div className="flex justify-center text-lg leading-relaxed">{Lang.publication[langg]}</div>
                 <div className="flex justify-between mt-2 text-lg">
                   <span>{Lang.en[langg]}</span>
                   <span className={data.data.en.title ? 'text-green-500' : 'text-red-500'}>• {Lang.title[langg]}</span>
@@ -38,8 +39,9 @@ export default ({isOpen, toggle, post, lang, data, publish}) => {
                   <span className={data.data.cover ? 'text-green-500' : 'text-red-500'}>• {Lang.cover[langg]}</span>
                 </div>
               </div>
+
               <div className="flex flex-col mt-6 mb-6">
-                <div className="flex justify-center text-lg">{Lang.author[langg]}</div>
+                <div className="flex justify-center text-lg leading-relaxed">{Lang.author[langg]} — @{data.author}</div>
                 <div className="flex justify-between mt-2 text-lg">
                   <span>{Lang.en[langg]}</span>
                   <span className={data.data.author.en.name ? 'text-green-500' : 'text-orange-500'}>• {Lang.name[langg]}</span>
@@ -55,11 +57,13 @@ export default ({isOpen, toggle, post, lang, data, publish}) => {
                   <span className={data.data.author.website ? 'text-green-500' : 'text-orange-500'}>• {Lang.website[langg]}</span>
                 </div>
               </div>
+
               {data.codes.map((code, i) => (
-                <span key={i} className={`${CodesLang[code].type === 'W' ? 'text-orange-500' : 'text-red-500'}`}>
-                  {CodesLang[code][langg]}
-                </span>
+                <p key={i} className={`${CodesLang[code].type === 'W' ? 'text-orange-500' : 'text-red-500'}`}>
+                  • {CodesLang[code][langg]}
+                </p>
               ))}
+
               <div className="flex justify-around mt-6">
                 <div onClick={toggle}
                   className="mr-8 rounded border border-gray-200 py-2 px-4 text-lg hover:text-green-700 hover:border-green-700 cursor-pointer">

@@ -10,7 +10,7 @@ export default () => {
     <footer className="bg-white footer w-full">
       <div className="flex items-center justify-between py-8 px-4 lg:px-8">
         <div className="flex">
-          <Link prefetch href="/">
+          <Link noPrefetch href="/">
             <img src="/static/images/headerMini.png" alt="header logo" className="cursor-pointer"/>
           </Link>
         </div>
@@ -18,17 +18,17 @@ export default () => {
         <div className="flex justify-between">
           <div className="hidden md:flex">
             <div className="md:mr-12">
-              <Link href="/about">
+              <Link noPrefetch href="/about">
                 <a className="header-link">{Lang.about[lang]}</a>
               </Link>
             </div>
             <div className="md:mr-12">
-              <Link href="/author">
+              <Link noPrefetch href="/author">
                 <a className="header-link">{Lang.writer[lang]}</a>
               </Link>
             </div>
             <div>
-              <Link href="/donate">
+              <Link noPrefetch href="/donate">
                 <a className="header-link">{Lang.donate[lang]}</a>
               </Link>
             </div>

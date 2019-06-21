@@ -204,7 +204,7 @@ module.exports = (app, server) => {
         if(post) {
 
           post.author = await User.findOne({_id: post.author}, {projection: {password: 0}})
-          if(req.user && (req.user._id === post.author || req.user.role === 'A'
+          if(req.user && (req.user._id === post.author._id || req.user.role === 'A'
             || post.sharedWith.indexOf(req.user._id) !== -1)) {
 
             res.json(checkPost(post))
@@ -478,5 +478,5 @@ const checkPost = (post) => {
   }
   if(!data.author.website) codes.push(7)
 
-  return {codes: codes, data: data, exclusive: exclusive}
+  return {codes: codes, data: data, exclusive: exclusive, author: post.author.username}
 }
