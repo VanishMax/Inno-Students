@@ -118,14 +118,14 @@ export default ({isEdit, edit, toggleCover, togglePublish, postID,
           }
 
           {isPublished ?
-            <div onClick={changeDeletion}
+            <div onClick={() => changeDeletion(true)}
                  className={`border rounded text-black py-2 px-4 cursor-pointer
               ${isDelete ? 'border-red-600 bg-red-600 text-white hover:border-red-900 hover:border-red-900' :
                    ' border-red-300 bg-white hover:border-red-700 hover:text-red-700'}`}>
               Archive
             </div>
           :
-            <div onClick={changeDeletion}
+            <div onClick={() => changeDeletion(false)}
                  className={`border rounded text-black py-2 px-4 cursor-pointer
               ${isDelete ? 'border-red-600 bg-red-600 text-white hover:border-red-900 hover:border-red-900' :
                    ' border-red-300 bg-white hover:border-red-700 hover:text-red-700'}`}>

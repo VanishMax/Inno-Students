@@ -57,6 +57,7 @@ module.exports = (app, server) => {
             'publishTime': 1,
             'en.title': 1,
             'ru.title': 1,
+            'url': 1,
             'tag': 1
           }
         }
@@ -94,6 +95,7 @@ module.exports = (app, server) => {
             'publishTime': 1,
             'en.title': 1,
             'ru.title': 1,
+            'url': 1,
             'tag': 1
           }
         }
@@ -129,6 +131,7 @@ module.exports = (app, server) => {
             'publishTime': 1,
             'en.title': 1,
             'ru.title': 1,
+            'url': 1,
             'tag': 1
           }
         }
@@ -162,6 +165,7 @@ module.exports = (app, server) => {
             'publishTime': 1,
             'en.title': 1,
             'ru.title': 1,
+            'url': 1,
             'tag': 1
           }
         }
