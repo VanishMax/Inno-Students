@@ -56,7 +56,7 @@ class MyApp extends App {
   }
 
   render () {
-    const { Component, pageProps, reduxStore } = this.props
+    const { Component, pageProps } = this.props
     const baseDomain = 'https://inno-students.herokuapp.com'
 
     return (

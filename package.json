@@ -1,7 +1,7 @@
 {
-  "name": "media_club",
+  "name": "inno-students",
   "version": "3.3.0",
-  "description": "Media Club website rewritten for the third time. Now the next.js and tailwind css are used",
+  "description": "InnoStudents media club website rewritten for the third time. Now the next.js and tailwind css are used",
   "main": "pages/_app.js",
   "scripts": {
     "start": "next build && NODE_ENV=production node server.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VanishMax/MediaClub.git"
+    "url": "git+https://github.com/VanishMax/inno-students.git"
   },
   "author": "VanishMax",
   "license": "MIT",
@@ -38,6 +38,6 @@
     "react-dom": "^16.8.6",
     "styled-components": "^4.3.1",
     "tailwindcss": "^1.0.1",
-    "webpack": "^4.32.1"
+    "webpack": "^4.35.0"
   }
 }
