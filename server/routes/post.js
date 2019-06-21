@@ -132,6 +132,21 @@ module.exports = (app, server) => {
     })
   })
 
+  app.post('/post/images', (req, res) => {
+    const id = req.body.post
+    if(id) {
+      Post.findOne({_id: id}, {projection: {img: 1, images: 1}}, (err, post) => {
+        if(!post) {
+          res.json({message: 'No such post'})
+        } else {
+          res.json({message: 'Done', post: post})
+        }
+      })
+    } else {
+      res.json({message: 'No ID provided'})
+    }
+  })
+
   // Change Cover image
   app.post('/post/edit/changeCover', (req, res) => {
     const id = parseInt(req.body.post), img = req.body.img

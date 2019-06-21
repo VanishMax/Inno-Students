@@ -45,10 +45,25 @@ const Post = ({post, role}) => {
 
   // Changing news cover and deleting useless images
   const [isCoverOpen, openCover] = useState(false)
-  const [images, changeImages] = useState(post.images)
-  const [chosenCover, chooseCover] = useState(post.img)
-  const toggleCover = () => {
-    openCover(!isCoverOpen)
+  const [images, changeImages] = useState(null)
+  const [chosenCover, chooseCover] = useState(null)
+  const toggleCover = async () => {
+    if(!isCoverOpen) {
+      const data = await fetch('/post/images', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({post: post._id})
+      }).then(res => res.json())
+      if(data.post && data.post.images.length !== 0) {
+        changeImages(data.post.images)
+        chooseCover(data.post.img)
+        openCover(!isCoverOpen)
+      } else {
+        changeSnack('No images available')
+      }
+    } else {
+      openCover(!isCoverOpen)
+    }
   }
   const choose = (img) => {
     fetch('/post/edit/changeCover', {
