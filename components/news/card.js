@@ -1,6 +1,7 @@
 import React from 'react'
 import Router from 'next/router'
 import {bucket} from '../../constants/user'
+import prettyDate from '../../middleware/prettyDate'
 
 export default ({news, big, last, lang}) => {
   const url = `url("${bucket + news.img}")`
@@ -8,7 +9,7 @@ export default ({news, big, last, lang}) => {
   let top = []
   top.push(news.tag)
   top.push(news.author[lang].name ? news.author[lang].name + ' ' + news.author[lang].surname : news.author.username)
-  top.push(news.publishTime)
+  top.push(prettyDate(news.publishTime, lang))
 
   const redirect = () => {
     Router.push({

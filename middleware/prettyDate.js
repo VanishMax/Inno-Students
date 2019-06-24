@@ -10,9 +10,9 @@ export default (date, lang) => {
   } else if (moment().diff(parsed, 'hours') < 12 || parsed.isSame(moment(), 'day')) {
     output = parsed.locale(lang).fromNow()
   } else if(parsed.isSame(moment(), 'year')) {
-    output = parsed.locale(lang).format('MMM, DD')
+    output = parsed.locale(lang).format('D MMMM')
   } else {
-    output = parsed.locale(lang).format('MMM YY, DD')
+    output = parsed.locale(lang).format('D MMMM, YYYY')
   }
 
   return output
