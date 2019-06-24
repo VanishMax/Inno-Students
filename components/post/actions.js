@@ -103,30 +103,30 @@ export default ({isEdit, edit, toggleCover, togglePublish, postID,
         </React.Fragment>
         }
 
-          <br className="fullBrSmall sm:hidden" />
+        {!isPublished && <br className="fullBrSmall sm:hidden" />}
 
-          {(!isPublished || isExclusive) &&
-            <div onClick={togglePublish}
-                 className="border border-green-300 rounded bg-white text-black py-2 px-4 cursor-pointer hover:border-green-700 hover:text-green-700">
-              Publish
-            </div>
-          }
+        {(!isPublished || isExclusive) &&
+          <div onClick={togglePublish}
+               className="border border-green-300 rounded bg-white text-black py-2 px-4 cursor-pointer hover:border-green-700 hover:text-green-700">
+            Publish
+          </div>
+        }
 
-          {isPublished ?
-            <div onClick={() => changeDeletion(true)}
-                 className={`border rounded text-black py-2 px-4 cursor-pointer
-              ${isDelete ? 'border-red-600 bg-red-600 text-white hover:border-red-900 hover:border-red-900' :
-                   ' border-red-300 bg-white hover:border-red-700 hover:text-red-700'}`}>
-              Archive
-            </div>
-          :
-            <div onClick={() => changeDeletion(false)}
-                 className={`border rounded text-black py-2 px-4 cursor-pointer
-              ${isDelete ? 'border-red-600 bg-red-600 text-white hover:border-red-900 hover:border-red-900' :
-                   ' border-red-300 bg-white hover:border-red-700 hover:text-red-700'}`}>
-              Delete
-            </div>
-          }
+        {isPublished ?
+          <div onClick={() => changeDeletion(true)}
+               className={`border rounded text-black py-2 px-4 cursor-pointer
+            ${isDelete ? 'border-red-600 bg-red-600 text-white hover:border-red-900 hover:border-red-900' :
+                 ' border-red-300 bg-white hover:border-red-700 hover:text-red-700'}`}>
+            Archive
+          </div>
+        :
+          <div onClick={() => changeDeletion(false)}
+               className={`border rounded text-black py-2 px-4 cursor-pointer
+            ${isDelete ? 'border-red-600 bg-red-600 text-white hover:border-red-900 hover:border-red-900' :
+                 ' border-red-300 bg-white hover:border-red-700 hover:text-red-700'}`}>
+            Delete
+          </div>
+        }
 
       </div>
       <hr />

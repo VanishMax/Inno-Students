@@ -3,6 +3,11 @@
     width: 96%;
 }
 
+.post-top-icon {
+    padding-bottom: 2px;
+    display: inline-block;
+}
+
 @media (min-width: 1024px) {
     .content {width: 70%}
 }
