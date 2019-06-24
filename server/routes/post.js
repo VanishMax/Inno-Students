@@ -89,47 +89,52 @@ module.exports = (app, server) => {
     let form = new formidable.IncomingForm()
     form.parse(req, (err, fields, files) => {
 
-      Post.findOne({_id: id}, (err, post) => {
-        if(post) {
-          if(req.user && (req.user._id === post.author || req.user.role === 'A'
-            || post.sharedWith.indexOf(req.user._id) !== -1)) {
+      // If image was pasted into editor from, like, another language - do nothing
+      if(fields.url.indexOf(bucket) === -1) {
+        Post.findOne({_id: id}, (err, post) => {
+          if(post) {
+            if(req.user && (req.user._id === post.author || req.user.role === 'A'
+              || post.sharedWith.indexOf(req.user._id) !== -1)) {
 
-            fs.readFile(files.file['path'], async (err, image) => {
-              if (err) throw err
+              fs.readFile(files.file['path'], async (err, image) => {
+                if (err) throw err
 
-              let name = 'images/' + post.url + '-' + (post.images.length + 1) + '.' + files.file['name'].split('.')[1]
+                let name = 'images/' + post.url + '-' + (post.images.length + 1) + '.' + files.file['name'].split('.')[1]
 
-              const formData = new FormData();
-              formData.append('key', name)
-              formData.append('file', image, {
-                filepath: files.file['path'],
-                contentType: 'image/jpeg',
-              })
+                const formData = new FormData();
+                formData.append('key', name)
+                formData.append('file', image, {
+                  filepath: files.file['path'],
+                  contentType: 'image/jpeg',
+                })
 
-              let data = await fetch(bucket, {
-                method: 'POST',
-                body: formData
-              }).then(response => response.status)
+                let data = await fetch(bucket, {
+                  method: 'POST',
+                  body: formData
+                }).then(response => response.status)
 
-              if(data === 204){
-                let ready
-                if(post.img !== '') {
-                  ready = await Post.findOneAndUpdate({_id: id}, {$push: {images: name}})
+                if(data === 204){
+                  let ready
+                  if(post.img !== '') {
+                    ready = await Post.findOneAndUpdate({_id: id}, {$push: {images: name}})
+                  } else {
+                    ready = await Post.findOneAndUpdate({_id: id}, {$set: {img: name}, $push: {images: name}})
+                  }
+                  if(ready) res.json({message: 'Done', url: bucket + name})
                 } else {
-                  ready = await Post.findOneAndUpdate({_id: id}, {$set: {img: name}, $push: {images: name}})
+                  res.json({message: 'Cannot upload'})
                 }
-                if(ready) res.json({message: 'Done', url: bucket + name})
-              } else {
-                res.json({message: 'Cannot upload'})
-              }
-            })
+              })
+            } else {
+              res.json({message: 'Go Fuck Yourself'})
+            }
           } else {
             res.json({message: 'Go Fuck Yourself'})
           }
-        } else {
-          res.json({message: 'Go Fuck Yourself'})
-        }
-      })
+        })
+      } else {
+        res.json({message: 'Done', url: fields.url})
+      }
     })
   })
 

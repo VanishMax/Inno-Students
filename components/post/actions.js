@@ -80,11 +80,6 @@ export default ({isEdit, edit, toggleCover, togglePublish, postID,
         <React.Fragment>
           <div
             className="border border-gray-200 rounded bg-white text-black py-2 px-4 cursor-pointer hover:border-green-700 hover:text-green-700">
-            <span className="hidden md:inline">Switch to </span>Russian
-          </div>
-
-          <div
-            className="border border-gray-200 rounded bg-white text-black py-2 px-4 cursor-pointer hover:border-green-700 hover:text-green-700">
             <span className="hidden md:inline">Connect to </span>G.Photo
           </div>
         </React.Fragment>
