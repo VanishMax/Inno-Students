@@ -38,7 +38,7 @@ module.exports = (app, server) => {
           images: [],
           img: '',
           publishTime: null,
-          views: null,
+          views: 0,
           exclusive: null,
           comments: [],
           url: url,
@@ -330,6 +330,17 @@ module.exports = (app, server) => {
       })
     } else {
       res.json({message: 'No id'})
+    }
+  })
+
+  // Increase views count
+  app.post('/post/views', (req, res) => {
+    const id = req.body.post
+    if(id) {
+      Post.findOneAndUpdate({_id: id}, {$inc: {views: 1}})
+      res.json({message: 'Done'})
+    } else {
+      res.json({message: 'No post id provided'})
     }
   })
 

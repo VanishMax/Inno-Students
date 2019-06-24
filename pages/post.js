@@ -1,4 +1,4 @@
-import React, {useContext, useState, useRef} from 'react'
+import React, {useContext, useState, useRef, useEffect} from 'react'
 import Router from 'next/router'
 import {bucket} from '../constants/user'
 import 'isomorphic-unfetch'
@@ -32,6 +32,18 @@ const Post = ({post, role}) => {
   const isEditor = role === 'E'
   const isPublished = post.status === 'P'
   const isExclusive = post.exclusive !== null && post.exclusive !== ''
+
+  if(isPublished) {
+    useEffect(() => {
+      setTimeout(() => {
+        fetch('/post/views', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({post: post._id})
+        })
+      }, 15000)
+    }, [])
+  }
 
   const [isEdit, goToEdit] = useState(false)
 
