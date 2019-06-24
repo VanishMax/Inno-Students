@@ -6,7 +6,9 @@ import dynamic from 'next/dynamic'
 const Dante = dynamic(() => import('Dante2'), {ssr: false})
 import {ImageBlockConfig} from 'Dante2/package/lib/components/blocks/image'
 import {VideoBlockConfig} from 'Dante2/package/lib/components/blocks/video'
+import {PlaceholderBlockConfig} from 'Dante2/package/lib/components/blocks/placeholder'
 import {DividerBlockConfig} from 'Dante2/package/lib/components/blocks/divider'
+import {PostLinkBlockConfig} from './postLinkBlock'
 
 export default ({lang, post, changeContent, form, changeForm, isEdit, titleRef, leadRef}) => {
 
@@ -32,17 +34,33 @@ export default ({lang, post, changeContent, form, changeForm, isEdit, titleRef, 
         {lang === 'en' ?
           <div  className="mt-6">
             <div />
-            <Dante onChange={changeContent} content={form.en.content} read_only={!isEdit}
-                   widgets={[ImageBlockConfig({ options: { upload_url: '/post/edit/img?post=' + post } }),
-                     VideoBlockConfig({ options: { placeholder: 'Put an external video link', endpoint: '//open.iframe.ly/api/oembed?origin=https://github.com&url=', caption: 'optional caption', }, }),
-                     DividerBlockConfig()]} />
+            <Dante
+              onChange={changeContent}
+              content={form.en.content}
+              read_only={!isEdit}
+              widgets={[
+                ImageBlockConfig({ options: { upload_url: '/post/edit/img?post=' + post } }),
+                VideoBlockConfig({ options: { placeholder: 'put an external video link', endpoint: '//noembed.com/embed?url=', caption: 'optional caption', }, }),
+                PlaceholderBlockConfig(),
+                DividerBlockConfig(),
+                PostLinkBlockConfig()
+              ]}
+            />
           </div>
         :
           <div className="mt-6">
-            <Dante onChange={changeContent} content={form.ru.content} read_only={!isEdit}
-                   widgets={[ImageBlockConfig({ options: { upload_url: '/post/edit/img?post=' + post } }),
-                   VideoBlockConfig({ options: { placeholder: 'Put an external video link', endpoint: '//open.iframe.ly/api/oembed?origin=https://github.com&url=', caption: 'optional caption', }, }),
-                   DividerBlockConfig()]} />
+            <Dante
+              onChange={changeContent}
+              content={form.ru.content}
+              read_only={!isEdit}
+              widgets={[
+                ImageBlockConfig({ options: { upload_url: '/post/edit/img?post=' + post } }),
+                VideoBlockConfig({ options: { placeholder: 'put an external video link', endpoint: '//noembed.com/embed?url=', caption: 'optional caption', }, }),
+                PlaceholderBlockConfig(),
+                DividerBlockConfig(),
+                PostLinkBlockConfig()
+              ]}
+            />
           </div>
         }
 

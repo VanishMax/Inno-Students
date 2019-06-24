@@ -14,4 +14,4 @@ export const fakeUser = {
 
 export const fakeUserImg = '/static/images/fakeUser.jpg'
 
-export const bucket = 'http://inno-students.s3.amazonaws.com/'
+export const bucket = '//inno-students.s3.amazonaws.com/'
