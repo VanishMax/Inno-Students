@@ -63,23 +63,32 @@ module.exports = (app, server) => {
     })
   })
 
-  // Save titles, leads and content with different languages
+  // Save titles and leads with different languages
   app.post('/post/edit/text', (req, res) => {
-    Post.findOne({_id: req.body.post}, (err, post) => {
-      if(post) {
-        if(req.user && (req.user._id === post.author || req.user.role === 'A'
-          || post.sharedWith.indexOf(req.user._id) !== -1)) {
+    const id = req.body.post
+    const lang = req.body.lang
+    const name = req.body.name
+    const content = req.body[name]
 
-          let field = req.body.lang + '.' + req.body.name
-          Post.findOneAndUpdate({_id: req.body.post}, {$set: {[field]: req.body[req.body.name]}})
-          res.json({message: 'Done'})
+    if(id && name && content && lang) {
+      Post.findOne({_id: id}, (err, post) => {
+        if(post) {
+          if(req.user && (req.user._id === post.author || req.user.role === 'A'
+            || post.sharedWith.indexOf(req.user._id) !== -1)) {
+
+            let field = lang + '.' + name
+            Post.findOneAndUpdate({_id: id}, {$set: { [field]: content}})
+            res.json({message: 'Done'})
+          } else {
+            res.json({message: 'Go Fuck Yourself'})
+          }
         } else {
           res.json({message: 'Go Fuck Yourself'})
         }
-      } else {
-        res.json({message: 'Go Fuck Yourself'})
-      }
-    })
+      })
+    } else {
+      res.json({message: 'No post id, name, content or language provided'})
+    }
   })
 
   // Save image on Amazon S3
