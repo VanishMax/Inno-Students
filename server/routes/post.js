@@ -46,12 +46,14 @@ module.exports = (app, server) => {
           en: {
             title: body.titleEn.trim(),
             lead: '',
-            content: ''
+            content: '',
+            textContent: ''
           },
           ru: {
             title: body.titleRu.trim(),
             lead: '',
-            content: ''
+            content: '',
+            textContent: ''
           }
         }
         Post.insertOne(newPost)

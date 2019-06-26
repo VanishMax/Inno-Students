@@ -1,8 +1,8 @@
 import React, {useContext, useState, useRef, useEffect} from 'react'
 import Router from 'next/router'
-import {bucket} from '../constants/user'
 import 'isomorphic-unfetch'
 
+import {bucket} from '../constants/user'
 import withPost from '../middleware/HOCs/withPost'
 import {LangContext} from '../middleware/context'
 import Lang from '../langs/post'
@@ -174,12 +174,14 @@ const Post = ({post, role}) => {
     en: {
       title: post.en.title,
       lead: post.en.lead,
-      content: post.en.content === '' ? null : JSON.parse(post.en.content)
+      content: post.en.content === '' ? null : JSON.parse(post.en.content),
+      textContent: post.en.textContent
     },
     ru: {
       title: post.ru.title,
       lead: post.ru.lead,
-      content: post.ru.content === '' ? null : JSON.parse(post.ru.content)
+      content: post.ru.content === '' ? null : JSON.parse(post.ru.content),
+      textContent: post.ru.textContent
     }
   })
 
@@ -206,11 +208,11 @@ const Post = ({post, role}) => {
   // Change Dante2 content
   const changeContent = (content) => {
     editForm({...form, [lang]: {...form[lang], content: content.emitSerializedOutput()}})
-    // console.log(content.getTextFromEditor())
 
     if(timeout) clearTimeout(timeout)
     changeTimeout(setTimeout(() => {
       if(content !== null) save('content', JSON.stringify(content.emitSerializedOutput()))
+      if(content !== null) save('textContent', content.getTextFromEditor())
     }, 1000))
   }
 
