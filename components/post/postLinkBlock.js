@@ -1,54 +1,38 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {PostLinkIcon} from '../icons/actions'
-import {addNewBlockAt, updateDataOfBlock} from 'Dante2/package/lib/model/index.js'
+import {addNewBlockAt} from 'Dante2/package/lib/model/index.js'
 import 'isomorphic-unfetch'
 import NewsCard from '../news/card'
 
-export default class PostLink extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {post: null}
-    console.log('pop', this.defaultData())
+
+const PostLink = (props) => {
+  const [post, editPost] = useState(null)
+
+  const dataForUpdate = () => {
+    return props.blockProps.data.toJS()
   }
 
-  defaultData =()=> {
-    let existing_data = this.props.block.getData().toJS()
-    return existing_data.embed_data || {}
-  }
+  useEffect(() => {
+    if (!props.blockProps.data) return
+    if (!dataForUpdate().endpoint && !dataForUpdate().provisory_text) return
 
-  updateData = () => {
-    const { block, blockProps } = this.props
-    const { getEditorState, setEditorState } = blockProps
-    const data = block.getData()
-    const newData = data.merge(this.state)
-    return setEditorState(updateDataOfBlock(getEditorState(), block, newData))
-  }
-
-  dataForUpdate =()=> {
-    return this.props.blockProps.data.toJS()
-  }
-
-  async componentDidMount() {
-
-    if (!this.props.blockProps.data) return
-    if (!this.dataForUpdate().endpoint && !this.dataForUpdate().provisory_text) return
-
-    const data = await fetch(this.dataForUpdate().provisory_text, {
-      method: 'POST'
-    }).then(res => res.json())
-    console.log(data)
-    if(data.post) this.setState({post: data.post})
-
-  }
-
-  render = ()=> {
-    if(this.state.post !== null) {
-      return (
-        <NewsCard news={this.state.post} lang={'en'} />
-      )
-    } else {
-      return <div></div>
+    const fetchData = async (url) => {
+      const data = await fetch(url, {
+        method: 'POST'
+      }).then(res => res.json())
+      if(data.post) editPost(data.post)
     }
+
+    fetchData(dataForUpdate().provisory_text)
+
+  }, [])
+
+  if(post !== null) {
+    return (
+      <NewsCard news={post} lang={'en'} />
+    )
+  } else {
+    return <div />
   }
 }
 
