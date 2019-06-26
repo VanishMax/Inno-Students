@@ -1,11 +1,15 @@
-import React, {useState, useEffect} from 'react'
-import {PostLinkIcon} from '../icons/actions'
+import React, {useState, useEffect, useContext} from 'react'
 import {addNewBlockAt} from 'Dante2/package/lib/model/index.js'
 import 'isomorphic-unfetch'
+
+import {PostLinkIcon} from '../icons/actions'
+import {LangContext} from '../../middleware/context'
 import NewsCard from '../news/card'
 
 
 const PostLink = (props) => {
+
+  const lang = useContext(LangContext)
   const [post, editPost] = useState(null)
 
   const dataForUpdate = () => {
@@ -29,7 +33,7 @@ const PostLink = (props) => {
 
   if(post !== null) {
     return (
-      <NewsCard news={post} lang={'en'} />
+      <NewsCard news={post} lang={lang} />
     )
   } else {
     return <div />
