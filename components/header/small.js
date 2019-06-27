@@ -2,11 +2,8 @@ import React from 'react'
 import Link from '../link'
 import Lang from '../../langs/header'
 import Socials from '../socials'
-import LLink from 'next/link'
 
 export default ({lang, isAuthed, opened, open, close, changeLang}) => {
-
-  let query = lang === 'ru' ? '?lang=ru' : ''
 
   return (
     <div className="flex lg:hidden flex-grow items-center justify-between">
@@ -20,7 +17,7 @@ export default ({lang, isAuthed, opened, open, close, changeLang}) => {
       </div>
 
       <div className="flex flex-grow justify-center">
-        <Link prefetch href="/">
+        <Link href="/" noPrefetch>
           <img src="/static/images/headerMini.png" alt="header logo" className="cursor-pointer" onClick={close}/>
         </Link>
       </div>
@@ -40,21 +37,21 @@ export default ({lang, isAuthed, opened, open, close, changeLang}) => {
 
       <div id="menu" className={"pt-4 " + (opened)}>
         <div className="flex flex-col flex-grow justify-center items-center text-xl no-underline">
-          <LLink href="/tag?slug=event" as={'/tag/event' + query}>
+          <Link href="/tag" query={{slug: 'event'}} as="/tag/event" noPrefetch>
             <a className="mb-2" onClick={close}>{Lang.events[lang]}</a>
-          </LLink>
-          <LLink href="/tag?slug=clubs" as={'/tag/clubs' + query}>
+          </Link>
+          <Link href="/tag" query={{slug: 'clubs'}} as="/tag/clubs" noPrefetch>
             <a className="mb-2" onClick={close}>{Lang.clubs[lang]}</a>
-          </LLink>
-          <LLink href="/tag?slug=people" as={'/tag/people' + query}>
+          </Link>
+          <Link href="/tag" query={{slug: 'people'}} as="/tag/people" noPrefetch>
             <a className="mb-2" onClick={close}>{Lang.people[lang]}</a>
-          </LLink>
-          <LLink href="/tag?slug=campus-life" as={'/tag/campus-life' + query}>
+          </Link>
+          <Link href="/tag" query={{slug: 'campus-life'}} as="/tag/campus-life" noPrefetch>
             <a className="mb-2" onClick={close}>{Lang.campuslife[lang]}</a>
-          </LLink>
-          <LLink href="/tag?slug=video" as={'/tag/video' + query}>
+          </Link>
+          <Link href="/tag" query={{slug: 'video'}} as="/tag/video" noPrefetch>
             <a className="mb-2" onClick={close}>{Lang.videos[lang]}</a>
-          </LLink>
+          </Link>
         </div>
 
         <hr/>
@@ -74,13 +71,13 @@ export default ({lang, isAuthed, opened, open, close, changeLang}) => {
             </Link>
           }
 
-          <Link href="/about">
+          <Link href="/post" query={{slug: '19-06-24-new-technology-in-iu'}} as="/post/19-06-24-new-technology-in-iu" noPrefetch>
             <a className="mb-2" onClick={close}>{Lang.about[lang]}</a>
           </Link>
-          <Link href="/writer">
+          <Link href="/post" query={{slug: '19-06-24-new-technology-in-iu'}} as="/post/19-06-24-new-technology-in-iu" noPrefetch>
             <a className="mb-2" onClick={close}>{Lang.writer[lang]}</a>
           </Link>
-          <Link href="/donate">
+          <Link href="/post" query={{slug: '19-06-24-new-technology-in-iu'}} as="/post/19-06-24-new-technology-in-iu" noPrefetch>
             <a className="mb-2" onClick={close}>{Lang.donate[lang]}</a>
           </Link>
         </div>

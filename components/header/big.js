@@ -1,12 +1,9 @@
 import React from 'react'
 import Link from '../link'
-import LLink from 'next/link'
 import Lang from '../../langs/header'
 import Dropdown from '../dropdown'
 
 export default ({lang, isAuthed, changeLang}) => {
-
-  let query = lang === 'ru' ? '?lang=ru' : ''
 
   const Opener = ({open}) =>
     <span>
@@ -16,36 +13,36 @@ export default ({lang, isAuthed, changeLang}) => {
   return (
     <div className="hidden lg:flex flex-grow items-center justify-between">
       <div className="flex">
-        <Link prefetch href="/">
+        <Link href="/">
           <img src="/static/images/headerMini.png" alt="header logo" className="cursor-pointer"/>
         </Link>
       </div>
 
       <div className="flex justify-between">
         <div className="mr-12">
-          <LLink href="/tag?slug=event" as={'/tag/event' + query}>
+          <Link href="/tag" query={{slug: 'event'}} as="/tag/event" noPrefetch>
             <a className="header-link">{Lang.events[lang]}</a>
-          </LLink>
+          </Link>
         </div>
         <div className="mr-12">
-          <LLink href="/tag?slug=clubs" as={'/tag/clubs' + query}>
+          <Link href="/tag" query={{slug: 'clubs'}} as="/tag/clubs" noPrefetch>
             <a className="header-link">{Lang.clubs[lang]}</a>
-          </LLink>
+          </Link>
         </div>
         <div className="mr-12">
-          <LLink href="/tag?slug=people" as={'/tag/people' + query}>
+          <Link href="/tag" query={{slug: 'people'}} as="/tag/people" noPrefetch>
             <a className="header-link">{Lang.people[lang]}</a>
-          </LLink>
+          </Link>
         </div>
         <div className="mr-12">
-          <LLink href="/tag?slug=campus-life" as={'/tag/campuslife' + query}>
+          <Link href="/tag" query={{slug: 'campus-life'}} as="/tag/campus-life" noPrefetch>
             <a className="header-link">{Lang.campuslife[lang]}</a>
-          </LLink>
+          </Link>
         </div>
         <div>
-          <LLink href="/tag?slug=video" as={'/tag/video' + query}>
+          <Link href="/tag" query={{slug: 'video'}} as="/tag/video" noPrefetch>
             <a className="header-link">{Lang.videos[lang]}</a>
-          </LLink>
+          </Link>
         </div>
       </div>
 
