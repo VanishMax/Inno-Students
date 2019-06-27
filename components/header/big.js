@@ -1,9 +1,12 @@
 import React from 'react'
 import Link from '../link'
+import LLink from 'next/link'
 import Lang from '../../langs/header'
 import Dropdown from '../dropdown'
 
 export default ({lang, isAuthed, changeLang}) => {
+
+  let query = lang === 'ru' ? '?lang=ru' : ''
 
   const Opener = ({open}) =>
     <span>
@@ -20,29 +23,29 @@ export default ({lang, isAuthed, changeLang}) => {
 
       <div className="flex justify-between">
         <div className="mr-12">
-          <Link href="/">
+          <LLink href="/tag?slug=event" as={'/tag/event' + query}>
             <a className="header-link">{Lang.events[lang]}</a>
-          </Link>
+          </LLink>
         </div>
         <div className="mr-12">
-          <Link href="/">
+          <LLink href="/tag?slug=clubs" as={'/tag/clubs' + query}>
             <a className="header-link">{Lang.clubs[lang]}</a>
-          </Link>
+          </LLink>
         </div>
         <div className="mr-12">
-          <Link href="/">
+          <LLink href="/tag?slug=people" as={'/tag/people' + query}>
             <a className="header-link">{Lang.people[lang]}</a>
-          </Link>
+          </LLink>
         </div>
         <div className="mr-12">
-          <Link href="/">
+          <LLink href="/tag?slug=campus-life" as={'/tag/campuslife' + query}>
             <a className="header-link">{Lang.campuslife[lang]}</a>
-          </Link>
+          </LLink>
         </div>
         <div>
-          <Link href="/">
+          <LLink href="/tag?slug=video" as={'/tag/video' + query}>
             <a className="header-link">{Lang.videos[lang]}</a>
-          </Link>
+          </LLink>
         </div>
       </div>
 

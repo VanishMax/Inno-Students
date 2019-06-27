@@ -2,8 +2,11 @@ import React from 'react'
 import Link from '../link'
 import Lang from '../../langs/header'
 import Socials from '../socials'
+import LLink from 'next/link'
 
 export default ({lang, isAuthed, opened, open, close, changeLang}) => {
+
+  let query = lang === 'ru' ? '?lang=ru' : ''
 
   return (
     <div className="flex lg:hidden flex-grow items-center justify-between">
@@ -37,21 +40,21 @@ export default ({lang, isAuthed, opened, open, close, changeLang}) => {
 
       <div id="menu" className={"pt-4 " + (opened)}>
         <div className="flex flex-col flex-grow justify-center items-center text-xl no-underline">
-          <Link href="/">
+          <LLink href="/tag?slug=event" as={'/tag/event' + query}>
             <a className="mb-2" onClick={close}>{Lang.events[lang]}</a>
-          </Link>
-          <Link href="/">
+          </LLink>
+          <LLink href="/tag?slug=clubs" as={'/tag/clubs' + query}>
             <a className="mb-2" onClick={close}>{Lang.clubs[lang]}</a>
-          </Link>
-          <Link href="/">
+          </LLink>
+          <LLink href="/tag?slug=people" as={'/tag/people' + query}>
             <a className="mb-2" onClick={close}>{Lang.people[lang]}</a>
-          </Link>
-          <Link href="/">
+          </LLink>
+          <LLink href="/tag?slug=campus-life" as={'/tag/campus-life' + query}>
             <a className="mb-2" onClick={close}>{Lang.campuslife[lang]}</a>
-          </Link>
-          <Link href="/">
+          </LLink>
+          <LLink href="/tag?slug=video" as={'/tag/video' + query}>
             <a className="mb-2" onClick={close}>{Lang.videos[lang]}</a>
-          </Link>
+          </LLink>
         </div>
 
         <hr/>

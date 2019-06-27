@@ -1,7 +1,7 @@
 import React from 'react'
 import 'isomorphic-unfetch'
 
-export default (Page, url = '') => {
+export default (Page) => {
   const WithNews = props => <Page {...props} />
 
   WithNews.getInitialProps = async (ctx) => {
@@ -10,8 +10,9 @@ export default (Page, url = '') => {
 
     } else {
 
+      let tag = (ctx.query && ctx.query.slug) ? 'tag?slug=' + ctx.query.slug : ''
       let data
-      data = await fetch('/' + url, {method: 'POST'})
+      data = await fetch('/' + tag, {method: 'POST'})
         .then(res => {
           return res.json()
         })

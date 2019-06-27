@@ -381,13 +381,13 @@ module.exports = (app, server) => {
     })
   })
 
-  // Get posts with query
-  app.get('/', (req, res) => {
 
+  // Get and send posts on index or tag
+  let aggregatePosts = (match, cb) => {
     Post.aggregate([
       {
         $match : {
-          status : 'P'
+          ...match
         }
       }, {
         $lookup: {
@@ -410,39 +410,28 @@ module.exports = (app, server) => {
           'comments': 0
         }
       }
-    ]).sort({publishTime: -1}).toArray((err, posts) => {
-      server.render(req, res, '/', {posts: posts})
+    ]).collation({ locale: 'en', strength: 2 }).sort({publishTime: -1}).toArray(cb)
+  }
+
+  app.get(['/', '/tag/:slug'], (req, res) => {
+    let match = {
+      status: 'P'
+    }
+    if(req.params.slug) match.tag = req.params.slug.replace(/-/, ' ').toLowerCase()
+
+    aggregatePosts(match, (err, posts) => {
+      server.render(req, res, '/' + (req.params.slug ? 'tag' : ''), {slug: req.params.slug || '', posts: posts})
     })
   })
-  app.post('/', (req, res) => {
 
-    Post.aggregate([
-      {
-        $match : {
-          status : 'P'
-        }
-      }, {
-        $lookup: {
-          from: 'users',
-          localField: 'author',
-          foreignField: '_id',
-          as: 'author'
-        }
-      },{
-        $unwind: '$author'
-      }, {
-        $project: {
-          'author.signedDate': 0,
-          'author.password': 0,
-          'author.request': 0,
-          'creationDate': 0,
-          'sharedWith': 0,
-          'en.content': 0,
-          'ru.content': 0,
-          'comments': 0
-        }
-      }
-    ]).sort({publishTime: -1}).toArray((err, posts) => {
+  app.post(['/', '/tag'], (req, res) => {
+
+    let match = {
+      status: 'P'
+    }
+    if(req.query.slug) match.tag = req.query.slug.replace(/ /, '').toLowerCase()
+
+    aggregatePosts(match, (err, posts) => {
       res.json({posts: posts})
     })
   })
