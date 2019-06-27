@@ -18,17 +18,17 @@ export default () => {
         <div className="flex justify-between">
           <div className="hidden md:flex">
             <div className="md:mr-12">
-              <Link href="/post" query={{slug: '19-06-24-new-technology-in-iu'}} as="/post/19-06-24-new-technology-in-iu" noPrefetch>
+              <Link href="/post" query={{slug: '19-06-24-new-technology-in-iu'}} as="/post/19-06-24-new-technology-in-iu">
                 <a className="header-link">{Lang.about[lang]}</a>
               </Link>
             </div>
             <div className="md:mr-12">
-              <Link href="/post" query={{slug: '19-06-24-new-technology-in-iu'}} as="/post/19-06-24-new-technology-in-iu" noPrefetch>
+              <Link href="/post" query={{slug: '19-06-24-new-technology-in-iu'}} as="/post/19-06-24-new-technology-in-iu">
                 <a className="header-link">{Lang.writer[lang]}</a>
               </Link>
             </div>
             <div>
-              <Link href="/post" query={{slug: '19-06-24-new-technology-in-iu'}} as="/post/19-06-24-new-technology-in-iu" noPrefetch>
+              <Link href="/post" query={{slug: '19-06-24-new-technology-in-iu'}} as="/post/19-06-24-new-technology-in-iu">
                 <a className="header-link">{Lang.donate[lang]}</a>
               </Link>
             </div>

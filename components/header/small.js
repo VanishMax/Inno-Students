@@ -37,19 +37,19 @@ export default ({lang, isAuthed, opened, open, close, changeLang}) => {
 
       <div id="menu" className={"pt-4 " + (opened)}>
         <div className="flex flex-col flex-grow justify-center items-center text-xl no-underline">
-          <Link href="/tag" query={{slug: 'event'}} as="/tag/event" noPrefetch>
+          <Link href="/tag" query={{slug: 'event'}} as="/tag/event">
             <a className="mb-2" onClick={close}>{Lang.events[lang]}</a>
           </Link>
-          <Link href="/tag" query={{slug: 'clubs'}} as="/tag/clubs" noPrefetch>
+          <Link href="/tag" query={{slug: 'clubs'}} as="/tag/clubs">
             <a className="mb-2" onClick={close}>{Lang.clubs[lang]}</a>
           </Link>
-          <Link href="/tag" query={{slug: 'people'}} as="/tag/people" noPrefetch>
+          <Link href="/tag" query={{slug: 'people'}} as="/tag/people">
             <a className="mb-2" onClick={close}>{Lang.people[lang]}</a>
           </Link>
-          <Link href="/tag" query={{slug: 'campus-life'}} as="/tag/campus-life" noPrefetch>
+          <Link href="/tag" query={{slug: 'campus-life'}} as="/tag/campus-life">
             <a className="mb-2" onClick={close}>{Lang.campuslife[lang]}</a>
           </Link>
-          <Link href="/tag" query={{slug: 'video'}} as="/tag/video" noPrefetch>
+          <Link href="/tag" query={{slug: 'video'}} as="/tag/video">
             <a className="mb-2" onClick={close}>{Lang.videos[lang]}</a>
           </Link>
         </div>
@@ -71,13 +71,13 @@ export default ({lang, isAuthed, opened, open, close, changeLang}) => {
             </Link>
           }
 
-          <Link href="/post" query={{slug: '19-06-24-new-technology-in-iu'}} as="/post/19-06-24-new-technology-in-iu" noPrefetch>
+          <Link href="/post" query={{slug: '19-06-24-new-technology-in-iu'}} as="/post/19-06-24-new-technology-in-iu">
             <a className="mb-2" onClick={close}>{Lang.about[lang]}</a>
           </Link>
-          <Link href="/post" query={{slug: '19-06-24-new-technology-in-iu'}} as="/post/19-06-24-new-technology-in-iu" noPrefetch>
+          <Link href="/post" query={{slug: '19-06-24-new-technology-in-iu'}} as="/post/19-06-24-new-technology-in-iu">
             <a className="mb-2" onClick={close}>{Lang.writer[lang]}</a>
           </Link>
-          <Link href="/post" query={{slug: '19-06-24-new-technology-in-iu'}} as="/post/19-06-24-new-technology-in-iu" noPrefetch>
+          <Link href="/post" query={{slug: '19-06-24-new-technology-in-iu'}} as="/post/19-06-24-new-technology-in-iu">
             <a className="mb-2" onClick={close}>{Lang.donate[lang]}</a>
           </Link>
         </div>

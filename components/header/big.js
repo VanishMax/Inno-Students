@@ -20,27 +20,27 @@ export default ({lang, isAuthed, changeLang}) => {
 
       <div className="flex justify-between">
         <div className="mr-12">
-          <Link href="/tag" query={{slug: 'event'}} as="/tag/event" noPrefetch>
+          <Link href="/tag" query={{slug: 'event'}} as="/tag/event">
             <a className="header-link">{Lang.events[lang]}</a>
           </Link>
         </div>
         <div className="mr-12">
-          <Link href="/tag" query={{slug: 'clubs'}} as="/tag/clubs" noPrefetch>
+          <Link href="/tag" query={{slug: 'clubs'}} as="/tag/clubs">
             <a className="header-link">{Lang.clubs[lang]}</a>
           </Link>
         </div>
         <div className="mr-12">
-          <Link href="/tag" query={{slug: 'people'}} as="/tag/people" noPrefetch>
+          <Link href="/tag" query={{slug: 'people'}} as="/tag/people">
             <a className="header-link">{Lang.people[lang]}</a>
           </Link>
         </div>
         <div className="mr-12">
-          <Link href="/tag" query={{slug: 'campus-life'}} as="/tag/campus-life" noPrefetch>
+          <Link href="/tag" query={{slug: 'campus-life'}} as="/tag/campus-life">
             <a className="header-link">{Lang.campuslife[lang]}</a>
           </Link>
         </div>
         <div>
-          <Link href="/tag" query={{slug: 'video'}} as="/tag/video" noPrefetch>
+          <Link href="/tag" query={{slug: 'video'}} as="/tag/video">
             <a className="header-link">{Lang.videos[lang]}</a>
           </Link>
         </div>

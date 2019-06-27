@@ -383,35 +383,6 @@ module.exports = (app, server) => {
 
 
   // Get and send posts on index or tag
-  let aggregatePosts = (match, cb) => {
-    Post.aggregate([
-      {
-        $match : {
-          ...match
-        }
-      }, {
-        $lookup: {
-          from: 'users',
-          localField: 'author',
-          foreignField: '_id',
-          as: 'author'
-        }
-      },{
-        $unwind: '$author'
-      }, {
-        $project: {
-          'author.signedDate': 0,
-          'author.password': 0,
-          'author.request': 0,
-          'creationDate': 0,
-          'sharedWith': 0,
-          'en.content': 0,
-          'ru.content': 0,
-          'comments': 0
-        }
-      }
-    ]).collation({ locale: 'en', strength: 2 }).sort({publishTime: -1}).toArray(cb)
-  }
 
   app.get(['/', '/tag/:slug'], (req, res) => {
     let match = {
@@ -459,6 +430,35 @@ module.exports = (app, server) => {
   })
 }
 
+const aggregatePosts = (match, cb) => {
+  Post.aggregate([
+    {
+      $match : {
+        ...match
+      }
+    }, {
+      $lookup: {
+        from: 'users',
+        localField: 'author',
+        foreignField: '_id',
+        as: 'author'
+      }
+    },{
+      $unwind: '$author'
+    }, {
+      $project: {
+        'author.signedDate': 0,
+        'author.password': 0,
+        'author.request': 0,
+        'creationDate': 0,
+        'sharedWith': 0,
+        'en.content': 0,
+        'ru.content': 0,
+        'comments': 0
+      }
+    }
+  ]).collation({ locale: 'en', strength: 2 }).sort({publishTime: -1}).toArray(cb)
+}
 
 const checkPost = (post) => {
   let content = post.en.content ? JSON.parse(post.en.content) : ''

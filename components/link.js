@@ -3,7 +3,7 @@ import { withRouter } from 'next/router'
 import Link from 'next/link'
 import {LangContext} from '../middleware/context'
 
-function MyLink({ children, router, href, as = '/', query, noPrefetch = false }) {
+function MyLink({ children, router, href, as = '/', query, prefetch = false }) {
   for(let x of ['lang']) {
     if(router.query[x]) query[x] = router.query[x]
   }
@@ -12,7 +12,7 @@ function MyLink({ children, router, href, as = '/', query, noPrefetch = false })
   let langQuery = lang === 'ru' ? '?lang=ru' : ''
 
   return (
-    <Link prefetch={!noPrefetch} href={{pathname: href, query: {...query}}} as={as + langQuery}>
+    <Link prefetch={prefetch} href={{pathname: href, query: {...query}}} as={as + langQuery}>
       {children}
     </Link>
   );
