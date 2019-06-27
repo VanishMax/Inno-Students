@@ -33,49 +33,34 @@ export default ({lang, post, changeContent, form, changeForm, isEdit, titleRef, 
 
         {lang === 'en' ?
           <div  className="mt-6">
-            {!process.browser ?
-              <span style={{whiteSpace: 'pre-line'}}>
-                {form.en.textContent}
-              </span>
-            :
-              <React.Fragment>
-                <div />
-                <Dante
-                  onChange={changeContent}
-                  content={form.en.content}
-                  read_only={!isEdit}
-                  widgets={[
-                    ImageBlockConfig({ options: { upload_url: '/post/edit/img?post=' + post } }),
-                    VideoBlockConfig({ options: { placeholder: 'put an external video link', endpoint: '//noembed.com/embed?url=', caption: 'optional caption', }, }),
-                    PlaceholderBlockConfig(),
-                    DividerBlockConfig(),
-                    PostLinkBlockConfig()
-                  ]}
-                />
-              </React.Fragment>
-            }
+            <div />
+            <Dante
+              onChange={changeContent}
+              content={form.en.content}
+              read_only={!isEdit}
+              widgets={[
+                ImageBlockConfig({ options: { upload_url: '/post/edit/img?post=' + post } }),
+                VideoBlockConfig({ options: { placeholder: 'put an external video link', endpoint: '//noembed.com/embed?url=', caption: 'optional caption', }, }),
+                PlaceholderBlockConfig(),
+                DividerBlockConfig(),
+                PostLinkBlockConfig()
+              ]}
+            />
           </div>
         :
           <div className="mt-6">
-            {process.browser === undefined ?
-              <span style={{whiteSpace: 'pre-line'}}>
-                {form.ru.textContent}
-              </span>
-            :
-              <Dante
-                onChange={changeContent}
-                content={form.ru.content}
-                read_only={!isEdit}
-                widgets={[
-                  ImageBlockConfig({ options: { upload_url: '/post/edit/img?post=' + post } }),
-                  VideoBlockConfig({ options: { placeholder: 'put an external video link', endpoint: '//noembed.com/embed?url=', caption: 'optional caption', }, }),
-                  PlaceholderBlockConfig(),
-                  DividerBlockConfig(),
-                  PostLinkBlockConfig()
-                ]}
-              />
-            }
-
+            <Dante
+              onChange={changeContent}
+              content={form.ru.content}
+              read_only={!isEdit}
+              widgets={[
+                ImageBlockConfig({ options: { upload_url: '/post/edit/img?post=' + post } }),
+                VideoBlockConfig({ options: { placeholder: 'put an external video link', endpoint: '//noembed.com/embed?url=', caption: 'optional caption', }, }),
+                PlaceholderBlockConfig(),
+                DividerBlockConfig(),
+                PostLinkBlockConfig()
+              ]}
+            />
           </div>
         }
 

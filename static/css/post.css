@@ -167,3 +167,17 @@
     box-shadow: 0 0 7px 2px rgba(0, 0, 0, .3);
     border-radius: 10px;
 }
+
+.dante-menu-linkinput .dante-menu-input {
+    color: black !important;
+}
+
+.dante-menu-linkinput .dante-icon:hover .icon-fillcolor {
+    fill: black !important;
+}
+
+.postContent {
+    font-family: Roboto, sans-serif !important;
+    font-size: inherit !important;
+    line-height: 1.5 !important;
+}

@@ -67,7 +67,7 @@ class MyApp extends App {
                 href={baseDomain + this.props.path + (this.props.lang !== 'ru' ? '?lang=ru' : '') }/>
           <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon"/>
           <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon"/>
-          <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"/>
+          <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700&display=swap" rel="stylesheet"/>
           <meta name="copyright" content="Inno Media Club"/>
         </Head>
         <LangContext.Provider value={this.state.lang}>
