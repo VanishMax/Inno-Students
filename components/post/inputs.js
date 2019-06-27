@@ -8,7 +8,6 @@ import {ImageBlockConfig} from 'Dante2/package/lib/components/blocks/image'
 import {VideoBlockConfig} from 'Dante2/package/lib/components/blocks/video'
 import {PlaceholderBlockConfig} from 'Dante2/package/lib/components/blocks/placeholder'
 import {DividerBlockConfig} from 'Dante2/package/lib/components/blocks/divider'
-import {PostLinkBlockConfig} from './postLinkBlock'
 
 export default ({lang, post, changeContent, form, changeForm, isEdit, titleRef, leadRef}) => {
 
@@ -42,8 +41,7 @@ export default ({lang, post, changeContent, form, changeForm, isEdit, titleRef, 
                 ImageBlockConfig({ options: { upload_url: '/post/edit/img?post=' + post } }),
                 VideoBlockConfig({ options: { placeholder: 'put an external video link', endpoint: '//noembed.com/embed?url=', caption: 'optional caption', }, }),
                 PlaceholderBlockConfig(),
-                DividerBlockConfig(),
-                PostLinkBlockConfig()
+                DividerBlockConfig()
               ]}
             />
           </div>
@@ -57,8 +55,7 @@ export default ({lang, post, changeContent, form, changeForm, isEdit, titleRef, 
                 ImageBlockConfig({ options: { upload_url: '/post/edit/img?post=' + post } }),
                 VideoBlockConfig({ options: { placeholder: 'put an external video link', endpoint: '//noembed.com/embed?url=', caption: 'optional caption', }, }),
                 PlaceholderBlockConfig(),
-                DividerBlockConfig(),
-                PostLinkBlockConfig()
+                DividerBlockConfig()
               ]}
             />
           </div>
