@@ -4,9 +4,9 @@ import Link from 'next/link'
 import {LangContext} from '../middleware/context'
 
 function MyLink({ children, router, href, as = '/', query, prefetch = false }) {
-  for(let x of ['lang']) {
-    if(router.query[x]) query[x] = router.query[x]
-  }
+  // for(let x of ['lang']) {
+  //   if(router.query[x]) query[x] = router.query[x]
+  // }
 
   const lang = useContext(LangContext)
   let langQuery = lang === 'ru' ? '?lang=ru' : ''

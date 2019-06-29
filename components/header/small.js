@@ -74,7 +74,7 @@ export default ({lang, isAuthed, opened, open, close, changeLang}) => {
           <Link href="/post" query={{slug: '19-06-24-new-technology-in-iu'}} as="/post/19-06-24-new-technology-in-iu">
             <a className="mb-2" onClick={close}>{Lang.about[lang]}</a>
           </Link>
-          <Link href="/post" query={{slug: '19-06-24-new-technology-in-iu'}} as="/post/19-06-24-new-technology-in-iu">
+          <Link href="/post" query={{slug: '19-06-29-become-a-writer'}} as="/post/19-06-29-become-a-writer">
             <a className="mb-2" onClick={close}>{Lang.writer[lang]}</a>
           </Link>
           <Link href="/post" query={{slug: '19-06-24-new-technology-in-iu'}} as="/post/19-06-24-new-technology-in-iu">

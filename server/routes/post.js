@@ -101,7 +101,7 @@ module.exports = (app, server) => {
     form.parse(req, (err, fields, files) => {
 
       // If image was pasted into editor from, like, another language - do nothing
-      if(fields.url.indexOf(bucket) === -1) {
+      if(!fields.url || fields.url.indexOf(bucket) === -1) {
         Post.findOne({_id: id}, (err, post) => {
           if(post) {
             if(req.user && (req.user._id === post.author || req.user.role === 'A'
