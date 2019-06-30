@@ -97,5 +97,13 @@ export const Lang = {
   publish: {
     en: 'Publish',
     ru: 'Опубликовать'
+  },
+  hidExclusive: {
+    en: 'Publish as hidden exclusive',
+    ru: 'Опубликовать скрытый эксклюзив'
+  },
+  hidPublish: {
+    en: 'Publish as hidden news',
+    ru: 'Опубликовать скрытую новость'
   }
 }

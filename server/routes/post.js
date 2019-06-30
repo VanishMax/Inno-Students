@@ -40,6 +40,7 @@ module.exports = (app, server) => {
           publishTime: null,
           views: 0,
           exclusive: '',
+          public: true,
           comments: [],
           url: url,
           oldUrl: url,
@@ -256,8 +257,8 @@ module.exports = (app, server) => {
 
   // Publish the post, check whether it's an exclusive
   app.post('/post/publish', (req, res) => {
-    const id = req.body.post, exclusive = req.body.exclusive
-    if(id && exclusive !== undefined) {
+    const id = req.body.post, exclusive = req.body.exclusive, isPublic = req.body.public
+    if(id && exclusive !== undefined && isPublic !== undefined) {
       Post.findOne({_id: id}, async (err, post) => {
         if (post) {
 
@@ -281,6 +282,7 @@ module.exports = (app, server) => {
                   Post.findOneAndUpdate({_id: id}, {$set: {
                       exclusive: check.exclusive,
                       status: 'P',
+                      public: isPublic,
                       publishTime: moment().format('YYYY-MM-DD HH:mm'),
                       url: url
                     }})
@@ -290,6 +292,7 @@ module.exports = (app, server) => {
                   Post.findOneAndUpdate({_id: id}, {$set: {
                       status: 'P',
                       exclusive: '',
+                      public: isPublic,
                       publishTime: moment().format('YYYY-MM-DD HH:mm'),
                       url: url
                     }})
@@ -397,7 +400,6 @@ module.exports = (app, server) => {
   })
 
   app.post(['/', '/tag'], (req, res) => {
-
     let match = {
       status: 'P'
     }
@@ -435,7 +437,8 @@ const aggregatePosts = (match, cb) => {
   Post.aggregate([
     {
       $match : {
-        ...match
+        ...match,
+        public: true
       }
     }, {
       $lookup: {

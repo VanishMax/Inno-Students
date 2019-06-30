@@ -146,12 +146,12 @@ const Post = ({post, role}) => {
     openPublish(!isPublishOpen)
   }
 
-  const publish = async (exclusive) => {
+  const publish = async (exclusive, isPublic = true) => {
     changeSnack('Publishing. Wait for redirect')
     const data = await fetch('/post/publish', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({post: post._id, exclusive: exclusive})
+      body: JSON.stringify({post: post._id, exclusive: exclusive, public: isPublic})
     }).then(res => res.json())
     togglePublish()
     if(data.url) {

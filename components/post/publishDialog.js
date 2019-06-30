@@ -71,16 +71,29 @@ export default ({isOpen, toggle, post, lang, data, publish}) => {
                 </div>
                 {(data.codes.indexOf(0) === -1 && data.codes.indexOf(3) === -1 &&
                   data.codes.indexOf(1) === -1 && data.codes.indexOf(2) === -1) &&
-                  <div onClick={() => publish(false)}
-                    className="rounded border border-green-200 py-2 px-4 text-lg hover:text-green-700 hover:border-green-700 cursor-pointer">
-                    {Lang.publish[langg]}
-                  </div>
+                  <React.Fragment>
+                    <div onClick={() => publish(false)}
+                         className="mr-8 rounded border border-green-200 py-2 px-4 text-lg hover:text-green-700 hover:border-green-700 cursor-pointer">
+                      {Lang.publish[langg]}
+                    </div>
+                    <div onClick={() => publish(false, false)}
+                         className="rounded border border-green-200 py-2 px-4 text-lg hover:text-green-700 hover:border-green-700 cursor-pointer">
+                      {Lang.hidPublish[langg]}
+                    </div>
+                  </React.Fragment>
                 }
-                {(data.codes.indexOf(1) !== -1 || data.codes.indexOf(2) !== -1) &&
-                  <div onClick={() => publish(true)}
-                    className="rounded border border-green-200 py-2 px-4 text-lg hover:text-green-700 hover:border-green-700 cursor-pointer">
-                    {Lang.exclusive[langg]}
-                  </div>
+                {((data.codes.indexOf(1) !== -1 || data.codes.indexOf(2) !== -1) && data.codes.indexOf(3) === -1) &&
+                  <React.Fragment>
+                    <div onClick={() => publish(true)}
+                         className="mr-8 rounded border border-green-200 py-2 px-4 text-lg hover:text-green-700 hover:border-green-700 cursor-pointer">
+                      {Lang.exclusive[langg]}
+                    </div>
+                    <div onClick={() => publish(true, false)}
+                         className="rounded border border-green-200 py-2 px-4 text-lg hover:text-green-700 hover:border-green-700 cursor-pointer">
+                      {Lang.hidExclusive[langg]}
+                    </div>
+                  </React.Fragment>
+
                 }
               </div>
             </React.Fragment>
