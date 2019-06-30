@@ -32,18 +32,6 @@ const Post = ({post, role}) => {
 
   const lang = (isAuthor || isEditor) ? useContext(LangContext) : (post.exclusive || useContext(LangContext))
 
-  if(isPublished) {
-    useEffect(() => {
-      setTimeout(() => {
-        fetch('/post/views', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({post: post._id})
-        })
-      }, 15000)
-    }, [])
-  }
-
   // State of the form: title, lead and content
   const [form, editForm] = useState({
     en: {
@@ -59,6 +47,18 @@ const Post = ({post, role}) => {
       textContent: post.ru.textContent
     }
   })
+
+  if(isPublished) {
+    useEffect(() => {
+      setTimeout(() => {
+        fetch('/post/views', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({post: post._id})
+        })
+      }, 15000)
+    }, [])
+  }
 
   if(!isAuthor && !isEditor) {
     return (

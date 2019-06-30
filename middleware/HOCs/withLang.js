@@ -1,6 +1,3 @@
-// import Router from 'next/router'
-// import makeURLWithQuery from '../makeURLWithQuery'
-
 import cookies from 'next-cookies'
 
 export default Page => {

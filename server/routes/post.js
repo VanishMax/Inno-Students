@@ -394,7 +394,12 @@ module.exports = (app, server) => {
     }
     if(req.params.slug) match.tag = req.params.slug.replace(/-/, ' ').toLowerCase()
 
-    aggregatePosts(match, (err, posts) => {
+    let limOfs = [
+      { $skip: 0 },
+      { $limit: 6 }
+    ]
+
+    aggregatePosts(match, limOfs, (err, posts) => {
       server.render(req, res, '/' + (req.params.slug ? 'tag' : ''), {slug: req.params.slug || '', posts: posts})
     })
   })
@@ -405,7 +410,16 @@ module.exports = (app, server) => {
     }
     if(req.query.slug) match.tag = req.query.slug.replace(/ /, '').toLowerCase()
 
-    aggregatePosts(match, (err, posts) => {
+    let limOfs = [
+      { $skip: 0 },
+      { $limit: 6 }
+    ]
+    if(req.body.limit && req.body.offset) {
+      limOfs[0].$skip = req.body.offset
+      limOfs[1].$limit = req.body.limit
+    }
+
+    aggregatePosts(match, limOfs, (err, posts) => {
       res.json({posts: posts})
     })
   })
@@ -433,7 +447,7 @@ module.exports = (app, server) => {
   })
 }
 
-const aggregatePosts = (match, cb) => {
+const aggregatePosts = (match, limOfs, cb) => {
   Post.aggregate([
     {
       $match : {
@@ -441,6 +455,10 @@ const aggregatePosts = (match, cb) => {
         public: true
       }
     }, {
+      $sort: {publishTime: -1}
+    },
+    ...limOfs,
+    {
       $lookup: {
         from: 'users',
         localField: 'author',
@@ -461,7 +479,7 @@ const aggregatePosts = (match, cb) => {
         'comments': 0
       }
     }
-  ]).collation({ locale: 'en', strength: 2 }).sort({publishTime: -1}).toArray(cb)
+  ]).collation({ locale: 'en', strength: 2 }).toArray(cb)
 }
 
 const checkPost = (post) => {
