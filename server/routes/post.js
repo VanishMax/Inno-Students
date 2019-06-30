@@ -497,10 +497,10 @@ const checkPost = (post) => {
     codes.push(0)
   } else if(!data.en.title || !data.en.lead || !data.en.content) {
     codes.push(1)
-    exclusive = 'en'
+    exclusive = 'ru'
   } else if(!data.ru.title || !data.ru.lead || !data.ru.content) {
     codes.push(2)
-    exclusive = 'ru'
+    exclusive = 'en'
   }
   if(!data.cover) codes.push(3)
   if((!data.author.en.name || !data.author.en.surname) && (!data.author.ru.name || !data.author.ru.surname)) {

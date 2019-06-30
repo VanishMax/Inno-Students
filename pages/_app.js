@@ -39,7 +39,7 @@ class MyApp extends App {
             query: { slug: Router.query.slug, lang: 'ru' }},
             Router.asPath.match(/lang=ru/) ? '' : Router.asPath + '?lang=ru')
         } else {
-          Router.replace({ pathname: Router.pathname, query: { slug: Router.query.slug }}, Router.asPath)
+          Router.replace({ pathname: Router.pathname, query: { slug: Router.query.slug }}, Router.pathname + '/' + Router.query.slug)
         }
       } else {
         if(lang === 'ru') {

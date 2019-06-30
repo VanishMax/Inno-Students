@@ -5,7 +5,6 @@ import 'isomorphic-unfetch'
 import {bucket} from '../constants/user'
 import withPost from '../middleware/HOCs/withPost'
 import {LangContext} from '../middleware/context'
-import Lang from '../langs/post'
 import Head from '../components/post/head'
 
 import dynamic from 'next/dynamic'
@@ -26,12 +25,12 @@ const Post = ({post, role}) => {
     )
   }
 
-  const lang = useContext(LangContext)
-
   const isAuthor = role === 'A'
   const isEditor = role === 'E'
   const isPublished = post.status === 'P'
   const isExclusive = post.exclusive !== null && post.exclusive !== ''
+
+  const lang = (isAuthor || isEditor) ? useContext(LangContext) : (post.exclusive || useContext(LangContext))
 
   if(isPublished) {
     useEffect(() => {
@@ -43,6 +42,37 @@ const Post = ({post, role}) => {
         })
       }, 15000)
     }, [])
+  }
+
+  // State of the form: title, lead and content
+  const [form, editForm] = useState({
+    en: {
+      title: post.en.title,
+      lead: post.en.lead,
+      content: post.en.content === '' ? null : JSON.parse(post.en.content),
+      textContent: post.en.textContent
+    },
+    ru: {
+      title: post.ru.title,
+      lead: post.ru.lead,
+      content: post.ru.content === '' ? null : JSON.parse(post.ru.content),
+      textContent: post.ru.textContent
+    }
+  })
+
+  if(!isAuthor && !isEditor) {
+    return (
+      <React.Fragment>
+        <Head lang={lang} post={post} isPublished={isPublished} />
+
+        <div className="content">
+          <PostHeader lang={lang} post={post} />
+          <Inputs lang={lang} isEdit={false} form={form} post={post._id}
+                  titleRef={null} leadRef={null}
+                  changeForm={null} changeContent={null} />
+        </div>
+      </React.Fragment>
+    )
   }
 
   const [isEdit, goToEdit] = useState(false)
@@ -168,22 +198,6 @@ const Post = ({post, role}) => {
   // Refs are passed to contenteditable title and lead inputs
   const titleRef = useRef(null)
   const leadRef = useRef(null)
-
-  // State of the form: title, lead and content
-  const [form, editForm] = useState({
-    en: {
-      title: post.en.title,
-      lead: post.en.lead,
-      content: post.en.content === '' ? null : JSON.parse(post.en.content),
-      textContent: post.en.textContent
-    },
-    ru: {
-      title: post.ru.title,
-      lead: post.ru.lead,
-      content: post.ru.content === '' ? null : JSON.parse(post.ru.content),
-      textContent: post.ru.textContent
-    }
-  })
 
   // Change read_only to edit mode
   const edit = () => {
