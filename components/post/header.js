@@ -2,10 +2,12 @@ import React from 'react'
 import prettyDate from '../../middleware/prettyDate'
 import {Eye, Comments, Clock, LangIcon} from '../icons/postHeader'
 import tags from '../../constants/tags'
+import Link from "../link";
 
 export default ({post, lang}) => {
 
   let found = tags.find(x => x.value === post.tag)
+  const tagUrl = found.url
   const Icon = found.icon
 
   return (
@@ -17,10 +19,13 @@ export default ({post, lang}) => {
           {post.exclusive === 'en' ? (lang === 'en' ? 'English' : 'Английский') : (lang === 'en' ? 'Russian' : 'Русский')}
         </span>
       }
-      <span className="mr-4">
-        <Icon width={20} height={20} className="post-top-icon" />&nbsp;
-        {post.tag}
-      </span>
+      <Link href="/tag" query={{slug: tagUrl}} as={'/tag/' + tagUrl}>
+        <a className="mr-4 cursor-pointer">
+          <Icon width={20} height={20} className="post-top-icon" />&nbsp;
+            {post.tag}
+        </a>
+      </Link>
+
       <span className="mr-4">
         <Clock width={18} height={18} className="post-top-icon" />&nbsp;
         {prettyDate(post.publishTime, lang) || post.creationDate}
