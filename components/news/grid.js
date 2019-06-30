@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import Router from 'next/router'
 import 'isomorphic-unfetch'
 
 import NewsCard from './card'
@@ -6,18 +7,26 @@ import LoadMore from '../icons/loadMore'
 
 export default ({posts, lang}) => {
 
-  let manyPosts = posts
+  // Go from props to state cause we will change it with loading
+  // And subscribe with useEffect on props change
+  const [manyPosts, editPosts] = useState(posts)
+  useEffect(() => {
+    editPosts(posts)
+  }, [posts])
+
+  // Make use of pagination with limit and offset
   const limit = 6
   const [offset, editOffset] = useState(limit)
-  const [showMore, changeShow] = useState(true)
+  const [showMore, changeShow] = useState(manyPosts.length >= limit)
 
+  // Load more posts
   const loadPosts = async () => {
-    const data = await fetch('/',{
+    const data = await fetch(Router.pathname + (Router.query.slug ? '?slug=' + Router.query.slug : ''),{
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({limit: limit, offset: offset})
     }).then(res => res.json())
-    manyPosts = manyPosts.concat(data.posts)
+    editPosts(manyPosts.concat(data.posts))
 
     if(data.posts.length < limit) changeShow(false)
     editOffset(offset + limit)
@@ -29,7 +38,7 @@ export default ({posts, lang}) => {
         <div className="text-lg leading-loose text-center">
           {lang === 'en' ? 'No posts found' : 'Нет подходящих публикаций'} :(
         </div>
-      :
+        :
         <React.Fragment>
           <div className="news-grid-row md:flex-row flex-col">
             {manyPosts.map((post, i) => (
