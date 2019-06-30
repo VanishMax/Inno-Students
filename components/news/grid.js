@@ -6,7 +6,7 @@ import LoadMore from '../icons/loadMore'
 
 export default ({posts, lang}) => {
 
-  const [manyPosts, editPosts] = useState(posts)
+  let manyPosts = posts
   const limit = 6
   const [offset, editOffset] = useState(limit)
   const [showMore, changeShow] = useState(true)
@@ -17,9 +17,8 @@ export default ({posts, lang}) => {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({limit: limit, offset: offset})
     }).then(res => res.json())
+    manyPosts = manyPosts.concat(data.posts)
 
-    console.log(data)
-    editPosts(manyPosts.concat(data.posts))
     if(data.posts.length < limit) changeShow(false)
     editOffset(offset + limit)
   }
