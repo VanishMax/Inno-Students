@@ -19,7 +19,7 @@ module.exports = (app, server) => {
   app.post('/post/new', (req, res) => {
     const body = req.body
     Counter.findOneAndUpdate({ _id: 'postid' }, { $inc: { seq: 1 } }, { new: true }, (err, seq) => {
-      let creationDate = moment().format('YY-MM-DD')
+      let creationDate = moment().format('DD-MM-YY')
       let titleToUrl = body.titleEn
         .trim().toLowerCase()
         .substring(0, 30)
@@ -39,9 +39,10 @@ module.exports = (app, server) => {
           img: '',
           publishTime: null,
           views: 0,
-          exclusive: null,
+          exclusive: '',
           comments: [],
           url: url,
+          oldUrl: url,
           sharedWith: [],
           en: {
             title: body.titleEn.trim(),
@@ -265,7 +266,7 @@ module.exports = (app, server) => {
             || post.sharedWith.indexOf(req.user._id) !== -1)) {
 
             if(post.status !== 'A') {
-              let publishDate = moment().format('YY-MM-DD')
+              let publishDate = moment().format('DD-MM-YY')
               let titleToUrl = post.en.title
                 .trim().toLowerCase()
                 .substring(0, 30)
@@ -348,15 +349,15 @@ module.exports = (app, server) => {
 
   // Get a post page
   app.get('/post/:url', (req, res) => {
-    Post.findOne({url: req.params.url}, async (err, post) => {
+    Post.findOne({$or: [{url: req.params.url}, {oldUrl: req.params.url}]}, async (err, post) => {
       if(!err && post) {
         post.author = await User.findOne({_id: post.author}, {projection: {password: 0}});
         if(!req.user) {
-          server.render(req, res, '/post', {slug: req.params.url, post: post, role: 'U'})
+          server.render(req, res, '/post', {slug: post.url, post: post, role: 'U'})
         } else if(req.user._id === post.author._id || req.user.role === 'A') {
-          server.render(req, res, '/post', {slug: req.params.url, post: post, role: 'A'})
+          server.render(req, res, '/post', {slug: post.url, post: post, role: 'A'})
         } else if(post.sharedWith.indexOf(req.user._id) !== -1) {
-          server.render(req, res, '/post', {slug: req.params.url, post: post, role: 'E'})
+          server.render(req, res, '/post', {slug: post.url, post: post, role: 'E'})
         }
       } else {
         server.render(req, res, '/post', {post: null, isAuthor: null})
@@ -365,15 +366,15 @@ module.exports = (app, server) => {
   })
 
   app.post('/post/:url', (req, res) => {
-    Post.findOne({url: req.params.url}, async (err, post) => {
+    Post.findOne({$or: [{url: req.params.url}, {oldUrl: req.params.url}]}, async (err, post) => {
       if(!err && post) {
         post.author = await User.findOne({_id: post.author}, {projection: {password: 0}});
         if(!req.user) {
-          res.json({slug: req.params.url, post: post, role: 'U'})
+          res.json({slug: post.url, post: post, role: 'U'})
         } else if(req.user._id === post.author._id || req.user.role === 'A') {
-          res.json({slug: req.params.url, post: post, role: 'A'})
+          res.json({slug: post.url, post: post, role: 'A'})
         } else if(post.sharedWith.indexOf(req.user._id) !== -1) {
-          res.json({slug: req.params.url, post: post, role: 'E'})
+          res.json({slug: post.url, post: post, role: 'E'})
         }
       } else {
         res.json({post: null, isAuthor: null})

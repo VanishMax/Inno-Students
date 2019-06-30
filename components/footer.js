@@ -23,7 +23,7 @@ export default () => {
               </Link>
             </div>
             <div className="md:mr-12">
-              <Link href="/post" query={{slug: '19-06-29-become-a-writer'}} as="/post/19-06-29-become-a-writer">
+              <Link href="/post" query={{slug: 'become-an-author'}} as="/post/become-an-author">
                 <a className="header-link">{Lang.writer[lang]}</a>
               </Link>
             </div>
