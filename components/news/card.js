@@ -7,9 +7,11 @@ export default ({news, big, last, lang}) => {
   const url = `url("${bucket + news.img}")`
 
   let top = []
-  top.push(news.tag)
   top.push(news.author[lang].name ? news.author[lang].name + ' ' + news.author[lang].surname : news.author.username)
+  top.push(news.tag)
   top.push(prettyDate(news.publishTime, lang))
+  if(news.exclusive === 'en') top.push(lang === 'en' ? 'English' : 'Английский')
+  if(news.exclusive === 'ru') top.push(lang === 'en' ? 'Russian' : 'Русский')
 
   const redirect = () => {
     Router.push({
