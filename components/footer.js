@@ -10,8 +10,8 @@ export default () => {
     <footer className="bg-white footer w-full">
       <div className="flex items-center justify-between py-8 px-4 lg:px-8">
         <div className="flex">
-          <Link noPrefetch href="/">
-            <img src="/static/images/headerMini.png" alt="header logo" className="cursor-pointer"/>
+          <Link href="/">
+            <img src="/static/images/headerMini.png" alt="footer logo" className="logo cursor-pointer"/>
           </Link>
         </div>
 
@@ -34,7 +34,6 @@ export default () => {
             </div>
           </div>
         </div>
-
 
         <div className="flex justify-end">
           <Socials size={6} />

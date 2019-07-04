@@ -16,7 +16,7 @@ export default ({lang, isAuthed, opened, open, close, changeLang}) => {
 
       <div className="flex flex-grow justify-center">
         <Link href="/">
-          <img src="/static/images/headerMini.png" alt="header logo" className="cursor-pointer" onClick={close}/>
+          <img src="/static/images/headerMini.png" alt="header logo" className="logo cursor-pointer" onClick={close}/>
         </Link>
       </div>
 

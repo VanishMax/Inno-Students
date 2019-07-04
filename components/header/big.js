@@ -14,7 +14,7 @@ export default ({lang, isAuthed, changeLang}) => {
     <div className="hidden lg:flex flex-grow items-center justify-between">
       <div className="flex">
         <Link href="/">
-          <img src="/static/images/headerMini.png" alt="header logo" className="cursor-pointer"/>
+          <img src="/static/images/headerMini.png" alt="header logo" className="logo cursor-pointer"/>
         </Link>
       </div>
 
