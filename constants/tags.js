@@ -4,7 +4,7 @@ export default [
   {key: 0, value: 'Event', icon: Icons.Event, url: 'event',
     title: {en: 'Events', ru: 'Мероприятия'},
     description: {
-      en: 'Event in Innopolis University. Read about such events as Christmas and Halloween as Slippers of the Year. Students know how to spend their time with the most joy.',
+      en: 'Events in Innopolis University. Read about such events as Christmas and Halloween as Slippers of the Year. Students know how to spend their time with the most joy.',
       ru: 'Мероприятия Университета Иннополис. Читайте о различных мероприятиях от Нового года или Хеллоуина до мероприятия "Тапочки года". Студенты знают, как проводить время с максимальным удовольствием.'}},
   {key: 1, value: 'News', icon: Icons.News, url: 'news',
     title: {en: 'News', ru: 'Новости'},

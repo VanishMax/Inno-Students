@@ -13,6 +13,7 @@ const Tag = ({posts, slug}) => {
 
   return (
     <Layout title={tag.title[lang]} description={tag.description[lang]} keywords={Lang.keywords[lang]}>
+      <h2 className="app pb-4 text-lg font-light tracking-wide text-gray-600">{tag.description[lang]}</h2>
       <div className="app flex justify-between">
         <NewsGrid posts={posts} lang={lang} />
       </div>

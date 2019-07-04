@@ -4,6 +4,8 @@ import 'isomorphic-unfetch'
 
 import NewsCard from './card'
 import LoadMore from '../icons/loadMore'
+import Link from '../link'
+import Lang from "../../langs/header";
 
 export default ({posts, lang}) => {
 
@@ -36,7 +38,21 @@ export default ({posts, lang}) => {
     <div className="news-grid">
       {manyPosts.length === 0 ?
         <div className="text-lg leading-loose text-center">
-          {lang === 'en' ? 'No posts found' : 'Нет подходящих публикаций'} :(
+          <p>{lang === 'en' ? 'No posts found' : 'Нет подходящих публикаций'} :(</p>
+          <p>
+            {lang === 'en' ? 'Try ' : 'Попробуйте '}
+            <Link href="/tag" query={{slug: 'article'}} as="/tag/article">
+              <a className="underline hover:text-green-800">
+                {lang === 'en' ? 'reading articles' : 'почитать статьи'}
+              </a>
+            </Link>
+            {lang === 'en' ? ' or ' : ' или '}
+            <Link href="/tag" query={{slug: 'video'}} as="/tag/video">
+              <a className="underline hover:text-green-800">
+                {lang === 'en' ? 'view videos' : 'посмотреть видео'}
+              </a>
+            </Link>
+          </p>
         </div>
         :
         <React.Fragment>
