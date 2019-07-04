@@ -8,29 +8,26 @@ export default ({lang, isAuthed, opened, open, close, changeLang}) => {
   return (
     <div className="flex lg:hidden flex-grow items-center justify-between">
 
-      <div className="flex justify-end">
-        <Link href="/">
-            <span className="cursor-pointer text-base text-gray-800 font-bold no-underline">
-              <span onClick={changeLang} className="inline lg:hidden font-normal cursor-pointer">{Lang.langSm[lang]}</span>
-            </span>
-        </Link>
+      <div className="flex justify-end ml-2">
+        <span className="cursor-pointer text-base text-gray-800 font-bold no-underline">
+          <span onClick={changeLang} className="inline lg:hidden font-normal cursor-pointer">{Lang.langSm[lang]}</span>
+        </span>
       </div>
 
       <div className="flex flex-grow justify-center">
-        <Link href="/" noPrefetch>
+        <Link href="/">
           <img src="/static/images/headerMini.png" alt="header logo" className="cursor-pointer" onClick={close}/>
         </Link>
       </div>
-
 
       {/* Menu overlay works only if checkbox is checked after clicking on hamburger */}
       {/* Styles are in the index.css file */}
 
       <div>
-        <div className={"openMenu justify-start cursor-pointer " + opened} onClick={open}>
+        <div className={"openMenu justify-start mr-2 cursor-pointer " + opened} onClick={open}>
           <img src="/static/images/icons/menu.png" alt="menu icon"/>
         </div>
-        <div className={"closeMenu justify-start cursor-pointer " + opened} onClick={close}>
+        <div className={"closeMenu justify-start mr-2 cursor-pointer " + opened} onClick={close}>
           <img src="/static/images/icons/close.png" alt="close menu icon"/>
         </div>
       </div>
@@ -57,18 +54,13 @@ export default ({lang, isAuthed, opened, open, close, changeLang}) => {
         <hr/>
         <div className="flex flex-col flex-grow justify-center items-center pt-4 text-xl no-underline">
 
-          {isAuthed ?
+          {isAuthed &&
             <React.Fragment>
               <Link href="/user">
                 <a className="mb-2" onClick={close}>{Lang.profile[lang]}</a>
               </Link>
               <a className="mb-2" onClick={close} href="/user/logout">{Lang.logout[lang]}</a>
             </React.Fragment>
-
-            :
-            <Link href="/user/login">
-              <a className="mb-2" onClick={close}>{Lang.login[lang]}</a>
-            </Link>
           }
 
           <Link href="/post" query={{slug: '19-06-24-new-technology-in-iu'}} as="/post/19-06-24-new-technology-in-iu">

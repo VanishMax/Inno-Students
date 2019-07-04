@@ -38,4 +38,4 @@
 
 .header-link { @apply text-gray-900 no-underline text-base tracking-wide cursor-pointer }
 
-.header-link:hover { @apply text-green-800 font-black }
+.header-link:hover { @apply text-green-800 underline }

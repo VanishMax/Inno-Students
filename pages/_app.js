@@ -33,11 +33,12 @@ class MyApp extends App {
       let lang = this.state.lang === 'en' ? 'ru' : 'en'
       document.cookie = `cookieLang=${lang}`
       if(Router.query.slug) {
+        console.log(lang, Router.pathname, Router.asPath, Router.asPath.match(/lang=ru/))
         if(lang === 'ru') {
           Router.replace({
             pathname: Router.pathname,
             query: { slug: Router.query.slug, lang: 'ru' }},
-            Router.asPath.match(/lang=ru/) ? '' : Router.asPath + '?lang=ru')
+            Router.asPath.match(/lang=ru/) ? Router.asPath.replace(/lang=ru/, '') : Router.asPath + '?lang=ru')
         } else {
           Router.replace({ pathname: Router.pathname, query: { slug: Router.query.slug }}, Router.pathname + '/' + Router.query.slug)
         }

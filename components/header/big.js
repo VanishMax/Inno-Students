@@ -49,7 +49,7 @@ export default ({lang, isAuthed, changeLang}) => {
       <div className="flex justify-end">
         <span onClick={changeLang} className="mr-8 header-link">{Lang.lang[lang]}</span>
 
-        {isAuthed ?
+        {isAuthed &&
           <Dropdown Opener={Opener} size={32} margin={8}>
             <Link href="/user">
               <a className="text-gray-800 font-semibold no-underline hover:text-green-800 leading-loose">
@@ -57,14 +57,11 @@ export default ({lang, isAuthed, changeLang}) => {
               </a>
             </Link>
             <br/>
-            <a href="/user/logout" className="text-gray-800 font-semibold no-underline hover:text-green-800 leading-loose">
+            <a href="/user/logout"
+               className="text-gray-800 font-semibold no-underline hover:text-green-800 leading-loose">
               {Lang.logout[lang]}
             </a>
           </Dropdown>
-          :
-          <Link href="/user/login">
-            <a className="header-link">{Lang.login[lang]}</a>
-          </Link>
         }
       </div>
     </div>
