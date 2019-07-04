@@ -10,8 +10,14 @@ export default props => {
 
   // State hook to open or close small-viewport menu by clicking on the burger
   const [opened, setOpen] = useState('closed')
-  const open = () => setOpen('opened')
-  const close = () => setOpen('closed')
+  const open = () => {
+    document.getElementsByTagName('body')[0].style.overflowY = 'hidden';
+    setOpen('opened')
+  }
+  const close = () => {
+    document.getElementsByTagName('body')[0].style.overflowY = 'scroll';
+    setOpen('closed')
+  }
 
   // Get data from global context
   const lang = useContext(LangContext)
