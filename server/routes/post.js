@@ -420,7 +420,7 @@ module.exports = (app, server) => {
     }
 
     aggregatePosts(match, limOfs, (err, posts) => {
-      res.json({posts: posts})
+      res.json({posts: posts, slug: req.query.slug ? req.query.slug : ''})
     })
   })
 

@@ -5,12 +5,14 @@ import Lang from '../langs/tag'
 import NewsGrid from '../components/news/grid'
 import Layout from '../layouts/default'
 import {LangContext} from '../middleware/context'
+import tags from '../constants/tags'
 
-const Tag = ({posts}) => {
+const Tag = ({posts, slug}) => {
   const lang = useContext(LangContext)
+  const tag = tags.find(x => x.url === slug)
 
   return (
-    <Layout title={Lang.metatitle[lang]} description={Lang.description[lang]} keywords={Lang.keywords[lang]}>
+    <Layout title={tag.title[lang]} description={tag.description[lang]} keywords={Lang.keywords[lang]}>
       <div className="app flex justify-between">
         <NewsGrid posts={posts} lang={lang} />
       </div>
