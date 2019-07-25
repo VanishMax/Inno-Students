@@ -1,47 +1,47 @@
 const login = {
   headSignTitle: {
     en: 'Sign Up Page',
-    ru: 'Регистрация'
+    ru: 'Регистрация',
   },
   headSignDescr: {
     en: 'Create a profile to get more features as an authorized user',
-    ru: 'Создайте профиль чтобы получить больше возвожостей в качестве зарегистрированного пользователя'
+    ru: 'Создайте профиль чтобы получить больше возвожостей в качестве зарегистрированного пользователя',
   },
   headLogTitle: {
     en: 'Log In Page',
-    ru: 'Авторизация'
+    ru: 'Авторизация',
   },
   headLogDescr: {
     en: 'Log In to get more features as an authorized user',
-    ru: 'Войдите чтобы получить больше возвожостей в качестве зарегистрированного пользователя'
+    ru: 'Войдите чтобы получить больше возвожостей в качестве зарегистрированного пользователя',
   },
   titleLog: {
     en: 'Log In',
-    ru: 'Войти'
+    ru: 'Войти',
   },
   titleSign: {
     en: 'Sign Up',
-    ru: 'Регистрация'
+    ru: 'Регистрация',
   },
   signButton: {
     en: 'Sign Up',
-    ru: 'Создать'
+    ru: 'Создать',
   },
   subtitle: {
     en: 'Please, provide your info',
-    ru: 'Пожалуйста, введите данные'
+    ru: 'Пожалуйста, введите данные',
   },
   username: {
     en: 'Username',
-    ru: 'Никнейм'
+    ru: 'Никнейм',
   },
   placeholder: {
     en: 'Nickname12',
-    ru: 'Nickname12'
+    ru: 'Nickname12',
   },
   password: {
     en: 'Password',
-    ru: 'Пароль'
+    ru: 'Пароль',
   },
   confirm: {
     en: 'Confirm Password',
@@ -49,12 +49,12 @@ const login = {
   },
   donthave: {
     en: 'Don\'t have an account?',
-    ru: 'Еще нет аккаунта?'
+    ru: 'Еще нет аккаунта?',
   },
   already: {
     en: 'Already have an account?',
-    ru: 'Уже есть аккаунт?'
-  }
-}
+    ru: 'Уже есть аккаунт?',
+  },
+};
 
-export default login
+export default login;

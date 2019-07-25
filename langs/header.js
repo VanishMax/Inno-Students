@@ -1,11 +1,11 @@
 const header = {
   events: {
     en: 'Events',
-    ru: 'Мероприятия'
+    ru: 'Мероприятия',
   },
   clubs: {
     en: 'Clubs',
-    ru: 'Клубы'
+    ru: 'Клубы',
   },
   people: {
     en: 'People',
@@ -13,44 +13,44 @@ const header = {
   },
   campuslife: {
     en: 'Campus Life',
-    ru: 'Жизнь студентов'
+    ru: 'Жизнь студентов',
   },
   videos: {
     en: 'Videos',
-    ru: 'Видео'
+    ru: 'Видео',
   },
   lang: {
     en: 'English',
-    ru: 'Русский'
+    ru: 'Русский',
   },
   langSm: {
     en: 'EN',
-    ru: 'РУС'
+    ru: 'РУС',
   },
   login: {
     en: 'Log In',
-    ru: 'Войти'
+    ru: 'Войти',
   },
   logout: {
     en: 'Log Out',
-    ru: 'Выйти'
+    ru: 'Выйти',
   },
   profile: {
     en: 'Profile',
-    ru: 'Профиль'
+    ru: 'Профиль',
   },
   about: {
     en: 'About Us',
-    ru: 'Про нас'
+    ru: 'Про нас',
   },
   writer: {
     en: 'Become an author',
-    ru: 'Стать автором'
+    ru: 'Стать автором',
   },
   donate: {
     en: 'Donate',
-    ru: 'Пожертвовать'
-  }
-}
+    ru: 'Пожертвовать',
+  },
+};
 
-export default header
+export default header;

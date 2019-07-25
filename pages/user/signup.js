@@ -1,20 +1,23 @@
-import React, {useContext} from 'react'
-import Head from 'next/head'
+import React, { useContext } from 'react';
+import Head from 'next/head';
 
-import Link from '../../components/link'
-import Lang from '../../langs/login'
-import ErrorLang from '../../langs/authError'
-import withAuthError from '../../middleware/HOCs/withAuthError'
-import { LangContext } from '../../middleware/context'
+import Link from '../../components/link';
+import Lang from '../../langs/login';
+import ErrorLang from '../../langs/authError';
+import withAuthError from '../../middleware/HOCs/withAuthError';
+import { LangContext } from '../../middleware/context';
 
-const Signup = (props) => {
-  const lang = useContext(LangContext)
+const Signup = ({ message }) => {
+  const lang = useContext(LangContext);
 
-  return(
+  return (
     <div className="w-4/5 md:w-3/5 lg:w-2/5 mx-auto">
       <Head>
-        <title>{Lang.headSignTitle[lang]} | InnoStudents</title>
-        <meta name="description" content={Lang.headSignDescr[lang]}/>
+        <title>
+          {Lang.headSignTitle[lang]}
+          &nbsp;| InnoStudents
+        </title>
+        <meta name="description" content={Lang.headSignDescr[lang]} />
       </Head>
       <h1 className="title">{Lang.titleSign[lang]}</h1>
       <div className="w-full mt-8 p-4 rounded shadow-lg">
@@ -23,50 +26,70 @@ const Signup = (props) => {
         <form className="w-full max-w-sm mx-auto" method="post" action="/user/signup">
           <div className="md:flex md:items-center mb-6">
             <div className="md:w-1/3">
-              <label className="block text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                     htmlFor="username">
+              <label
+                className="block text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4"
+                htmlFor="username"
+              >
                 {Lang.username[lang]}
               </label>
             </div>
             <div className="md:w-2/3">
               <input
                 className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-300"
-                id="username" type="text" name="username" placeholder={Lang.placeholder[lang]}/>
+                id="username"
+                type="text"
+                name="username"
+                placeholder={Lang.placeholder[lang]}
+              />
             </div>
           </div>
           <div className="md:flex md:items-center mb-6">
             <div className="md:w-1/3">
-              <label className="block text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                     htmlFor="password">
+              <label
+                className="block text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4"
+                htmlFor="password"
+              >
                 {Lang.password[lang]}
               </label>
             </div>
             <div className="md:w-2/3">
               <input
                 className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-300"
-                id="password" type="password" name="password" placeholder="**********"/>
+                id="password"
+                type="password"
+                name="password"
+                placeholder="**********"
+              />
             </div>
           </div>
           <div className="md:flex md:items-center mb-6">
             <div className="md:w-1/3">
-              <label className="block text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                     htmlFor="confirm">
+              <label
+                className="block text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4"
+                htmlFor="confirm"
+              >
                 {Lang.confirm[lang]}
               </label>
             </div>
             <div className="md:w-2/3">
               <input
                 className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-300"
-                id="confirm" type="password" name="confirmPassword" placeholder="**********"/>
+                id="confirm"
+                type="password"
+                name="confirmPassword"
+                placeholder="**********"
+              />
             </div>
           </div>
           <h3 className="mb-4 text-center text-base italic text-red-800">
-            {lang === 'en' ? props.message : ErrorLang[props.message]}
+            {lang === 'en' ? message : ErrorLang[message]}
           </h3>
           <div className="flex items-center justify-center">
             <button
               className="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-              type="submit" name="submit">
+              type="submit"
+              name="submit"
+            >
               {Lang.signButton[lang]}
             </button>
           </div>
@@ -79,7 +102,7 @@ const Signup = (props) => {
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default withAuthError(Signup)
+export default withAuthError(Signup);
