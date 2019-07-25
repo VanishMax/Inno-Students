@@ -4,7 +4,6 @@ import Lang from '../../langs/profile';
 
 export default ({ lang }) => (
   <React.Fragment>
-
     <div className="mt-16 md:mt-0 flex justify-around items-end md:hidden">
       <div className="flex justify-center w-1/2">
         <Link href="/user/users">

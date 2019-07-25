@@ -14,9 +14,7 @@ export default (Page) => {
       ctx.res.writeHead(302, { Location: `/user/login${makeURLWithQuery(ctx.query)}` });
       ctx.res.end();
     } else {
-      let data;
-
-      data = await fetch(ctx.pathname, { method: 'POST' })
+      const data = await fetch(ctx.pathname, { method: 'POST' })
         .then(res => res.json());
 
       if (!data.user) return Router.replace({ pathname: '/user/login', query: ctx.query, shallow: true });

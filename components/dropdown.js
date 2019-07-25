@@ -8,11 +8,9 @@ export default ({
 
   return (
     <React.Fragment>
-
       <Opener open={() => setIsComponentVisible(true)} />
 
-      {isComponentVisible
-        && (
+      {isComponentVisible && (
         <div
           ref={ref}
           onClick={() => (stopAutoclose ? null : setIsComponentVisible(false))}
@@ -20,9 +18,7 @@ export default ({
         >
           {children}
         </div>
-        )
-      }
-
+      )}
     </React.Fragment>
   );
 };

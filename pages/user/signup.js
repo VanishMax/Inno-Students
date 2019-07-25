@@ -7,7 +7,7 @@ import ErrorLang from '../../langs/authError';
 import withAuthError from '../../middleware/HOCs/withAuthError';
 import { LangContext } from '../../middleware/context';
 
-const Signup = (props) => {
+const Signup = ({ message }) => {
   const lang = useContext(LangContext);
 
   return (
@@ -15,8 +15,7 @@ const Signup = (props) => {
       <Head>
         <title>
           {Lang.headSignTitle[lang]}
-          {' '}
-| InnoStudents
+          &nbsp;| InnoStudents
         </title>
         <meta name="description" content={Lang.headSignDescr[lang]} />
       </Head>
@@ -83,7 +82,7 @@ const Signup = (props) => {
             </div>
           </div>
           <h3 className="mb-4 text-center text-base italic text-red-800">
-            {lang === 'en' ? props.message : ErrorLang[props.message]}
+            {lang === 'en' ? message : ErrorLang[message]}
           </h3>
           <div className="flex items-center justify-center">
             <button

@@ -93,14 +93,11 @@ export default ({
           </div>
         </div>
 
-        {form.error !== null
-          && (
+        {form.error !== null && (
           <h3 className="mb-4 text-center text-base italic text-red-800">
             {Lang.errors[form.error][lang]}
           </h3>
-          )
-        }
-
+        )}
 
         <div className="flex items-center justify-center">
           <button

@@ -4,10 +4,14 @@ import Lang from '../../langs/header';
 import Socials from '../socials';
 
 export default ({
-  lang, isAuthed, opened, open, close, changeLang,
+  lang,
+  isAuthed,
+  opened,
+  open,
+  close,
+  changeLang,
 }) => (
   <div className="flex lg:hidden flex-grow items-center justify-between">
-
     <div className="flex justify-end ml-2">
       <span className="cursor-pointer text-base text-gray-800 font-bold no-underline">
         <span onClick={changeLang} className="inline lg:hidden font-normal cursor-pointer">{Lang.langSm[lang]}</span>
@@ -54,16 +58,14 @@ export default ({
       <hr />
       <div className="flex flex-col flex-grow justify-center items-center pt-4 text-xl no-underline">
 
-        {isAuthed
-            && (
-            <React.Fragment>
-              <Link href="/user">
-                <a className="mb-2" onClick={close}>{Lang.profile[lang]}</a>
-              </Link>
-              <a className="mb-2" onClick={close} href="/user/logout">{Lang.logout[lang]}</a>
-            </React.Fragment>
-            )
-          }
+        {isAuthed && (
+          <React.Fragment>
+            <Link href="/user">
+              <a className="mb-2" onClick={close}>{Lang.profile[lang]}</a>
+            </Link>
+            <a className="mb-2" onClick={close} href="/user/logout">{Lang.logout[lang]}</a>
+          </React.Fragment>
+        )}
 
         <Link href="/post" query={{ slug: '19-06-24-new-technology-in-iu' }} as="/post/19-06-24-new-technology-in-iu">
           <a className="mb-2" onClick={close}>{Lang.about[lang]}</a>
@@ -81,6 +83,5 @@ export default ({
         <Socials size={6} />
       </div>
     </div>
-
   </div>
 );

@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default props => (
   <svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" {...props}>
     <path d="M18,26c-2.206,0-4,1.794-4,4s1.794,4,4,4s4-1.794,4-4S20.206,26,18,26z" />

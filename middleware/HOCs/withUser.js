@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default (Page) => {
   const WithUser = props => <Page {...props} />;
 
@@ -5,14 +7,14 @@ export default (Page) => {
     const { ctx } = context;
 
     // Get user from the server (Used only in the _app page)
-    let user = {};
+    let userObject = {};
     if (ctx.req && ctx.req.user) {
-      user = ctx.req.user;
+      userObject = ctx.req.user;
     }
 
     return {
       ...(Page.getInitialProps ? await Page.getInitialProps(context) : {}),
-      user,
+      userObject,
     };
   };
 

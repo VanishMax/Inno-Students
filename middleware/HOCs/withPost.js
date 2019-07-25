@@ -9,8 +9,7 @@ export default (Page) => {
       return ctx.query;
     }
 
-    let data;
-    data = await fetch(`/post/${ctx.query.slug}`, { method: 'POST' })
+    const data = await fetch(`/post/${ctx.query.slug}`, { method: 'POST' })
       .then(res => res.json());
 
     return { ...data };

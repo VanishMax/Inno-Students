@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import 'isomorphic-unfetch';
 import Dropdown from '../dropdown';
 
-
 export default ({
   isEdit, edit, toggleCover, togglePublish, postID,
   lang, snack, isDelete, changeDeletion, sharedWith,
@@ -14,21 +13,24 @@ export default ({
     const data = await fetch('/user/editors', {
       method: 'POST',
     }).then(res => res.json());
-    changeUsers(data.users.map((user) => {
-      user.isShared = sharedWith.indexOf(user._id) !== -1;
-      return user;
+    changeUsers(data.users.map((_user) => {
+      const userItem = Object.assign({}, _user);
+      userItem.isShared = sharedWith.indexOf(userItem._id) !== -1;
+      return userItem;
     }));
   };
 
   // By clicking in the dropdown on the name of the editor
   const toggleShare = async (id) => {
     let action = '';
-    changeUsers(users.map((user) => {
-      if (user._id === id) {
-        user.isShared ? action = 'Deshare' : action = 'Share';
-        user.isShared = !user.isShared;
+    changeUsers(users.map((_user) => {
+      const userItem = Object.assign({}, _user);
+      if (userItem._id === id) {
+        if (userItem.isShared) action = 'Deshare';
+        else action = 'Share';
+        userItem.isShared = !userItem.isShared;
       }
-      return user;
+      return userItem;
     }));
 
     const data = await fetch('/post/edit/share', {

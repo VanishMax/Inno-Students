@@ -1,3 +1,4 @@
+import React from 'react';
 import cookies from 'next-cookies';
 
 export default (Page) => {

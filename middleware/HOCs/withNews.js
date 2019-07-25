@@ -10,8 +10,7 @@ export default (Page) => {
     }
 
     const tag = (ctx.query && ctx.query.slug) ? `tag?slug=${ctx.query.slug}` : '';
-    let data;
-    data = await fetch(`/${tag}`, { method: 'POST' })
+    const data = await fetch(`/${tag}`, { method: 'POST' })
       .then(res => res.json());
 
     return { ...data };

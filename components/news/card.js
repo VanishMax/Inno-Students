@@ -32,8 +32,8 @@ export default ({
         <div className="news-card-overlay" />
         <div className="news-card-caption">
           <div className="small">
-            {top.map((top, i) => (
-              <span key={i}>{top}</span>
+            {top.map((toppy, i) => (
+              <span key={i}>{toppy}</span>
             ))}
           </div>
           <div className="big">{news[lang].title}</div>

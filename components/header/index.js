@@ -6,7 +6,7 @@ import Big from './big';
 import Small from './small';
 
 // Component that divides logic and design
-export default (props) => {
+export default ({ changeLang }) => {
   // State hook to open or close small-viewport menu by clicking on the burger
   const [opened, setOpen] = useState('closed');
   const open = () => {
@@ -30,7 +30,7 @@ export default (props) => {
       <Big
         isAuthed={isAuthed}
         lang={lang}
-        changeLang={props.changeLang}
+        changeLang={changeLang}
       />
 
       {/* Small viewport (<1024px) */}
@@ -40,7 +40,7 @@ export default (props) => {
         opened={opened}
         open={open}
         close={close}
-        changeLang={props.changeLang}
+        changeLang={changeLang}
       />
 
     </header>

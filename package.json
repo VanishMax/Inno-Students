@@ -9,7 +9,8 @@
     "build": "next build",
     "pm": "NODE_ENV=production pm2 start server.js",
     "lint": "eslint .",
-    "precommit": "npm run lint"
+    "precommit": "npm run lint",
+    "fix": "eslint . --fix"
   },
   "repository": {
     "type": "git",
@@ -46,6 +47,7 @@
     "webpack": "^4.35.0"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.2",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-plugin-import": "^2.18.2",

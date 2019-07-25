@@ -59,7 +59,14 @@ export default ({ lang, user, goFromEdit }) => {
 
   return (
     <React.Fragment>
-      <Form form={form} lang={lang} change={changeVal} submit={submit} changeImage={changeImage} refToForm={ref} />
+      <Form
+        form={form}
+        lang={lang}
+        change={changeVal}
+        submit={submit}
+        changeImage={changeImage}
+        refToForm={ref}
+      />
     </React.Fragment>
   );
 };

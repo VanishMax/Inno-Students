@@ -30,7 +30,9 @@ class MyApp extends App {
 
     // Change global language (URL also)
     this.toggleLang = () => {
-      const lang = this.state.lang === 'en' ? 'ru' : 'en';
+      let { lang } = this.state;
+      lang = lang === 'en' ? 'ru' : 'en';
+
       document.cookie = `cookieLang=${lang}`;
       if (Router.query.slug) {
         console.log(lang, Router.pathname, Router.asPath, Router.asPath.match(/lang=ru/));

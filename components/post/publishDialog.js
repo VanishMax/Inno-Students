@@ -20,8 +20,7 @@ export default ({
       <div className="app flex items-center justify-around flex-wrap flex-col md:flex-row">
         <NewsCard big lang={langg} news={post} />
         <div className="mt-6">
-          {data
-            && (
+          {data && (
             <React.Fragment>
 
               <div className="flex flex-col">
@@ -29,37 +28,37 @@ export default ({
                 <div className="flex justify-between mt-2 text-lg">
                   <span>{Lang.en[langg]}</span>
                   <span className={data.data.en.title ? 'text-green-500' : 'text-red-500'}>
-•
+                    •
                     {Lang.title[langg]}
                   </span>
                   <span className={data.data.en.lead ? 'text-green-500' : 'text-red-500'}>
-•
+                    •
                     {Lang.lead[langg]}
                   </span>
                   <span className={data.data.en.content ? 'text-green-500' : 'text-red-500'}>
-•
+                    •
                     {Lang.content[langg]}
                   </span>
                 </div>
                 <div className="flex justify-between mt-2 text-lg">
                   <span>{Lang.ru[langg]}</span>
                   <span className={data.data.ru.title ? 'text-green-500' : 'text-red-500'}>
-•
+                    •
                     {Lang.title[langg]}
                   </span>
                   <span className={data.data.ru.lead ? 'text-green-500' : 'text-red-500'}>
-•
+                    •
                     {Lang.lead[langg]}
                   </span>
                   <span className={data.data.ru.content ? 'text-green-500' : 'text-red-500'}>
-•
+                    •
                     {Lang.content[langg]}
                   </span>
                 </div>
                 <div className="flex justify-between mt-2 text-lg">
                   <span />
                   <span className={data.data.cover ? 'text-green-500' : 'text-red-500'}>
-•
+                    •
                     {Lang.cover[langg]}
                   </span>
                 </div>
@@ -68,36 +67,35 @@ export default ({
               <div className="flex flex-col mt-6 mb-6">
                 <div className="flex justify-center text-lg leading-relaxed">
                   {Lang.author[langg]}
-                  {' '}
-— @
+                  &nbsp; — @
                   {data.author}
                 </div>
                 <div className="flex justify-between mt-2 text-lg">
                   <span>{Lang.en[langg]}</span>
                   <span className={data.data.author.en.name ? 'text-green-500' : 'text-orange-500'}>
-•
+                    •
                     {Lang.name[langg]}
                   </span>
                   <span className={data.data.author.en.surname ? 'text-green-500' : 'text-orange-500'}>
-•
+                    •
                     {Lang.surname[langg]}
                   </span>
                 </div>
                 <div className="flex justify-between mt-2 text-lg">
                   <span>{Lang.ru[langg]}</span>
                   <span className={data.data.author.ru.name ? 'text-green-500' : 'text-orange-500'}>
-•
+                    •
                     {Lang.name[langg]}
                   </span>
                   <span className={data.data.author.ru.surname ? 'text-green-500' : 'text-orange-500'}>
-•
+                    •
                     {Lang.surname[langg]}
                   </span>
                 </div>
                 <div className="flex justify-between mt-2 text-lg">
                   <span />
                   <span className={data.data.author.website ? 'text-green-500' : 'text-orange-500'}>
-•
+                    •
                     {Lang.website[langg]}
                   </span>
                 </div>
@@ -105,8 +103,7 @@ export default ({
 
               {data.codes.map((code, i) => (
                 <p key={i} className={`${CodesLang[code].type === 'W' ? 'text-orange-500' : 'text-red-500'}`}>
-                  •
-                  {' '}
+                  •&nbsp;
                   {CodesLang[code][langg]}
                 </p>
               ))}
@@ -121,45 +118,43 @@ export default ({
                 {(data.codes.indexOf(0) === -1 && data.codes.indexOf(3) === -1
                   && data.codes.indexOf(1) === -1 && data.codes.indexOf(2) === -1)
                   && (
-                  <React.Fragment>
-                    <div
-                      onClick={() => publish(false)}
-                      className="mr-8 rounded border border-green-200 py-2 px-4 text-lg hover:text-green-700 hover:border-green-700 cursor-pointer"
-                    >
-                      {Lang.publish[langg]}
-                    </div>
-                    <div
-                      onClick={() => publish(false, false)}
-                      className="rounded border border-green-200 py-2 px-4 text-lg hover:text-green-700 hover:border-green-700 cursor-pointer"
-                    >
-                      {Lang.hidPublish[langg]}
-                    </div>
-                  </React.Fragment>
-                  )
-                }
-                {((data.codes.indexOf(1) !== -1 || data.codes.indexOf(2) !== -1) && data.codes.indexOf(3) === -1)
+                    <React.Fragment>
+                      <div
+                        onClick={() => publish(false)}
+                        className="mr-8 rounded border border-green-200 py-2 px-4 text-lg hover:text-green-700 hover:border-green-700 cursor-pointer"
+                      >
+                        {Lang.publish[langg]}
+                      </div>
+                      <div
+                        onClick={() => publish(false, false)}
+                        className="rounded border border-green-200 py-2 px-4 text-lg hover:text-green-700 hover:border-green-700 cursor-pointer"
+                      >
+                        {Lang.hidPublish[langg]}
+                      </div>
+                    </React.Fragment>
+                  )}
+                {((data.codes.indexOf(1) !== -1
+                  || data.codes.indexOf(2) !== -1)
+                  && data.codes.indexOf(3) === -1)
                   && (
-                  <React.Fragment>
-                    <div
-                      onClick={() => publish(true)}
-                      className="mr-8 rounded border border-green-200 py-2 px-4 text-lg hover:text-green-700 hover:border-green-700 cursor-pointer"
-                    >
-                      {Lang.exclusive[langg]}
-                    </div>
-                    <div
-                      onClick={() => publish(true, false)}
-                      className="rounded border border-green-200 py-2 px-4 text-lg hover:text-green-700 hover:border-green-700 cursor-pointer"
-                    >
-                      {Lang.hidExclusive[langg]}
-                    </div>
-                  </React.Fragment>
-                  )
-
-                }
+                    <React.Fragment>
+                      <div
+                        onClick={() => publish(true)}
+                        className="mr-8 rounded border border-green-200 py-2 px-4 text-lg hover:text-green-700 hover:border-green-700 cursor-pointer"
+                      >
+                        {Lang.exclusive[langg]}
+                      </div>
+                      <div
+                        onClick={() => publish(true, false)}
+                        className="rounded border border-green-200 py-2 px-4 text-lg hover:text-green-700 hover:border-green-700 cursor-pointer"
+                      >
+                        {Lang.hidExclusive[langg]}
+                      </div>
+                    </React.Fragment>
+                  )}
               </div>
             </React.Fragment>
-            )
-          }
+          )}
         </div>
       </div>
     </div>

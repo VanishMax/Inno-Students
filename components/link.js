@@ -1,10 +1,10 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { withRouter } from 'next/router';
 import Link from 'next/link';
 import { LangContext } from '../middleware/context';
 
 function MyLink({
-  children, href, as = href, query, prefetch = false, text = false,
+  children, href, as = href, query, prefetch = false,
 }) {
   const lang = useContext(LangContext);
   const langQuery = lang === 'ru' ? '?lang=ru' : '';

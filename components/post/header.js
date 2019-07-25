@@ -14,36 +14,34 @@ export default ({ post, lang }) => {
   return (
     <div className="text-sm text-gray-600">
       <span className="mr-4">{`${post.author[lang].name} ${post.author[lang].surname}`}</span>
-      {post.exclusive
-        && (
+      {post.exclusive && (
         <span className="mr-4">
           <LangIcon width={20} height={20} className="post-top-icon" />
-&nbsp;
+          &nbsp;
           {post.exclusive === 'en' ? (lang === 'en' ? 'English' : 'Английский') : (lang === 'en' ? 'Russian' : 'Русский')}
         </span>
-        )
-      }
+      )}
       <Link href="/tag" query={{ slug: tagUrl }} as={`/tag/${tagUrl}`}>
         <a className="mr-4 cursor-pointer">
           <Icon width={20} height={20} className="post-top-icon" />
-&nbsp;
+          &nbsp;
           {post.tag}
         </a>
       </Link>
 
       <span className="mr-4">
         <Clock width={18} height={18} className="post-top-icon" />
-&nbsp;
+        &nbsp;
         {prettyDate(post.publishTime, lang) || post.creationDate}
       </span>
       <span className="mr-4">
         <Comments width={16} height={16} className="post-top-icon" />
-&nbsp;
+        &nbsp;
         {post.comments.length}
       </span>
       <span>
         <Eye width={18} height={22} className="post-top-icon" />
-&nbsp;
+        &nbsp;
         {post.views || 0}
       </span>
     </div>

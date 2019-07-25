@@ -38,21 +38,17 @@ export default ({ user, initialRole }) => {
 
   return (
     <React.Fragment>
-      {done
-        ? (
-          <span className="text-green-700 leading-tight">
-          Done
-          </span>
-        )
-        : (
-          <Dropdown Opener={Opener} size={48} margin={2}>
-            {roles.map(rol => (
-              <DropValue index={rol.key} key={rol.key} user={user} />
-            ))}
-          </Dropdown>
-        )
-      }
-
+      {done ? (
+        <span className="text-green-700 leading-tight">
+        Done
+        </span>
+      ) : (
+        <Dropdown Opener={Opener} size={48} margin={2}>
+          {roles.map(rol => (
+            <DropValue index={rol.key} key={rol.key} user={user} />
+          ))}
+        </Dropdown>
+      )}
     </React.Fragment>
   );
 };

@@ -2,10 +2,8 @@
 
 export default (query) => {
   let str = '?';
+  // eslint-disable-next-line no-restricted-syntax
   for (const x in query) {
-    console.log(x === 'lang');
-    console.log('');
-    console.log('');
     if (x === 'error') str += `message=${query[x].message}&`;
     else if (x === 'lang') str += `${x}=${query[x]}&`;
   }

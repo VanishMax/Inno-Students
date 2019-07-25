@@ -41,6 +41,5 @@ export default ({ lang, img, goFromEdit }) => (
         <a href="/user/logout" className="hover:text-green-700">{Lang.logout[lang]}</a>
       </div>
     </div>
-
   </React.Fragment>
 );

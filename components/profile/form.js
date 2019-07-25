@@ -20,24 +20,21 @@ export default ({
       <div className="flex flex-row justify-around">
         <div className="flex w-full items-center justify-center bg-grey-lighter">
 
-          <label className="w-1/2 md:w-1/3 flex flex-col items-center px-2 py-3 md:px-4 md:py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-green-700">
-            {form.src !== ''
-              ? (
-                <React.Fragment>
-                  <img src={form.src} className="avatar" />
-                </React.Fragment>
-              )
-              : (
-                <React.Fragment>
-                  <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
-                    </svg>
-                  <span className="mt-2 text-base leading-normal">Select an image</span>
-                </React.Fragment>
-              )
-              }
+          <div className="w-1/2 md:w-1/3 flex flex-col items-center px-2 py-3 md:px-4 md:py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-green-700">
+            {form.src !== '' ? (
+              <React.Fragment>
+                <img src={form.src} className="avatar" />
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                </svg>
+                <span className="mt-2 text-base leading-normal">Select an image</span>
+              </React.Fragment>
+            )}
             <input type="file" className="hidden" name="file" accept="image/*" onChange={changeImage} />
-          </label>
+          </div>
         </div>
       </div>
     </form>
@@ -118,6 +115,5 @@ export default ({
         </button>
       </div>
     </form>
-
   </div>
 );

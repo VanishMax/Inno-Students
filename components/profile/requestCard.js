@@ -18,7 +18,7 @@ export default ({ user }) => {
     <div className="rounded shadow w-full md:w-2/3 lg:w-1/2 mt-4 py-2 px-4">
       <h3 className="text-lg text-center">
         {user.username}
-        <a className="ml-6 text-blue-500" href={`https://t.me/${user.request.alias}`} target="_blank">
+        <a className="ml-6 text-blue-500" href={`https://t.me/${user.request.alias}`} target="_blank" rel="noopener noreferrer">
           @
           {user.request.alias}
         </a>
