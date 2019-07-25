@@ -21,7 +21,7 @@ export default ({ changeLang }) => {
   // Get data from global context
   const lang = useContext(LangContext);
   const user = useContext(AuthContext);
-  const isAuthed = user._id !== undefined;
+  const isAuthed = user && user._id !== undefined;
 
   return (
     <header className="app flex items-center justify-between py-3">

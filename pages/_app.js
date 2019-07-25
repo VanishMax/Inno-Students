@@ -35,7 +35,6 @@ class MyApp extends App {
 
       document.cookie = `cookieLang=${lang}`;
       if (Router.query.slug) {
-        console.log(lang, Router.pathname, Router.asPath, Router.asPath.match(/lang=ru/));
         if (lang === 'ru') {
           Router.replace({
             pathname: Router.pathname,

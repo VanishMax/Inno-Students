@@ -8,7 +8,7 @@ export default ({
     <Head>
       <title>
         {title || ''}
-        &nbps;| InnoStudents
+        &nbsp;| InnoStudents
       </title>
       <meta name="description" content={description || ''} />
       <meta name="keywords" content={keywords || ''} />
