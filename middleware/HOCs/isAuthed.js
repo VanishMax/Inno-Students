@@ -1,33 +1,29 @@
-import React from 'react'
-import Router from 'next/router'
-import 'isomorphic-unfetch'
-import makeURLWithQuery from '../makeURLWithQuery'
+import React from 'react';
+import Router from 'next/router';
+import 'isomorphic-unfetch';
+import makeURLWithQuery from '../makeURLWithQuery';
 
-export default Page => {
-  const WithAuth = props => <Page {...props} />
+export default (Page) => {
+  const WithAuth = props => <Page {...props} />;
 
-  WithAuth.getInitialProps = async ctx => {
-    if(ctx.req) {
-      if(ctx.req.user) {
-        return {user: ctx.req.user}
-      } else {
-        ctx.res.writeHead(302, {Location: '/user/login' + makeURLWithQuery(ctx.query)})
-        ctx.res.end()
+  WithAuth.getInitialProps = async (ctx) => {
+    if (ctx.req) {
+      if (ctx.req.user) {
+        return { user: ctx.req.user };
       }
+      ctx.res.writeHead(302, { Location: `/user/login${makeURLWithQuery(ctx.query)}` });
+      ctx.res.end();
     } else {
-      const data = await fetch('/user', {method: 'POST'})
-        .then( res => {
-          return res.json()
-        })
+      const data = await fetch('/user', { method: 'POST' })
+        .then(res => res.json());
 
-      if(data.user) {
-        return {user: data.user}
-      } else {
-        Router.replace({ pathname: '/user/login', query: ctx.query, shallow: true})
-        return {}
+      if (data.user) {
+        return { user: data.user };
       }
+      Router.replace({ pathname: '/user/login', query: ctx.query, shallow: true });
+      return {};
     }
-  }
+  };
 
-  return WithAuth
-}
+  return WithAuth;
+};

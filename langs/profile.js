@@ -1,56 +1,56 @@
 const profile = {
   profile: {
     en: 'Profile',
-    ru: 'Профиль'
+    ru: 'Профиль',
   },
   myposts: {
     en: 'My posts',
-    ru: 'Мои посты'
+    ru: 'Мои посты',
   },
   newpost: {
     en: 'New post',
-    ru: 'Новый пост'
+    ru: 'Новый пост',
   },
   drafts: {
     en: 'Drafts',
-    ru: 'Черновики'
+    ru: 'Черновики',
   },
   logout: {
     en: 'Log out',
-    ru: 'Выйти'
+    ru: 'Выйти',
   },
   author: {
     en: 'Author',
-    ru: 'Автор'
+    ru: 'Автор',
   },
   admin: {
     en: 'Admin',
-    ru: 'Администратор'
+    ru: 'Администратор',
   },
   edit: {
     en: 'Edit',
-    ru: 'Редактировать'
+    ru: 'Редактировать',
   },
   alldrafts: {
     en: 'All drafts',
-    ru: 'Все черновики'
+    ru: 'Все черновики',
   },
   users: {
     en: 'Users',
-    ru: 'Пользователи'
+    ru: 'Пользователи',
   },
   requests: {
     en: 'Requests',
-    ru: 'Заявки'
+    ru: 'Заявки',
   },
   stats: {
     en: 'Statistics',
-    ru: 'Статистика'
+    ru: 'Статистика',
   },
   save: {
     en: 'Save',
-    ru: 'Сохранить'
-  }
-}
+    ru: 'Сохранить',
+  },
+};
 
-export default profile
+export default profile;

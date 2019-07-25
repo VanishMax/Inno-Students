@@ -1,10 +1,12 @@
-import React from 'react'
-import Link from './link'
+import React from 'react';
+import Link from './link';
 
-import {Telegram, FaceBook, Instagram, YouTube, Vkontakte} from './icons/socials'
+import {
+  Telegram, FaceBook, Instagram, YouTube, Vkontakte,
+} from './icons/socials';
 
-export default ({size}) => {
-  const classes = `mr-2 w-${size} h-${size}`
+export default ({ size }) => {
+  const classes = `mr-2 w-${size} h-${size}`;
   return (
     <React.Fragment>
       <a href="https://t.me/InnoStudents" className={classes} target="_blank">
@@ -23,5 +25,5 @@ export default ({size}) => {
         <YouTube />
       </a>
     </React.Fragment>
-  )
-}
+  );
+};

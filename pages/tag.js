@@ -1,15 +1,15 @@
-import React, {useContext} from 'react'
-import withNews from '../middleware/HOCs/withNews'
+import React, { useContext } from 'react';
+import withNews from '../middleware/HOCs/withNews';
 
-import Lang from '../langs/tag'
-import NewsGrid from '../components/news/grid'
-import Layout from '../layouts/default'
-import {LangContext} from '../middleware/context'
-import tags from '../constants/tags'
+import Lang from '../langs/tag';
+import NewsGrid from '../components/news/grid';
+import Layout from '../layouts/default';
+import { LangContext } from '../middleware/context';
+import tags from '../constants/tags';
 
-const Tag = ({posts, slug}) => {
-  const lang = useContext(LangContext)
-  const tag = tags.find(x => x.url === slug)
+const Tag = ({ posts, slug }) => {
+  const lang = useContext(LangContext);
+  const tag = tags.find(x => x.url === slug);
 
   return (
     <Layout title={tag.title[lang]} description={tag.description[lang]} keywords={Lang.keywords[lang]}>
@@ -18,7 +18,7 @@ const Tag = ({posts, slug}) => {
         <NewsGrid posts={posts} lang={lang} />
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default withNews(Tag)
+export default withNews(Tag);

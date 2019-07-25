@@ -1,0 +1,6 @@
+server
+out
+.next
+node_modules
+.idea
+server.js

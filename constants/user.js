@@ -4,14 +4,14 @@ export const fakeUser = {
   img: '/static/images/fakeUser.png',
   en: {
     name: 'Kalivan',
-    surname: 'Ivanov'
+    surname: 'Ivanov',
   },
   ru: {
     name: 'Калыван',
-    surname: 'Иванов'
-  }
-}
+    surname: 'Иванов',
+  },
+};
 
-export const fakeUserImg = '/static/images/fakeUser.jpg'
+export const fakeUserImg = '/static/images/fakeUser.jpg';
 
-export const bucket = '//inno-students.s3.amazonaws.com/'
+export const bucket = '//inno-students.s3.amazonaws.com/';

@@ -4,7 +4,7 @@ const authError = {
   'Wrong password': 'Неправильный пароль',
   'No such user with this username': 'Такого пользователя не существует',
   'Password is not confirmed': 'Пароли не совпадают',
-  'That username already exists': 'Такой пользователь уже существует'
-}
+  'That username already exists': 'Такой пользователь уже существует',
+};
 
-export default authError
+export default authError;

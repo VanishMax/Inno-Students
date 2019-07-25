@@ -1,25 +1,21 @@
-import React from 'react'
-import 'isomorphic-unfetch'
+import React from 'react';
+import 'isomorphic-unfetch';
 
 export default (Page) => {
-  const WithNews = props => <Page {...props} />
+  const WithNews = props => <Page {...props} />;
 
   WithNews.getInitialProps = async (ctx) => {
-    if(ctx.req) {
-      return ctx.query
-
-    } else {
-
-      let tag = (ctx.query && ctx.query.slug) ? 'tag?slug=' + ctx.query.slug : ''
-      let data
-      data = await fetch('/' + tag, {method: 'POST'})
-        .then(res => {
-          return res.json()
-        })
-
-      return {...data}
+    if (ctx.req) {
+      return ctx.query;
     }
-  }
 
-  return WithNews
-}
+    const tag = (ctx.query && ctx.query.slug) ? `tag?slug=${ctx.query.slug}` : '';
+    let data;
+    data = await fetch(`/${tag}`, { method: 'POST' })
+      .then(res => res.json());
+
+    return { ...data };
+  };
+
+  return WithNews;
+};
