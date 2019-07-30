@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import withNews from '../middleware/HOCs/withNews';
 
 import Lang from '../langs/tag';
@@ -17,12 +18,25 @@ const Tag = ({ posts, slug }) => {
       description={tag.description[lang]}
       keywords={Lang.keywords[lang]}
     >
-      <h2 className="app pb-4 text-lg font-light tracking-wide text-gray-600">{tag.description[lang]}</h2>
-      <div className="app flex justify-between">
-        <NewsGrid posts={posts} lang={lang} />
-      </div>
+      <React.Fragment>
+        <h2 className="app pb-4 text-lg font-light tracking-wide text-gray-600">{tag.description[lang]}</h2>
+        <div className="app flex justify-between">
+          <NewsGrid posts={posts} lang={lang} />
+        </div>
+      </React.Fragment>
     </Layout>
   );
+};
+
+
+Tag.propTypes = {
+  posts: PropTypes.arrayOf(PropTypes.object),
+  slug: PropTypes.string,
+};
+
+Tag.defaultProps = {
+  posts: [],
+  slug: '',
 };
 
 export default withNews(Tag);

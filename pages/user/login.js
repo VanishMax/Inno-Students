@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import Head from 'next/head';
+import PropTypes from 'prop-types';
 
 import Link from '../../components/link';
 import Lang from '../../langs/login';
@@ -84,6 +85,14 @@ const Login = ({ message }) => {
       </div>
     </div>
   );
+};
+
+Login.propTypes = {
+  message: PropTypes.string,
+};
+
+Login.defaultProps = {
+  message: '',
 };
 
 export default withAuthError(Login);

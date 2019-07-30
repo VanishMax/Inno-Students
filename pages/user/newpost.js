@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
 import Router from 'next/router';
 import 'isomorphic-unfetch';
 
@@ -67,5 +68,16 @@ const NewPost = ({ user }) => {
     </React.Fragment>
   );
 };
+
+NewPost.propTypes = {
+  user: PropTypes.shape({
+    _id: PropTypes.number,
+  }),
+};
+
+NewPost.defaultProps = {
+  user: {},
+};
+
 
 export default isAuthed(NewPost);
