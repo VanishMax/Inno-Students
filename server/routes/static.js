@@ -1,7 +1,5 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = (app) => {
-  app.get('/robots.txt', (req, res) => {
-    return res.sendFile(path.join(__dirname, '../../', 'static/robots.txt'))
-  })
-}
+  app.get('/robots.txt', (req, res) => res.sendFile(path.join(__dirname, '../../', 'static/robots.txt')));
+};
