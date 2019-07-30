@@ -1,15 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Link from '../link';
 import Lang from '../../langs/header';
 import Socials from '../socials';
 
-export default ({
-  lang,
-  isAuthed,
-  opened,
-  open,
-  close,
-  changeLang,
+const MobileHeader = ({
+  lang, isAuthed, opened,
+  open, close, changeLang,
 }) => (
   <div className="flex lg:hidden flex-grow items-center justify-between">
     <div className="flex justify-end ml-2">
@@ -85,3 +82,18 @@ export default ({
     </div>
   </div>
 );
+
+MobileHeader.propTypes = {
+  lang: PropTypes.string.isRequired,
+  changeLang: PropTypes.func.isRequired,
+  opened: PropTypes.string.isRequired,
+  open: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
+  isAuthed: PropTypes.bool,
+};
+
+MobileHeader.defaultProps = {
+  isAuthed: false,
+};
+
+export default MobileHeader;

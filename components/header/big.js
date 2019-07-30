@@ -1,14 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Link from '../link';
 import Lang from '../../langs/header';
 import Dropdown from '../dropdown';
 
-export default ({ lang, isAuthed, changeLang }) => {
+const DesktopHeader = ({ lang, isAuthed, changeLang }) => {
   const Opener = ({ open }) => (
     <span>
       <img onClick={open} src="/static/images/icons/user.png" className="cursor-pointer" />
     </span>
   );
+  Opener.propTypes = {
+    open: PropTypes.func.isRequired,
+  };
+
   return (
     <div className="hidden lg:flex flex-grow items-center justify-between">
       <div className="flex">
@@ -68,3 +73,15 @@ export default ({ lang, isAuthed, changeLang }) => {
     </div>
   );
 };
+
+DesktopHeader.propTypes = {
+  lang: PropTypes.string.isRequired,
+  changeLang: PropTypes.func.isRequired,
+  isAuthed: PropTypes.bool,
+};
+
+DesktopHeader.defaultProps = {
+  isAuthed: false,
+};
+
+export default DesktopHeader;
