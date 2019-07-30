@@ -32,7 +32,10 @@ const RolesDropdown = ({ user, initialRole }) => {
   );
   DropValue.propTypes = {
     index: PropTypes.number.isRequired,
-    open: PropTypes.func.isRequired,
+    open: PropTypes.func,
+  };
+  DropValue.defaultProps = {
+    open: null,
   };
 
   const Opener = ({ open }) => (
@@ -65,11 +68,11 @@ const RolesDropdown = ({ user, initialRole }) => {
 
 RolesDropdown.propTypes = {
   initialRole: PropTypes.string.isRequired,
-  user: PropTypes.shape({}),
+  user: PropTypes.number,
 };
 
 RolesDropdown.defaultProps = {
-  user: {},
+  user: null,
 };
 
 export default RolesDropdown;

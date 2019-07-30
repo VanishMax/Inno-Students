@@ -19,6 +19,7 @@ function MyLink({
 
 MyLink.propTypes = {
   href: PropTypes.string,
+  // eslint-disable-next-line
   as: PropTypes.string,
   query: PropTypes.shape(),
   children: PropTypes.element,
@@ -27,7 +28,6 @@ MyLink.propTypes = {
 
 MyLink.defaultProps = {
   href: '/',
-  as: '/',
   query: {},
   children: null,
   prefetch: false,
