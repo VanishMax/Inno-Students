@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ImageBlockConfig } from 'Dante2/package/lib/components/blocks/image';
 import { VideoBlockConfig } from 'Dante2/package/lib/components/blocks/video';
 import { PlaceholderBlockConfig } from 'Dante2/package/lib/components/blocks/placeholder';
@@ -8,7 +9,7 @@ import dynamic from 'next/dynamic';
 
 const Dante = dynamic(() => import('Dante2'), { ssr: false });
 
-export default ({
+const Inputs = ({
   lang, post, changeContent, form, changeForm, isEdit, titleRef, leadRef,
 }) => (
   <React.Fragment>
@@ -61,3 +62,33 @@ export default ({
     )}
   </React.Fragment>
 );
+
+Inputs.propTypes = () => {
+  // eslint-disable-next-line no-use-before-define
+  const Element = typeof Element === 'undefined' ? () => {} : Element;
+  return {
+    lang: PropTypes.string.isRequired,
+    post: PropTypes.number.isRequired,
+    form: PropTypes.shape({
+      en: PropTypes.object,
+      ru: PropTypes.object,
+    }),
+    changeContent: PropTypes.func.isRequired,
+    changeForm: PropTypes.func.isRequired,
+    isEdit: PropTypes.bool.isRequired,
+    titleRef: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+    ]).isRequired,
+    leadRef: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+    ]).isRequired,
+  };
+};
+
+Inputs.defaultProps = {
+  form: {},
+};
+
+export default Inputs;

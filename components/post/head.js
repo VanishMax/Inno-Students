@@ -1,13 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { bucket } from '../../constants/user';
 
-export default ({ post, lang, isPublished }) => (
+const PostHead = ({ post, lang, isPublished }) => (
   <Head>
     <title>{post[lang].title}</title>
 
-    {isPublished
-      && (
+    {isPublished && (
       <React.Fragment>
         <meta name="keywords" content="Inno Students, media club, Innopolis University, article, post, news" />
         <meta name="description" content={post[lang].lead} />
@@ -25,7 +25,23 @@ export default ({ post, lang, isPublished }) => (
         <meta property="article:author" content={`//${post.author.website}`} />
         <meta property="article:publishedTime" content={post.publishTime} />
       </React.Fragment>
-      )
-      }
+    )}
   </Head>
 );
+
+PostHead.propTypes = {
+  lang: PropTypes.string.isRequired,
+  isPublished: PropTypes.bool.isRequired,
+  post: PropTypes.shape({
+    author: PropTypes.object,
+    url: PropTypes.string,
+    img: PropTypes.string,
+    publishTime: PropTypes.string,
+  }),
+};
+
+PostHead.defaultProps = {
+  post: {},
+};
+
+export default PostHead;

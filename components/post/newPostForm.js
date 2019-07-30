@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Lang from '../../langs/newpost';
 import Layout from '../../layouts/user';
 import Dropdown from '../dropdown';
 
 import { bucket, fakeUserImg } from '../../constants/user';
 
-export default ({
+const NewPostForm = ({
   lang, user, changeTitle, changeTag, submit, form, tags,
 }) => {
   const DropValue = ({ index, open }) => {
@@ -22,12 +23,22 @@ export default ({
       </div>
     );
   };
+  DropValue.propTypes = {
+    index: PropTypes.number.isRequired,
+    open: PropTypes.func,
+  };
+  DropValue.defaultProps = {
+    open: null,
+  };
 
   const Opener = ({ open }) => (
     <span>
       <DropValue open={open} index={form.tag} />
     </span>
   );
+  Opener.propTypes = {
+    open: PropTypes.func.isRequired,
+  };
 
   return (
     <Layout
@@ -114,3 +125,28 @@ export default ({
     </Layout>
   );
 };
+
+NewPostForm.propTypes = {
+  lang: PropTypes.string.isRequired,
+  changeTitle: PropTypes.func.isRequired,
+  changeTag: PropTypes.func.isRequired,
+  submit: PropTypes.func.isRequired,
+  tags: PropTypes.arrayOf(PropTypes.object),
+  user: PropTypes.shape({
+    img: PropTypes.string,
+  }),
+  form: PropTypes.shape({
+    titleEn: PropTypes.string,
+    titleRu: PropTypes.string,
+    tag: PropTypes.number,
+    error: PropTypes.string,
+  }),
+};
+
+NewPostForm.defaultProps = {
+  user: {},
+  tags: [],
+  form: {},
+};
+
+export default NewPostForm;

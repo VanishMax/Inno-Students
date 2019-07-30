@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Router from 'next/router';
 import tags from '../../constants/tags';
 
-export default ({
-  posts, lang, isPublished = false, authors = false,
+const PostsTable = ({
+  posts, lang, isPublished, authors,
 }) => {
   const toIcon = (tag) => {
     const found = tags.find(x => x.value === tag);
@@ -26,13 +27,11 @@ export default ({
               <th className="py-4 px-2 md:px-6 border-b border-grey-light">
                 Title
               </th>
-              {authors
-              && (
-              <th className="py-4 px-2 md:px-6 border-b border-grey-light">
-                Author
-              </th>
-              )
-              }
+              {authors && (
+                <th className="py-4 px-2 md:px-6 border-b border-grey-light">
+                  Author
+                </th>
+              )}
               <th className="py-4 px-2 md:px-6 border-b border-grey-light">
                 {isPublished ? 'Publish time' : 'Creation date'}
               </th>
@@ -57,13 +56,11 @@ export default ({
                 <td className="py-4 px-2 md:px-6 border-b border-gray-100">
                   {post[lang].title}
                 </td>
-                {authors
-              && (
-              <th className="py-4 px-2 md:px-6 border-b border-gray-100">
-                {post.author.username}
-              </th>
-              )
-              }
+                {authors && (
+                  <th className="py-4 px-2 md:px-6 border-b border-gray-100">
+                    {post.author.username}
+                  </th>
+                )}
                 <td className="py-4 px-2 md:px-6 border-b border-gray-100">
                   {isPublished ? post.publishTime : post.creationDate}
                 </td>
@@ -75,3 +72,18 @@ export default ({
     </div>
   );
 };
+
+PostsTable.propTypes = {
+  lang: PropTypes.string.isRequired,
+  posts: PropTypes.arrayOf(PropTypes.object),
+  isPublished: PropTypes.bool,
+  authors: PropTypes.bool,
+};
+
+PostsTable.defaultProps = {
+  posts: [],
+  isPublished: false,
+  authors: false,
+};
+
+export default PostsTable;

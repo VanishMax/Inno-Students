@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import 'isomorphic-unfetch';
 import Dropdown from '../dropdown';
 
-export default ({
+const PostActions = ({
   isEdit, edit, toggleCover, togglePublish, postID,
   lang, snack, isDelete, changeDeletion, sharedWith,
   isPublished, isExclusive,
@@ -50,6 +51,13 @@ export default ({
       <span>{user[lang].name ? (`${user[lang].name} ${user[lang].surname}`) : user.username}</span>
     </div>
   );
+  DropValue.propTypes = {
+    user: PropTypes.shape({
+      _id: PropTypes.number,
+      isShared: PropTypes.bool,
+      username: PropTypes.string,
+    }).isRequired,
+  };
 
   const Opener = ({ open }) => (
     <span onClick={() => { getUsers(); open(); }} className="border border-gray-200 rounded bg-white text-black py-2 px-4 cursor-pointer hover:border-green-700 hover:text-green-700">
@@ -57,7 +65,9 @@ export default ({
       Editors
     </span>
   );
-
+  Opener.propTypes = {
+    open: PropTypes.func.isRequired,
+  };
 
   return (
     <div className="mb-4">
@@ -157,3 +167,22 @@ export default ({
     </div>
   );
 };
+
+//   snack, sharedWith,
+
+PostActions.propTypes = {
+  lang: PropTypes.string.isRequired,
+  postID: PropTypes.number.isRequired,
+  isEdit: PropTypes.bool.isRequired,
+  isPublished: PropTypes.bool.isRequired,
+  isExclusive: PropTypes.bool.isRequired,
+  isDelete: PropTypes.bool.isRequired,
+  edit: PropTypes.func.isRequired,
+  toggleCover: PropTypes.func.isRequired,
+  changeDeletion: PropTypes.func.isRequired,
+  togglePublish: PropTypes.func.isRequired,
+  snack: PropTypes.func.isRequired,
+  sharedWith: PropTypes.arrayOf(PropTypes.number).isRequired,
+};
+
+export default PostActions;

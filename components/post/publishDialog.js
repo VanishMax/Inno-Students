@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import NewsCard from '../news/card';
 import { CodesLang, Lang } from '../../langs/publish';
 
-export default ({
+const PublishDialog = ({
   isOpen, toggle, post, lang, data, publish,
 }) => {
   const [langg, changeLangg] = useState(lang);
@@ -160,3 +161,23 @@ export default ({
     </div>
   );
 };
+
+PublishDialog.propTypes = {
+  lang: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  toggle: PropTypes.func.isRequired,
+  publish: PropTypes.func.isRequired,
+  post: PropTypes.shape({}),
+  data: PropTypes.shape({
+    codes: PropTypes.arrayOf(PropTypes.number),
+    author: PropTypes.string,
+    data: PropTypes.object,
+  }),
+};
+
+PublishDialog.defaultProps = {
+  post: {},
+  data: {},
+};
+
+export default PublishDialog;

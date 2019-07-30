@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import prettyDate from '../../middleware/prettyDate';
 import {
   Eye, Comments, Clock, LangIcon,
@@ -6,7 +7,7 @@ import {
 import tags from '../../constants/tags';
 import Link from '../link';
 
-export default ({ post, lang }) => {
+const PostHeader = ({ post, lang }) => {
   const found = tags.find(x => x.value === post.tag);
   const tagUrl = found.url;
   const Icon = found.icon;
@@ -47,3 +48,22 @@ export default ({ post, lang }) => {
     </div>
   );
 };
+
+PostHeader.propTypes = {
+  lang: PropTypes.string.isRequired,
+  post: PropTypes.shape({
+    author: PropTypes.object,
+    exclusive: PropTypes.string,
+    tag: PropTypes.string,
+    publishTime: PropTypes.string,
+    creationDate: PropTypes.string,
+    comments: PropTypes.arrayOf(PropTypes.object),
+    views: PropTypes.number,
+  }),
+};
+
+PostHeader.defaultProps = {
+  post: {},
+};
+
+export default PostHeader;
