@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'next/router';
 import Link from 'next/link';
 import { LangContext } from '../middleware/context';
 
 function MyLink({
-  children, href, as = href, query, prefetch = false,
+  children, href, as = href, query, prefetch,
 }) {
   const lang = useContext(LangContext);
   const langQuery = lang === 'ru' ? '?lang=ru' : '';
@@ -15,5 +16,21 @@ function MyLink({
     </Link>
   );
 }
+
+MyLink.propTypes = {
+  href: PropTypes.string,
+  as: PropTypes.string,
+  query: PropTypes.shape(),
+  children: PropTypes.element,
+  prefetch: PropTypes.bool,
+};
+
+MyLink.defaultProps = {
+  href: '/',
+  as: '/',
+  query: {},
+  children: null,
+  prefetch: false,
+};
 
 export default withRouter(MyLink);

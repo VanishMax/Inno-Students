@@ -86,9 +86,11 @@ export default ({
           </div>
           <div className="md:w-2/3">
             <Dropdown Opener={Opener} size={48} margin={2} height={40}>
-              {tags.map(tag => (
-                <DropValue index={tag.key} key={tag.key} />
-              ))}
+              <React.Fragment>
+                {tags.map(tag => (
+                  <DropValue index={tag.key} key={tag.key} />
+                ))}
+              </React.Fragment>
             </Dropdown>
           </div>
         </div>

@@ -28,7 +28,6 @@ const Header = ({ changeLang }) => {
     <header className="app flex items-center justify-between py-3">
       {/* Large viewport (>1024px) */}
       <Big
-        isAuthed={isAuthed}
         lang={lang}
         changeLang={changeLang}
       />

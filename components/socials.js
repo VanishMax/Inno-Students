@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {
   Telegram, FaceBook, Instagram, YouTube, Vkontakte,
 } from './icons/socials';
 
-export default ({ size }) => {
+const Socials = ({ size }) => {
   const classes = `mr-2 w-${size} h-${size}`;
   return (
     <React.Fragment>
@@ -26,3 +27,13 @@ export default ({ size }) => {
     </React.Fragment>
   );
 };
+
+Socials.propTypes = {
+  size: PropTypes.number,
+};
+
+Socials.defaultProps = {
+  size: null,
+};
+
+export default Socials;

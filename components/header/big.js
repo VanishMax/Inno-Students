@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from '../link';
 import Lang from '../../langs/header';
-import Dropdown from '../dropdown';
 
-const DesktopHeader = ({ lang, isAuthed, changeLang }) => {
+const DesktopHeader = ({ lang, changeLang }) => {
   const Opener = ({ open }) => (
     <span>
       <img onClick={open} src="/static/images/icons/user.png" className="cursor-pointer" />
@@ -52,23 +51,6 @@ const DesktopHeader = ({ lang, isAuthed, changeLang }) => {
 
       <div className="flex justify-end">
         <span onClick={changeLang} className="mr-8 header-link">{Lang.lang[lang]}</span>
-
-        {isAuthed && (
-          <Dropdown Opener={Opener} size={32} margin={8}>
-            <Link href="/user">
-              <a className="text-gray-800 font-semibold no-underline hover:text-green-800 leading-loose">
-                {Lang.profile[lang]}
-              </a>
-            </Link>
-            <br />
-            <a
-              href="/user/logout"
-              className="text-gray-800 font-semibold no-underline hover:text-green-800 leading-loose"
-            >
-              {Lang.logout[lang]}
-            </a>
-          </Dropdown>
-        )}
       </div>
     </div>
   );
@@ -77,11 +59,6 @@ const DesktopHeader = ({ lang, isAuthed, changeLang }) => {
 DesktopHeader.propTypes = {
   lang: PropTypes.string.isRequired,
   changeLang: PropTypes.func.isRequired,
-  isAuthed: PropTypes.bool,
-};
-
-DesktopHeader.defaultProps = {
-  isAuthed: false,
 };
 
 export default DesktopHeader;
