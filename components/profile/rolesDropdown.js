@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import 'isomorphic-unfetch';
 
 import Dropdown from '../dropdown';
 import roles from '../../constants/roles';
 
-export default ({ user, initialRole }) => {
+const RolesDropdown = ({ user, initialRole }) => {
   const [role, changeRole] = useState(roles.find(x => x.value === initialRole));
   const [done, changeDone] = useState(false);
 
@@ -29,26 +30,46 @@ export default ({ user, initialRole }) => {
       {roles[index].mean}
     </div>
   );
+  DropValue.propTypes = {
+    index: PropTypes.number.isRequired,
+    open: PropTypes.func.isRequired,
+  };
 
   const Opener = ({ open }) => (
     <span>
       <DropValue open={open} index={role.key} />
     </span>
   );
+  Opener.propTypes = {
+    open: PropTypes.func.isRequired,
+  };
 
   return (
     <React.Fragment>
       {done ? (
         <span className="text-green-700 leading-tight">
-        Done
+          Done
         </span>
       ) : (
         <Dropdown Opener={Opener} size={48} margin={2}>
-          {roles.map(rol => (
-            <DropValue index={rol.key} key={rol.key} user={user} />
-          ))}
+          <React.Fragment>
+            {roles.map(rol => (
+              <DropValue index={rol.key} key={rol.key} user={user} />
+            ))}
+          </React.Fragment>
         </Dropdown>
       )}
     </React.Fragment>
   );
 };
+
+RolesDropdown.propTypes = {
+  initialRole: PropTypes.string.isRequired,
+  user: PropTypes.shape({}),
+};
+
+RolesDropdown.defaultProps = {
+  user: {},
+};
+
+export default RolesDropdown;

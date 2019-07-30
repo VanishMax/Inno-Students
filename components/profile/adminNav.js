@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Link from '../link';
 import Lang from '../../langs/profile';
 
-export default ({ lang }) => (
+const AdminNavigation = ({ lang }) => (
   <React.Fragment>
     <div className="mt-16 md:mt-0 flex justify-around items-end md:hidden">
       <div className="flex justify-center w-1/2">
@@ -43,3 +44,9 @@ export default ({ lang }) => (
     </div>
   </React.Fragment>
 );
+
+AdminNavigation.propTypes = {
+  lang: PropTypes.string.isRequired,
+};
+
+export default AdminNavigation;
