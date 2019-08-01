@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Router from 'next/router';
 import 'isomorphic-unfetch';
 
+import Lang from '../../langs/grid';
 import NewsCard from './card';
 import LoadMore from '../icons/loadMore';
 import Link from '../link';
@@ -38,20 +39,23 @@ const NewsGrid = ({ posts, lang }) => {
       {manyPosts.length === 0 ? (
         <div className="text-lg leading-loose text-center">
           <p>
-            {lang === 'en' ? 'No posts found' : 'Нет подходящих публикаций'}
-            {' '}
+            {Lang.noPosts[lang]}
+            &nbsp;
           </p>
           <p>
-            {lang === 'en' ? 'Try ' : 'Попробуйте '}
+            {Lang.try[lang]}
+            &nbsp;
             <Link href="/tag" query={{ slug: 'article' }} as="/tag/article">
               <a className="underline hover:text-green-800">
-                {lang === 'en' ? 'reading articles' : 'почитать статьи'}
+                {Lang.reading[lang]}
               </a>
             </Link>
-            {lang === 'en' ? ' or ' : ' или '}
+            &nbsp;
+            {Lang.or[lang]}
+            &nbsp;
             <Link href="/tag" query={{ slug: 'video' }} as="/tag/video">
               <a className="underline hover:text-green-800">
-                {lang === 'en' ? 'view videos' : 'посмотреть видео'}
+                {Lang.viewing[lang]}
               </a>
             </Link>
           </p>
@@ -71,9 +75,9 @@ const NewsGrid = ({ posts, lang }) => {
           </div>
 
           {showMore && (
-            <div onClick={loadPosts} className="flex flex-col justify-center items-center h-40 w-full cursor-pointer hover:text-gray-800">
+            <div onClick={loadPosts} className="load-more-box  hover:text-gray-800">
               <LoadMore width={30} height={25} />
-              <span className="text-sm leading-relaxed">{lang === 'en' ? 'Load more' : 'Загрузить еще'}</span>
+              <span className="text-sm leading-relaxed">{Lang.loadMore[lang]}</span>
             </div>
           )}
         </React.Fragment>
