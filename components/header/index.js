@@ -25,7 +25,7 @@ const Header = ({ changeLang }) => {
   const isAuthed = user && user._id !== undefined;
 
   return (
-    <header className="app flex items-center justify-between py-3">
+    <header className="app header">
       {/* Large viewport (>1024px) */}
       <Big
         lang={lang}

@@ -15,7 +15,7 @@ const Dropdown = ({
         <div
           ref={ref}
           onClick={() => (stopAutoclose ? null : setIsComponentVisible(false))}
-          className={`w-${size} mt-${margin} h-${height} px-${padding || 6} absolute bg-white shadow rounded py-3 z-10 overflow-y-scroll`}
+          className={`dropdown w-${size} mt-${margin} h-${height} px-${padding || 6}`}
         >
           {children}
         </div>

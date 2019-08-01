@@ -14,7 +14,7 @@ const DesktopHeader = ({ lang, changeLang }) => {
   };
 
   return (
-    <div className="hidden lg:flex flex-grow items-center justify-between">
+    <nav className="big-nav">
       <div className="flex">
         <Link href="/">
           <img src="/static/images/headerMini.png" alt="header logo" className="logo cursor-pointer" />
@@ -52,7 +52,7 @@ const DesktopHeader = ({ lang, changeLang }) => {
       <div className="flex justify-end">
         <span onClick={changeLang} className="mr-8 header-link">{Lang.lang[lang]}</span>
       </div>
-    </div>
+    </nav>
   );
 };
 

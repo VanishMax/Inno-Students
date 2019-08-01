@@ -3,6 +3,7 @@ import React from 'react';
 import '../static/css/index.css';
 import '../static/css/normalize.css';
 import '../static/css/default.css';
+import '../static/css/components.css';
 import '../static/css/post.css';
 import '../static/css/headfoot.css';
 import '../static/css/news.css';

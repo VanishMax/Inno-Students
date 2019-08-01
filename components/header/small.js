@@ -8,9 +8,9 @@ const MobileHeader = ({
   lang, isAuthed, opened,
   open, close, changeLang,
 }) => (
-  <div className="flex lg:hidden flex-grow items-center justify-between">
+  <nav className="small-nav">
     <div className="flex justify-end ml-2">
-      <span className="cursor-pointer text-base text-gray-800 font-bold no-underline">
+      <span className="lang-small">
         <span onClick={changeLang} className="inline lg:hidden font-normal cursor-pointer">{Lang.langSm[lang]}</span>
       </span>
     </div>
@@ -34,7 +34,7 @@ const MobileHeader = ({
     </div>
 
     <div id="menu" className={`pt-4 ${opened}`}>
-      <div className="flex flex-col flex-grow justify-center items-center text-xl no-underline">
+      <div className="link-block-small">
         <Link href="/tag" query={{ slug: 'event' }} as="/tag/event">
           <a className="mb-2" onClick={close}>{Lang.events[lang]}</a>
         </Link>
@@ -53,8 +53,7 @@ const MobileHeader = ({
       </div>
 
       <hr />
-      <div className="flex flex-col flex-grow justify-center items-center pt-4 text-xl no-underline">
-
+      <div className="link-block-small">
         {isAuthed && (
           <React.Fragment>
             <Link href="/user">
@@ -80,7 +79,7 @@ const MobileHeader = ({
         <Socials size={6} />
       </div>
     </div>
-  </div>
+  </nav>
 );
 
 MobileHeader.propTypes = {
