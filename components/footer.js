@@ -4,7 +4,7 @@ import { LangContext } from '../middleware/context';
 import Link from './link';
 import Socials from './socials';
 
-export default () => {
+const footer = () => {
   const lang = useContext(LangContext);
   return (
     <footer className="bg-white footer w-full">
@@ -42,3 +42,5 @@ export default () => {
     </footer>
   );
 };
+
+export default footer;

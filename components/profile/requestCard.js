@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import 'isomorphic-unfetch';
 
-export default ({ user }) => {
+const RequestCard = ({ user }) => {
   const [approved, change] = useState(user.request.approved);
 
   const submit = async () => {
@@ -38,3 +39,22 @@ export default ({ user }) => {
     </div>
   );
 };
+
+RequestCard.propTypes = {
+  user: PropTypes.shape({
+    _id: PropTypes.number,
+    username: PropTypes.string,
+    request: PropTypes.shape({
+      approved: PropTypes.bool,
+      alias: PropTypes.string,
+      date: PropTypes.string,
+      text: PropTypes.string,
+    }),
+  }),
+};
+
+RequestCard.defaultProps = {
+  user: {},
+};
+
+export default RequestCard;

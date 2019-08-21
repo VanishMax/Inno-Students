@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Lang from '../../langs/profile';
 
 import { fakeUser } from '../../constants/user';
 
-export default ({ lang, user, goToEdit }) => {
+const User = ({ lang, user, goToEdit }) => {
   const locale = user[lang];
   const fakeLocale = fakeUser[lang];
 
@@ -43,3 +44,20 @@ export default ({ lang, user, goToEdit }) => {
     </React.Fragment>
   );
 };
+
+User.propTypes = {
+  lang: PropTypes.string.isRequired,
+  goToEdit: PropTypes.func,
+  user: PropTypes.shape({
+    username: PropTypes.string,
+    website: PropTypes.string,
+    role: PropTypes.string,
+  }),
+};
+
+User.defaultProps = {
+  goToEdit: null,
+  user: {},
+};
+
+export default User;

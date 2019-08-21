@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Lang from '../../langs/profile';
 
 import { fakeUser } from '../../constants/user';
 
-export default ({
+const EditForm = ({
   lang, form, refToForm, change, submit, changeImage,
 }) => (
   <div className="flex flex-col justify-center w-full md:w-4/5 lg:w-3/5">
@@ -117,3 +118,27 @@ export default ({
     </form>
   </div>
 );
+
+EditForm.propTypes = {
+  lang: PropTypes.string.isRequired,
+  refToForm: PropTypes.node.isRequired,
+  change: PropTypes.func.isRequired,
+  submit: PropTypes.func.isRequired,
+  changeImage: PropTypes.func.isRequired,
+  form: PropTypes.shape({
+    img: PropTypes.string,
+    src: PropTypes.string,
+    username: PropTypes.string,
+    website: PropTypes.string,
+    enName: PropTypes.string,
+    ruName: PropTypes.string,
+    enSurname: PropTypes.string,
+    ruSurname: PropTypes.string,
+  }),
+};
+
+EditForm.defaultProps = {
+  form: {},
+};
+
+export default EditForm;

@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
+import PropTypes from 'prop-types';
 import 'isomorphic-unfetch';
 import Form from './form';
 
-export default ({ lang, user, goFromEdit }) => {
+const EditUser = ({ lang, user, goFromEdit }) => {
   const [form, changeForm] = useState({
     username: user.username || '',
     website: user.website || '',
@@ -70,3 +71,29 @@ export default ({ lang, user, goFromEdit }) => {
     </React.Fragment>
   );
 };
+
+// lang, user, goFromEdit
+EditUser.propTypes = {
+  lang: PropTypes.string.isRequired,
+  goFromEdit: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    _id: PropTypes.number,
+    username: PropTypes.string,
+    website: PropTypes.string,
+    img: PropTypes.string,
+    en: PropTypes.shape({
+      name: PropTypes.string,
+      surname: PropTypes.string,
+    }),
+    ru: PropTypes.shape({
+      name: PropTypes.string,
+      surname: PropTypes.string,
+    }),
+  }),
+};
+
+EditUser.defaultProps = {
+  user: {},
+};
+
+export default EditUser;

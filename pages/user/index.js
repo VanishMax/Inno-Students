@@ -1,4 +1,6 @@
 import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
+
 import Router from 'next/router';
 import isAuthed from '../../middleware/HOCs/isAuthed';
 import { LangContext } from '../../middleware/context';
@@ -36,6 +38,16 @@ const Profile = ({ user }) => {
       </Layout>
     </React.Fragment>
   );
+};
+
+Profile.propTypes = {
+  user: PropTypes.shape({
+    img: PropTypes.string,
+  }),
+};
+
+Profile.defaultProps = {
+  user: {},
 };
 
 export default isAuthed(Profile);

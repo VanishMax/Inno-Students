@@ -22,6 +22,35 @@
     }
 }
 
+.header {
+  @apply flex items-center justify-between py-3;
+}
+
+.header .big-nav {
+  @apply hidden flex-grow items-center justify-between;
+}
+
+.header .small-nav {
+  @apply flex flex-grow items-center justify-between;
+}
+
+.header .lang-small {
+  @apply cursor-pointer text-base text-gray-800 font-bold no-underline;
+}
+
+.header .link-block-small {
+  @apply flex flex-col flex-grow justify-center items-center text-xl no-underline;
+}
+
+@media (min-width: 1024px) {
+  .header .big-nav {
+    display: flex;
+  }
+  .header .small-nav {
+    display: none;
+  }
+}
+
 #menu {
     position: fixed;
     height: calc(100vh - 4rem);

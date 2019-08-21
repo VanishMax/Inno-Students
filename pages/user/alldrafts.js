@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 
 import { LangContext } from '../../middleware/context';
 import Layout from '../../layouts/user';
@@ -21,6 +22,18 @@ const Drafts = ({ posts, user }) => {
       </Layout>
     </React.Fragment>
   );
+};
+
+Drafts.propTypes = {
+  posts: PropTypes.arrayOf(PropTypes.object),
+  user: PropTypes.shape({
+    img: PropTypes.string,
+  }),
+};
+
+Drafts.defaultProps = {
+  user: {},
+  posts: [],
 };
 
 export default withData(Drafts);

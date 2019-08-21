@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import Head from 'next/head';
 
 import Link from '../../components/link';
@@ -104,5 +105,14 @@ const Signup = ({ message }) => {
     </div>
   );
 };
+
+Signup.propTypes = {
+  message: PropTypes.string,
+};
+
+Signup.defaultProps = {
+  message: '',
+};
+
 
 export default withAuthError(Signup);

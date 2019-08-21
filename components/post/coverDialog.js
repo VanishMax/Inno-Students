@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { bucket } from '../../constants/user';
 import { Trash } from '../icons/actions';
 
-export default ({
+const CoverDialog = ({
   isOpen, toggle, images, chosen, choose, del,
 }) => {
   if (images) {
@@ -29,3 +30,18 @@ export default ({
   }
   return <React.Fragment />;
 };
+
+CoverDialog.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  chosen: PropTypes.string,
+  toggle: PropTypes.func.isRequired,
+  choose: PropTypes.func.isRequired,
+  del: PropTypes.func.isRequired,
+  images: PropTypes.arrayOf(PropTypes.string),
+};
+CoverDialog.defaultProps = {
+  images: [],
+  chosen: null,
+};
+
+export default CoverDialog;

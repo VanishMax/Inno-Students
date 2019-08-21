@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import RolesDropdown from './rolesDropdown';
 
-export default ({ users, lang }) => (
+const UsersTable = ({ users, lang }) => (
   <div className="w-full md:w-2/3 mx-auto">
     <div className="bg-white shadow-md rounded my-6">
       <table className="text-left w-full border-collapse">
@@ -43,3 +44,14 @@ export default ({ users, lang }) => (
     </div>
   </div>
 );
+
+UsersTable.propTypes = {
+  lang: PropTypes.string.isRequired,
+  users: PropTypes.arrayOf(PropTypes.object),
+};
+
+UsersTable.defaultProps = {
+  users: [],
+};
+
+export default UsersTable;

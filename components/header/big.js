@@ -1,16 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Link from '../link';
 import Lang from '../../langs/header';
-import Dropdown from '../dropdown';
 
-export default ({ lang, isAuthed, changeLang }) => {
+const DesktopHeader = ({ lang, changeLang }) => {
   const Opener = ({ open }) => (
     <span>
       <img onClick={open} src="/static/images/icons/user.png" className="cursor-pointer" />
     </span>
   );
+  Opener.propTypes = {
+    open: PropTypes.func.isRequired,
+  };
+
   return (
-    <div className="hidden lg:flex flex-grow items-center justify-between">
+    <nav className="big-nav">
       <div className="flex">
         <Link href="/">
           <img src="/static/images/headerMini.png" alt="header logo" className="logo cursor-pointer" />
@@ -47,24 +51,14 @@ export default ({ lang, isAuthed, changeLang }) => {
 
       <div className="flex justify-end">
         <span onClick={changeLang} className="mr-8 header-link">{Lang.lang[lang]}</span>
-
-        {isAuthed && (
-          <Dropdown Opener={Opener} size={32} margin={8}>
-            <Link href="/user">
-              <a className="text-gray-800 font-semibold no-underline hover:text-green-800 leading-loose">
-                {Lang.profile[lang]}
-              </a>
-            </Link>
-            <br />
-            <a
-              href="/user/logout"
-              className="text-gray-800 font-semibold no-underline hover:text-green-800 leading-loose"
-            >
-              {Lang.logout[lang]}
-            </a>
-          </Dropdown>
-        )}
       </div>
-    </div>
+    </nav>
   );
 };
+
+DesktopHeader.propTypes = {
+  lang: PropTypes.string.isRequired,
+  changeLang: PropTypes.func.isRequired,
+};
+
+export default DesktopHeader;

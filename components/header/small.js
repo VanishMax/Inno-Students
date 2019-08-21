@@ -1,19 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Link from '../link';
 import Lang from '../../langs/header';
 import Socials from '../socials';
 
-export default ({
-  lang,
-  isAuthed,
-  opened,
-  open,
-  close,
-  changeLang,
+const MobileHeader = ({
+  lang, isAuthed, opened,
+  open, close, changeLang,
 }) => (
-  <div className="flex lg:hidden flex-grow items-center justify-between">
+  <nav className="small-nav">
     <div className="flex justify-end ml-2">
-      <span className="cursor-pointer text-base text-gray-800 font-bold no-underline">
+      <span className="lang-small">
         <span onClick={changeLang} className="inline lg:hidden font-normal cursor-pointer">{Lang.langSm[lang]}</span>
       </span>
     </div>
@@ -37,7 +34,7 @@ export default ({
     </div>
 
     <div id="menu" className={`pt-4 ${opened}`}>
-      <div className="flex flex-col flex-grow justify-center items-center text-xl no-underline">
+      <div className="link-block-small">
         <Link href="/tag" query={{ slug: 'event' }} as="/tag/event">
           <a className="mb-2" onClick={close}>{Lang.events[lang]}</a>
         </Link>
@@ -56,8 +53,7 @@ export default ({
       </div>
 
       <hr />
-      <div className="flex flex-col flex-grow justify-center items-center pt-4 text-xl no-underline">
-
+      <div className="link-block-small">
         {isAuthed && (
           <React.Fragment>
             <Link href="/user">
@@ -83,5 +79,20 @@ export default ({
         <Socials size={6} />
       </div>
     </div>
-  </div>
+  </nav>
 );
+
+MobileHeader.propTypes = {
+  lang: PropTypes.string.isRequired,
+  changeLang: PropTypes.func.isRequired,
+  opened: PropTypes.string.isRequired,
+  open: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
+  isAuthed: PropTypes.bool,
+};
+
+MobileHeader.defaultProps = {
+  isAuthed: false,
+};
+
+export default MobileHeader;

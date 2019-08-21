@@ -1,0 +1,3 @@
+.dropdown {
+  @apply absolute bg-white shadow rounded py-3 z-10 overflow-y-scroll;
+}

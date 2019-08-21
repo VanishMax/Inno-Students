@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Link from '../link';
 import Lang from '../../langs/profile';
 
-export default ({ lang, img, goFromEdit }) => (
+const TopNavigation = ({ lang, img, goFromEdit }) => (
   <React.Fragment>
     <div className="flex justify-around items-end">
       <div className="flex justify-center w-1/3 md:w-1/5">
@@ -43,3 +44,11 @@ export default ({ lang, img, goFromEdit }) => (
     </div>
   </React.Fragment>
 );
+
+TopNavigation.propTypes = {
+  lang: PropTypes.string.isRequired,
+  img: PropTypes.string.isRequired,
+  goFromEdit: PropTypes.func.isRequired,
+};
+
+export default TopNavigation;

@@ -1,12 +1,13 @@
 import React from 'react';
 import Router from 'next/router';
 import Head from 'next/head';
+import PropTypes from 'prop-types';
 
 import AdminNav from '../components/profile/adminNav';
 import MainNav from '../components/profile/mainNav';
 import Request from '../components/profile/request';
 
-export default ({
+const Layout = ({
   children, lang, img, goFromEdit, title, user,
 }) => {
   if (!goFromEdit) {
@@ -45,3 +46,25 @@ export default ({
 
   );
 };
+
+Layout.propTypes = {
+  title: PropTypes.string.isRequired,
+  lang: PropTypes.string.isRequired,
+  children: PropTypes.element,
+  img: PropTypes.string,
+  user: PropTypes.shape({
+    role: PropTypes.string,
+  }),
+  goFromEdit: PropTypes.func,
+};
+
+Layout.defaultProps = {
+  children: null,
+  img: '',
+  user: {
+    role: 'U',
+  },
+  goFromEdit: null,
+};
+
+export default Layout;

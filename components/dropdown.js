@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import clickAway from '../middleware/clickAway';
 
-export default ({
+const Dropdown = ({
   Opener, children, size, margin, height, padding, stopAutoclose,
 }) => {
   const { ref, isComponentVisible, setIsComponentVisible } = clickAway(false);
@@ -14,7 +15,7 @@ export default ({
         <div
           ref={ref}
           onClick={() => (stopAutoclose ? null : setIsComponentVisible(false))}
-          className={`w-${size} mt-${margin} h-${height} px-${padding || 6} absolute bg-white shadow rounded py-3 z-10 overflow-y-scroll`}
+          className={`dropdown w-${size} mt-${margin} h-${height} px-${padding || 6}`}
         >
           {children}
         </div>
@@ -22,3 +23,25 @@ export default ({
     </React.Fragment>
   );
 };
+
+// Opener, stopAutoclose,
+Dropdown.propTypes = {
+  Opener: PropTypes.func.isRequired,
+  children: PropTypes.element,
+  size: PropTypes.number,
+  height: PropTypes.number,
+  margin: PropTypes.number,
+  padding: PropTypes.number,
+  stopAutoclose: PropTypes.bool,
+};
+
+Dropdown.defaultProps = {
+  stopAutoclose: false,
+  children: null,
+  size: null,
+  height: null,
+  padding: null,
+  margin: null,
+};
+
+export default Dropdown;

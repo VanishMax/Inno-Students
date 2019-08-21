@@ -1,15 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Router from 'next/router';
 import { bucket } from '../../constants/user';
 import prettyDate from '../../middleware/prettyDate';
+import printName from '../../middleware/printName';
 
-export default ({
+const NewsCard = ({
   news, big, last, lang,
 }) => {
   const url = `url("${bucket + news.img}")`;
 
   const top = [];
-  top.push(news.author[lang].name ? `${news.author[lang].name} ${news.author[lang].surname}` : news.author.username);
+  top.push(printName(lang, news.author));
   top.push(news.tag);
   top.push(prettyDate(news.publishTime, lang));
   if (news.exclusive === 'en') top.push(lang === 'en' ? 'English' : 'Английский');
@@ -43,3 +45,25 @@ export default ({
     </React.Fragment>
   );
 };
+
+NewsCard.propTypes = {
+  lang: PropTypes.string.isRequired,
+  big: PropTypes.bool,
+  last: PropTypes.bool,
+  news: PropTypes.shape({
+    img: PropTypes.string,
+    tag: PropTypes.string,
+    exclusive: PropTypes.string,
+    publishTime: PropTypes.string,
+    url: PropTypes.string,
+    author: PropTypes.object,
+  }),
+};
+
+NewsCard.defaultProps = {
+  big: false,
+  last: false,
+  news: {},
+};
+
+export default NewsCard;

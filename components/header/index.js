@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { LangContext, AuthContext } from '../../middleware/context';
 
 // Viewport components for the Header
@@ -6,7 +7,7 @@ import Big from './big';
 import Small from './small';
 
 // Component that divides logic and design
-export default ({ changeLang }) => {
+const Header = ({ changeLang }) => {
   // State hook to open or close small-viewport menu by clicking on the burger
   const [opened, setOpen] = useState('closed');
   const open = () => {
@@ -24,11 +25,9 @@ export default ({ changeLang }) => {
   const isAuthed = user && user._id !== undefined;
 
   return (
-    <header className="app flex items-center justify-between py-3">
-
+    <header className="app header">
       {/* Large viewport (>1024px) */}
       <Big
-        isAuthed={isAuthed}
         lang={lang}
         changeLang={changeLang}
       />
@@ -42,7 +41,12 @@ export default ({ changeLang }) => {
         close={close}
         changeLang={changeLang}
       />
-
     </header>
   );
 };
+
+Header.propTypes = {
+  changeLang: PropTypes.func.isRequired,
+};
+
+export default Header;

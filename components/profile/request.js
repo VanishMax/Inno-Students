@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import 'isomorphic-unfetch';
 import Lang from '../../langs/request';
 
-export default ({ user, lang }) => {
+const Request = ({ user, lang }) => {
   const [isRequested, changeRequested] = useState(user.request.date !== '');
 
   const [form, changeForm] = useState({
@@ -116,3 +117,20 @@ export default ({ user, lang }) => {
     </div>
   );
 };
+
+Request.propTypes = {
+  lang: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    _id: PropTypes.number,
+    username: PropTypes.string,
+    request: PropTypes.shape({
+      date: PropTypes.string,
+    }),
+  }),
+};
+
+Request.defaultProps = {
+  user: {},
+};
+
+export default Request;

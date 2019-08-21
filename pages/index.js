@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import Layout from '../layouts/default';
 import { LangContext } from '../middleware/context';
 import Lang from '../langs/home';
@@ -18,6 +19,14 @@ const Home = ({ posts }) => {
       </div>
     </Layout>
   );
+};
+
+Home.propTypes = {
+  posts: PropTypes.arrayOf(PropTypes.object),
+};
+
+Home.defaultProps = {
+  posts: [],
 };
 
 export default withNews(Home);

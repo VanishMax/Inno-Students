@@ -1,6 +1,7 @@
 import React, {
   useContext, useState, useRef, useEffect,
 } from 'react';
+import PropTypes from 'prop-types';
 import Router from 'next/router';
 import 'isomorphic-unfetch';
 
@@ -313,6 +314,36 @@ const Post = ({ post, role }) => {
       </div>
     </React.Fragment>
   );
+};
+
+Post.propTypes = {
+  post: PropTypes.shape({
+    _id: PropTypes.number,
+    sharedWith: PropTypes.arrayOf(PropTypes.number),
+    status: PropTypes.string,
+    exclusive: PropTypes.string,
+    en: PropTypes.shape({
+      title: PropTypes.string,
+      lead: PropTypes.string,
+      content: PropTypes.string,
+      textContent: PropTypes.string,
+    }),
+    ru: PropTypes.shape({
+      title: PropTypes.string,
+      lead: PropTypes.string,
+      content: PropTypes.string,
+      textContent: PropTypes.string,
+    }),
+  }),
+  role: PropTypes.string,
+};
+
+Post.defaultProps = {
+  post: {
+    status: 'E',
+    exclusive: '',
+  },
+  role: 'U',
 };
 
 export default withPost(Post);
