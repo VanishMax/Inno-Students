@@ -3,6 +3,9 @@
   "version": "3.4.0",
   "description": "InnoStudents media club website rewritten for the third time. Now the next.js and tailwind css are used",
   "main": "pages/_app.js",
+  "engines": {
+    "node": "12.9.0"
+  },
   "scripts": {
     "start": "next build && NODE_ENV=production node server.js",
     "dev": "node server.js",
