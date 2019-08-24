@@ -1,4 +1,5 @@
 module.exports = {
   mongoURI: process.env.MONGOURI || '',
-  cookieKey: process.env.COOKIEKEY || ''
+  cookieKey: process.env.COOKIEKEY || '',
+  bucket: process.env.BUCKET || '',
 }

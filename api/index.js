@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 const config = require('./config/config');
 const db = require('./config/connection');
@@ -26,9 +26,8 @@ app.use(
 // app.use(passport.session());
 // require('./server/config/localAuth')(passport);
 
-// require('./server/routes/auth')(app, server);
-// require('./server/routes/user')(app, server);
-// require('./server/routes/post')(app, server);
+require('./routes/posts')(app);
+require('./routes/edit-posts')(app);
 
 app.get('*', (req, res) => {
   res.json({message: 'It\'s all right'});
