@@ -3,4 +3,3 @@ node_modules
 src/node_modules
 yarn-error.log
 __sapper__/
-package-lock.json
